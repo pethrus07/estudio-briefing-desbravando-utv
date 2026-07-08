@@ -7,6 +7,8 @@
 
 **Projeto real, em produção — não é demo nem exercício de portfólio.** É usado no dia a dia da **Desbravando UTV**, uma operação de expedições de UTV com atuação nacional que movimenta milhões de reais.
 
+**Desbravando UTV:** [site oficial](https://desbravandoutv.com) · Instagram [@desbravando_utv](https://www.instagram.com/desbravando_utv/)
+
 > Ferramenta de briefing usada no atendimento ao cliente: um **único arquivo HTML, client-side e offline**, que transforma um formulário guiado num **pacote estruturado** (`.zip`) pronto pra virar um deck de 14 slides. Sem servidor, sem login, sem build — abre e usa.
 
 ---
