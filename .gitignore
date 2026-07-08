@@ -1,0 +1,8 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Ambiente / dependências (não usadas — app é HTML único)
+node_modules/
+.env
+.env.*
