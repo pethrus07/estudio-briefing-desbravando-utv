@@ -59,3 +59,13 @@ O truque é o **motor ser genérico**: o formulário é renderizado a partir de 
 Abra o `index.html` no navegador — não precisa de servidor nem internet. Preencha as seções, arraste as fotos e clique em exportar; o `.zip` é baixado na hora.
 
 > App em produção, personalizado para uma operação real. As chaves de integração com o acervo (`DRIVE_ENDPOINT`/`DRIVE_KEY`) ficam **vazias** neste repositório — são preenchidas só no arquivo em uso, nunca versionadas.
+
+---
+
+## 5. Roadmap
+
+O plano de evolução — sair de "um deck de expedição" para uma ferramenta que
+atende vários tipos de arte, online e com slides reordenáveis, mantendo o custo
+próximo de zero — está documentado em **[PLANO_EXPANSAO.md](PLANO_EXPANSAO.md)**:
+diagnóstico do que existe hoje, decisões fechadas, arquitetura escolhida
+(Cloudflare Pages + R2) e custo de operação.
