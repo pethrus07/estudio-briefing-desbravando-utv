@@ -94,15 +94,27 @@ section.card{background:var(--card);border:1px solid var(--line);border-radius:1
 .addrow{margin-top:14px;background:none;border:1.5px dashed #454545;color:#DDDDDD;border-radius:10px;padding:13px 16px;width:100%;cursor:pointer;font-size:14px;font-weight:600;transition:border-color .12s,color .12s}
 .addrow:hover{border-color:#FFF;color:#FFF}
 
-/* ===== modo reunião ===== */
-.mtg-banner{border:1px solid var(--line);background:var(--card2);border-radius:14px;padding:18px 20px;margin:16px 0 4px;animation:cardIn .28s ease both}
-.mtg-bnr-t{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#FFF;font-weight:700}
-.mtg-bnr-d{color:#A8A8A8;font-size:13.5px;margin-top:8px;line-height:1.5}
-.mtg-bnr-d b{color:#EAEAEA}
-.mtg-bnr-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-section.card.mtg{padding:16px 20px 20px;margin:14px 0}
-section.card.mtg .field{margin-top:12px}
-section.card.mtg .stitle input{font-size:22px}
+/* ===== modo reunião — wizard linear ===== */
+/* na view reunião, esconde o chrome do editor (grade de tipos, campos, chips) — só o wizard aparece */
+body.wz .sub, body.wz .namebox, body.wz .two, body.wz .ptrack, body.wz .ptxt, body.wz .chips, body.wz #gnav, body.wz #addsec{display:none!important}
+.wz{max-width:640px;margin:6px auto 0;animation:cardIn .28s ease both}
+.wz-prog{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);font-weight:700}
+.wz-bar{height:3px;background:#242424;border-radius:99px;margin:10px 0 24px;overflow:hidden}
+.wz-bar i{display:block;height:100%;background:#FFF;border-radius:99px;transition:width .3s ease}
+.wz-q{font-family:'Anton';font-size:clamp(26px,5vw,38px);text-transform:uppercase;line-height:.95;letter-spacing:-.5px}
+.wz-hint{color:var(--mut);font-size:14px;margin:8px 0 22px;line-height:1.5}
+.wz-hint b{color:#EAEAEA}
+.wz-field{margin-bottom:16px}
+.wz-field label{display:block;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);margin-bottom:7px}
+.wz textarea{min-height:230px;font-size:16px;line-height:1.55}
+.wz-brief{margin-bottom:10px}
+.wz-nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:26px}
+.wz-nav .sp{flex:1}
+.wz-skip{font-size:12px;color:var(--dim)}
+.wz-done{text-align:center;padding:24px 0}
+.wz-done .wz-q{margin-bottom:10px}
+.wz-done .wz-nav{justify-content:center}
+@media(max-width:640px){.wz textarea{min-height:180px}}
 .imgbriefs{margin-top:16px;border:1.5px dashed #4A4A4A;background:#121212;border-radius:12px;padding:14px 16px}
 .imgbriefs label{display:block;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#DDDDDD;font-weight:700;margin-bottom:6px}
 .imgbriefs .ib-hint{font-size:11.5px;color:#6E6E6E;margin-bottom:9px;line-height:1.4}
@@ -953,6 +965,8 @@ function cardHTML(sec,i){
 const gnav=document.getElementById("gnav");
 function renderAll(){
   form.innerHTML=""; gnav.innerHTML="";
+  document.body.classList.toggle("wz",VIEW==="reuniao");
+  if(VIEW==="reuniao"){ renderMeeting(); renderMeta(); return; }
   if(!SECS.length){
     form.innerHTML=`<div class="empty">Nenhuma seção ainda. Clique em <b>+ Adicionar seção</b> para começar.</div>`;
     renderMeta(); return;
@@ -972,8 +986,6 @@ function renderAll(){
       if(last){document.getElementById("gen").click();}
       else{CUR++;renderAll();scrollTop();}
     });
-  }else if(VIEW==="reuniao"){
-    renderMeeting();
   }else{
     SECS.forEach((sec,i)=>{
       const el=document.createElement("section");el.className="card";el.dataset.sid=sec.id;el.style.animationDelay=(Math.min(i,8)*0.03)+"s";
@@ -1029,11 +1041,10 @@ function renderMeta(){
 }
 
 /* ============ MODO REUNIÃO ============
-   View leve, orientada a anotação: o PM anota as respostas do cliente ao vivo.
-   Captura só TEXTO + "briefs de imagem" (descrições do que caçar). SEM upload de foto.
-   A saída é o MESMO rascunho JSON do applyDraft (via downloadDraft), então o operador
-   segue direto no Estúdio completo para caçar/anexar as fotos e gerar o pacote.
-   Reaproveita LIB, fieldHTML e os handlers de input/click já existentes. */
+   Wizard linear de captura rápida: 6 passos, uma pergunta por tela, tudo pulável.
+   NÃO é o editor completo — as respostas são mapeadas para campos/seções do MESMO
+   rascunho (SECS), então o JSON abre normalmente no Estúdio completo e no generatePackage.
+   Autosave a cada mudança. Fotos não são anexadas aqui (só "briefs de imagem" em texto). */
 
 /* Caixa de "briefs de imagem" — vive em sec.notas_imagens (nível de seção, sobrevive ao
    round-trip do applyDraft; ver MAPA_TECNICO §2.5). Só aparece em blocos que têm foto. */
@@ -1046,59 +1057,123 @@ function imgBriefsHTML(sec){
   </div>`;
 }
 
-/* Card compacto do modo reunião: só campos de texto (pula t:"img") + briefs de imagem. */
-function meetingCardHTML(sec,i){
-  const def=LIB[sec.tipo];
-  let h=`<div class="shead">
-    <div class="snum">${String(i+1).padStart(2,"0")}</div>
-    <div class="stitle"><input value="${esc(sec.titulo)}" data-sid="${sec.id}" data-act="ret" aria-label="Título da seção"></div>
-    <div class="sblock">${esc(def.nome)}</div>
-    <div class="sctrl">
-      <button class="icb" type="button" data-sid="${sec.id}" data-act="up" title="Mover para cima" ${i===0?"disabled":""}>↑</button>
-      <button class="icb" type="button" data-sid="${sec.id}" data-act="down" title="Mover para baixo" ${i===SECS.length-1?"disabled":""}>↓</button>
-      <button class="icb" type="button" data-sid="${sec.id}" data-act="dup" title="Duplicar">⧉</button>
-      <button class="icb" type="button" data-sid="${sec.id}" data-act="del" title="Remover">✕</button>
-    </div></div>`;
-  if(def.desc) h+=`<div class="chint">${esc(def.desc)}</div>`;
-  for(const it of def.campos){
-    if(it.t==="img")continue; /* sem foto no modo reunião */
-    h+=fieldHTML(sec.id,null,it,sec.vals,sec.fotos,sec.pos,sec.semfoto);
-  }
-  if(def.rep){
-    const rows=sec.rows[def.rep.k]||[];
-    h+=`<div class="subhead">${esc(def.rep.rotulo)}s</div>`;
-    rows.forEach((r,ri)=>{
-      h+=`<div class="row"><div class="rowhead"><span class="rl">${esc(def.rep.rotulo)} ${String(ri+1).padStart(2,"0")}</span>
-        <button class="rxb" type="button" data-sid="${sec.id}" data-row="${ri}" data-act="delrow">✕ remover</button></div>`;
-      for(const it of def.rep.campos){
-        if(it.t==="img")continue;
-        h+=fieldHTML(sec.id,ri,it,r.vals,r.fotos,r.pos||{},sec.semfoto);
-      }
-      h+=`</div>`;
-    });
-    h+=`<button class="addrow" type="button" data-sid="${sec.id}" data-act="addrow">+ Adicionar ${esc(def.rep.rotulo.toLowerCase())}</button>`;
-  }
-  if(blockHasImg(def)) h+=imgBriefsHTML(sec);
-  return h;
-}
+/* ---- estado do wizard ---- */
+let WSTEP=0, WBRIEFEXTRA=0; const WTOTAL=6;
 
+/* alvos no rascunho atual (SECS), resolvidos por tipo de seção. Todos opcionais → passos puláveis.
+   O mapeamento é o que garante o round-trip: cada resposta grava num campo/seção que o
+   Estúdio completo e o generatePackage já entendem. */
+function wzCapa(){return SECS.find(s=>s.tipo==="capa");}
+function wzExpSec(){return SECS.find(s=>s.tipo==="texto_foto");}
+function wzConteudoSec(){return SECS.find(s=>s.tipo==="roteiro")||SECS.filter(s=>s.tipo==="texto_foto")[1]||SECS.find(s=>["galeria","cartoes","lista","livre"].includes(s.tipo));}
+function wzDetSec(){return SECS.find(s=>s.tipo==="colunas")||SECS.find(s=>["lista","cartoes","livre"].includes(s.tipo));}
+function wzImgSec(){return SECS.find(s=>blockHasImg(LIB[s.tipo]))||SECS[0];}
+function wzGV(sec,k){return sec?(sec.vals[k]||""):"";}
+function wzSV(sec,k,v){if(sec){sec.vals[k]=v;scheduleAutosave();}}
+function wzGetExp(){return wzGV(wzExpSec(),"texto");}
+function wzSetExp(v){wzSV(wzExpSec(),"texto",v);}
+function wzGetConteudo(){const s=wzConteudoSec();if(!s)return "";if(s.tipo==="roteiro"){const d=(s.rows.dias||[])[0];return d?(d.vals.desc||""):"";}return s.vals.texto||"";}
+function wzSetConteudo(v){const s=wzConteudoSec();if(!s)return;if(s.tipo==="roteiro"){if(!s.rows.dias||!s.rows.dias.length)s.rows.dias=[newRow()];const d=s.rows.dias[0];d.vals.desc=v;if(!(d.vals.titulo||"").trim())d.vals.titulo="Roteiro";}else{s.vals.texto=v;}scheduleAutosave();}
+function wzGetDet(){const s=wzDetSec();if(!s)return "";if(s.tipo==="colunas")return s.vals.col1_itens||"";if(s.tipo==="lista")return s.vals.itens||"";return s.vals.texto||"";}
+function wzSetDet(v){const s=wzDetSec();if(!s)return;if(s.tipo==="colunas")s.vals.col1_itens=v;else if(s.tipo==="lista")s.vals.itens=v;else s.vals.texto=v;scheduleAutosave();}
+function wzGetBriefs(){const s=wzImgSec();return s?(s.notas_imagens||""):"";}
+function wzSetBriefs(v){const s=wzImgSec();if(s){s.notas_imagens=v;scheduleAutosave();}}
+function wzTemRoteiro(){return !!SECS.find(s=>s.tipo==="roteiro");}
+
+function wzHead(step,q,hint){
+  return `<div class="wz-prog">Passo ${step+1} de ${WTOTAL}</div>
+    <div class="wz-bar"><i style="width:${Math.round((step+1)/WTOTAL*100)}%"></i></div>
+    <div class="wz-q">${esc(q)}</div>
+    ${hint?`<div class="wz-hint">${hint}</div>`:""}`;
+}
+function wzStepHTML(step){
+  if(step===0){
+    let opts="";for(const id in TYPES)opts+=`<option value="${id}"${id===TIPO?" selected":""}>${esc(TYPES[id].nome)}</option>`;
+    return wzHead(0,"Vamos começar.","Escolha o tipo de peça e dê um nome. O formato sai automático do tipo.")+`
+      <div class="wz-field"><label>Que peça você vai montar?</label><select data-wz="tipo">${opts}</select></div>
+      <div class="wz-field"><label>Nome do projeto</label><input type="text" data-wz="nome" value="${esc(document.getElementById("nome").value)}" placeholder="Ex.: Expedição Serra Catarinense — Urubici · set/2026"></div>`;
+  }
+  if(step===1){
+    const c=wzCapa();
+    return wzHead(1,"A abertura.","O gancho: título e o essencial pra situar. Frases curtas.")+`
+      <div class="wz-field"><label>Título</label><input type="text" data-wz="cap_titulo" value="${esc(wzGV(c,"titulo"))}" placeholder="Ex.: Serra Catarinense"></div>
+      <div class="wz-field"><label>Linha de apoio</label><input type="text" data-wz="cap_dest" value="${esc(wzGV(c,"dest"))}" placeholder="Ex.: 5 dias · cânions · a maior cascata de SC"></div>
+      <div class="wz-field"><label>Destino / lugar</label><input type="text" data-wz="cap_sub" value="${esc(wzGV(c,"sub"))}" placeholder="Ex.: Urubici · Santa Catarina"></div>
+      <div class="wz-field"><label>Datas</label><input type="text" data-wz="cap_pil" value="${esc(wzGV(c,"pilulas"))}" placeholder="Ex.: 16–20 SET 2026"></div>`;
+  }
+  if(step===2){
+    return wzHead(2,"A experiência.","Com suas palavras: o que essa peça conta/vende. Um parágrafo já ajuda.")+`
+      <div class="wz-field"><textarea data-wz="exp" placeholder="Ex.: Uma expedição de 5 dias pela Serra Catarinense — cânions, estrada e a maior cascata de SC. Do check-in ao encerramento é tudo cuidado: o cliente só vive a experiência.">${esc(wzGetExp())}</textarea></div>`;
+  }
+  if(step===3){
+    const roteiro=wzTemRoteiro();
+    return wzHead(3,roteiro?"O roteiro.":"O conteúdo.",roteiro?"O dia a dia, na ordem. Pode ser em tópicos.":"O miolo: as etapas / o conteúdo principal.")+`
+      <div class="wz-field"><textarea data-wz="conteudo" placeholder="${roteiro?"Ex.: Dia 1 — chegada e boas-vindas. Dia 2 — cânion e Serra do Rio do Rastro. Dia 3 — day off na vinícola…":"Ex.: as etapas / seções principais da peça, na ordem."}">${esc(wzGetConteudo())}</textarea></div>`;
+  }
+  if(step===4){
+    return wzHead(4,"Detalhes.","O que inclui, condições e preço — o que o cliente precisa saber.")+`
+      <div class="wz-field"><textarea data-wz="det" placeholder="Ex.: Inclui transfer do UTV (ida/volta), hospedagem, refeições e apoio. Não inclui combustível. A partir de R$ …">${esc(wzGetDet())}</textarea></div>`;
+  }
+  /* step 5 — imagens (lista repetível de briefs, sem upload) */
+  let rows=wzGetBriefs().split("\n").map(l=>l.trim()).filter(Boolean);
+  const total=Math.max(rows.length+WBRIEFEXTRA,1);
+  while(rows.length<total)rows.push("");
+  let fields="";
+  rows.forEach((l,i)=>{fields+=`<div class="wz-brief"><input type="text" data-wz="brief" value="${esc(l)}" placeholder="${i===0?"Ex.: UTV subindo o cânion ao pôr do sol, foto ampla":"Descreva outra imagem…"}"></div>`;});
+  return wzHead(5,"As imagens.","Descreva cada imagem que entra — o que aparece, clima, enquadramento. <b>Sem anexar agora</b>; a foto entra depois, no Estúdio.")+`
+    <div class="wz-briefs">${fields}</div>
+    <button type="button" class="btn2" id="wzaddbrief" style="margin-top:4px">+ adicionar imagem</button>`;
+}
+function wzNavHTML(step){
+  const last=step===WTOTAL-1;
+  return `<div class="wz-nav">
+    <button type="button" class="gbtn" id="wzprev"${step===0?" disabled":""}>← Voltar</button>
+    <div class="sp"></div><span class="wz-skip">todos os passos são opcionais</span>
+    <button type="button" class="gbtn next" id="wznext">${last?"Concluir →":"Próximo →"}</button>
+  </div>`;
+}
+function wzDoneHTML(){
+  return `<div class="wz-done">
+    <div class="wz-q">Pronto.</div>
+    <div class="wz-hint">Suas anotações já estão no rascunho. Baixe o arquivo e abra no <b>Estúdio completo</b> pra revisar, caçar/anexar as fotos e gerar o pacote.</div>
+    <div class="wz-nav"><button type="button" class="gbtn" id="wzback">← Voltar</button><button type="button" class="btn" id="wzsave">Salvar rascunho da reunião</button></div>
+  </div>`;
+}
 function renderMeeting(){
-  const banner=document.createElement("div");
-  banner.className="mtg-banner";
-  banner.innerHTML=`<div class="mtg-bnr-t">Modo reunião</div>
-    <div class="mtg-bnr-d">Capture o essencial enquanto conversa: escreva os textos e descreva as imagens. Anexar as fotos fica pra depois, no Estúdio.</div>
-    <div class="mtg-bnr-actions">
-      <button class="mb pri" type="button" id="mtgsave">Salvar rascunho da reunião</button>
-      <button class="mb sec" type="button" id="mtgfull">Abrir no Estúdio completo</button>
-    </div>`;
-  form.appendChild(banner);
-  SECS.forEach((sec,i)=>{
-    const el=document.createElement("section");el.className="card mtg";el.dataset.sid=sec.id;el.style.animationDelay=(Math.min(i,8)*0.03)+"s";
-    el.innerHTML=meetingCardHTML(sec,i);
-    form.appendChild(el);
+  form.innerHTML="";
+  const wrap=document.createElement("div");wrap.className="wz";
+  wrap.innerHTML=(WSTEP>=WTOTAL)?wzDoneHTML():(wzStepHTML(WSTEP)+wzNavHTML(WSTEP));
+  form.appendChild(wrap);
+  wzWire(wrap);
+}
+function wzCollectBriefs(wrap){
+  const vals=[...wrap.querySelectorAll('input[data-wz="brief"]')].map(i=>i.value.trim()).filter(Boolean);
+  wzSetBriefs(vals.join("\n"));
+}
+function wzOnInput(k,el,wrap){
+  const v=el.value;
+  if(k==="tipo"){if(v!==TIPO&&TYPES[v]){TIPO=v;loadPreset(v);document.getElementById("formato").value=TYPES[v].formato;renderTypes();scheduleAutosave();renderMeeting();}return;}
+  if(k==="nome"){document.getElementById("nome").value=v;scheduleAutosave();return;}
+  if(k==="cap_titulo"){wzSV(wzCapa(),"titulo",v);return;}
+  if(k==="cap_dest"){wzSV(wzCapa(),"dest",v);return;}
+  if(k==="cap_sub"){wzSV(wzCapa(),"sub",v);return;}
+  if(k==="cap_pil"){wzSV(wzCapa(),"pilulas",v);return;}
+  if(k==="exp"){wzSetExp(v);return;}
+  if(k==="conteudo"){wzSetConteudo(v);return;}
+  if(k==="det"){wzSetDet(v);return;}
+  if(k==="brief"){wzCollectBriefs(wrap);return;}
+}
+function wzGo(step){WBRIEFEXTRA=0;WSTEP=Math.max(0,Math.min(WTOTAL,step));renderMeeting();scrollTop();}
+function wzWire(wrap){
+  wrap.querySelectorAll("[data-wz]").forEach(el=>{
+    const ev=(el.tagName==="SELECT")?"change":"input";
+    el.addEventListener(ev,()=>wzOnInput(el.dataset.wz,el,wrap));
   });
-  document.getElementById("mtgsave").addEventListener("click",downloadDraft);
-  document.getElementById("mtgfull").addEventListener("click",()=>setView("tudo"));
+  const prev=wrap.querySelector("#wzprev");if(prev)prev.addEventListener("click",()=>wzGo(WSTEP-1));
+  const next=wrap.querySelector("#wznext");if(next)next.addEventListener("click",()=>wzGo(WSTEP+1));
+  const back=wrap.querySelector("#wzback");if(back)back.addEventListener("click",()=>wzGo(WTOTAL-1));
+  const save=wrap.querySelector("#wzsave");if(save)save.addEventListener("click",downloadDraft);
+  const add=wrap.querySelector("#wzaddbrief");if(add)add.addEventListener("click",()=>{wzCollectBriefs(wrap);WBRIEFEXTRA++;renderMeeting();});
 }
 
 /* ============ MODO DE VISUALIZAÇÃO ============ */
@@ -1110,7 +1185,7 @@ function setView(v){
 }
 vg.addEventListener("click",()=>setView("guiada"));
 vt.addEventListener("click",()=>setView("tudo"));
-vr.addEventListener("click",()=>setView("reuniao"));
+vr.addEventListener("click",()=>{WSTEP=0;WBRIEFEXTRA=0;setView("reuniao");});
 
 /* ============ EVENTOS DO FORMULÁRIO ============ */
 form.addEventListener("input",e=>{
