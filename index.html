@@ -94,6 +94,20 @@ section.card{background:var(--card);border:1px solid var(--line);border-radius:1
 .addrow{margin-top:14px;background:none;border:1.5px dashed #454545;color:#DDDDDD;border-radius:10px;padding:13px 16px;width:100%;cursor:pointer;font-size:14px;font-weight:600;transition:border-color .12s,color .12s}
 .addrow:hover{border-color:#FFF;color:#FFF}
 
+/* ===== modo reunião ===== */
+.mtg-banner{border:1px solid var(--line);background:var(--card2);border-radius:14px;padding:18px 20px;margin:16px 0 4px;animation:cardIn .28s ease both}
+.mtg-bnr-t{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#FFF;font-weight:700}
+.mtg-bnr-d{color:#A8A8A8;font-size:13.5px;margin-top:8px;line-height:1.5}
+.mtg-bnr-d b{color:#EAEAEA}
+.mtg-bnr-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+section.card.mtg{padding:16px 20px 20px;margin:14px 0}
+section.card.mtg .field{margin-top:12px}
+section.card.mtg .stitle input{font-size:22px}
+.imgbriefs{margin-top:16px;border:1.5px dashed #4A4A4A;background:#121212;border-radius:12px;padding:14px 16px}
+.imgbriefs label{display:block;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#DDDDDD;font-weight:700;margin-bottom:6px}
+.imgbriefs .ib-hint{font-size:11.5px;color:#6E6E6E;margin-bottom:9px;line-height:1.4}
+.imgbriefs textarea{min-height:72px}
+
 /* fotos */
 .imgrow{display:flex;flex-wrap:wrap;gap:14px;margin-top:6px}
 .imgcol{flex:1;min-width:210px}
@@ -290,6 +304,7 @@ section.card{background:var(--card);border:1px solid var(--line);border-radius:1
       <div class="vtog" role="tablist" aria-label="Modo de preenchimento">
         <button id="vg" class="on" type="button">Passo a passo</button>
         <button id="vt" type="button">Ver tudo</button>
+        <button id="vr" type="button">Modo reunião</button>
       </div>
       <div class="stamp" id="stamp"></div>
     </div>
@@ -832,6 +847,9 @@ function cardHTML(sec,i){
     });
     h+=`<button class="addrow" type="button" data-sid="${sec.id}" data-act="addrow">+ Adicionar ${esc(def.rep.rotulo.toLowerCase())}</button>`;
   }
+  /* briefs de imagem trazidos do modo reunião: mostra no Estúdio completo p/ o operador
+     saber o que caçar; só aparece quando há briefs, não altera o card para quem não os usa */
+  if((sec.notas_imagens||"").trim()) h+=imgBriefsHTML(sec);
   return h;
 }
 
@@ -858,6 +876,8 @@ function renderAll(){
       if(last){document.getElementById("gen").click();}
       else{CUR++;renderAll();scrollTop();}
     });
+  }else if(VIEW==="reuniao"){
+    renderMeeting();
   }else{
     SECS.forEach((sec,i)=>{
       const el=document.createElement("section");el.className="card";el.dataset.sid=sec.id;el.style.animationDelay=(Math.min(i,8)*0.03)+"s";
@@ -912,21 +932,99 @@ function renderMeta(){
   document.getElementById("nphotos").textContent=np;
 }
 
+/* ============ MODO REUNIÃO ============
+   View leve, orientada a anotação: o PM anota as respostas do cliente ao vivo.
+   Captura só TEXTO + "briefs de imagem" (descrições do que caçar). SEM upload de foto.
+   A saída é o MESMO rascunho JSON do applyDraft (via downloadDraft), então o operador
+   segue direto no Estúdio completo para caçar/anexar as fotos e gerar o pacote.
+   Reaproveita LIB, fieldHTML e os handlers de input/click já existentes. */
+
+/* Caixa de "briefs de imagem" — vive em sec.notas_imagens (nível de seção, sobrevive ao
+   round-trip do applyDraft; ver MAPA_TECNICO §2.5). Só aparece em blocos que têm foto. */
+function imgBriefsHTML(sec){
+  // TODO(identidade): os exemplos abaixo ("cânion do dia 2", "pasta Urubici") são placeholders
+  // com sabor de expedição — revisar a redação quando a identidade/tom novo chegar.
+  const v=esc(sec.notas_imagens||"");
+  return `<div class="imgbriefs">
+    <label>📷 Briefs de imagem — o que a equipe deve caçar depois</label>
+    <div class="ib-hint">Descreva as fotos a buscar (o quê e onde), uma por linha. Não anexe fotos aqui: isso é feito depois, no Estúdio completo.</div>
+    <textarea data-sid="${sec.id}" data-act="notaimg" placeholder="Ex.: Foto do cânion do dia 2 · tem no Drive, pasta Urubici&#10;Foto aérea da pousada · pedir ao cliente">${v}</textarea>
+  </div>`;
+}
+
+/* Card compacto do modo reunião: só campos de texto (pula t:"img") + briefs de imagem. */
+function meetingCardHTML(sec,i){
+  const def=LIB[sec.tipo];
+  let h=`<div class="shead">
+    <div class="snum">${String(i+1).padStart(2,"0")}</div>
+    <div class="stitle"><input value="${esc(sec.titulo)}" data-sid="${sec.id}" data-act="ret" aria-label="Título da seção"></div>
+    <div class="sblock">${esc(def.nome)}</div>
+    <div class="sctrl">
+      <button class="icb" type="button" data-sid="${sec.id}" data-act="up" title="Mover para cima" ${i===0?"disabled":""}>↑</button>
+      <button class="icb" type="button" data-sid="${sec.id}" data-act="down" title="Mover para baixo" ${i===SECS.length-1?"disabled":""}>↓</button>
+      <button class="icb" type="button" data-sid="${sec.id}" data-act="dup" title="Duplicar">⧉</button>
+      <button class="icb" type="button" data-sid="${sec.id}" data-act="del" title="Remover">✕</button>
+    </div></div>`;
+  if(def.desc) h+=`<div class="chint">${esc(def.desc)}</div>`;
+  for(const it of def.campos){
+    if(it.t==="img")continue; /* sem foto no modo reunião */
+    h+=fieldHTML(sec.id,null,it,sec.vals,sec.fotos,sec.pos,sec.semfoto);
+  }
+  if(def.rep){
+    const rows=sec.rows[def.rep.k]||[];
+    h+=`<div class="subhead">${esc(def.rep.rotulo)}s</div>`;
+    rows.forEach((r,ri)=>{
+      h+=`<div class="row"><div class="rowhead"><span class="rl">${esc(def.rep.rotulo)} ${String(ri+1).padStart(2,"0")}</span>
+        <button class="rxb" type="button" data-sid="${sec.id}" data-row="${ri}" data-act="delrow">✕ remover</button></div>`;
+      for(const it of def.rep.campos){
+        if(it.t==="img")continue;
+        h+=fieldHTML(sec.id,ri,it,r.vals,r.fotos,r.pos||{},sec.semfoto);
+      }
+      h+=`</div>`;
+    });
+    h+=`<button class="addrow" type="button" data-sid="${sec.id}" data-act="addrow">+ Adicionar ${esc(def.rep.rotulo.toLowerCase())}</button>`;
+  }
+  if(blockHasImg(def)) h+=imgBriefsHTML(sec);
+  return h;
+}
+
+function renderMeeting(){
+  const banner=document.createElement("div");
+  banner.className="mtg-banner";
+  // TODO(identidade): texto do banner é instrução operacional; alinhar a redação ao tom novo quando chegar.
+  banner.innerHTML=`<div class="mtg-bnr-t">Modo reunião · anotação ao vivo</div>
+    <div class="mtg-bnr-d">Anote as respostas do cliente direto nos campos. As fotos <b>não</b> são anexadas aqui — no bloco <b>Briefs de imagem</b> você descreve o que a equipe deve caçar depois. Ao terminar, use <b>Salvar rascunho da reunião</b> e abra o arquivo no <b>Estúdio completo</b> para caçar/anexar as fotos e gerar o pacote.</div>
+    <div class="mtg-bnr-actions">
+      <button class="mb pri" type="button" id="mtgsave">Salvar rascunho da reunião</button>
+      <button class="mb sec" type="button" id="mtgfull">Abrir no Estúdio completo</button>
+    </div>`;
+  form.appendChild(banner);
+  SECS.forEach((sec,i)=>{
+    const el=document.createElement("section");el.className="card mtg";el.dataset.sid=sec.id;el.style.animationDelay=(Math.min(i,8)*0.03)+"s";
+    el.innerHTML=meetingCardHTML(sec,i);
+    form.appendChild(el);
+  });
+  document.getElementById("mtgsave").addEventListener("click",downloadDraft);
+  document.getElementById("mtgfull").addEventListener("click",()=>setView("tudo"));
+}
+
 /* ============ MODO DE VISUALIZAÇÃO ============ */
-const vg=document.getElementById("vg"),vt=document.getElementById("vt");
+const vg=document.getElementById("vg"),vt=document.getElementById("vt"),vr=document.getElementById("vr");
 function setView(v){
   VIEW=v;
-  vg.classList.toggle("on",v==="guiada");vt.classList.toggle("on",v==="tudo");
+  vg.classList.toggle("on",v==="guiada");vt.classList.toggle("on",v==="tudo");vr.classList.toggle("on",v==="reuniao");
   renderAll(); scheduleAutosave();
 }
 vg.addEventListener("click",()=>setView("guiada"));
 vt.addEventListener("click",()=>setView("tudo"));
+vr.addEventListener("click",()=>setView("reuniao"));
 
 /* ============ EVENTOS DO FORMULÁRIO ============ */
 form.addEventListener("input",e=>{
   const t=e.target; if(!t.dataset.sid)return;
   const sec=findSec(t.dataset.sid); if(!sec)return;
   if(t.dataset.act==="ret"){sec.titulo=t.value;TITLED=true;renderMeta();scheduleAutosave();return;}
+  if(t.dataset.act==="notaimg"){sec.notas_imagens=t.value;scheduleAutosave();return;}
   if(t.dataset.act)return;
   if(!t.dataset.k)return;
   if(t.dataset.row!=null){const def=LIB[sec.tipo];sec.rows[def.rep.k][+t.dataset.row].vals[t.dataset.k]=t.value;}
@@ -1255,7 +1353,7 @@ function applyDraft(d){
     for(const rk in s.rows)s.rows[rk]=s.rows[rk].map(r=>({vals:r.vals||{},fotos:r.fotos||{},pos:r.pos||{}}));
     return s;
   });
-  if(d.view==="tudo"||d.view==="guiada"){VIEW=d.view;vg.classList.toggle("on",VIEW==="guiada");vt.classList.toggle("on",VIEW==="tudo");}
+  if(d.view==="tudo"||d.view==="guiada"||d.view==="reuniao"){VIEW=d.view;vg.classList.toggle("on",VIEW==="guiada");vt.classList.toggle("on",VIEW==="tudo");vr.classList.toggle("on",VIEW==="reuniao");}
   CUR=Math.max(0,Math.min(d.cur||0,SECS.length-1));
   renderTypes(); renderAll();
 }
@@ -1272,8 +1370,11 @@ document.getElementById("loadfile").addEventListener("change",e=>{
           buttons:[{label:"Abrir rascunho",cls:"pri",val:true},{label:"Cancelar",cls:"sec",val:false}]});
         if(!ok){e.target.value="";return;}
       }
-      applyDraft(d); scheduleAutosave();
-      toast("Rascunho aberto.");
+      applyDraft(d);
+      /* handoff: um rascunho de reunião abre no Estúdio completo (onde se caça/anexa foto) */
+      if(VIEW==="reuniao")setView("tudo");
+      scheduleAutosave();
+      toast(d.view==="reuniao"?"Rascunho da reunião aberto no Estúdio completo — agora cace e anexe as fotos.":"Rascunho aberto.");
     }catch(_){
       uiDialog({title:"Arquivo inválido",msg:"Este arquivo não é um rascunho do Estúdio de Briefing. Escolha um arquivo <b>RASCUNHO_*.json</b> gerado pelo botão “Salvar rascunho”.",buttons:[{label:"Entendi",cls:"pri",val:true}]});
     }
