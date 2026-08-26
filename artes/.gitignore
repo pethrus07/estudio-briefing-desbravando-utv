@@ -1,0 +1,10 @@
+# Derivados do index.html — `node artes/ferramentas/extrair-marca.mjs` +
+# `python artes/ferramentas/congelar-fontes.py` reconstroem. Os bytes já vivem
+# em base64 no index.html; versionar de novo só dobraria o peso do repo.
+fontes/*.ttf
+marca/logo-desbravando.png
+
+# Fotos provisórias baixadas do Commons — `fotos-provisorias.mjs` rebaixa quando precisar.
+# Os créditos ficam versionados; as imagens, não.
+fotos/*.jpg
+fotos/*.png

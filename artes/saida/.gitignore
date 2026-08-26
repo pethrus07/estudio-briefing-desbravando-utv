@@ -1,0 +1,3 @@
+# Saída é gerada — `node artes/ferramentas/render.mjs tudo` reconstrói tudo.
+*
+!.gitignore
