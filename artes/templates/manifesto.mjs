@@ -121,19 +121,24 @@ export function manifesto(dados, opcoes = {}) {
 
   /* ---------- regras numeradas ----------
      Mesma malha da agenda da programação: número · trilho · corpo. */
-  .regras{ list-style:none; display:grid; gap:3em }
+  .regras{ list-style:none; display:grid; gap:3em; position:relative }
+  /* a espinha e desenhada na LISTA, no eixo da coluna do trilho (3,2em do numero +
+     metade dos 1,9em da coluna), e nao por item: um trilho por item vira toco solto
+     quando a peca e arejada, porque o vao entre itens corta a linha. */
+  .regras::before{
+    content:""; position:absolute; left:calc(4.15em - 1px); top:.87em; bottom:0; width:2px;
+    background:linear-gradient(180deg,
+      rgba(255,255,255,.28) 0%, rgba(255,255,255,.28) 84%, rgba(255,255,255,0) 100%);
+  }
   .regra{ display:grid; grid-template-columns:3.2em 1.9em 1fr; align-items:start }
   .num{
     font-family:"Anton",sans-serif; font-weight:400; font-size:2.3em; line-height:1;
     letter-spacing:-.01em; font-variant-numeric:tabular-nums; color:#fff;
   }
-  .trilho{ position:relative; justify-self:center; width:2px; align-self:stretch; background:rgba(255,255,255,.28) }
+  .trilho{ position:relative; justify-self:center; width:2px; align-self:stretch }
   .trilho::before{
     content:""; position:absolute; top:.42em; left:50%; transform:translateX(-50%);
     width:.9em; height:.9em; border-radius:50%; background:#fff; box-shadow:0 0 0 .32em #000;
-  }
-  .regra:last-child .trilho{
-    background:linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 80%);
   }
   .corpo{ padding-left:1.4em; padding-bottom:.1em }
   .regra h2{
@@ -191,7 +196,9 @@ export function manifesto(dados, opcoes = {}) {
       <ol class="regras">${(dados.secoes ?? []).map(secao).join("")}</ol>
     </div>
 
-    <div class="rodape">
+    ${
+      dados.essenciais?.length || dados.assinatura
+        ? `<div class="rodape">
       <div class="divisor"></div>
       ${
         dados.essenciais?.length
@@ -201,7 +208,9 @@ export function manifesto(dados, opcoes = {}) {
           : ""
       }
       ${dados.assinatura ? `<p class="assina">${esc(dados.assinatura)}</p>` : ""}
-    </div>
+    </div>`
+        : ""
+    }
   </div>
 </div>
 </body>
