@@ -1,0 +1,15 @@
+{
+ "_nota": "Carta de drinks do evento. Texto do cliente em 26/08/2026, na íntegra e na ordem dele — a contagem 1..5 é pedido explícito. O 🍹 do título saiu: emoji entra colorido e a identidade é P&B estrito.",
+ "_escala": "1,80 é o TETO: acima disso a lista do Mojito quebra em duas linhas e sobra «gás» órfão. Drink novo com lista mais longa que a do Mojito exige baixar a escala — conferir com medir-arte.mjs --caixas.",
+ "rotulo": "Bar do evento",
+ "titulo": "Drinks do evento",
+ "fundo": "topografia-drinks.svg",
+ "secoes": [
+  { "titulo": "Caipirinha", "texto": "Cachaça, limão e açúcar" },
+  { "titulo": "Gin Tônica", "texto": "Gin e água tônica" },
+  { "titulo": "Mojito", "texto": "Rum Bacardi, hortelã, açúcar, limão e água com gás" },
+  { "titulo": "Margarita", "texto": "Tequila, Cointreau, açúcar e limão" },
+  { "titulo": "Aperol Spritz", "texto": "Aperol, espumante extra brut e água com gás" }
+ ],
+ "escala": 1.80
+}

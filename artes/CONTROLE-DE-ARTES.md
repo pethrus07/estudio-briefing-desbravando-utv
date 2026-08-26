@@ -117,6 +117,7 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 | 2 | **Programação da expedição** — 5 dias | 5 | 5 | *a decidir* | entregue 26/08 |
 | 3 | **`logo-lateral.svg`** — assinatura lateral em vetor | 1 | — | *a decidir* | entregue 26/08 |
 | 4 | **Código de conduta** — “A favor do off-road consciente” | 1 | 1 | *a decidir* | entregue 26/08 |
+| 5 | **Carta de drinks** do evento | 1 | 1 | *a decidir* | entregue 26/08 |
 
 ---
 
@@ -208,6 +209,27 @@ essenciais do pé viraram frase fechada (“Capacete e cinto de segurança, semp
 **Como eu enquadraria.** Uma arte, mas não é post: é peça de seis blocos com hierarquia
 de três níveis e template próprio, do mesmo tipo de trabalho da primeira peça da série de
 programação. Sugestão: **R$ 40**.
+
+### 5 · Carta de drinks do evento
+
+Uma peça, 1080 × 1920, no template do código de conduta — cinco drinks numerados (a
+contagem 1–5 é pedido dele) com nome e ingredientes. **Custo de conteúdo, não de
+construção:** o template já existia, entrou dado e escala.
+
+O que exigiu trabalho de verdade foi a escala. A mesma peça que aguenta 27 linhas de
+conduta com 5 drinks fica com metade do quadro vazia, então o corpo sobe 80% (`escala`
+1,80). **1,80 é o teto**, medido: acima disso a lista do Mojito quebra em duas linhas e
+sobra “gás” órfão. Drink novo com lista mais longa que a do Mojito exige baixar a escala.
+
+O 🍹 do título saiu — emoji entra colorido e a identidade é P&B estrito.
+
+**Duas melhorias no template**, que valem para o código de conduta também (peça
+re-entregue): o trilho virou **espinha contínua** atravessando a lista, porque um trilho
+por item virava toco solto ao lado do ponto quando a peça é arejada; e rodapé sem conteúdo
+deixou de desenhar um filete solto no pé.
+
+**Como eu enquadraria.** É arte padrão de post (**R$ 15**) — o template é o mesmo da peça
+anterior e o trabalho foi de conteúdo e de acerto de escala.
 
 ### Ferramenta criada no caminho (não cobrável)
 
