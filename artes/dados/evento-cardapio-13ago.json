@@ -1,0 +1,37 @@
+{
+  "_nota": "Cardápio da Noite do Queijo, Pizza & Vinho — mesma estética da arte de pré-expedição. Os sabores vieram do cliente; 'Briske' foi lido como Brisket. Sem descrição de ingredientes de propósito: não invento recheio. Se a pizzaria mandar as descrições, entram em 'detalhe'.",
+
+  "sobrelinha": "PRÉ-EXPEDIÇÃO · FAMÍLIA · URUBICI-SC",
+  "titulo": "CARDÁPIO<br>DA NOITE",
+  "subtitulo": "Noite do Queijo, Pizza & Vinho",
+
+  "fundo": {
+    "arquivo": "fotos/evento/fundo-cardapio.jpg",
+    "descricao": "Foto de fundo · pizza em mesa de madeira",
+    "foco": "center 60%",
+    "modo": "base",
+    "provisoria": true,
+    "credito": "Pizza Margherita (Verde Ischia).jpg · Wikimedia Commons · CC BY-SA 4.0",
+    "fonte": "https://commons.wikimedia.org/wiki/File:Pizza_Margherita_(Verde_Ischia).jpg"
+  },
+
+  "itens": [
+    { "nome": "Marguerita", "detalhe": null },
+    { "nome": "Parma com rúcula", "detalhe": null },
+    { "nome": "Calabresa", "detalhe": null },
+    { "nome": "Quatro queijos", "detalhe": null },
+    { "nome": "Brisket", "detalhe": null }
+  ],
+
+  "linhas": [
+    { "icone": "hora", "texto": "Quinta · 13 ago · 18h30 – 22h30" },
+    { "icone": "local", "texto": "Base Desbravando UTV" },
+    { "icone": "taca", "texto": "Traga o vinho da sua preferência" }
+  ],
+
+  "patrocinio": {
+    "label": "Patrocínio oficial",
+    "logo": "../marca/can-am-branco.png"
+  }
+}
+

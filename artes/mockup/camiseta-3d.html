@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Mockup 3D — camiseta da equipe</title>
+<style>
+  /* O fundo é CSS, não textura de cena: como `scene.background`, o gradiente era
+     esticado pelo aspecto da tela e criava faixas. Aqui o canvas tem alpha e o
+     estúdio fica atrás dele. */
+  html, body { margin: 0; height: 100%; overflow: hidden; }
+  body {
+    background:
+      radial-gradient(120% 85% at 50% 18%, #3d3d3d 0%, #232323 32%, #131313 62%, #070707 100%);
+  }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<script type="module">
+/**
+ * MOCKUP 3D — camiseta preta da equipe, com a estampa aplicada.
+ *
+ *   ?vista=costas|frente   qual lado a câmera mostra (padrão: costas)
+ *   ?w=1400&h=1750         tamanho do render
+ *
+ * A camiseta é uma superfície paramétrica: `superficie(theta, y)` devolve o ponto
+ * no tecido. A MESMA função posiciona a estampa, só deslocada na normal — é isso
+ * que faz a arte acompanhar o volume em vez de flutuar por cima.
+ */
+import * as THREE from "../vendor/three.module.js";
+
+const params = new URLSearchParams(location.search);
+const vista = params.get("vista") === "frente" ? "frente" : "costas";
+const W = Number(params.get("w") || 1400);
+const H = Number(params.get("h") || 1750);
+
+/* ------------------------------------------------------- forma da camiseta */
+
+const ALTURA = 0.62;        // do ombro à barra, em metros
+const Y_BARRA = -0.305;
+const Y_OMBRO = 0.255;
+const Y_TOPO = 0.315;
+const RAIO_GOLA = 0.098;
+const ACHATA = 0.60;        // o corpo é elíptico, não redondo
+
+/** Raio do corpo em função da altura: ombro largo, leve cintura, barra solta. */
+function perfil(y) {
+  if (y >= Y_OMBRO) {
+    // do ombro para a gola o raio cai rápido: é a linha do ombro.
+    // O clamp importa: extrapolando, a curva suave volta a crescer acima da gola e
+    // a malha ganhava uma aba plana gigante atravessando o quadro.
+    const t = Math.min(1, (y - Y_OMBRO) / (Y_TOPO - Y_OMBRO));
+    const suavizado = t * t * (3 - 2 * t); // ombro arredondado, não cônico
+    return 0.258 * (1 - suavizado) + RAIO_GOLA * suavizado;
+  }
+  const t = (y - Y_BARRA) / (Y_OMBRO - Y_BARRA); // 0 na barra, 1 no ombro
+  const cintura = 0.232 + 0.013 * Math.pow(Math.abs(t - 0.45) / 0.55, 1.7);
+  return cintura + 0.022 * Math.pow(t, 2.6);
+}
+
+/** Dobras do tecido — sem elas o preto vira um borrão sem informação. */
+function dobras(theta, y) {
+  const suave = Math.min(1, Math.max(0, (Y_OMBRO - y) / 0.18)); // some perto do ombro
+  return (
+    suave *
+    (0.0078 * Math.sin(5 * theta + 7.5 * y) +
+      0.0046 * Math.sin(9 * theta - 3.1 * y + 1.2) +
+      0.0031 * Math.sin(17 * theta + 2.0) +
+      0.0038 * Math.sin(21 * y + 0.6) * Math.max(0, 0.5 - Math.abs(t01(y) - 0.15)))
+  );
+}
+const t01 = (y) => (y - Y_BARRA) / (Y_OMBRO - Y_BARRA);
+
+/** Ponto do tecido. deslocaNormal>0 empurra para fora (usado pela estampa). */
+function superficie(theta, y, deslocaNormal = 0) {
+  const r = perfil(y) + dobras(theta, y);
+  const a = r + deslocaNormal;
+  const b = r * ACHATA + deslocaNormal;
+  return new THREE.Vector3(a * Math.sin(theta), y, b * Math.cos(theta));
+}
+
+function malhaCorpo(radial = 128, vertical = 96) {
+  const pos = [], uv = [], idx = [];
+  for (let j = 0; j <= vertical; j++) {
+    const y = Y_BARRA + (Y_TOPO - Y_BARRA) * (j / vertical);
+    for (let i = 0; i <= radial; i++) {
+      const theta = (i / radial) * Math.PI * 2;
+      const p = superficie(theta, y);
+      pos.push(p.x, p.y, p.z);
+      uv.push(i / radial, j / vertical);
+    }
+  }
+  for (let j = 0; j < vertical; j++) {
+    for (let i = 0; i < radial; i++) {
+      const a = j * (radial + 1) + i, b = a + 1, c = a + radial + 1, d = c + 1;
+      idx.push(a, c, b, b, c, d);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  g.setIndex(idx);
+  g.computeVertexNormals();
+  return g;
+}
+
+/** Estampa: plano subdividido colado na superfície, com folga na normal. */
+function malhaEstampa({ thetaCentro, yCentro, largura, altura, segmentos = 40 }) {
+  const pos = [], uv = [], idx = [];
+  const raioRef = perfil(yCentro);
+  for (let j = 0; j <= segmentos; j++) {
+    const v = j / segmentos;
+    const y = yCentro + (0.5 - v) * altura;
+    for (let i = 0; i <= segmentos; i++) {
+      const u = i / segmentos;
+      // largura de arco convertida em ângulo pelo raio local
+      const theta = thetaCentro + (u - 0.5) * (largura / raioRef);
+      const p = superficie(theta, y, 0.0016);
+      pos.push(p.x, p.y, p.z);
+      uv.push(u, 1 - v);
+    }
+  }
+  for (let j = 0; j < segmentos; j++) {
+    for (let i = 0; i < segmentos; i++) {
+      const a = j * (segmentos + 1) + i, b = a + 1, c = a + segmentos + 1, d = c + 1;
+      idx.push(a, c, b, b, c, d);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  g.setIndex(idx);
+  g.computeVertexNormals();
+  return g;
+}
+
+/* ------------------------------------------------------------- texturas */
+
+/** Trama de algodão em canvas: dá granulado ao preto e vira normalMap. */
+function texturaTecido() {
+  const n = 512;
+  const c = document.createElement("canvas");
+  c.width = c.height = n;
+  const ctx = c.getContext("2d");
+  const img = ctx.createImageData(n, n);
+  for (let y = 0; y < n; y++) {
+    for (let x = 0; x < n; x++) {
+      const trama = (Math.sin(x * 1.9) + Math.sin(y * 2.1)) * 10;
+      const ruido = (Math.random() - 0.5) * 26;
+      const v = 128 + trama + ruido;
+      const i = (y * n + x) * 4;
+      img.data[i] = img.data[i + 1] = 128 + (v - 128) * 0.35;
+      img.data[i + 2] = 255;
+      img.data[i + 3] = 255;
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+  const t = new THREE.CanvasTexture(c);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.repeat.set(26, 34);
+  return t;
+}
+
+/* --------------------------------------------------------------- cena */
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(W, H);
+renderer.setPixelRatio(1);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.35;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+
+const giro = (Number(params.get("giro") || 0) * Math.PI) / 180;
+const camera = new THREE.PerspectiveCamera(30, W / H, 0.1, 20);
+if (giro) {
+  camera.position.set(0.12, 0.4, 1.95);
+} else {
+  camera.position.set(0, 0.06, 1.78);
+}
+camera.lookAt(0, giro ? -0.03 : -0.01, 0);
+
+const tecido = texturaTecido();
+const matTecido = new THREE.MeshStandardMaterial({
+  color: 0x272727, // preto de algodão, não preto absoluto: precisa aceitar luz
+  roughness: 0.9,
+  metalness: 0.0,
+  normalMap: tecido,
+  normalScale: new THREE.Vector2(0.55, 0.55),
+  side: THREE.DoubleSide,
+});
+
+const camiseta = new THREE.Group();
+scene.add(camiseta);
+
+const corpo = new THREE.Mesh(malhaCorpo(), matTecido);
+
+camiseta.add(corpo);
+
+// gola: rolinho elíptico no topo
+const gola = new THREE.Mesh(
+  new THREE.TorusGeometry(RAIO_GOLA, 0.0098, 20, 96),
+  new THREE.MeshStandardMaterial({
+    color: 0x191919, roughness: 0.86,
+    normalMap: tecido, normalScale: new THREE.Vector2(0.4, 0.4),
+  })
+);
+gola.rotation.x = Math.PI / 2;
+gola.scale.set(1, ACHATA, 1);
+gola.position.y = Y_TOPO - 0.006;
+
+camiseta.add(gola);
+
+/* Tampa da gola: o corpo é aberto no topo e, com material de dois lados, o buraco
+   mostrava o interior da frente — lia como um vinco preto flutuando. Um disco
+   côncavo escuro fecha a vista sem parecer tampa. */
+const interior = new THREE.Mesh(
+  new THREE.SphereGeometry(RAIO_GOLA * 1.02, 48, 16, 0, Math.PI * 2, Math.PI * 0.5, Math.PI * 0.5),
+  new THREE.MeshStandardMaterial({ color: 0x070707, roughness: 1, side: THREE.DoubleSide })
+);
+interior.scale.set(1, 0.42, ACHATA);
+interior.position.y = Y_TOPO - 0.004;
+camiseta.add(interior);
+
+/**
+ * Manga: tubo de seção elíptica que NASCE dentro do corpo e desce em diagonal.
+ * Cilindro solto no ombro lia como asa — o segredo é começar o eixo dentro do
+ * tronco (a costura desaparece) e inclinar pouco a partir da vertical.
+ */
+function malhaManga(lado, { inclina = 0.62, compr = 0.2, r0 = 0.108, r1 = 0.09, radial = 48, secoes = 20 } = {}) {
+  const origem = new THREE.Vector3(lado * 0.17, 0.225, 0);
+  const eixo = new THREE.Vector3(lado * Math.sin(inclina), -Math.cos(inclina), 0).normalize();
+  const u = new THREE.Vector3().crossVectors(eixo, new THREE.Vector3(0, 0, 1)).normalize();
+  const v = new THREE.Vector3().crossVectors(eixo, u).normalize();
+
+  const pos = [], uv = [], idx = [];
+  for (let j = 0; j <= secoes; j++) {
+    const t = j / secoes;
+    const centro = origem.clone().add(eixo.clone().multiplyScalar(t * compr));
+    // afina para a ponta e cai um pouco (peso do tecido)
+    let r = r0 + (r1 - r0) * t;
+    // bainha: engrossa nos últimos milímetros. Antes era um anel separado, que em
+    // vista 3/4 aparecia solto, como uma alça flutuando ao lado da manga.
+    if (t > 0.9) r += 0.006 * Math.sin(((t - 0.9) / 0.1) * Math.PI);
+    centro.y -= 0.012 * t * t;
+    for (let i = 0; i <= radial; i++) {
+      const ang = (i / radial) * Math.PI * 2;
+      const p = centro
+        .clone()
+        .add(u.clone().multiplyScalar(Math.cos(ang) * r * 0.82))
+        .add(v.clone().multiplyScalar(Math.sin(ang) * r));
+      pos.push(p.x, p.y, p.z);
+      uv.push(i / radial, t);
+    }
+  }
+  for (let j = 0; j < secoes; j++) {
+    for (let i = 0; i < radial; i++) {
+      const a = j * (radial + 1) + i, b = a + 1, c = a + radial + 1, d = c + 1;
+      idx.push(a, c, b, b, c, d);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  g.setIndex(idx);
+  g.computeVertexNormals();
+  return { geometria: g, pontaCentro: origem.clone().add(eixo.clone().multiplyScalar(compr)), eixo, raioPonta: r1, inclina };
+}
+
+for (const lado of [-1, 1]) {
+  const { geometria } = malhaManga(lado);
+  const manga = new THREE.Mesh(geometria, matTecido);
+  camiseta.add(manga);
+}
+
+// barra inferior
+const barraBaixo = new THREE.Mesh(
+  new THREE.TorusGeometry(perfil(Y_BARRA), 0.009, 16, 128),
+  new THREE.MeshStandardMaterial({ color: 0x181818, roughness: 0.9 })
+);
+barraBaixo.rotation.x = Math.PI / 2;
+barraBaixo.scale.set(1, ACHATA, 1);
+barraBaixo.position.y = Y_BARRA;
+camiseta.add(barraBaixo);
+
+/* Sombra de contato pintada, em vez de piso com shadow map: o plano aparecia como
+   uma linha de horizonte atrás da peça e as sombras esticadas das mangas cruzavam
+   o fundo. Aqui é só uma mancha radial dando apoio embaixo. */
+function texturaSombra() {
+  const n = 256;
+  const c = document.createElement("canvas");
+  c.width = c.height = n;
+  const ctx = c.getContext("2d");
+  const g = ctx.createRadialGradient(n / 2, n / 2, 0, n / 2, n / 2, n / 2);
+  g.addColorStop(0, "rgba(0,0,0,.75)");
+  g.addColorStop(0.55, "rgba(0,0,0,.32)");
+  g.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, n, n);
+  return new THREE.CanvasTexture(c);
+}
+
+/* De pé, a câmera vê o plano quase de lado: virava um risco reto atravessando o
+   quadro. Deitado bem abaixo e só com a câmera alta ele funciona; por isso a
+   sombra só entra quando há inclinação (vista 3/4). */
+const sombraContato = new THREE.Mesh(
+  new THREE.PlaneGeometry(0.95, 0.42),
+  new THREE.MeshBasicMaterial({ map: texturaSombra(), transparent: true, depthWrite: false })
+);
+sombraContato.rotation.x = -Math.PI / 2;
+sombraContato.position.set(0, Y_BARRA - 0.045, 0.03);
+if (giro) scene.add(sombraContato); // com a câmera alta o apoio no chão ajuda
+
+/* ------------------------------------------------------------- luzes */
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x0a0a0a, 0.5));
+
+const chave = new THREE.DirectionalLight(0xffffff, 2.4);
+chave.position.set(-0.85, 1.1, 1.4);
+scene.add(chave);
+
+// dois contornos: é o que separa uma peça preta de um fundo preto
+for (const x of [-1, 1]) {
+  const contorno = new THREE.DirectionalLight(0xffffff, 1.35);
+  contorno.position.set(x * 1.7, 0.75, -1.05);
+  scene.add(contorno);
+}
+
+const preencher = new THREE.DirectionalLight(0xffffff, 0.55);
+preencher.position.set(0.8, -0.5, 1.1);
+scene.add(preencher);
+
+/* ----------------------------------------------------------- estampas */
+
+const carregador = new THREE.TextureLoader();
+const carregar = (url) =>
+  new Promise((ok, erro) =>
+    carregador.load(url, (t) => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; ok(t); }, undefined, erro)
+  );
+
+function aplicar(textura, config) {
+  const mat = new THREE.MeshStandardMaterial({
+    map: textura,
+    transparent: true,
+    roughness: 0.62,       // tinta de estampa reflete um pouco mais que o tecido
+    metalness: 0,
+    alphaTest: 0.02,
+    depthWrite: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -2,
+  });
+  const m = new THREE.Mesh(malhaEstampa(config), mat);
+  camiseta.add(m);
+  return m;
+}
+
+const ESTAMPAS = {
+  // 80 mm de largura, bloco de 66 mm, 60 mm abaixo da gola, centralizado atrás
+  costas: {
+    arquivo: "../saida/camiseta-producao-arte-costas.png",
+    config: { thetaCentro: Math.PI, yCentro: Y_TOPO - 0.06 - 0.033, largura: 0.08, altura: 0.066 },
+  },
+  // 30 mm, peito esquerdo de quem veste (à direita na vista de frente)
+  frente: {
+    arquivo: "../saida/camiseta-producao-arte-frente.png",
+    config: { thetaCentro: Math.asin(0.09 / 0.262), yCentro: Y_TOPO - 0.13 - 0.0057, largura: 0.03, altura: 0.0113 },
+  },
+};
+
+const alvo = ESTAMPAS[vista];
+camiseta.rotation.y = (vista === "costas" ? Math.PI : 0) + giro;
+
+try {
+  const t = await carregar(alvo.arquivo);
+  aplicar(t, alvo.config);
+} catch (e) {
+  const aviso = document.createElement("div");
+  aviso.style.cssText = "position:fixed;top:12px;left:12px;color:#f66;font:14px monospace";
+  aviso.textContent = "estampa não carregou: " + alvo.arquivo;
+  document.body.appendChild(aviso);
+}
+
+renderer.render(scene, camera);
+document.title = "pronto";
+</script>
+</body>
+</html>
+
+

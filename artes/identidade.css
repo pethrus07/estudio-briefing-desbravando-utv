@@ -1,0 +1,165 @@
+/* ============================================================
+   IDENTIDADE VISUAL — DESBRAVANDO UTV
+   Registro NÚCLEO (P&B estrito). Fonte da verdade: SPEC_MD (index.html).
+   Usado por: templates/cracha.mjs · templates/cordao.mjs · templates/parcerias.mjs
+   ============================================================ */
+
+@font-face {
+  font-family: "Anton";
+  src: url("fontes/Anton-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("fontes/Archivo-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("fontes/Archivo-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("fontes/Archivo-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  /* Núcleo — sem nenhuma cor de destaque. A única cor, quando há, vem da fotografia. */
+  --preto: #000000;
+  --branco: #ffffff;
+  --texto: rgba(255, 255, 255, 0.82);
+  --label: rgba(255, 255, 255, 0.55);
+  --divisor: rgba(255, 255, 255, 0.13);
+  --borda-pilula: rgba(255, 255, 255, 0.38);
+  /* Cinza do ícone no cordão — discreto sobre preto, mas ainda visível depois
+     da sublimação (abaixo de ~#5a5a5a a fita come o desenho). */
+  --cinza-marca: #6e6e6e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--preto);
+  color: var(--branco);
+  font-family: "Archivo", sans-serif;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  text-rendering: geometricPrecision;
+}
+
+/* ---------- Tipografia ---------- */
+
+/* h1..h4 são bold por padrão e o Anton só existe em Regular: sem peso explícito o
+   navegador fabrica um negrito sintético — engrossa a letra (descaracterizando a
+   marca) e, no PDF, sai como Type3, texto virado desenho. */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 400;
+}
+
+.titulo {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.85;
+  letter-spacing: -0.5px;
+  color: var(--branco);
+}
+
+.sobrelinha {
+  font-family: "Archivo", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  color: var(--label);
+}
+
+.corpo {
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--texto);
+}
+
+.corpo strong,
+.forte {
+  font-weight: 700;
+  color: var(--branco);
+}
+
+/* ---------- Elementos ---------- */
+
+.pilula {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--borda-pilula);
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--branco);
+}
+
+.divisor {
+  height: 1.5px;
+  background: var(--divisor);
+  border: 0;
+}
+
+/* Lista do núcleo: marcador ↗ branco, rótulo forte + descrição .82
+   O ↗ é desenhado, não tipografado: nem Anton nem Archivo trazem U+2197, e o
+   fallback do sistema entra no PDF como fonte externa (ou Type3). */
+.lista {
+  list-style: none;
+}
+.lista li {
+  display: flex;
+  gap: 0.6em;
+}
+.lista li::before {
+  content: "";
+  flex: none;
+  width: 0.82em;
+  height: 0.82em;
+  margin-top: 0.28em;
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='square'%3E%3Cpath d='M6 18 18 6'/%3E%3Cpath d='M8.5 6H18v9.5'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+}
+
+/* Foto contida — cantos 14px na escala de 1920. */
+.foto {
+  border-radius: 14px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Peça de marca / proposta de patrocínio: a peça inteira fica monocromática. */
+.mono {
+  filter: grayscale(1);
+}
+
+/* Slot de foto ainda não fornecida: moldura discreta que diz o que entra ali.
+   Nunca é decoração — é um campo pendente, e o render avisa no terminal. */
+.slot-foto {
+  border: 1.5px dashed rgba(255, 255, 255, 0.28);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  color: var(--label);
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}

@@ -1,0 +1,39 @@
+{
+ "dia": 3,
+ "rotuloDia": "Dia 3 · Vinícola",
+ "data": "28/08",
+ "mesNome": "Agosto",
+ "diaSemana": "Sexta-feira",
+ "titulo": "Dia da vinícola",
+ "local": "Vinícola Thera",
+ "subtitulo": "Um dia fora da trilha, entre vinhos.",
+ "agenda": [
+  {
+   "hora": "07h30",
+   "titulo": "Café da manhã"
+  },
+  {
+   "hora": "11h00",
+   "titulo": "Saída do transfer",
+   "texto": "Deslocamento de aproximadamente 30 minutos até a vinícola."
+  },
+  {
+   "hora": "12h30",
+   "titulo": "Chegada à vinícola"
+  },
+  {
+   "hora": "15h30",
+   "titulo": "Retorno do transfer"
+  },
+  {
+   "hora": "16h00",
+   "titulo": "Chegada à Pousada Serra Bela"
+  },
+  {
+   "hora": "19h00",
+   "titulo": "Jantar na pousada"
+  }
+ ],
+ "escala": 0.95,
+ "_nota": "Programação do dia 28/08 da 3ª Expedição Família. Texto do cliente por WhatsApp em 26/08/2026. Emoji do original sai: a identidade é P&B."
+}

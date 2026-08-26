@@ -1,0 +1,24 @@
+{
+ "dia": 5,
+ "rotuloDia": "Dia 5 · Despedida",
+ "data": "30/08",
+ "mesNome": "Agosto",
+ "diaSemana": "Domingo",
+ "titulo": "Dia de despedida",
+ "local": "Pousada Serra Bela",
+ "subtitulo": "Chegamos ao último dia da nossa expedição.",
+ "agenda": [
+  {
+   "hora": "07h30",
+   "titulo": "Café da manhã"
+  },
+  {
+   "hora": "até 12h00",
+   "titulo": "Check-out",
+   "texto": "É hora de voltar para casa, levando na bagagem tudo o que vivemos por aqui."
+  }
+ ],
+ "fecho": "Obrigado por viver esses dias com a gente. Que venham as próximas histórias.",
+ "escala": 1,
+ "_nota": "Programação do dia 30/08 da 3ª Expedição Família. Texto do cliente por WhatsApp em 26/08/2026. Emoji do original sai: a identidade é P&B."
+}

@@ -1,0 +1,74 @@
+{
+ "dia": 4,
+ "rotuloDia": "Dia 4 · Segundo dia de trilha",
+ "data": "29/08",
+ "mesNome": "Agosto",
+ "diaSemana": "Sábado",
+ "titulo": "Segundo dia de trilha",
+ "local": "Pousada Serra Bela",
+ "previsao": [
+  {
+   "rotulo": "Saída",
+   "valor": "08h30"
+  },
+  {
+   "rotulo": "Distância",
+   "valor": "~170 km"
+  },
+  {
+   "rotulo": "Chegada",
+   "valor": "17h00"
+  }
+ ],
+ "agenda": [
+  {
+   "hora": "07h00",
+   "titulo": "Coolers"
+  },
+  {
+   "hora": "07h30",
+   "titulo": "Café da manhã"
+  },
+  {
+   "hora": "08h10",
+   "titulo": "Briefing com o grupo"
+  },
+  {
+   "hora": "08h30",
+   "titulo": "Saída para a trilha"
+  },
+  {
+   "hora": "12h30",
+   "titulo": "Almoço",
+   "texto": "Almoço da Dona Cleide, restaurante típico da região · área reservada. Previsto entre 12h30 e 13h00."
+  },
+  {
+   "hora": "19h00",
+   "titulo": "Evento de encerramento",
+   "texto": "Para fechar a expedição, uma noite especial para celebrarmos juntos.",
+   "tags": [
+    "Jantar",
+    "Vinhos",
+    "Chopp",
+    "Refrigerantes"
+   ],
+   "extra": "Música ao vivo"
+  }
+ ],
+ "roteiro": [
+  "Pedra da Águia",
+  "Espraiado",
+  "Trilha dos Bugres",
+  "Urubici"
+ ],
+ "asfalto": {
+  "itens": [
+   "~13 km · Pousada Serra Bela ao Espraiado",
+   "~9 km · retorno do Espraiado à Trilha dos Bugres"
+  ],
+  "nota": "Trechos pontuais, necessários para o deslocamento."
+ },
+ "aviso": "Quilometragens e horários são previsões e podem mudar conforme o andamento da trilha.",
+ "escala": 0.76,
+ "_nota": "Programação do dia 29/08 da 3ª Expedição Família. Texto do cliente por WhatsApp em 26/08/2026. Emoji do original sai: a identidade é P&B."
+}

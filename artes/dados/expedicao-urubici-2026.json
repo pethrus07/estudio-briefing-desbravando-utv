@@ -1,0 +1,40 @@
+{
+  "_nota": "Dados da 3ª Expedição Família (Urubici/SC, 26 a 30/08/2026). Usado pelo adesivo do UTV, pelo cartão de identificação e pela carta de boas-vindas. 'in Urubici SC' está como o cliente escreveu na referência — se quiser no padrão da marca, virar 'Urubici · SC'. Ajuste 18/08: ano dividido em 20/26, periodo da expedicao removido (mostrarPeriodo=false) e versao em fundo branco para comparar.",
+  "edicao": "3ª Expedição",
+  "publico": "Família",
+  "ano": "2026",
+  "local": "in Urubici SC",
+  "periodo": "26/08 a 30/08",
+  "instagram": "@desbravando_utv",
+  "adesivo": {
+    "diametroMm": 150,
+    "numero": "01"
+  },
+  "cartao": {
+    "larguraMm": 100,
+    "alturaMm": 70,
+    "furoMm": 6,
+    "campos": [
+      "Nome",
+      "Nº UTV",
+      "Observação"
+    ]
+  },
+  "carta": {
+    "titulo": "Bem-vindos<br>a Urubici.",
+    "paragrafos": [
+      "Depois de meses de expectativa, finalmente chegou a hora. Urubici é o ponto de partida para tudo o que vamos viver nos próximos dias.",
+      "A Serra Catarinense será o nosso cenário. Novos caminhos, boas conversas, paisagens que surpreendem e momentos que vão ficar na memória.",
+      "E a primeira delas começa hoje à noite.",
+      "Nosso encontro de boas-vindas marca oficialmente o início dessa expedição e será o primeiro de muitos momentos que vamos compartilhar juntos por aqui.",
+      "Então, aproveitem a chegada. Daqui a pouco, nos encontramos."
+    ],
+    "destaque": [
+      "Urubici nos espera.",
+      "E essa história está apenas começando."
+    ],
+    "fecho": "É muito bom ter vocês com a gente.",
+    "assinatura": "Equipe Desbravando"
+  },
+  "mostrarPeriodo": false
+}

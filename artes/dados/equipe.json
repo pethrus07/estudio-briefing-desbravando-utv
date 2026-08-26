@@ -1,0 +1,16 @@
+{
+  "_nota": "Dados de exemplo para conferir o layout. Troque pelos integrantes reais e aponte 'foto' para o arquivo do retrato (JPG/PNG, recorte vertical, rosto no terço superior). Sem 'foto', o crachá sai com o campo marcado como pendente.",
+  "config": {
+    "verso": true,
+    "site": "desbravandoutv.com",
+    "avisoVerso": "Este crachá identifica um integrante da equipe durante a expedição. Em caso de perda, entregar à organização."
+  },
+  "pessoas": [
+    { "nome": "Ana Beatriz Moraes", "cargo": "Produtora", "foto": null },
+    { "nome": "Lucas Ferreira", "cargo": "Videomaker", "foto": null },
+    { "nome": "Rafael Nunes", "cargo": "Guia", "foto": null },
+    { "nome": "Marcos Antônio Silva", "cargo": "Mecânico", "foto": null },
+    { "nome": "Juliana Castro", "cargo": "Operacional", "foto": null },
+    { "nome": "Camila Duarte", "cargo": "Atendimento", "foto": null }
+  ]
+}

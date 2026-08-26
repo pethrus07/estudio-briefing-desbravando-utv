@@ -1,0 +1,53 @@
+{
+ "_nota": "Código de conduta na trilha. Texto do cliente (peça anterior dele, com foto de fundo) reconstruído na linguagem P&B da série de programação em 26/08/2026. Duas liberdades de texto: o '&' de 'Vilarejos & Comunidades' virou 'e' (o ampersand do Anton é largo e briga com a caixa alta espaçada) e os dois essenciais do pé viraram frase fechada.",
+ "rotulo": "Código de conduta",
+ "titulo": "A favor do off-road",
+ "titulo2": "consciente",
+ "fundo": "topografia-conduta.svg",
+ "secoes": [
+  {
+   "titulo": "Conduta segura nas expedições",
+   "itens": [
+    "Estradas vicinais: velocidade reduzida.",
+    "Ao avistar ciclistas, reduza para no máximo 30 km/h.",
+    "Retome a velocidade apenas 100 metros após a ultrapassagem."
+   ]
+  },
+  {
+   "titulo": "Vilarejos e comunidades",
+   "itens": ["Reduza a velocidade.", "Abaixe o som.", "Priorize a tranquilidade local."]
+  },
+  {
+   "titulo": "Campos abertos",
+   "itens": ["A velocidade só aumenta com 100% de visibilidade e ausência total de população."]
+  },
+  {
+   "titulo": "Respeito a todos na trilha",
+   "itens": [
+    "Ciclistas, motos, jipes e veículos de apoio.",
+    "Reduza sempre para 30–40 km/h ao compartilhar o mesmo trecho.",
+    "Sinalize, mantenha distância e ultrapasse com segurança."
+   ]
+  },
+  {
+   "titulo": "Observação importante",
+   "destaque": true,
+   "texto": "O UTV não possui marcha. Mesmo a 30–40 km/h, o ronco do motor pode soar mais alto do que a velocidade real.",
+   "subrotulo": "Lembrando",
+   "itens": [
+    "Trechos de maior visibilidade: manter até 60 km/h.",
+    "Vilarejos e áreas curtas: entre 20–30 km/h, priorizando segurança e tranquilidade locais.",
+    "Quando falamos em acelerar, é não passar dos 60 km/h nos trechos permitidos. A velocidade indicada é 30 km/h."
+   ]
+  },
+  {
+   "titulo": "Somos uma só família na trilha",
+   "texto": "Respeito sempre. Estamos todos vivendo a mesma paixão pela terra, pela trilha e pelos momentos que a gente coleciona juntos."
+  }
+ ],
+ "essenciais": [
+  { "rotulo": "Segurança", "texto": "Capacete e cinto de segurança, sempre." },
+  { "rotulo": "Limpeza", "texto": "Não jogue lixo na trilha. Lixo no lixo." }
+ ],
+ "escala": 1
+}

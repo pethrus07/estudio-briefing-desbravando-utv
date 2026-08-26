@@ -1,0 +1,24 @@
+{
+  "_nota": "Conjunto de bandeiras 2,50 m × 1,50 m. Desbravando e Can-Am: fundo preto, marca em branco. As três nacionais usam os SVG oficiais de domínio público (Wikimedia Commons) em marca/bandeiras/.",
+
+  "itens": [
+    {
+      "nome": "Desbravando",
+      "tipo": "marca",
+      "arquivo": "desbravando",
+      "logo": "../marca/logo-desbravando-grande.png",
+      "larguraLogo": "58%"
+    },
+    {
+      "nome": "Can-Am",
+      "tipo": "marca",
+      "arquivo": "can-am",
+      "logo": "../marca/can-am-branco-grande.png",
+      "larguraLogo": "52%"
+    },
+    { "nome": "Canadá", "tipo": "nacional", "arquivo": "canada" },
+    { "nome": "Brasil", "tipo": "nacional", "arquivo": "brasil" },
+    { "nome": "Estados Unidos", "tipo": "nacional", "arquivo": "eua" }
+  ]
+}
+

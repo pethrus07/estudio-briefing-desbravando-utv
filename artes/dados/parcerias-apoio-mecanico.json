@@ -1,0 +1,111 @@
+{
+  "_nota": "Documento-base do Programa de Parcerias. A página 5 (território) é a única que muda por parceiro: duplique este arquivo trocando 'territorio' para gastronomia, bebidas, seguros, fotografia etc. Campos vazios saem marcados como pendência — números e contato nunca são preenchidos por conta própria.",
+  "numeros": {
+    "seguidores": "",
+    "alcance": "",
+    "visualizacoes": "",
+    "engajamento": ""
+  },
+  "contato": {
+    "nome": "",
+    "telefone": "",
+    "email": ""
+  },
+  "capa": {
+    "arquivo": "fotos/provisoria-capa.jpg",
+    "descricao": "Foto de abertura · comboio de UTVs na expedição, plano aberto",
+    "provisoria": true,
+    "credito": "Dune Buggy at Huacachina (7136152157).jpg · Alex Proimos from Sydney, Australia · CC BY 2.0",
+    "fonte": "https://commons.wikimedia.org/wiki/File%3ADune%20Buggy%20at%20Huacachina%20(7136152157).jpg"
+  },
+  "fotoOperacao": {
+    "arquivo": "fotos/provisoria-fotoOperacao.jpg",
+    "descricao": "Foto da operação · equipe Desbravando em campo",
+    "provisoria": true,
+    "credito": "Buggy with shovel wheels to drive in the sand dunes of Qatar. (32786115736).jpg · Ralf Steinberger from Milan, Berlin + Munich, Italy + Germany · CC BY 2.0",
+    "fonte": "https://commons.wikimedia.org/wiki/File%3ABuggy%20with%20shovel%20wheels%20to%20drive%20in%20the%20sand%20dunes%20of%20Qatar.%20(32786115736).jpg"
+  },
+  "encerramento": {
+    "arquivo": "fotos/provisoria-encerramento.jpg",
+    "descricao": "Foto de encerramento · fim de dia na trilha",
+    "provisoria": true,
+    "credito": "Great Sand Dunes Sunset.jpg · 420 Photography · CC0",
+    "fonte": "https://commons.wikimedia.org/wiki/File%3AGreat%20Sand%20Dunes%20Sunset.jpg"
+  },
+  "territorio": {
+    "nome": "Apoio Mecânico",
+    "promessa": "Muito mais do que manutenção.",
+    "foto": {
+      "arquivo": "fotos/provisoria-territorio-foto.jpg",
+      "descricao": "Foto real · equipe mecânica trabalhando no UTV",
+      "provisoria": true,
+      "credito": "Car engine maintenance involves a mechanic inspecting and adjusting parts under the hood.jpg · Shixart1985 · CC BY 2.0",
+      "fonte": "https://commons.wikimedia.org/wiki/File%3ACar%20engine%20maintenance%20involves%20a%20mechanic%20inspecting%20and%20adjusting%20parts%20under%20the%20hood.jpg"
+    },
+    "itens": [
+      {
+        "titulo": "Preparação.",
+        "texto": "Os UTVs revisados antes da expedição sair."
+      },
+      {
+        "titulo": "Segurança.",
+        "texto": "Acompanhamento durante todo o percurso."
+      },
+      {
+        "titulo": "Continuidade.",
+        "texto": "Atendimento no imprevisto, para o participante seguir vivendo a experiência."
+      },
+      {
+        "titulo": "Conteúdo técnico.",
+        "texto": "O conhecimento da sua equipe vira material que a comunidade consome."
+      },
+      {
+        "titulo": "Relacionamento.",
+        "texto": "Contato com os proprietários antes, durante e depois da expedição."
+      }
+    ]
+  },
+  "ganhos": [
+    "Fazer parte da experiência do cliente.",
+    "Criar relacionamento com proprietários de UTV.",
+    "Produzir conteúdo autêntico.",
+    "Fortalecer sua autoridade no segmento.",
+    "Estar presente em momentos que geram lembrança.",
+    "Aparecer de forma natural para quem acompanha cada expedição."
+  ],
+  "casos": [
+    {
+      "local": "Jericoacoara",
+      "legenda": "Imagine sua equipe sendo lembrada por tornar essa experiência possível.",
+      "foto": {
+        "arquivo": "fotos/provisoria-casos-0-foto.jpg",
+        "descricao": "Caso · resgate do carro em Jericoacoara",
+        "provisoria": true,
+        "credito": "Escavada Wash, New Mexico 2025.jpg · Craig Talbert · CC BY 4.0",
+        "fonte": "https://commons.wikimedia.org/wiki/File%3AEscavada%20Wash%2C%20New%20Mexico%202025.jpg"
+      }
+    },
+    {
+      "local": "Almoço nas dunas",
+      "legenda": "Imagine se este momento fosse assinado pela sua marca.",
+      "foto": {
+        "arquivo": "fotos/provisoria-casos-1-foto.jpg",
+        "descricao": "Caso · restaurante nas dunas",
+        "provisoria": true,
+        "credito": "Paoay Sand Dunes Sunset.jpg · Rollymagpayo · CC BY-SA 4.0",
+        "fonte": "https://commons.wikimedia.org/wiki/File%3APaoay%20Sand%20Dunes%20Sunset.jpg"
+      }
+    },
+    {
+      "local": "Primeira luz",
+      "legenda": "Imagine centenas de pessoas associando este momento à sua marca.",
+      "foto": {
+        "arquivo": "fotos/provisoria-casos-2-foto.jpg",
+        "descricao": "Caso · nascer do sol na expedição",
+        "provisoria": true,
+        "credito": "Milky Way Before Sunrise at Sand Dune Arch (54023509734).jpg · Eric Kilby from Somerville, MA, USA · CC BY-SA 2.0",
+        "fonte": "https://commons.wikimedia.org/wiki/File%3AMilky%20Way%20Before%20Sunrise%20at%20Sand%20Dune%20Arch%20(54023509734).jpg"
+      }
+    }
+  ]
+}

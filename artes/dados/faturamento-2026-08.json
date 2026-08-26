@@ -1,0 +1,268 @@
+{
+  "_nota": "Descritivo de artes do ciclo 26/07 → 25/08/2026, para o fechamento do dia 26. Tabela vigente: R$ 20 simples / R$ 40 menos simples (atualizada em 17/08; antes R$ 15). Cada versão entregue conta como uma arte — precedente do fechamento de 23/07.",
+  "cliente": "Desbravando UTV",
+  "plano": "Aceleração",
+  "competencia": "26/07 → 25/08/2026",
+  "emissao": "17/08/2026",
+  "vencimento": "26/08/2026",
+  "regra": [
+    "Cada versão entregue conta como uma arte — mesmo critério do fechamento de 23/07, em que as três versões da arte de mesa foram três artes.",
+    "R$ 20 quando a peça é um bloco de informação em layout direto. R$ 40 quando o layout é construído do zero, tem hierarquia de várias informações, foto tratada, duas faces ou texto longo diagramado.",
+    "Duas rodadas de ajuste por entrega estão inclusas (cláusula 7.3 do escopo). Só o que passou disso aparece como ajuste extra.",
+    "Arquivo derivado do mesmo desenho — prova de corte, versão sem fundo, outra proporção, mapa técnico — não é cobrado. Vão listados para registro."
+  ],
+  "pecas": [
+    {
+      "nome": "Crachá da equipe",
+      "oque": "Identificação da equipe em campo, com foto, nome e cargo.",
+      "spec": "PVC 0,76 mm · 54 × 86 mm vertical · arquivo 60 × 92 mm com 3 mm de sangria · frente variável + verso comum",
+      "itens": [
+        {
+          "nome": "Layout centro — foto contida, nome e cargo centralizados",
+          "classe": "menos simples",
+          "valor": 40
+        },
+        {
+          "nome": "Layout editorial — foto sangrada no topo, texto à esquerda",
+          "classe": "menos simples",
+          "valor": 40
+        }
+      ],
+      "acompanha": [
+        "Versão com marcas de corte e área segura, para conferência",
+        "Ficha de especificação técnica de 2 páginas (crachá + cordão)"
+      ],
+      "argumento": "Duas diagramações completas e independentes, não variação de cor: cada uma resolve foto, nome em dois níveis, cargo e verso. A grade fecha nos 86 mm de altura com a foto aplicada — foi refeita quando o retrato entrou, porque o cargo saía da área segura. O nome é variável por pessoa e encolhe sozinho quando é longo."
+    },
+    {
+      "nome": "Cordão do crachá",
+      "oque": "Fita de pescoço para o crachá da equipe.",
+      "spec": "Fita 20 mm × 90 cm · arquivo 904 × 24 mm com 2 mm de sangria · sublimação",
+      "itens": [
+        {
+          "nome": "Fita preta com o ícone da montanha repetido a cada 70 mm",
+          "classe": "simples",
+          "valor": 20
+        }
+      ],
+      "acompanha": [],
+      "argumento": "Peça de um elemento só. O cinza foi clareado depois do primeiro teste porque na sublimação o tom original desaparecia na fita."
+    },
+    {
+      "nome": "Camiseta da equipe — PRODUÇÃO",
+      "oque": "Estampa do uniforme: cargo nas costas e ícone no peito.",
+      "spec": "Costas: cargo com 80 mm + ícone com 30 mm acima · frente: ícone 30 mm no peito esquerdo · vetor em curvas, 1 cor",
+      "itens": [
+        {
+          "nome": "Estampa das costas — ícone + cargo",
+          "classe": "menos simples",
+          "valor": 40
+        },
+        {
+          "nome": "Estampa da frente — ícone",
+          "classe": "simples",
+          "valor": 20
+        }
+      ],
+      "acompanha": [
+        "Duas versões sem fundo, no tamanho físico exato, para a máquina",
+        "Mapa de aplicação A4 com as duas vistas cotadas",
+        "Provas em 300 dpi"
+      ],
+      "argumento": "O texto foi convertido em curvas: a estamparia imprime igual sem ter a fonte instalada. As medidas foram invertidas a pedido (a palavra passou a 80 mm e o ícone a 30 mm) e o bloco foi rediagramado. Cada arte saiu em duas formas — visível sobre preto para conferência e sem fundo para produção — e a segunda não é cobrada."
+    },
+    {
+      "nome": "Cardápio — Noite do Queijo, Pizza & Vinho",
+      "oque": "Cardápio do evento de 13/08, para mesa e para redes.",
+      "spec": "Mesa: A5 e A4, com 3 mm de sangria, pronto para gráfica · Social: 1080 × 1920 e 1080 × 1350, pixel exato",
+      "itens": [
+        {
+          "nome": "Mesa A5 — foto tratada, lista de sabores e recado do chef",
+          "classe": "menos simples",
+          "valor": 40
+        },
+        {
+          "nome": "Mesa A4 — mesma diagramação em outro formato",
+          "classe": "simples",
+          "valor": 20
+        },
+        {
+          "nome": "Stories 1080 × 1920 — com data, local e recado do vinho",
+          "classe": "menos simples",
+          "valor": 40
+        },
+        {
+          "nome": "Feed 1080 × 1350",
+          "classe": "simples",
+          "valor": 20
+        }
+      ],
+      "acompanha": [
+        "Provas em 300 dpi das versões de mesa",
+        "Créditos e licença da foto de fundo"
+      ],
+      "argumento": "Quatro peças de uso diferente: as de social levam data, local e recado porque quem vê ainda não está no evento; as de mesa não levam, porque quem está na mesa já chegou. A foto de fundo foi tratada e ancorada para não competir com os nomes dos sabores. Duas rodadas de ajuste estão inclusas; a terceira (retirar subtítulo e rodapé, entrar o recado do chef) aparece como extra."
+    },
+    {
+      "nome": "Bandeiras 2,50 × 1,50 m",
+      "oque": "Conjunto de cinco bandeiras para a operação.",
+      "spec": "2500 × 1500 mm final · arquivo 2560 × 1560 mm com 30 mm de sangria para a bainha · vetorial em escala 1:1",
+      "itens": [
+        {
+          "nome": "Desbravando — preta, marca em branco",
+          "classe": "simples",
+          "valor": 20
+        },
+        {
+          "nome": "Can-Am — preta, marca em branco",
+          "classe": "simples",
+          "valor": 20
+        },
+        {
+          "nome": "Canadá",
+          "classe": "simples",
+          "valor": 20
+        },
+        {
+          "nome": "Brasil",
+          "classe": "simples",
+          "valor": 20
+        },
+        {
+          "nome": "Estados Unidos",
+          "classe": "simples",
+          "valor": 20
+        }
+      ],
+      "acompanha": [
+        "As três nacionais também em proporção oficial de cada país",
+        "Provas em PNG",
+        "Folha com acabamento sugerido: tecido, bainha e ferragem"
+      ],
+      "argumento": "Arquivos em tamanho real, vetoriais, com a sangria que a bainha exige. As três nacionais foram checadas contra a especificação oficial de cada país; como 2,50 × 1,50 m não é a proporção de nenhuma delas, foi entregue também a versão na proporção correta — sem custo — para a escolha entre uniformidade no mastro e fidelidade. O logo do patrocinador foi preparado em branco com transparência a partir do arquivo preto sobre branco."
+    },
+    {
+      "nome": "Carta de recepção — 3ª Expedição Família",
+      "oque": "Carta entregue às famílias na chegada em Urubici.",
+      "spec": "A5 148 × 210 mm + 3 mm de sangria · uma página · texto do cliente, diagramado",
+      "itens": [
+        {
+          "nome": "Versão clara — tinta preta no papel",
+          "classe": "menos simples",
+          "valor": 40
+        },
+        {
+          "nome": "Versão escura — fundo preto, tinta branca",
+          "classe": "simples",
+          "valor": 20
+        }
+      ],
+      "acompanha": [
+        "Provas em 300 dpi"
+      ],
+      "argumento": "Texto longo diagramado para leitura de família cansada de viagem: coluna de 104 mm, entrelinha alta, margens largas, destaque no trecho de fecho. Duas versões porque a escolha muda custo e leitura — a clara imprime mais barato e lê melhor; a escura segue a linguagem das peças de social."
+    },
+    {
+      "nome": "Adesivo de identificação do UTV",
+      "oque": "Adesivo circular colado no veículo para identificar o número.",
+      "spec": "Círculo Ø 150 mm + 3 mm de sangria · preto e branco",
+      "itens": [
+        {
+          "nome": "Selo da expedicao com o numero do UTV — fundo preto",
+          "classe": "menos simples",
+          "valor": 40
+        },
+        {
+          "nome": "Mesma arte em fundo branco, para comparar",
+          "classe": "simples",
+          "valor": 20
+        }
+      ],
+      "acompanha": [
+        "Os demais números da série, derivados do mesmo arquivo",
+        "Cartao de identificacao atualizado com o mesmo selo (ano dividido e sem periodo)"
+      ],
+      "argumento": "Selo com seis informações hierarquizadas dentro de um círculo — marca, edição, público, ano, local, período e número — em preto e branco, como pedido, a partir de uma referência que vinha em azul e verde-limão. O número é variável: aprovada a arte, a série inteira sai do mesmo arquivo, sem cobrança por unidade. Ajuste de 18/08: o ano passou a dois blocos empilhados (20/26) como na referencia, o periodo da expedicao saiu, e foi feita a versao em fundo branco para a escolha. O selo e compartilhado com o cartao de identificacao, que foi atualizado junto sem cobranca."
+    },
+    {
+      "nome": "Cartão de identificação do UTV",
+      "oque": "Cartão pendurado no veículo para saber de quem é.",
+      "spec": "100 × 70 mm + 3 mm de sangria · furo de 6 mm marcado · frente e verso",
+      "itens": [
+        {
+          "nome": "Frente com o selo da expedição + verso com campos",
+          "classe": "menos simples",
+          "valor": 40
+        }
+      ],
+      "acompanha": [
+        "Provas em 300 dpi das duas faces"
+      ],
+      "argumento": "Duas faces com lógicas opostas no mesmo arquivo: frente escura com o selo, verso claro com campos de Nome, Nº UTV e Observação. O verso é claro por decisão funcional — é preenchido à mão, e caneta comum não escreve sobre preto."
+    },
+    {
+      "nome": "Chaveiro de fita",
+      "oque": "Fita curta, no modelo de cordão, para usar como chaveiro.",
+      "spec": "Fita 20 mm × 25 cm + 2 mm de sangria · sublimação · texto em curvas",
+      "itens": [
+        {
+          "nome": "Variante A — só o ícone",
+          "classe": "simples",
+          "valor": 20
+        },
+        {
+          "nome": "Variante B — ícone + DESBRAVANDO UTV",
+          "classe": "simples",
+          "valor": 20
+        },
+        {
+          "nome": "Variante C — ícone + nome + @desbravando_utv",
+          "classe": "simples",
+          "valor": 20
+        }
+      ],
+      "acompanha": [],
+      "argumento": "Três variantes porque a pergunta foi exatamente essa — se ficava melhor só a logo ou com o nome. Cada uma é um padrão de repetição diferente, calculado para a fita de 25 cm. O texto está em curvas, sem dependência de fonte."
+    }
+  ],
+  "ajustes": {
+    "titulo": "Rodadas de ajuste além das duas inclusas",
+    "valorUnitario": 5,
+    "itens": [
+      {
+        "nome": "Camiseta — 3ª rodada (inversão das medidas 80/30 mm)",
+        "valor": 5
+      },
+      {
+        "nome": "Camiseta — 4ª rodada (versão visível, porque a arte branca abria em branco)",
+        "valor": 5
+      },
+      {
+        "nome": "Cardápio — 3ª rodada (fora o subtítulo e o rodapé, entrou o recado do chef)",
+        "valor": 5
+      }
+    ],
+    "nota": "As duas primeiras rodadas de cada peça estão inclusas, conforme a cláusula 7.3. Crachá, cordão, bandeiras, carta, adesivo, cartão e chaveiro ficaram dentro do limite."
+  },
+  "cotaDigital": {
+    "titulo": "Criação digital — dentro da cota do plano",
+    "usados": 1,
+    "total": 5,
+    "itens": [
+      {
+        "nome": "Documento do Programa de Parcerias — 9 páginas",
+        "argumento": "Documento comercial de nove páginas para apresentar o programa às marcas: tese, plataforma, ciclo de valor, território do parceiro, o que a marca ganha, casos e encerramento. A página do território é parametrizada — cada novo parceiro (gastronomia, bebidas, seguros, fotografia) sai do mesmo arquivo."
+      }
+    ],
+    "nota": "Entra na cota de 5 itens de criação digital do mês, sem custo adicional. Restam 4 usos neste ciclo."
+  },
+  "descartado": {
+    "titulo": "Executado e descartado a pedido",
+    "itens": [
+      {
+        "nome": "Mockup 3D da camiseta — 3 renders",
+        "argumento": "Modelagem em 3D da camiseta com a estampa aplicada sobre o volume do tecido, em três vistas. Reprovada e removida do pacote a pedido do cliente. Registrada aqui apenas para constar; não está sendo cobrada."
+      }
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "_nota": "Cardápio de MESA — fica na mesa no dia do evento. Ajuste de 11/08: sem os dados da parte inferior (data, local, recado e patrocínio), sem o subtítulo 'Noite do Queijo, Pizza & Vinho', e com o recado do chef abaixo dos sabores. Os sabores vieram do cliente; 'Briske' lido como Brisket. Sem descrição de ingredientes: não invento recheio.",
+
+  "sobrelinha": "PRÉ-EXPEDIÇÃO · FAMÍLIA · URUBICI-SC",
+  "titulo": "CARDÁPIO<br>DA NOITE",
+
+  "fundo": {
+    "arquivo": "fotos/evento/fundo-cardapio.jpg",
+    "descricao": "Foto de fundo · pizza em mesa de madeira",
+    "foco": "center 45%",
+    "modo": "base",
+    "alturaPct": 40,
+    "provisoria": true,
+    "credito": "Pizza Margherita (Verde Ischia).jpg · Wikimedia Commons · CC BY-SA 4.0",
+    "fonte": "https://commons.wikimedia.org/wiki/File:Pizza_Margherita_(Verde_Ischia).jpg"
+  },
+
+  "itens": [
+    { "nome": "Marguerita", "detalhe": null },
+    { "nome": "Parma com rúcula", "detalhe": null },
+    { "nome": "Calabresa", "detalhe": null },
+    { "nome": "Quatro queijos", "detalhe": null },
+    { "nome": "Brisket", "detalhe": null }
+  ],
+
+  "nota": "Não encontrou seu sabor favorito? Consulte o chef e peça sua pizza do seu jeito.",
+
+  "linhas": [],
+  "patrocinio": null
+}

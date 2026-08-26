@@ -1,0 +1,38 @@
+{
+ "_nota": "Programação do dia 1 da 3ª Expedição Família (26/08/2026). Texto recebido do cliente em 25/08. Emojis do WhatsApp saem: o 📍 vira um alfinete desenhado, porque emoji entra colorido e a identidade é P&B.",
+ "sobrelinha": "Programação • 26/08",
+ "titulo": "Bem-vindos a Urubici",
+ "subtitulo": "A nossa expedição começa aqui.",
+ "local": "Pousada Serra Bela",
+ "fundo": {
+  "arquivo": "fotos/evento/urubici-morro.jpg",
+  "descricao": "Morro da Igreja · Pedra Furada, o marco de Urubici",
+  "foco": "center 42%",
+  "tratamento": "pb",
+  "credito": "Renato Soares · Morro da Igreja, Parque Nacional de São Joaquim · Wikimedia Commons · domínio público",
+  "fonte": "https://commons.wikimedia.org/wiki/File:Renato_Soares_Morro_da_Igreja_Parque_Nacional_de_S%C3%A3o_Joaquim.jpg"
+ },
+ "agenda": [
+  {
+   "hora": "15h00",
+   "titulo": "Check-in"
+  },
+  {
+   "hora": "19h00",
+   "titulo": "Evento de Boas-vindas",
+   "texto": "Uma noite para reunir a turma e dar início aos próximos dias.",
+   "tags": [
+    "Jantar",
+    "Vinhos",
+    "Chopp",
+    "Refrigerantes"
+   ],
+   "extra": "Música ao vivo"
+  }
+ ],
+ "fecho": "Chegou a hora. Nos encontramos na Serra Catarinense.",
+ "data": "26/08",
+ "rotuloDia": "Dia 1 · Chegada",
+ "mesNome": "Agosto",
+ "diaSemana": "Quarta-feira"
+}

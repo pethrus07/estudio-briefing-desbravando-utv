@@ -1,0 +1,69 @@
+{
+ "dia": 2,
+ "rotuloDia": "Dia 2 · Primeiro dia de trilha",
+ "data": "27/08",
+ "mesNome": "Agosto",
+ "diaSemana": "Quinta-feira",
+ "titulo": "Primeiro dia de trilha",
+ "local": "Pousada Serra Bela",
+ "previsao": [
+  {
+   "rotulo": "Saída",
+   "valor": "08h30"
+  },
+  {
+   "rotulo": "Distância",
+   "valor": "~180 km"
+  },
+  {
+   "rotulo": "Chegada",
+   "valor": "17h–17h30"
+  }
+ ],
+ "agenda": [
+  {
+   "hora": "07h00",
+   "titulo": "Coolers"
+  },
+  {
+   "hora": "07h30",
+   "titulo": "Café da manhã"
+  },
+  {
+   "hora": "08h10",
+   "titulo": "Briefing com o grupo"
+  },
+  {
+   "hora": "08h30",
+   "titulo": "Saída para a trilha"
+  },
+  {
+   "hora": "13h00",
+   "titulo": "Almoço",
+   "texto": "Churrascaria da Cascata · área reservada. Previsto entre 13h00 e 13h30."
+  },
+  {
+   "hora": "19h00",
+   "titulo": "Jantar na pousada",
+   "texto": "Para encerrarmos juntos o primeiro dia de trilha."
+  }
+ ],
+ "roteiro": [
+  "Urubici",
+  "Bom Jardim da Serra",
+  "Parque Nacional",
+  "Mirante da Serra do Rio do Rastro",
+  "Urubici"
+ ],
+ "asfalto": {
+  "itens": [
+   "~17 km · Urubici a Bom Jardim",
+   "~12 km · acesso ao Parque Nacional",
+   "~12 km · Mirante até a Churrascaria"
+  ],
+  "nota": "Trechos pontuais, necessários para o deslocamento."
+ },
+ "aviso": "Quilometragens e horários são previsões e podem mudar conforme o andamento da trilha.",
+ "escala": 0.79,
+ "_nota": "Programação do dia 27/08 da 3ª Expedição Família. Texto do cliente por WhatsApp em 26/08/2026. Emoji do original sai: a identidade é P&B."
+}

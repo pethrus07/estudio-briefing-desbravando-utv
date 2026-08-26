@@ -1,0 +1,31 @@
+{
+ "_nota": "Programação do dia 1 da 3ª Expedição Família (26/08/2026). Texto recebido do cliente em 25/08. Emojis do WhatsApp saem: o 📍 vira um alfinete desenhado, porque emoji entra colorido e a identidade é P&B.",
+ "titulo": "Bem-vindos a Urubici",
+ "subtitulo": "A nossa expedição começa aqui.",
+ "local": "Pousada Serra Bela",
+ "agenda": [
+  {
+   "hora": "15h00",
+   "titulo": "Check-in"
+  },
+  {
+   "hora": "19h00",
+   "titulo": "Evento de Boas-vindas",
+   "texto": "Uma noite para reunir a turma e dar início aos próximos dias.",
+   "tags": [
+    "Jantar",
+    "Vinhos",
+    "Chopp",
+    "Refrigerantes"
+   ],
+   "extra": "Música ao vivo"
+  }
+ ],
+ "fecho": "Chegou a hora. Nos encontramos na Serra Catarinense.",
+ "data": "26/08",
+ "rotuloDia": "Dia 1 · Chegada",
+ "mesNome": "Agosto",
+ "diaSemana": "Quarta-feira",
+ "dia": 1,
+ "escala": 1
+}
