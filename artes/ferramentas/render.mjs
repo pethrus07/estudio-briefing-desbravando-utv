@@ -21,7 +21,9 @@ import { arteEstampa, mapaAplicacao } from "../templates/camiseta.mjs";
 import { evento, meta as metaEvento } from "../templates/evento.mjs";
 
 import { programacao, meta as metaProgramacao } from "../templates/programacao.mjs";
-import { manifesto, meta as metaManifesto } from "../templates/manifesto.mjs";
+import { manifesto } from "../templates/manifesto.mjs";
+import { oferta } from "../templates/oferta.mjs";
+import { FORMATOS as FORMATOS_SOCIAL } from "../templates/comum.mjs";
 import { bandeira } from "../templates/bandeira.mjs";
 import { adesivo, cartaoUtv } from "../templates/expedicao.mjs";
 import { adesivoVetor, textosNecessarios } from "../templates/adesivo-vetor.mjs";
@@ -405,11 +407,27 @@ function fazerManifesto() {
   const arquivo = opt("dados", "manifesto-off-road.json");
   const dados = lerDados(arquivo);
   const formato = opt("formato", "stories");
-  const fmt = metaManifesto.formatos[formato];
+  const fmt = FORMATOS_SOCIAL[formato];
   if (!fmt) throw new Error(`formato desconhecido: ${formato}`);
   const { html } = manifesto(dados, { formato });
   console.log(`Manifesto · ${dados.titulo} ${dados.titulo2 ?? ""} · ${dados.secoes.length} seções · ${fmt.l}×${fmt.a} px`);
   const nome = arquivo.replace(/\.json$/, "");
+  mkdirSync(saida, { recursive: true });
+  const htmlPath = join(saida, `${nome}.html`);
+  writeFileSync(htmlPath, html, "utf8");
+  paraPngExato(htmlPath, fmt.l, fmt.a, join(saida, `${nome}.png`));
+}
+
+/** Proposta de expedicao — o PDF virado peca de imagem. */
+function fazerOferta() {
+  const arquivo = opt("dados", "expedicao-origens.json");
+  const dados = lerDados(arquivo);
+  const formato = opt("formato", "stories");
+  const fmt = FORMATOS_SOCIAL[formato];
+  if (!fmt) throw new Error(`formato desconhecido: ${formato}`);
+  const { html } = oferta(dados, { formato });
+  console.log(`Oferta · ${dados.titulo} · ${dados.dias.length} dias · ${dados.incluso.length} itens inclusos · ${fmt.l}×${fmt.a} px`);
+  const nome = arquivo.replace(/[.]json$/, "");
   mkdirSync(saida, { recursive: true });
   const htmlPath = join(saida, `${nome}.html`);
   writeFileSync(htmlPath, html, "utf8");
@@ -432,6 +450,7 @@ const alvos = {
 
   programacao: fazerProgramacao,
   manifesto: fazerManifesto,
+  oferta: fazerOferta,
 };
 
 if (alvo === "tudo") {
