@@ -84,6 +84,17 @@ ${cssLista(fmt)}
     display:block; font-size:.88em; line-height:1.3; letter-spacing:.22em;
     text-transform:uppercase; color:#b8b8b8; margin-top:.95em;
   }
+  /* selos: a classificação da expedição e a chamada de urgência. Viram pílula em vez de
+     mais uma linha de texto porque o bloco de título já tem quatro linhas — pílula lê
+     como etiqueta, não como continuação da leitura. */
+  .selos{ display:flex; flex-wrap:wrap; gap:.6em; margin-top:1.5em }
+  .selo{
+    font-size:.84em; line-height:1.2; letter-spacing:.2em; text-transform:uppercase;
+    border:1px solid rgba(255,255,255,.34); border-radius:99px; padding:.55em 1.1em;
+    color:#e6e6e6;
+  }
+  /* invertido: numa peça P&B, sólido é o acento mais forte que existe */
+  .selo.forte{ background:#fff; border-color:#fff; color:#000; font-weight:600 }
 
   /* ---------- seções de texto ---------- */
   .bloco{ margin-top:2.4em }
@@ -110,17 +121,25 @@ ${cssLista(fmt)}
   }
   .nota{ font-size:.94em; line-height:1.42; color:#9e9e9e; margin-top:.8em }
 
-  /* ---------- rodapé: o valor é o fecho ---------- */
-  .rodape{ display:grid; gap:1.3em; margin-top:2.6em }
+  /* ---------- rodapé: o valor é o fecho ----------
+     Dois pacotes lado a lado: preço se lê comparando, e empilhado um sob o outro o
+     segundo pareceria condição do primeiro em vez de alternativa. */
+  .rodape{ display:grid; gap:1.15em; margin-top:2.4em }
   .divisor{ height:1px; background:rgba(255,255,255,.18) }
-  .preco{ display:flex; align-items:baseline; gap:.7em; flex-wrap:wrap }
+  .pacotes{ display:grid; grid-template-columns:1fr 1fr; gap:1.6em; align-items:start }
+  .pacote dt{
+    font-size:.82em; line-height:1.3; letter-spacing:.2em; text-transform:uppercase; color:#9e9e9e;
+    margin-bottom:.34em;
+  }
+  .preco{ display:flex; align-items:baseline; gap:.6em; flex-wrap:wrap }
   .preco .n{
-    font-family:"Anton",sans-serif; font-weight:400; font-size:3.5em; line-height:1;
+    font-family:"Anton",sans-serif; font-weight:400; font-size:2.9em; line-height:1;
     letter-spacing:-.02em;
   }
   .preco .un{
-    font-size:1.04em; line-height:1.3; letter-spacing:.2em; text-transform:uppercase; color:#b8b8b8;
+    font-size:.92em; line-height:1.3; letter-spacing:.18em; text-transform:uppercase; color:#b8b8b8;
   }
+  .pacote .obs{ font-size:.92em; line-height:1.4; color:#9e9e9e; margin-top:.5em }
   .pgto{ font-size:1em; line-height:1.45; color:#c2c2c2 }
   .pgto i{ font-style:normal; color:#8a8a8a; padding:0 .3em }
 </style>
@@ -138,6 +157,14 @@ ${cssLista(fmt)}
         <h1>${esc(dados.titulo)}</h1>
         ${dados.data ? `<span class="quando">${esc(dados.data)}</span>` : ""}
         ${dados.diasSemana ? `<span class="dias-semana">${esc(dados.diasSemana)}</span>` : ""}
+        ${
+          dados.classificacao || dados.chamada
+            ? `<div class="selos">
+          ${dados.classificacao ? `<span class="selo">${esc(dados.classificacao)}</span>` : ""}
+          ${dados.chamada ? `<span class="selo forte">${esc(dados.chamada)}</span>` : ""}
+        </div>`
+            : ""
+        }
       </div>
 
       <div>
@@ -186,10 +213,15 @@ ${cssLista(fmt)}
 
     <div class="rodape">
       <div class="divisor"></div>
-      <div class="preco">
-        <b class="n">${esc(dados.valor)}</b>
-        <span class="un">${esc(dados.valorUnidade ?? "")}</span>
-      </div>
+      <dl class="pacotes">${(dados.pacotes ?? [])
+        .map(
+          (v) => `<div class="pacote">
+          <dt>${esc(v.nome)}</dt>
+          <dd class="preco"><b class="n">${esc(v.valor)}</b><span class="un">${esc(v.unidade ?? "")}</span></dd>
+          ${v.obs ? `<dd class="obs">${esc(v.obs)}</dd>` : ""}
+        </div>`
+        )
+        .join("")}</dl>
       ${
         dados.pagamento?.length
           ? `<p class="pgto">${dados.pagamento.map(esc).join(" <i>•</i> ")}</p>`
