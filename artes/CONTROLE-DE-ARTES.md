@@ -118,6 +118,7 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 | 3 | **`logo-lateral.svg`** — assinatura lateral em vetor | 1 | — | *a decidir* | entregue 26/08 |
 | 4 | **Código de conduta** — “A favor do off-road consciente” | 1 | 1 | *a decidir* | entregue 26/08 |
 | 5 | **Carta de drinks** do evento | 1 | 1 | *a decidir* | entregue 26/08 |
+| 6 | **Expedição Origens** — proposta em imagem | 1 | 1 | *a decidir* | entregue 02/09 |
 
 ---
 
@@ -231,7 +232,45 @@ deixou de desenhar um filete solto no pé.
 **Como eu enquadraria.** É arte padrão de post (**R$ 15**) — o template é o mesmo da peça
 anterior e o trabalho foi de conteúdo e de acerto de escala.
 
+### 6 · Expedição Origens — proposta em imagem
+
+O PDF de proposta da Expedição Origens (23–25/10, Brotas) virado **peça de imagem**, a
+pedido dele: “imagem e não pdf”. Uma peça, 1080 × 1920, com o conteúdo integral do
+documento — roteiro dos três dias, hospedagem, o que está e o que não está incluso,
+segurança, valor e formas de pagamento.
+
+**O trabalho aqui foi de forma, não de texto.** O documento tem seis assuntos de natureza
+diferente; em PDF eles viram seis páginas de lista, e num quadro de story esse mesmo
+conteúdo pede ~2 400 px de altura. O caminho errado seria encolher a letra até caber. Cada
+assunto ganhou a forma que ocupa menos altura sem perder leitura:
+
+| assunto | forma |
+|---|---|
+| Roteiro | lista numerada (a malha do conjunto), hora e evento em duas colunas |
+| Está incluso | checklist em **duas colunas** — 11 itens em 6 linhas |
+| Não está incluso | uma linha só, itens separados por bullet |
+| Valor | rodapé ancorado, número em Anton: é o fecho da peça |
+
+**Condensação da lista de inclusos, para conferir com ele:** eram 15 linhas com repetição
+por dia, viraram 11 sem perder informação — café da manhã de sábado e domingo numa linha
+(os dois na pousada), bebidas e gelo das duas trilhas numa linha, jantar na pousada das
+duas noites numa linha, hospedagem das duas noites numa linha. E “chopp, drinks, música ao
+vivo e jantar”, que aparecia dentro dos dois eventos, saiu para nota — era a mesma frase
+duas vezes.
+
+**Como eu enquadraria.** Template novo (`templates/oferta.mjs`) com cinco estruturas que
+não existiam: dia de roteiro com trecho e quilometragem, grade de hora × evento, checklist
+de duas colunas, linha corrida de exclusões e bloco de preço. Mesmo porte da primeira peça
+da série de programação, com trabalho a mais de reorganização de conteúdo. Sugestão:
+**R$ 50**.
+
 ### Ferramenta criada no caminho (não cobrável)
+
+`templates/comum.mjs` — o cromo das peças de social (fundo, véu, coluna de três faixas,
+marca, bloco de título) e a malha *número · trilho · corpo*, num lugar só. Extraído quando
+a terceira peça ia copiar o mesmo CSS pela terceira vez — copiado, ele divergiria e ninguém
+saberia qual versão é a certa. O refator foi conferido por **md5 do PNG antes e depois**: as
+duas peças já entregues saíram byte a byte idênticas.
 
 `ferramentas/topografia.mjs` — gerador do campo de curvas de nível. O script que fez as
 cinco texturas da programação era avulso e se perdeu; a sexta peça precisaria refazer a olho

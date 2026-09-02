@@ -1,0 +1,66 @@
+{
+ "_nota": "Expedição Origens (23–25/10/2026), a partir do PDF 'Expedição Origens' que ele mandou em 26/08/2026. Conteúdo integral do documento; o que mudou foi a FORMA, para caber num quadro de 1080×1920.",
+ "_condensacao": "A lista 'o que está incluso' tinha 15 linhas com repetição por dia. Virou 11 sem perder informação: café da manhã de sábado + domingo numa linha (ambos na pousada), bebidas e gelo de sexta + sábado numa linha, jantar na pousada de sexta + sábado numa linha, hospedagem das duas noites numa linha. O que os eventos incluem (chopp, drinks, música ao vivo e jantar) saiu de dentro dos dois itens e virou nota — era a mesma frase repetida duas vezes.",
+ "rotulo": "Quintal do Desbravando UTV · by Serra do Itaqueri",
+ "titulo": "Expedição Origens",
+ "data": "23 a 25 de outubro de 2026",
+ "diasSemana": "Sexta-feira a domingo",
+ "fundo": "topografia-origens.svg",
+ "dias": [
+  {
+   "quando": "Sexta · 23/10",
+   "trecho": "Desbravando → Brotas",
+   "distancia": "≈ 110 km",
+   "horarios": [
+    { "hora": "08h30", "oque": "Saída do Desbravando" },
+    { "hora": "13h30/14h", "oque": "Almoço no trecho (Secret Point)" },
+    { "hora": "17h/18h", "oque": "Chegada prevista em Brotas" },
+    { "hora": "19h00", "oque": "Evento de Chegada" }
+   ]
+  },
+  {
+   "quando": "Sábado · 24/10",
+   "trecho": "Roteiro pela região de Brotas",
+   "distancia": "80 a 120 km",
+   "horarios": [
+    { "hora": "08h30", "oque": "Saída" },
+    { "hora": "12h/13h", "oque": "Almoço no Trecho Raiz" },
+    { "hora": "17h30/18h", "oque": "Chegada prevista à pousada" },
+    { "hora": "19h00", "oque": "Evento de Encerramento" }
+   ]
+  },
+  {
+   "quando": "Domingo · 25/10",
+   "trecho": "Retorno",
+   "horarios": [
+    { "hora": "", "oque": "Café da manhã" },
+    { "hora": "08h30", "oque": "Saída prevista para retorno" }
+   ]
+  }
+ ],
+ "hospedagem": {
+  "nome": "Pousada Três Quedas",
+  "texto": "quartos distribuídos conforme a capacidade de cada acomodação.",
+  "upgrade": "Upgrade de quarto mediante disponibilidade, tratado caso a caso."
+ },
+ "incluso": [
+  "Café da manhã no Desbravando (sexta)",
+  "Café da manhã na pousada (sábado e domingo)",
+  "Bebidas e gelo para trilha (sexta e sábado)",
+  "Almoço no Secret Point (sexta)",
+  "Almoço no Trecho Raiz (sábado)",
+  "Jantar na pousada (sexta e sábado)",
+  "Evento de Chegada (sexta)",
+  "Evento de Encerramento (sábado)",
+  "Hospedagem (sexta e sábado)",
+  "2 camisetas personalizadas",
+  "Apoio mecânico"
+ ],
+ "inclusoNota": "Os eventos de Chegada e Encerramento incluem chopp, drinks, música ao vivo e jantar.",
+ "naoIncluso": ["Gasolina do UTV", "Itens e consumos não mencionados"],
+ "seguranca": "É obrigatório o uso dos itens de segurança durante todo o percurso da expedição.",
+ "valor": "R$ 2.300",
+ "valorUnidade": "por pessoa",
+ "pagamento": ["Cartão de crédito em até 10× com juros da operadora", "Boleto em até 2× sem juros"],
+ "escala": 1
+}

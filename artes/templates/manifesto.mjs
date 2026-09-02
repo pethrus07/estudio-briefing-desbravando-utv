@@ -1,51 +1,29 @@
 /**
- * MANIFESTO — peça de código de conduta, identidade Desbravando.
+ * MANIFESTO — peça de lista numerada, identidade Desbravando.
  *
- * Mesma linguagem da série de programação (P&B, Anton em caixa alta, curvas de nível
- * no fundo, assinatura lateral no topo) numa estrutura diferente: ali é linha do tempo
- * de horários, aqui é regra numerada. A coluna de número + trilho + corpo é a MESMA da
- * agenda de propósito — é o que faz a peça ler como parte do conjunto sem repetir o
- * layout.
+ * Serve o código de conduta e a carta de drinks: título, uma lista de seções numeradas
+ * (cada uma com nome, parágrafo e/ou itens) e um fecho opcional de dois essenciais. O
+ * quadro vem de `comum.mjs`; aqui só vive o miolo.
  *
- * Formato: 1080 × 1920 (WhatsApp), o único que ele pediu para a série.
+ * A malha *número · trilho · corpo* é a MESMA da agenda da programação, de propósito — é
+ * o que faz a peça ler como parte do conjunto sem repetir o layout.
  *
- * DENSIDADE é o problema desta peça, não o vão: são seis seções e ~27 linhas de texto.
- * A tentação é encolher o corpo até caber — e 12px numa peça de 1080 de largura vira
- * ~4pt no celular, ilegível. O corpo fica em 1,14em (18px) e quem cede é a folga entre
- * seções. Se entrar mais texto, o certo é partir em duas peças, não diminuir a letra.
+ * DENSIDADE é o problema desta peça, não o vão. Na conduta são seis seções e ~27 linhas;
+ * a tentação é encolher o corpo até caber, e 12px numa peça de 1080 de largura vira ~4pt
+ * no celular, ilegível. O corpo fica em 1,14em e quem cede é a folga entre seções. Se
+ * entrar mais texto, o certo é partir em duas peças, não diminuir a letra. No sentido
+ * contrário, peça curta (5 drinks) sobe pela `escala` do dado, senão sobra metade do
+ * quadro vazia — mas conferir a quebra de linha depois: escala alta faz item longo virar
+ * duas linhas com órfão no fim.
  *
- * A mancha vai a 39em (~700px) de propósito: em 26em a metade direita do quadro ficava
- * vazia e frase curta quebrava em duas linhas sem motivo.
- *
- * REGRA DURA, herdada da programação: nenhum texto com line-height abaixo de 1. A caixa
- * do Anton é mais curta que o glifo (asc 1,176 + desc 0,329 = 1,505em de altura
- * natural), então entrelinha comprimida faz a letra invadir a vizinha sem que nenhuma
- * regra de CSS pareça errada. Espaço óptico se resolve com margin.
+ * A mancha vai a 39em (~700px): em 26em a metade direita do quadro ficava vazia e frase
+ * curta quebrava em duas linhas sem motivo.
  */
 
-import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-
-const aqui = dirname(fileURLToPath(import.meta.url));
-
-const esc = (s) =>
-  String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-
-const FORMATOS = { stories: { l: 1080, a: 1920, k: 1 } };
-
-/** SVG do repo, embutido para herdar a cor — filtro CSS rasterizaria o elemento. */
-function svgDoRepo(arquivo, extra = "", pasta = "marca") {
-  return readFileSync(join(aqui, "..", pasta, arquivo), "utf8")
-    .replace(/<\?xml[^>]*>|<!--[\s\S]*?-->/g, "")
-    .replace("<svg", `<svg ${extra}`)
-    .replace(/fill="(#fff|#ffffff|#FFF|#FFFFFF|white)"/g, 'fill="currentColor"');
-}
+import { esc, escala, cssCromo, cssLista, htmlFundo, htmlMarca } from "./comum.mjs";
 
 export function manifesto(dados, opcoes = {}) {
-  const base = FORMATOS[opcoes.formato] ?? FORMATOS.stories;
-  const fmt = { ...base, k: base.k * (dados.escala ?? 1) };
-  const fundo = dados.fundo ?? "topografia-conduta.svg";
+  const fmt = escala(dados, opcoes);
 
   const secao = (s, i) => `
         <li class="regra${s.destaque ? " destaque" : ""}">
@@ -71,98 +49,9 @@ export function manifesto(dados, opcoes = {}) {
 <title>${esc(dados.titulo)} ${esc(dados.titulo2 ?? "")}</title>
 <link rel="stylesheet" href="../identidade.css">
 <style>
-  *{ margin:0; padding:0; box-sizing:border-box }
-  html,body{ width:${fmt.l}px; height:${fmt.a}px; overflow:hidden }
-  body{
-    background:#000; color:#fff; font-size:${16 * fmt.k}px;
-    font-family:"Archivo",sans-serif; font-weight:400; -webkit-font-smoothing:antialiased;
-  }
-  .peca{ position:relative; width:${fmt.l}px; height:${fmt.a}px; overflow:hidden }
+${cssCromo(fmt)}
 
-  /* ---------- fundo ---------- */
-  .topo{ position:absolute; inset:0; color:#fff; opacity:.30; pointer-events:none }
-  .topo svg{ width:100%; height:100%; display:block }
-  .veu{
-    position:absolute; inset:0; pointer-events:none;
-    background:linear-gradient(180deg,
-      rgba(0,0,0,.58) 0%, rgba(0,0,0,.20) 9%, rgba(0,0,0,.66) 20%,
-      rgba(0,0,0,.82) 32%, rgba(0,0,0,.84) 76%, rgba(0,0,0,.68) 90%,
-      rgba(0,0,0,.44) 100%);
-  }
-
-  /* ---------- ritmo: marca no topo, miolo elástico, fecho no rodapé ---------- */
-  .coluna{
-    position:absolute; inset:0;
-    display:grid; grid-template-rows:auto 1fr auto;
-    padding:${4 / fmt.k}em ${4.2 / fmt.k}em ${3.2 / fmt.k}em;
-  }
-  .miolo{ display:grid; align-content:center; padding:1.4em 0 }
-  .bl-titulo{ margin-bottom:5em }
-
-  .marca{ width:${17.5 / fmt.k}em; color:#fff }
-  .marca svg{ width:100%; height:auto; display:block; fill:currentColor }
-
-  /* ---------- título ---------- */
-  .rot{
-    display:block; font-size:.9em; line-height:1.3; letter-spacing:.3em;
-    text-transform:uppercase; color:#c4c4c4; margin-bottom:1.1em;
-  }
-  h1{
-    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
-    font-size:4.5em; line-height:1.04; letter-spacing:-.018em; max-width:11em;
-  }
-  /* o "CONSCIENTE" da peça de referência: mesma linha de leitura do título, mas
-     espaçado — a palavra que muda o sentido de tudo, então não pode ser subtítulo
-     de corpo pequeno. */
-  .eco{
-    display:block; font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
-    font-size:2.05em; line-height:1.14; letter-spacing:.3em; color:#fff; margin-top:.34em;
-  }
-
-  /* ---------- regras numeradas ----------
-     Mesma malha da agenda da programação: número · trilho · corpo. */
-  .regras{ list-style:none; display:grid; gap:3em; position:relative }
-  /* a espinha e desenhada na LISTA, no eixo da coluna do trilho (3,2em do numero +
-     metade dos 1,9em da coluna), e nao por item: um trilho por item vira toco solto
-     quando a peca e arejada, porque o vao entre itens corta a linha. */
-  .regras::before{
-    content:""; position:absolute; left:calc(4.15em - 1px); top:.87em; bottom:0; width:2px;
-    background:linear-gradient(180deg,
-      rgba(255,255,255,.28) 0%, rgba(255,255,255,.28) 84%, rgba(255,255,255,0) 100%);
-  }
-  .regra{ display:grid; grid-template-columns:3.2em 1.9em 1fr; align-items:start }
-  .num{
-    font-family:"Anton",sans-serif; font-weight:400; font-size:2.3em; line-height:1;
-    letter-spacing:-.01em; font-variant-numeric:tabular-nums; color:#fff;
-  }
-  .trilho{ position:relative; justify-self:center; width:2px; align-self:stretch }
-  .trilho::before{
-    content:""; position:absolute; top:.42em; left:50%; transform:translateX(-50%);
-    width:.9em; height:.9em; border-radius:50%; background:#fff; box-shadow:0 0 0 .32em #000;
-  }
-  .corpo{ padding-left:1.4em; padding-bottom:.1em }
-  .regra h2{
-    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
-    font-size:1.7em; line-height:1.1; letter-spacing:-.004em;
-  }
-  .lead{ font-size:1.14em; line-height:1.48; color:#dcdcdc; margin-top:.6em; max-width:39em }
-  .itens{ list-style:none; display:grid; gap:.42em; margin-top:.72em }
-  .itens li{
-    display:flex; align-items:baseline; gap:.66em;
-    font-size:1.14em; line-height:1.46; color:#c7c7c7; max-width:39em;
-  }
-  .itens li::before{
-    content:""; width:.36em; height:.36em; border-radius:50%; background:rgba(255,255,255,.5);
-    flex:none; transform:translateY(-.2em);
-  }
-  .secao-rot{
-    display:block; font-size:.8em; line-height:1.3; letter-spacing:.24em;
-    text-transform:uppercase; color:#9e9e9e; margin-top:1.1em;
-  }
-  /* A observação sobre o motor do UTV explica por que as outras regras existem. Levou
-     filete à esquerda por uma versão e saiu: era uma SEGUNDA linha vertical a 2px do
-     trilho, e sujava a malha. Quem destaca a seção é o próprio título dela. */
-  .destaque .lead{ color:#f2f2f2; font-weight:500 }
+${cssLista(fmt)}
 
   /* ---------- fecho: os dois essenciais ---------- */
   .rodape{ display:grid; gap:1.5em }
@@ -180,11 +69,10 @@ export function manifesto(dados, opcoes = {}) {
 </head>
 <body>
 <div class="peca">
-  <div class="topo">${svgDoRepo(fundo, "", "graficos")}</div>
-  <div class="veu"></div>
+  ${htmlFundo(dados.fundo)}
 
   <div class="coluna">
-    <div class="marca">${svgDoRepo("logo-lateral.svg")}</div>
+    ${htmlMarca()}
 
     <div class="miolo">
       <div class="bl-titulo">
@@ -218,4 +106,4 @@ export function manifesto(dados, opcoes = {}) {
   };
 }
 
-export const meta = { nome: "manifesto", formatos: FORMATOS };
+export const meta = { nome: "manifesto" };
