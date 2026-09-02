@@ -118,7 +118,7 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 | 3 | **`logo-lateral.svg`** — assinatura lateral em vetor | 1 | — | *a decidir* | entregue 26/08 |
 | 4 | **Código de conduta** — “A favor do off-road consciente” | 1 | 1 | *a decidir* | entregue 26/08 |
 | 5 | **Carta de drinks** do evento | 1 | 1 | *a decidir* | entregue 26/08 |
-| 6 | **Expedição Origens** — proposta em imagem | 1 | 1 | *a decidir* | entregue 02/09 |
+| 6 | **Expedição Origens** — proposta em imagem | 1 | 1 | *a decidir* | entregue 02/09 · rodada 1/2 no mesmo dia (v2 do PDF) |
 
 ---
 
@@ -257,6 +257,22 @@ por dia, viraram 11 sem perder informação — café da manhã de sábado e dom
 duas noites numa linha, hospedagem das duas noites numa linha. E “chopp, drinks, música ao
 vivo e jantar”, que aparecia dentro dos dois eventos, saiu para nota — era a mesma frase
 duas vezes.
+
+**Rodada 1 de 2 (inclusa), em 02/09.** Ele mandou a **v2 do PDF** e pediu um elemento novo:
+
+| mudança | de onde vem |
+|---|---|
+| “Expedição masculina” | v2 do PDF |
+| **Pacote 1 Dia — R$ 1.450**, com a observação da saída após o café do dia seguinte | v2 do PDF |
+| **“Vagas limitadas”** | pedido dele, não está no PDF |
+
+Os dois selos (classificação e chamada) viraram **pílula** em vez de mais uma linha de
+texto: o bloco de título já tinha quatro linhas, e pílula lê como etiqueta, não como
+continuação da leitura. O “vagas limitadas” é o único elemento **sólido** da peça — numa
+identidade P&B, preencher é o acento mais forte que existe, e é onde o olho cai depois do
+título. Os dois pacotes ficaram **lado a lado**, porque preço se lê comparando: empilhados,
+o segundo pareceria condição do primeiro em vez de alternativa. Escala de 1 para 0,95 para
+absorver as três linhas novas sem encostar no topo.
 
 **Como eu enquadraria.** Template novo (`templates/oferta.mjs`) com cinco estruturas que
 não existiam: dia de roteiro com trecho e quilometragem, grade de hora × evento, checklist

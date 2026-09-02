@@ -1,10 +1,12 @@
 {
- "_nota": "Expedição Origens (23–25/10/2026), a partir do PDF 'Expedição Origens' que ele mandou em 26/08/2026. Conteúdo integral do documento; o que mudou foi a FORMA, para caber num quadro de 1080×1920.",
+ "_nota": "Expedição Origens (23–25/10/2026), a partir do PDF 'Expedição Origens' — v2 recebida em 02/09/2026, que acrescentou 'expedição masculina' e o Pacote 1 Dia (R$ 1.450). O 'vagas limitadas' é pedido dele, não vem do PDF. Conteúdo integral do documento; o que mudou foi a FORMA, para caber num quadro de 1080×1920.",
  "_condensacao": "A lista 'o que está incluso' tinha 15 linhas com repetição por dia. Virou 11 sem perder informação: café da manhã de sábado + domingo numa linha (ambos na pousada), bebidas e gelo de sexta + sábado numa linha, jantar na pousada de sexta + sábado numa linha, hospedagem das duas noites numa linha. O que os eventos incluem (chopp, drinks, música ao vivo e jantar) saiu de dentro dos dois itens e virou nota — era a mesma frase repetida duas vezes.",
  "rotulo": "Quintal do Desbravando UTV · by Serra do Itaqueri",
  "titulo": "Expedição Origens",
  "data": "23 a 25 de outubro de 2026",
  "diasSemana": "Sexta-feira a domingo",
+ "classificacao": "Expedição masculina",
+ "chamada": "Vagas limitadas",
  "fundo": "topografia-origens.svg",
  "dias": [
   {
@@ -59,8 +61,15 @@
  "inclusoNota": "Os eventos de Chegada e Encerramento incluem chopp, drinks, música ao vivo e jantar.",
  "naoIncluso": ["Gasolina do UTV", "Itens e consumos não mencionados"],
  "seguranca": "É obrigatório o uso dos itens de segurança durante todo o percurso da expedição.",
- "valor": "R$ 2.300",
- "valorUnidade": "por pessoa",
+ "pacotes": [
+  { "nome": "Pacote completo", "valor": "R$ 2.300", "unidade": "por pessoa" },
+  {
+   "nome": "Pacote 1 dia",
+   "valor": "R$ 1.450",
+   "unidade": "por pessoa",
+   "obs": "Participação de 1 dia, com saída após o café da manhã do dia seguinte."
+  }
+ ],
  "pagamento": ["Cartão de crédito em até 10× com juros da operadora", "Boleto em até 2× sem juros"],
- "escala": 1
+ "escala": 0.95
 }
