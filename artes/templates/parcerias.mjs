@@ -6,12 +6,26 @@
  * peça inteira monocromática. Sem patrocinador na peça: aqui o Desbravando fala
  * *com* marcas, não exibe as suas.
  *
- * Arquitetura de conteúdo (9 páginas), conforme os documentos de base:
+ * Arquitetura de conteúdo (10 páginas), conforme os documentos de base:
  *   1 capa · 2 a tese · 3 o Desbravando · 4 o ciclo · 5 o território da marca
- *   6 o que a marca ganha · 7 casos ("imagine sua marca aqui") · 8 como construímos
- *   9 encerramento
- * A página 5 é a única que muda conforme o parceiro.
+ *   6 o que a marca ganha · 7 casos ("imagine sua marca aqui") · 8 possibilidades
+ *   9 como construímos · 10 encerramento
+ * As páginas 5, 6, 7 e 8 mudam conforme o parceiro; as outras são institucionais.
+ *
+ * MODO TIPOGRÁFICO (`visual: "tipografico"`). O documento nasceu dependente de sete
+ * fotos, e enquanto elas não existem o normal era sair com sete caixas cinzas escrito
+ * "foto" — que num documento de proposta lê como rascunho e derruba a credibilidade de
+ * tudo em volta. No modo tipográfico não há caixa vazia: a foto simplesmente não existe,
+ * a grade de duas colunas colapsa em uma, e capa e encerramento trocam a foto pelo campo
+ * de curvas de nível da identidade. Os casos da página 7 viram trio editorial com o
+ * número grande em Anton. O documento fica coerente sem foto, e continua listando no
+ * console quais fotos faltam — sem inventar nenhuma.
+ *
+ * O número da página é PARÂMETRO da função, não literal dentro dela: inserir a página 8
+ * renumerava duas páginas à mão, e é o tipo de coisa que sai errada em silêncio.
  */
+
+import { svgDoRepo } from "./comum.mjs";
 
 const P = 1920;
 const A = 1080;
@@ -25,6 +39,8 @@ const esc = (s) =>
 
 /** Campos que o Desbravando ainda precisa preencher aparecem como pendência, nunca inventados. */
 const pendencias = [];
+/** Modo da rodada: sem foto, nada de caixa vazia — o layout muda de forma. */
+let semFoto = false;
 function valor(bruto, rotulo) {
   const v = String(bruto ?? "").trim();
   if (!v) {
@@ -38,9 +54,57 @@ function foto(slot, classe = "") {
   if (slot?.arquivo) {
     return `<img class="foto mono ${classe}" src="${esc(slot.arquivo)}" alt="">`;
   }
+  /* No modo tipográfico a ausência não deixa marca na peça: quem cede é a grade, não a
+     página. A pendência não sai por aqui porque metade dos slots é desviada antes de
+     chegar nesta função (capa, casos e encerramento trocam de elemento) — quem registra
+     é `cobrarFotos`, senão a lista de "o que falta" nasce incompleta, justo com as fotos
+     que já existem e só precisam ser salvas. */
+  if (semFoto) return "";
   pendencias.push(`foto · ${slot?.descricao ?? "sem descrição"}`);
   return `<div class="slot-foto ${classe}"><span>${esc(slot?.descricao ?? "foto")}</span></div>`;
 }
+
+/** Todos os slots do documento, na ordem das páginas — a lista do que falta sair. */
+const slotsDeFoto = (d) => [
+  ["01 capa", d.capa],
+  ["03 operação", d.fotoOperacao],
+  ["05 território", d.territorio?.foto],
+  ...(d.casos ?? []).map((c, i) => [`07 caso ${i + 1}`, c.foto]),
+  ["10 encerramento", d.encerramento],
+];
+
+function cobrarFotos(d) {
+  for (const [onde, slot] of slotsDeFoto(d)) {
+    if (!slot?.arquivo) pendencias.push(`foto ${onde} · ${slot?.descricao ?? "sem descrição"}`);
+  }
+}
+
+/** Fundo de capa e encerramento quando não há foto: o campo de curvas da identidade. */
+const fundoGrafico = () =>
+  `<div class="capa-fundo topo-grafico">${svgDoRepo("topografia-parcerias.svg", "", "graficos")}</div>`;
+
+/**
+ * Número vazio não vira travessão numa proposta comercial: a régua de audiência É o
+ * argumento da página, e meia régua preenchida lê pior do que régua nenhuma. Ou entram
+ * os quatro, ou a página fica só com o texto — e os quatro vão para a lista de pendências.
+ */
+const CAMPOS_NUM = ["seguidores", "alcance", "visualizacoes", "engajamento"];
+const temNumero = (n = {}) => CAMPOS_NUM.some((k) => String(n[k] ?? "").trim());
+function semNumero(n = {}) {
+  CAMPOS_NUM.forEach((k) => pendencias.push(`número · ${k}`));
+  return "";
+}
+
+/**
+ * Lista de duas colunas lida de CIMA PARA BAIXO, não em ziguezague. Com o preenchimento
+ * padrão do grid (por linha), "Presença" e "Utilidade" caem lado a lado e a ordem que o
+ * cliente escreveu se perde — quem lê pula de coluna a cada item.
+ */
+const emColunas = (n) =>
+  `style="grid-auto-flow:column;grid-template-rows:repeat(${Math.ceil(n / 2)},auto)"`;
+
+/** Grade de duas colunas só existe se a coluna da direita existir. */
+const grade = (classe) => (semFoto ? "grade-solo" : classe);
 
 const marca = `<img class="marca-topo" src="../marca/logo-desbravando.png" alt="Desbravando UTV">`;
 const rodape = (n) => `<div class="rodape"><span>Programa de Parcerias Desbravando</span><span>${n}</span></div>`;
@@ -49,7 +113,7 @@ const rodape = (n) => `<div class="rodape"><span>Programa de Parcerias Desbravan
 
 const capa = (d) => `
 <section class="pagina capa">
-  <div class="capa-fundo">${foto(d.capa, "cobre")}</div>
+  ${semFoto ? fundoGrafico() : `<div class="capa-fundo">${foto(d.capa, "cobre")}</div>`}
   <div class="veu-capa"></div>
   <div class="capa-conteudo">
     ${marca}
@@ -62,7 +126,7 @@ const capa = (d) => `
   </div>
 </section>`;
 
-const tese = () => `
+const tese = (n) => `
 <section class="pagina">
   ${marca}
   <p class="sobrelinha">A tese</p>
@@ -83,14 +147,14 @@ const tese = () => `
       <p class="corpo nota">Participa. Permanece na memória de quem viveu e de quem acompanhou.</p>
     </div>
   </div>
-  ${rodape("02")}
+  ${rodape(n)}
 </section>`;
 
-const oDesbravando = (d) => `
+const oDesbravando = (d, n) => `
 <section class="pagina">
   ${marca}
   <p class="sobrelinha">A plataforma</p>
-  <div class="grade-2-1">
+  <div class="${grade("grade-2-1")}">
     <div>
       <h2 class="titulo secao">O Desbravando</h2>
       <p class="corpo texto-largo">O Desbravando conecta pessoas apaixonadas pelo universo off-road através de
@@ -98,19 +162,23 @@ const oDesbravando = (d) => `
       experiência memorável</strong>.</p>
       <p class="corpo texto-largo">Hoje somos uma comunidade em constante crescimento, reconhecida pela qualidade
       das experiências que entrega e pelo conteúdo que compartilha.</p>
-      <div class="numeros">
+      ${
+        temNumero(d.numeros)
+          ? `<div class="numeros">
         <div class="numero"><span class="n">${valor(d.numeros.seguidores, "número · seguidores")}</span><span class="rot">Seguidores</span></div>
         <div class="numero"><span class="n">${valor(d.numeros.alcance, "número · alcance")}</span><span class="rot">Alcance</span></div>
         <div class="numero"><span class="n">${valor(d.numeros.visualizacoes, "número · visualizações")}</span><span class="rot">Visualizações</span></div>
         <div class="numero"><span class="n">${valor(d.numeros.engajamento, "número · engajamento")}</span><span class="rot">Engajamento</span></div>
-      </div>
+      </div>`
+          : semNumero(d.numeros)
+      }
     </div>
     ${foto(d.fotoOperacao, "alta")}
   </div>
-  ${rodape("03")}
+  ${rodape(n)}
 </section>`;
 
-const ciclo = () => {
+const ciclo = (n) => {
   const passos = [
     "O participante vive a experiência.",
     "A marca participa desse momento.",
@@ -133,20 +201,22 @@ const ciclo = () => {
   </ol>
   <p class="corpo destaque-linha">Não falamos apenas de quem participa da expedição, mas das
   <strong>milhares de pessoas que acompanham cada momento</strong> pelo conteúdo produzido pelo Desbravando.</p>
-  ${rodape("04")}
+  ${rodape(n)}
 </section>`;
 };
 
-const territorio = (d) => `
+const territorio = (d, n) => `
 <section class="pagina">
   ${marca}
   <p class="sobrelinha">O território da marca</p>
-  <div class="grade-1-1">
+  <div class="${grade("grade-1-1")}">
     <div>
       <h2 class="titulo secao">${esc(d.territorio.nome)}</h2>
       <p class="subtitulo">${esc(d.territorio.promessa)}</p>
-      <p class="corpo pergunta">Como essa marca melhora a experiência do participante?</p>
-      <ul class="lista lista-territorio">
+      <p class="corpo pergunta">${esc(
+        d.territorio.pergunta ?? "Como essa marca melhora a experiência do participante?"
+      )}</p>
+      <ul class="lista lista-territorio" ${semFoto ? emColunas(d.territorio.itens.length) : ""}>
         ${d.territorio.itens
           .map((i) => `<li><span><strong>${esc(i.titulo)}</strong> ${esc(i.texto)}</span></li>`)
           .join("\n        ")}
@@ -154,10 +224,10 @@ const territorio = (d) => `
     </div>
     ${foto(d.territorio.foto, "alta")}
   </div>
-  ${rodape("05")}
+  ${rodape(n)}
 </section>`;
 
-const ganho = (d) => `
+const ganho = (d, n) => `
 <section class="pagina">
   ${marca}
   <p class="sobrelinha">O que a sua marca ganha</p>
@@ -165,28 +235,48 @@ const ganho = (d) => `
   <ul class="lista lista-ganho">
     ${d.ganhos.map((g) => `<li><span>${esc(g)}</span></li>`).join("\n    ")}
   </ul>
-  ${rodape("06")}
+  ${rodape(n)}
 </section>`;
 
-const casos = (d) => `
+const casos = (d, n) => `
 <section class="pagina">
   ${marca}
   <p class="sobrelinha">Momentos reais</p>
   <h2 class="titulo secao secao-menor">Imagine sua marca aqui.</h2>
-  <div class="casos">
+  <div class="casos${semFoto ? " sem-foto" : ""}">
     ${d.casos
       .map(
-        (c) => `<figure class="caso">
-      ${foto(c.foto, "caso-img")}
+        (c, i) => `<figure class="caso">
+      ${semFoto ? `<span class="caso-n">${String(i + 1).padStart(2, "0")}</span>` : foto(c.foto, "caso-img")}
       <figcaption><span class="caso-local">${esc(c.local)}</span><span class="caso-legenda">${esc(c.legenda)}</span></figcaption>
     </figure>`
       )
       .join("\n    ")}
   </div>
-  ${rodape("07")}
+  ${rodape(n)}
 </section>`;
 
-const construcao = () => {
+/**
+ * Página nova (8) — as possibilidades de participação do parceiro.
+ *
+ * Entra como LISTA DE POSSIBILIDADES, não como escopo: o briefing é explícito em
+ * apresentar isso como exemplos de ativação a construir com o parceiro, e não como
+ * pacote fechado. A nota de fecho é o que carrega essa ressalva na peça — sem ela a
+ * lista lê como entrega contratada.
+ */
+const possibilidades = (d, n) => `
+<section class="pagina">
+  ${marca}
+  <p class="sobrelinha">Possibilidades</p>
+  <h2 class="titulo secao secao-menor">${esc(d.possibilidades.titulo)}</h2>
+  <ul class="lista lista-possib" ${emColunas(d.possibilidades.itens.length)}>
+    ${d.possibilidades.itens.map((i) => `<li><span>${esc(i)}</span></li>`).join("\n    ")}
+  </ul>
+  ${d.possibilidades.nota ? `<p class="corpo destaque-linha">${esc(d.possibilidades.nota)}</p>` : ""}
+  ${rodape(n)}
+</section>`;
+
+const construcao = (d, n) => {
   const etapas = [
     "Entendemos sua marca",
     "Identificamos oportunidades",
@@ -209,7 +299,12 @@ const construcao = () => {
   </div>
   <p class="corpo destaque-linha">Cada marca tem objetivos diferentes. Por isso não existe pacote pronto —
   existe <strong>uma ativação desenhada para a sua empresa</strong>.</p>
-  ${rodape("08")}
+  ${
+    d.faixa?.length
+      ? `<div class="faixa">${d.faixa.map((t) => `<span>${esc(t)}</span>`).join('<i>+</i>')}</div>`
+      : ""
+  }
+  ${rodape(n)}
 </section>`;
 };
 
@@ -221,24 +316,23 @@ function linhaContato(c = {}) {
     [c.email, "contato · e-mail"],
   ];
   const preenchidos = campos.filter(([v]) => String(v ?? "").trim());
-  if (!preenchidos.length) {
-    campos.forEach(([, rotulo]) => pendencias.push(rotulo));
-    return `<span class="pendente">contato a preencher</span>`;
-  }
   campos.filter(([v]) => !String(v ?? "").trim()).forEach(([, rotulo]) => pendencias.push(rotulo));
-  return preenchidos.map(([v]) => esc(v)).join(" · ");
+  /* Documento que vai para a marca não anuncia o próprio buraco: sem contato, a linha
+     não existe. A pendência aparece no console de quem renderiza, que é quem resolve. */
+  if (!preenchidos.length) return "";
+  return `<p class="contato">${preenchidos.map(([v]) => esc(v)).join(" · ")}</p>`;
 }
 
 const encerramento = (d) => `
 <section class="pagina encerramento">
-  <div class="capa-fundo">${foto(d.encerramento, "cobre")}</div>
+  ${semFoto ? fundoGrafico() : `<div class="capa-fundo">${foto(d.encerramento, "cobre")}</div>`}
   <div class="veu-encerramento"></div>
   <div class="capa-conteudo">
     ${marca}
     <h2 class="titulo hero hero-menor">As melhores marcas<br>não aparecem.<br>Elas fazem parte<br>da experiência.</h2>
     <div class="capa-base">
       <p class="subtitulo">Vamos construir essa parceria?</p>
-      <p class="contato">${linhaContato(d.contato)}</p>
+      ${linhaContato(d.contato)}
     </div>
   </div>
 </section>`;
@@ -247,15 +341,20 @@ const encerramento = (d) => `
 
 export function parcerias(dados, opcoes = {}) {
   pendencias.length = 0;
+  semFoto = (opcoes.visual ?? dados.visual ?? "foto") === "tipografico";
+  if (semFoto) cobrarFotos(dados);
+  /* O número da página vive AQUI, ao lado da ordem — inserir uma página no meio é mexer
+     numa lista, não caçar literal dentro de nove funções. */
   const paginas = [
     capa(dados),
-    tese(),
-    oDesbravando(dados),
-    ciclo(),
-    territorio(dados),
-    ganho(dados),
-    casos(dados),
-    construcao(),
+    tese("02"),
+    oDesbravando(dados, "03"),
+    ciclo("04"),
+    territorio(dados, "05"),
+    ganho(dados, "06"),
+    casos(dados, "07"),
+    ...(dados.possibilidades ? [possibilidades(dados, "08")] : []),
+    construcao(dados, dados.possibilidades ? "09" : "08"),
     encerramento(dados),
   ].join("\n");
 
@@ -405,6 +504,58 @@ export function parcerias(dados, opcoes = {}) {
   .etapa-n { display: block; font-family: "Anton"; font-size: 34px; color: rgba(255,255,255,.42); }
   .etapa-t { display: block; margin-top: 12px; font-size: 24px; font-weight: 700; color: var(--branco); line-height: 1.25; }
   .etapa-seta { font-style: normal; font-size: 28px; color: rgba(255,255,255,.35); }
+
+  /* ---------- modo tipográfico ---------- */
+  /* capa e encerramento sem foto: o campo de curvas de nível da identidade entra no
+     lugar da imagem. Os véus são os mesmos, então a hierarquia do título não muda. */
+  .capa-fundo.topo-grafico { color: #fff; opacity: .34; }
+  .capa-fundo.topo-grafico svg { width: 100%; height: 100%; display: block; }
+  /* O véu da capa foi calibrado para escurecer FOTO. Sobre as curvas de nível ele apaga
+     o fundo inteiro do lado do título — aqui ele só segura o contraste do texto. */
+  .topo-grafico ~ .veu-capa {
+    background: linear-gradient(90deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.62) 34%, rgba(0,0,0,.2) 72%, rgba(0,0,0,.1) 100%);
+  }
+  .topo-grafico ~ .veu-encerramento {
+    background: linear-gradient(180deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.6) 55%, rgba(0,0,0,.9) 100%);
+  }
+
+  /* grade de duas colunas colapsada: a coluna do texto ganha a largura, mas com teto —
+     linha de 1680px de largura é ilegível, e o vazio à direita é intencional. */
+  .grade-solo { display: block; }
+  /* Sem foto E sem régua de audiência, a página 3 ficaria um título com dois parágrafos
+     pequenos em cima de meia página vazia. O texto sobe de corpo e assume a página como
+     declaração — é o mesmo conteúdo ocupando o espaço que era da foto. */
+  .grade-solo .texto-largo { max-width: 1420px; font-size: 33px; line-height: 1.45; margin-top: 38px; }
+  .grade-solo .subtitulo { margin-top: 18px; }
+  .grade-solo .lista-territorio { grid-template-columns: 1fr 1fr; gap: 22px 90px; max-width: 1560px; }
+
+  /* página 7 sem foto: trio editorial com o número grande. O número faz o trabalho de
+     estrutura que a foto fazia — sem ele as três legendas flutuariam soltas. */
+  .casos.sem-foto { margin-top: 96px; }
+  .casos.sem-foto .caso { border-top: 1.5px solid var(--divisor); padding-top: 34px; }
+  .casos.sem-foto figcaption { margin-top: 0; }
+  .casos.sem-foto .caso-legenda { font-size: 30px; }
+  .caso-n {
+    display: block; font-family: "Anton"; font-size: 190px; line-height: 1;
+    color: rgba(255,255,255,.22); margin-bottom: 36px;
+  }
+
+  /* ---------- página 8 · possibilidades ---------- */
+  .lista-possib { margin-top: 54px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px 90px; }
+  .lista-possib li { font-size: 27px; line-height: 1.4; color: var(--texto); }
+  .lista-possib li::before { font-size: 24px; color: rgba(255,255,255,.5); }
+
+  /* ---------- faixa de destaque (página 9) ---------- */
+  .faixa {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 16px;
+    margin-top: 46px; border-top: 1.5px solid var(--divisor); padding-top: 32px;
+    font-family: "Anton"; font-size: 38px; text-transform: uppercase; letter-spacing: .01em;
+    color: var(--branco);
+  }
+  .faixa i {
+    font-style: normal; font-family: "Archivo"; font-weight: 700; font-size: 28px;
+    color: rgba(255,255,255,.45);
+  }
 </style>
 </head>
 <body>
