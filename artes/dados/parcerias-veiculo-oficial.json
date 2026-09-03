@@ -1,16 +1,15 @@
 {
  "_nota": "Programa de Parcerias — VEÍCULO OFICIAL. Adaptação do documento de Apoio Mecânico conforme o briefing de alteração recebido em 02/09/2026. Páginas 02, 03, 04 e 10 seguem institucionais e idênticas ao original; mudam 01, 05, 06, 07 e 09, e entra a 08 (possibilidades).",
- "_visual": "Roda em modo TIPOGRÁFICO porque nenhuma das fotos está no disco — as 4 que ele mandou em 02/09 estão só na conversa. Nesse modo não existe caixa vazia escrito 'foto': a grade colapsa, e capa e encerramento usam o campo de curvas de nível. Para virar a versão com foto, salvar os arquivos nos caminhos abaixo e trocar visual para 'foto'.",
- "_fotos_que_faltam": {
-  "fotos/veiculo-oficial/capa-praia.jpg": "ENVIADA na conversa — comboio de UTVs na praia, plano aberto de drone",
-  "fotos/veiculo-oficial/caso-comboio-trilha.jpg": "ENVIADA na conversa — comboio subindo a trilha em fila indiana",
-  "fotos/veiculo-oficial/caso-churrasqueira.jpg": "ENVIADA na conversa — churrasqueira de roda à noite, ponto de apoio",
-  "fotos/veiculo-oficial/caso-alto-do-morro.jpg": "ENVIADA na conversa — UTVs alinhados no alto do morro, paisagem aberta",
-  "fotos/veiculo-oficial/operacao.jpg": "NÃO ENVIADA — operação Desbravando em campo (página 03)",
-  "fotos/veiculo-oficial/territorio-caminhonete.jpg": "NÃO ENVIADA — caminhonete em ação durante expedição (página 05). É a única foto que o briefing pede com o veículo, e não existe nenhuma.",
-  "fotos/veiculo-oficial/encerramento.jpg": "NÃO ENVIADA — fim de dia na trilha (página 10)"
+ "_visual": "A decisão de foto é POR SLOT: a página que tem foto usa a foto, a que não tem fica tipográfica (grade em uma coluna; capa e encerramento com o campo de curvas de nível). As 4 fotos reais entraram em 03/09/2026 — capa e os três casos da página 07. Faltam 3: operação (p.03), caminhonete em ação (p.05) e fim de dia na trilha (p.10). Para gerar a versão sem foto nenhuma, mesmo com arquivo no disco, usar visual: 'tipografico'.",
+ "_fotos": {
+  "fotos/veiculo-oficial/capa-praia.jpg": "OK 03/09 — comboio de UTVs na praia, drone (capa)",
+  "fotos/veiculo-oficial/caso-comboio-trilha.jpg": "OK 03/09 — comboio subindo a trilha (07/01 No caminho)",
+  "fotos/veiculo-oficial/caso-churrasqueira.jpg": "OK 03/09 — churrasqueira de roda à noite (07/02 Na experiência)",
+  "fotos/veiculo-oficial/caso-alto-do-morro.jpg": "OK 03/09 — UTVs no alto do morro (07/03 No conteúdo)",
+  "fotos/veiculo-oficial/operacao.jpg": "FALTA — operação Desbravando em campo (p.03)",
+  "fotos/veiculo-oficial/territorio-caminhonete.jpg": "FALTA — caminhonete em ação durante expedição (p.05). É a única que o briefing pede COM o veículo, e não existe nenhuma.",
+  "fotos/veiculo-oficial/encerramento.jpg": "FALTA — fim de dia na trilha (p.10)"
  },
- "visual": "tipografico",
  "numeros": {
   "seguidores": "",
   "alcance": "",

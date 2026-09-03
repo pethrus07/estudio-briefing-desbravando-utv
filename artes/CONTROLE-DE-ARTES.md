@@ -119,7 +119,7 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 | 4 | **Código de conduta** — “A favor do off-road consciente” | 1 | 1 | *a decidir* | entregue 26/08 |
 | 5 | **Carta de drinks** do evento | 1 | 1 | *a decidir* | entregue 26/08 |
 | 6 | **Expedição Origens** — proposta em imagem | 1 | 1 | *a decidir* | entregue 02/09 · rodada 1/2 no mesmo dia (v2 do PDF) |
-| 7 | **Parcerias · Veículo Oficial** — apresentação de 10 páginas | 10 | 6 | *a decidir* | 1ª versão em 02/09 · modo tipográfico (sem foto no disco) |
+| 7 | **Parcerias · Veículo Oficial** — apresentação de 10 páginas | 10 | 6 | *a decidir* | entregue 03/09 · 4 fotos reais aplicadas; 3 slots ainda tipográficos |
 
 ---
 
@@ -300,26 +300,40 @@ renderizável.
 | 09 construção | estrutura mantida + faixa **VEÍCULO + EXPERIÊNCIA + CONTEÚDO + ATIVAÇÕES** |
 | 10 encerramento | sem alteração |
 
-**Modo tipográfico — a decisão que definiu esta versão.** Nenhuma das fotos está no disco:
-as 4 que ele mandou em 02/09 vieram só na conversa, e as outras 3 nunca existiram. Por
-decisão dele (“usemos apenas o que temos; onde não tem foto, faça num modelo sem foto”),
-o template ganhou um modo em que **não existe caixa vazia escrito “foto”** — que num
-documento de proposta lê como rascunho e derruba a credibilidade de tudo em volta. No modo
-tipográfico a grade de duas colunas colapsa, capa e encerramento usam o campo de curvas de
-nível da identidade, e os três casos da página 07 viram trio editorial com o número grande
-em Anton. Vale para qualquer parceiro futuro, não só para este.
+**Foto por slot — a decisão que definiu esta versão.** Ele baixou e passou as 4 fotos em
+03/09; as outras 3 não existem. A primeira versão tratou isso como modo da peça inteira
+(tudo tipográfico) e estava **errado**: o certo é a página que tem foto usar a foto e a
+página que não tem virar tipográfica — não as sete se rebaixarem à pior. Agora a decisão é
+por slot, automática pela presença do arquivo.
+
+O que o template ganhou nas duas rodadas, e vale para qualquer parceiro futuro: **não existe
+caixa vazia escrito “foto”** (num documento de proposta lê como rascunho e derruba a
+credibilidade de tudo em volta); sem foto a grade de duas colunas colapsa em uma; capa e
+encerramento sem foto usam o campo de curvas de nível da identidade; e os casos da página 07
+sem foto viram trio editorial com o número grande em Anton.
+
+**As 4 fotos, onde entraram** — mapeadas pelo conteúdo, não pela ordem em que chegaram:
+
+| foto | página |
+|---|---|
+| Comboio de UTVs na praia, drone (a única horizontal) | 01 capa |
+| Comboio subindo a trilha em fila | 07 / 01 No caminho |
+| Churrasqueira de roda à noite | 07 / 02 Na experiência |
+| UTVs alinhados no alto do morro | 07 / 03 No conteúdo |
+
+Bate com as três sugestões de imagem que o briefing dá para a página 07 (comboio · ponto de
+apoio · paisagem forte), e a horizontal é a única que serve de fundo de capa.
 
 Na mesma linha: **número de audiência vazio não vira travessão** (ou entram os quatro, ou a
 página fica só com o texto — meia régua preenchida lê pior que régua nenhuma) e **contato
 vazio não imprime “contato a preencher”**: documento que vai para a marca não anuncia o
 próprio buraco. As 14 pendências saem no console de quem renderiza, que é quem resolve.
 
-⚠️ **Falta para virar a versão final:** as 4 fotos que ele mandou (salvar em
-`artes/fotos/veiculo-oficial/` com os nomes que o JSON já indica e trocar `visual` para
-`foto`), mais 3 que não existem — operação (p. 03), **caminhonete em ação (p. 05)** e fim de
-dia na trilha (p. 10) —, os 4 números de audiência e o contato. A da página 05 é a única que
-o briefing pede **com o veículo**, e é a que mais falta: ali o argumento é “produto em
-situação real”.
+⚠️ **Ainda falta:** 3 fotos — operação (p. 03), **caminhonete em ação (p. 05)** e fim de dia
+na trilha (p. 10) —, os 4 números de audiência e o contato. A da página 05 é a única que o
+briefing pede **com o veículo**, e é a que mais falta: ali o argumento é “produto em situação
+real”. Enquanto não vierem, essas três páginas seguem tipográficas e coerentes — basta
+salvar o arquivo com o nome que o JSON indica e re-renderizar.
 
 **Como eu enquadraria.** 10 páginas, 6 alteradas e 1 nova, mais um modo de layout novo no
 template. É documento, não arte de post — mesma natureza do que o contrato chama de criação
