@@ -59,7 +59,11 @@ function valor(bruto, rotulo) {
 
 function foto(slot, classe = "") {
   if (slot?.arquivo) {
-    return `<img class="foto mono ${classe}" src="${esc(slot.arquivo)}" alt="">`;
+    /* A peça é monocromática por regra de identidade. `cor: true` no slot é a exceção
+       deliberada: na página 07 as três fotos SÃO o argumento ("imagine sua marca aqui"),
+       e num documento inteiro em P&B a cor ali vira o pico emocional do documento em vez
+       de virar inconsistência. Fora dessa página, cor solta seria só ruído. */
+    return `<img class="foto ${slot.cor ? "" : "mono "}${classe}" src="${esc(slot.arquivo)}" alt="">`;
   }
   /* Ausência de foto não deixa marca na peça: quem cede é a grade, não a página. Caixa
      cinza escrito "foto" num documento de proposta lê como rascunho e derruba a

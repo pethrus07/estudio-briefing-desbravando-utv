@@ -1,5 +1,6 @@
 {
  "_nota": "Programa de Parcerias — VEÍCULO OFICIAL. Adaptação do documento de Apoio Mecânico conforme o briefing de alteração recebido em 02/09/2026. Páginas 02, 03, 04 e 10 seguem institucionais e idênticas ao original; mudam 01, 05, 06, 07 e 09, e entra a 08 (possibilidades).",
+ "_cor": "O documento é monocromático por regra de identidade. As três fotos da página 07 são a exceção (cor: true), a pedido dele em 03/09: naquela página as fotos SÃO o argumento (imagine sua marca aqui), e num documento inteiro em P&B a cor ali é o pico do documento. Capa e demais páginas seguem dessaturadas.",
  "_visual": "A decisão de foto é POR SLOT: a página que tem foto usa a foto, a que não tem fica tipográfica (grade em uma coluna; capa e encerramento com o campo de curvas de nível). As 4 fotos reais entraram em 03/09/2026 — capa e os três casos da página 07. Faltam 3: operação (p.03), caminhonete em ação (p.05) e fim de dia na trilha (p.10). Para gerar a versão sem foto nenhuma, mesmo com arquivo no disco, usar visual: 'tipografico'.",
  "_fotos": {
   "fotos/veiculo-oficial/capa-praia.jpg": "OK 03/09 — comboio de UTVs na praia, drone (capa)",
@@ -78,6 +79,7 @@
    "legenda": "Imagine sua caminhonete acompanhando nossas expedições pelos principais destinos do Brasil.",
    "foto": {
     "arquivo": "fotos/veiculo-oficial/caso-comboio-trilha.jpg",
+    "cor": true,
     "descricao": "Comboio subindo a trilha em fila indiana"
    }
   },
@@ -86,6 +88,7 @@
    "legenda": "Imagine o veículo fazendo parte dos momentos que nossos participantes vão lembrar.",
    "foto": {
     "arquivo": "fotos/veiculo-oficial/caso-churrasqueira.jpg",
+    "cor": true,
     "descricao": "Churrasqueira de roda à noite, ponto de apoio da expedição"
    }
   },
@@ -94,6 +97,7 @@
    "legenda": "Imagine milhares de pessoas acompanhando essa jornada com a sua marca fazendo parte dela.",
    "foto": {
     "arquivo": "fotos/veiculo-oficial/caso-alto-do-morro.jpg",
+    "cor": true,
     "descricao": "UTVs alinhados no alto do morro, paisagem aberta"
    }
   }

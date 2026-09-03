@@ -324,6 +324,12 @@ sem foto viram trio editorial com o número grande em Anton.
 Bate com as três sugestões de imagem que o briefing dá para a página 07 (comboio · ponto de
 apoio · paisagem forte), e a horizontal é a única que serve de fundo de capa.
 
+**As três da página 07 saem em cor**, a pedido dele em 03/09 — exceção deliberada à regra de
+identidade, que manda a peça de marca inteira monocromática. O argumento a favor: naquela
+página as fotos SÃO o argumento (“imagine sua marca aqui”), e num documento de dez páginas em
+P&B a cor ali vira o pico do documento em vez de virar inconsistência. Capa e demais páginas
+seguem dessaturadas de propósito — é o contraste que dá o efeito.
+
 Na mesma linha: **número de audiência vazio não vira travessão** (ou entram os quatro, ou a
 página fica só com o texto — meia régua preenchida lê pior que régua nenhuma) e **contato
 vazio não imprime “contato a preencher”**: documento que vai para a marca não anuncia o
