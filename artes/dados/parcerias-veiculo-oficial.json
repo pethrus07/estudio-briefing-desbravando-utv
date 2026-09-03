@@ -1,0 +1,117 @@
+{
+ "_nota": "Programa de Parcerias — VEÍCULO OFICIAL. Adaptação do documento de Apoio Mecânico conforme o briefing de alteração recebido em 02/09/2026. Páginas 02, 03, 04 e 10 seguem institucionais e idênticas ao original; mudam 01, 05, 06, 07 e 09, e entra a 08 (possibilidades).",
+ "_visual": "Roda em modo TIPOGRÁFICO porque nenhuma das fotos está no disco — as 4 que ele mandou em 02/09 estão só na conversa. Nesse modo não existe caixa vazia escrito 'foto': a grade colapsa, e capa e encerramento usam o campo de curvas de nível. Para virar a versão com foto, salvar os arquivos nos caminhos abaixo e trocar visual para 'foto'.",
+ "_fotos_que_faltam": {
+  "fotos/veiculo-oficial/capa-praia.jpg": "ENVIADA na conversa — comboio de UTVs na praia, plano aberto de drone",
+  "fotos/veiculo-oficial/caso-comboio-trilha.jpg": "ENVIADA na conversa — comboio subindo a trilha em fila indiana",
+  "fotos/veiculo-oficial/caso-churrasqueira.jpg": "ENVIADA na conversa — churrasqueira de roda à noite, ponto de apoio",
+  "fotos/veiculo-oficial/caso-alto-do-morro.jpg": "ENVIADA na conversa — UTVs alinhados no alto do morro, paisagem aberta",
+  "fotos/veiculo-oficial/operacao.jpg": "NÃO ENVIADA — operação Desbravando em campo (página 03)",
+  "fotos/veiculo-oficial/territorio-caminhonete.jpg": "NÃO ENVIADA — caminhonete em ação durante expedição (página 05). É a única foto que o briefing pede com o veículo, e não existe nenhuma.",
+  "fotos/veiculo-oficial/encerramento.jpg": "NÃO ENVIADA — fim de dia na trilha (página 10)"
+ },
+ "visual": "tipografico",
+ "numeros": {
+  "seguidores": "",
+  "alcance": "",
+  "visualizacoes": "",
+  "engajamento": ""
+ },
+ "contato": {
+  "nome": "",
+  "telefone": "",
+  "email": ""
+ },
+ "capa": {
+  "arquivo": "fotos/veiculo-oficial/capa-praia.jpg",
+  "descricao": "Comboio de UTVs na praia, plano aberto de drone"
+ },
+ "fotoOperacao": {
+  "arquivo": "fotos/veiculo-oficial/operacao.jpg",
+  "descricao": "Operação Desbravando em campo"
+ },
+ "encerramento": {
+  "arquivo": "fotos/veiculo-oficial/encerramento.jpg",
+  "descricao": "Fim de dia na trilha"
+ },
+ "territorio": {
+  "nome": "Veículo Oficial",
+  "promessa": "Muito mais do que estar presente. Fazer parte do caminho.",
+  "pergunta": "Como essa marca passa a fazer parte da experiência?",
+  "foto": {
+   "arquivo": "fotos/veiculo-oficial/territorio-caminhonete.jpg",
+   "descricao": "Caminhonete em ação durante uma expedição"
+  },
+  "itens": [
+   {
+    "titulo": "Presença.",
+    "texto": "A caminhonete acompanha a expedição e está inserida naturalmente em toda a operação."
+   },
+   {
+    "titulo": "Utilidade.",
+    "texto": "Atua como veículo de apoio, transportando equipe, equipamentos e dando suporte durante o percurso."
+   },
+   {
+    "titulo": "Produto em situação real.",
+    "texto": "O veículo é utilizado no ambiente em que seus atributos fazem sentido: estrada, terra, aventura e deslocamentos de longa distância."
+   },
+   {
+    "titulo": "Conteúdo.",
+    "texto": "A caminhonete passa a fazer parte das imagens, vídeos, bastidores e histórias produzidas durante as expedições."
+   },
+   {
+    "titulo": "Relacionamento.",
+    "texto": "A marca se aproxima de um público conectado ao universo automotivo, off-road, viagens e experiências."
+   }
+  ]
+ },
+ "ganhos": [
+  "Ter o veículo inserido em experiências reais.",
+  "Demonstrar o produto em um ambiente compatível com seu posicionamento.",
+  "Gerar conteúdo autêntico de uso, e não apenas publicidade.",
+  "Aproximar a marca de proprietários e consumidores do universo off-road.",
+  "Estar presente antes, durante e depois das expedições através do conteúdo.",
+  "Transformar cada expedição em uma oportunidade de relacionamento e exposição da marca."
+ ],
+ "casos": [
+  {
+   "local": "No caminho",
+   "legenda": "Imagine sua caminhonete acompanhando nossas expedições pelos principais destinos do Brasil.",
+   "foto": {
+    "arquivo": "fotos/veiculo-oficial/caso-comboio-trilha.jpg",
+    "descricao": "Comboio subindo a trilha em fila indiana"
+   }
+  },
+  {
+   "local": "Na experiência",
+   "legenda": "Imagine o veículo fazendo parte dos momentos que nossos participantes vão lembrar.",
+   "foto": {
+    "arquivo": "fotos/veiculo-oficial/caso-churrasqueira.jpg",
+    "descricao": "Churrasqueira de roda à noite, ponto de apoio da expedição"
+   }
+  },
+  {
+   "local": "No conteúdo",
+   "legenda": "Imagine milhares de pessoas acompanhando essa jornada com a sua marca fazendo parte dela.",
+   "foto": {
+    "arquivo": "fotos/veiculo-oficial/caso-alto-do-morro.jpg",
+    "descricao": "UTVs alinhados no alto do morro, paisagem aberta"
+   }
+  }
+ ],
+ "possibilidades": {
+  "titulo": "Como o veículo pode fazer parte",
+  "itens": [
+   "Veículo oficial de apoio nas expedições.",
+   "Presença no comboio e nos principais deslocamentos.",
+   "Apoio à operação e transporte de equipamentos.",
+   "Conteúdo proprietário produzido durante as viagens.",
+   "Fotos e vídeos do veículo em destinos reais.",
+   "Ativações especiais em momentos selecionados da expedição.",
+   "Presença em eventos de pré-expedição, boas-vindas e encerramento.",
+   "Experiências e test-drive com participantes, quando fizer sentido."
+  ],
+  "nota": "Estas são possibilidades a construir com o parceiro — exemplos de ativação, não um pacote fechado. O desenho final sai da conversa com a marca."
+ },
+ "faixa": ["Veículo", "Experiência", "Conteúdo", "Ativações"]
+}

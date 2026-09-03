@@ -188,7 +188,8 @@ function fazerParcerias() {
     if (slot) slot.arquivo = resolverFoto(slot.arquivo);
   }
   const { html, pendencias } = parcerias(dados);
-  console.log(`Parcerias · ${dados.territorio.nome} · 9 páginas · ${metaParcerias.formatoPx.join("×")} px`);
+  const nPaginas = (html.match(/<section class="pagina/g) ?? []).length;
+  console.log(`Parcerias · ${dados.territorio.nome} · ${nPaginas} páginas · ${metaParcerias.formatoPx.join("×")} px${dados.visual === "tipografico" ? " · modo tipográfico (sem foto)" : ""}`);
   if (pendencias.length) {
     console.log(`  ${pendencias.length} campo(s) a preencher antes de enviar:`);
     for (const p of pendencias) console.log(`    · ${p}`);

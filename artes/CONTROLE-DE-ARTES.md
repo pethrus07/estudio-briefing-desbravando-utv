@@ -119,6 +119,7 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 | 4 | **Código de conduta** — “A favor do off-road consciente” | 1 | 1 | *a decidir* | entregue 26/08 |
 | 5 | **Carta de drinks** do evento | 1 | 1 | *a decidir* | entregue 26/08 |
 | 6 | **Expedição Origens** — proposta em imagem | 1 | 1 | *a decidir* | entregue 02/09 · rodada 1/2 no mesmo dia (v2 do PDF) |
+| 7 | **Parcerias · Veículo Oficial** — apresentação de 10 páginas | 10 | 6 | *a decidir* | 1ª versão em 02/09 · modo tipográfico (sem foto no disco) |
 
 ---
 
@@ -279,6 +280,51 @@ não existiam: dia de roteiro com trecho e quilometragem, grade de hora × event
 de duas colunas, linha corrida de exclusões e bloco de preço. Mesmo porte da primeira peça
 da série de programação, com trabalho a mais de reorganização de conteúdo. Sugestão:
 **R$ 50**.
+
+### 7 · Programa de Parcerias · Veículo Oficial — apresentação de 10 páginas
+
+Adaptação da apresentação de **Apoio Mecânico** para uma proposta de **Veículo Oficial de
+Apoio**, conforme o briefing de alteração que ele mandou em 02/09. Não é ajuste da peça
+anterior: é **versão nova do documento**, num arquivo de dados próprio
+(`dados/parcerias-veiculo-oficial.json`), com o de Apoio Mecânico intacto e ainda
+renderizável.
+
+| página | o que mudou |
+|---|---|
+| 01 capa | selo “Apoio Mecânico” → **Veículo Oficial**; título e assinatura mantidos |
+| 02·03·04 | institucionais, sem alteração de texto |
+| 05 território | título, promessa, **pergunta** e os 5 itens (Presença · Utilidade · Produto em situação real · Conteúdo · Relacionamento) |
+| 06 ganhos | os 6 benefícios substituídos |
+| 07 momentos | os três casos passam a **01 No caminho · 02 Na experiência · 03 No conteúdo** |
+| **08 nova** | **Como o veículo pode fazer parte** — 8 possibilidades + a ressalva de que são exemplos, não pacote fechado |
+| 09 construção | estrutura mantida + faixa **VEÍCULO + EXPERIÊNCIA + CONTEÚDO + ATIVAÇÕES** |
+| 10 encerramento | sem alteração |
+
+**Modo tipográfico — a decisão que definiu esta versão.** Nenhuma das fotos está no disco:
+as 4 que ele mandou em 02/09 vieram só na conversa, e as outras 3 nunca existiram. Por
+decisão dele (“usemos apenas o que temos; onde não tem foto, faça num modelo sem foto”),
+o template ganhou um modo em que **não existe caixa vazia escrito “foto”** — que num
+documento de proposta lê como rascunho e derruba a credibilidade de tudo em volta. No modo
+tipográfico a grade de duas colunas colapsa, capa e encerramento usam o campo de curvas de
+nível da identidade, e os três casos da página 07 viram trio editorial com o número grande
+em Anton. Vale para qualquer parceiro futuro, não só para este.
+
+Na mesma linha: **número de audiência vazio não vira travessão** (ou entram os quatro, ou a
+página fica só com o texto — meia régua preenchida lê pior que régua nenhuma) e **contato
+vazio não imprime “contato a preencher”**: documento que vai para a marca não anuncia o
+próprio buraco. As 14 pendências saem no console de quem renderiza, que é quem resolve.
+
+⚠️ **Falta para virar a versão final:** as 4 fotos que ele mandou (salvar em
+`artes/fotos/veiculo-oficial/` com os nomes que o JSON já indica e trocar `visual` para
+`foto`), mais 3 que não existem — operação (p. 03), **caminhonete em ação (p. 05)** e fim de
+dia na trilha (p. 10) —, os 4 números de audiência e o contato. A da página 05 é a única que
+o briefing pede **com o veículo**, e é a que mais falta: ali o argumento é “produto em
+situação real”.
+
+**Como eu enquadraria.** 10 páginas, 6 alteradas e 1 nova, mais um modo de layout novo no
+template. É documento, não arte de post — mesma natureza do que o contrato chama de criação
+digital, mas de porte muito maior. Sugestão: **R$ 120**, e a versão com as fotos entra como
+rodada inclusa.
 
 ### Ferramenta criada no caminho (não cobrável)
 
