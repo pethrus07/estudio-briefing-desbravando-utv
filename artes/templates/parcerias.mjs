@@ -39,8 +39,15 @@ const esc = (s) =>
 
 /** Campos que o Desbravando ainda precisa preencher aparecem como pendência, nunca inventados. */
 const pendencias = [];
-/** Modo da rodada: sem foto, nada de caixa vazia — o layout muda de forma. */
-let semFoto = false;
+/**
+ * A decisão de foto é POR SLOT, não da peça inteira. Foi global por uma versão e estava
+ * errado: das sete fotos, quatro existem e três não, e o certo é a página que tem foto
+ * usar a foto e a página que não tem virar tipográfica — não as sete se rebaixarem à pior.
+ * `visual: "tipografico"` continua existindo como trava, para gerar a versão sem foto
+ * nenhuma mesmo com arquivo no disco.
+ */
+let forcarTipografico = false;
+const tem = (slot) => !forcarTipografico && Boolean(slot?.arquivo);
 function valor(bruto, rotulo) {
   const v = String(bruto ?? "").trim();
   if (!v) {
@@ -54,14 +61,10 @@ function foto(slot, classe = "") {
   if (slot?.arquivo) {
     return `<img class="foto mono ${classe}" src="${esc(slot.arquivo)}" alt="">`;
   }
-  /* No modo tipográfico a ausência não deixa marca na peça: quem cede é a grade, não a
-     página. A pendência não sai por aqui porque metade dos slots é desviada antes de
-     chegar nesta função (capa, casos e encerramento trocam de elemento) — quem registra
-     é `cobrarFotos`, senão a lista de "o que falta" nasce incompleta, justo com as fotos
-     que já existem e só precisam ser salvas. */
-  if (semFoto) return "";
-  pendencias.push(`foto · ${slot?.descricao ?? "sem descrição"}`);
-  return `<div class="slot-foto ${classe}"><span>${esc(slot?.descricao ?? "foto")}</span></div>`;
+  /* Ausência de foto não deixa marca na peça: quem cede é a grade, não a página. Caixa
+     cinza escrito "foto" num documento de proposta lê como rascunho e derruba a
+     credibilidade de tudo em volta. Quem registra a falta é `cobrarFotos`. */
+  return "";
 }
 
 /** Todos os slots do documento, na ordem das páginas — a lista do que falta sair. */
@@ -75,7 +78,7 @@ const slotsDeFoto = (d) => [
 
 function cobrarFotos(d) {
   for (const [onde, slot] of slotsDeFoto(d)) {
-    if (!slot?.arquivo) pendencias.push(`foto ${onde} · ${slot?.descricao ?? "sem descrição"}`);
+    if (!tem(slot)) pendencias.push(`foto ${onde} · ${slot?.descricao ?? "sem descrição"}`);
   }
 }
 
@@ -104,7 +107,7 @@ const emColunas = (n) =>
   `style="grid-auto-flow:column;grid-template-rows:repeat(${Math.ceil(n / 2)},auto)"`;
 
 /** Grade de duas colunas só existe se a coluna da direita existir. */
-const grade = (classe) => (semFoto ? "grade-solo" : classe);
+const grade = (classe, slot) => (tem(slot) ? classe : "grade-solo");
 
 const marca = `<img class="marca-topo" src="../marca/logo-desbravando.png" alt="Desbravando UTV">`;
 const rodape = (n) => `<div class="rodape"><span>Programa de Parcerias Desbravando</span><span>${n}</span></div>`;
@@ -113,7 +116,7 @@ const rodape = (n) => `<div class="rodape"><span>Programa de Parcerias Desbravan
 
 const capa = (d) => `
 <section class="pagina capa">
-  ${semFoto ? fundoGrafico() : `<div class="capa-fundo">${foto(d.capa, "cobre")}</div>`}
+  ${tem(d.capa) ? `<div class="capa-fundo">${foto(d.capa, "cobre")}</div>` : fundoGrafico()}
   <div class="veu-capa"></div>
   <div class="capa-conteudo">
     ${marca}
@@ -154,7 +157,7 @@ const oDesbravando = (d, n) => `
 <section class="pagina">
   ${marca}
   <p class="sobrelinha">A plataforma</p>
-  <div class="${grade("grade-2-1")}">
+  <div class="${grade("grade-2-1", d.fotoOperacao)}">
     <div>
       <h2 class="titulo secao">O Desbravando</h2>
       <p class="corpo texto-largo">O Desbravando conecta pessoas apaixonadas pelo universo off-road através de
@@ -209,14 +212,14 @@ const territorio = (d, n) => `
 <section class="pagina">
   ${marca}
   <p class="sobrelinha">O território da marca</p>
-  <div class="${grade("grade-1-1")}">
+  <div class="${grade("grade-1-1", d.territorio.foto)}">
     <div>
       <h2 class="titulo secao">${esc(d.territorio.nome)}</h2>
       <p class="subtitulo">${esc(d.territorio.promessa)}</p>
       <p class="corpo pergunta">${esc(
         d.territorio.pergunta ?? "Como essa marca melhora a experiência do participante?"
       )}</p>
-      <ul class="lista lista-territorio" ${semFoto ? emColunas(d.territorio.itens.length) : ""}>
+      <ul class="lista lista-territorio" ${tem(d.territorio.foto) ? "" : emColunas(d.territorio.itens.length)}>
         ${d.territorio.itens
           .map((i) => `<li><span><strong>${esc(i.titulo)}</strong> ${esc(i.texto)}</span></li>`)
           .join("\n        ")}
@@ -243,11 +246,11 @@ const casos = (d, n) => `
   ${marca}
   <p class="sobrelinha">Momentos reais</p>
   <h2 class="titulo secao secao-menor">Imagine sua marca aqui.</h2>
-  <div class="casos${semFoto ? " sem-foto" : ""}">
+  <div class="casos${d.casos.some((c) => tem(c.foto)) ? "" : " sem-foto"}">
     ${d.casos
       .map(
-        (c, i) => `<figure class="caso">
-      ${semFoto ? `<span class="caso-n">${String(i + 1).padStart(2, "0")}</span>` : foto(c.foto, "caso-img")}
+        (c, i) => `<figure class="caso${tem(c.foto) ? "" : " caso-solo"}">
+      ${tem(c.foto) ? foto(c.foto, "caso-img") : `<span class="caso-n">${String(i + 1).padStart(2, "0")}</span>`}
       <figcaption><span class="caso-local">${esc(c.local)}</span><span class="caso-legenda">${esc(c.legenda)}</span></figcaption>
     </figure>`
       )
@@ -325,7 +328,7 @@ function linhaContato(c = {}) {
 
 const encerramento = (d) => `
 <section class="pagina encerramento">
-  ${semFoto ? fundoGrafico() : `<div class="capa-fundo">${foto(d.encerramento, "cobre")}</div>`}
+  ${tem(d.encerramento) ? `<div class="capa-fundo">${foto(d.encerramento, "cobre")}</div>` : fundoGrafico()}
   <div class="veu-encerramento"></div>
   <div class="capa-conteudo">
     ${marca}
@@ -341,8 +344,8 @@ const encerramento = (d) => `
 
 export function parcerias(dados, opcoes = {}) {
   pendencias.length = 0;
-  semFoto = (opcoes.visual ?? dados.visual ?? "foto") === "tipografico";
-  if (semFoto) cobrarFotos(dados);
+  forcarTipografico = (opcoes.visual ?? dados.visual) === "tipografico";
+  cobrarFotos(dados);
   /* O número da página vive AQUI, ao lado da ordem — inserir uma página no meio é mexer
      numa lista, não caçar literal dentro de nove funções. */
   const paginas = [
@@ -484,8 +487,10 @@ export function parcerias(dados, opcoes = {}) {
   .lista-ganho li::before { font-size: 26px; color: rgba(255,255,255,.5); }
 
   /* ---------- página 7 · casos ---------- */
-  .casos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 56px; }
-  .caso-img, .caso .slot-foto { width: 100%; height: 420px; }
+  /* 400px, não 420: com legenda de três linhas nos três casos, 420 encostava a última
+     linha no filete do rodapé — sobravam 18px. */
+  .casos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 48px; }
+  .caso-img, .caso .slot-foto { width: 100%; height: 400px; }
   .caso figcaption { display: block; margin-top: 22px; }
   .caso-local {
     display: block; font-size: 16px; font-weight: 600; letter-spacing: 3px;
@@ -531,7 +536,14 @@ export function parcerias(dados, opcoes = {}) {
 
   /* página 7 sem foto: trio editorial com o número grande. O número faz o trabalho de
      estrutura que a foto fazia — sem ele as três legendas flutuariam soltas. */
+  /* Trio inteiro sem foto: o bloco desce e cresce, porque não há imagem sustentando a
+     página. Uma figura sozinha sem foto (classe caso-solo) só troca a imagem pelo número,
+     e mantém a altura das vizinhas para as três legendas continuarem alinhadas.
+     ATENÇÃO: nada de acento grave neste comentário — ele está dentro de um template
+     literal, e um acento grave solto fecha a string e o CSS vira código. */
   .casos.sem-foto { margin-top: 96px; }
+  .caso-solo .caso-n { height: 420px; display: flex; align-items: center; margin-bottom: 0; }
+  .casos.sem-foto .caso-solo .caso-n { height: auto; display: block; }
   .casos.sem-foto .caso { border-top: 1.5px solid var(--divisor); padding-top: 34px; }
   .casos.sem-foto figcaption { margin-top: 0; }
   .casos.sem-foto .caso-legenda { font-size: 30px; }
