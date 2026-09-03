@@ -113,13 +113,14 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 
 | # | entrega | peças | artes | R$ | situação |
 |---|---|---:|---:|---:|---|
-| 1 | Formulário do almoço na vinícola | — | — | **0** | no ar 25/08 · uso do módulo já pago |
+| 1 | Formulário do almoço na vinícola | — | — | **50** | no ar 25/08 · R$ 50 por formulário, decisão dele em 03/09 |
 | 2 | **Programação da expedição** — 5 dias | 5 | 5 | *a decidir* | entregue 26/08 |
 | 3 | **`logo-lateral.svg`** — assinatura lateral em vetor | 1 | — | *a decidir* | entregue 26/08 |
 | 4 | **Código de conduta** — “A favor do off-road consciente” | 1 | 1 | *a decidir* | entregue 26/08 |
 | 5 | **Carta de drinks** do evento | 1 | 1 | *a decidir* | entregue 26/08 |
 | 6 | **Expedição Origens** — proposta em imagem | 1 | 1 | *a decidir* | entregue 02/09 · rodada 1/2 no mesmo dia (v2 do PDF) |
 | 7 | **Parcerias · Veículo Oficial** — apresentação de 10 páginas | 10 | 6 | *a decidir* | entregue 03/09 · 4 fotos reais aplicadas; 3 slots ainda tipográficos |
+| 8 | **Formulário de avaliação da expedição** | — | — | **50** | no ar 03/09 · `/avaliacao-expedicao` |
 
 ---
 
@@ -345,6 +346,30 @@ salvar o arquivo com o nome que o JSON indica e re-renderizar.
 template. É documento, não arte de post — mesma natureza do que o contrato chama de criação
 digital, mas de porte muito maior. Sugestão: **R$ 120**, e a versão com as fotos entra como
 rodada inclusa.
+
+### 8 · Formulário de avaliação da expedição
+
+Pedido pelo WhatsApp em 03/09: “no mesmo estilo do cardápio, para os clientes avaliarem a
+expedição — nome, nota, comentário”. Três campos, e só esses três: formulário de avaliação
+com mais campos é formulário que ninguém termina. No ar em
+`cardapio.desbravando-utv.workers.dev/avaliacao-expedicao`, amarrado à Urubici de agosto.
+
+**Teve desenvolvimento, não só configuração.** O tipo de campo `nota` não existia no
+módulo — é escala de avaliação (1 a 5, com rótulo nas pontas), diferente do `numero` que já
+havia: nota é comparável entre respostas e cabe num toque, número é digitado e aceita 0 a
+999. Fica disponível no painel para qualquer formulário futuro.
+
+**Uma correção que este formulário revelou.** O pé da página prometia, em texto fixo no
+código: *“usamos estas respostas só para planejar a alimentação da expedição. Nada é
+publicado nem repassado para terceiros.”* Correto para o cardápio, errado em qualquer outro
+formulário — e num de avaliação é um problema de verdade, porque promete que nada é
+publicado justamente onde o cliente vai querer publicar o elogio. A promessa virou dado do
+formulário (migração v4.5), com campo no painel, e os dois formulários de cardápio que já
+existem mantiveram a promessa original — quem respondeu leu aquele texto.
+
+**Régua:** R$ 50, como os outros dois. Decisão dele em 03/09 — *“já é o terceiro
+formulário, são 3 cobranças”*. ⚠️ Mas o primeiro já foi pago no fechamento de 26/08, então
+o que entra neste ciclo são **dois** (vinícola + avaliação), R$ 100.
 
 ### Ferramenta criada no caminho (não cobrável)
 
