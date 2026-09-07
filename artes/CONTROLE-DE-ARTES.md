@@ -450,7 +450,7 @@ o que dá **R$ 15**. Fica em R$ 5: mexer nisso por R$ 15 no total não paga o at
 O fechamento em PDF com identidade RYZE sai deste mesmo conjunto de dados:
 `node ferramentas/render.mjs fechamento` gera 6 páginas A4 e só entrega se o
 `auditar-fechamento.py` aprovar. Entregue em
-`~/Downloads/RYZE-Fechamento-Desbravando-26-07-a-25-08-PRE-APROVACAO.pdf`.
+`estudio-briefing-desbravando-utv/artes/saida/fechamento-2026-08.pdf` (a cópia `RYZE-Fechamento-Desbravando-26-07-a-25-08-PRE-APROVACAO.pdf` que ficava em Downloads não existe mais; regenera com `artes/templates/fechamento.mjs` a partir de `artes/dados/fechamento-2026-08.json`).
 
 ## Detalhe item a item — as 22 artes
 
