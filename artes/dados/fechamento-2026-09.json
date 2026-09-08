@@ -1,0 +1,162 @@
+{
+ "_nota": "PRÉVIA do ciclo 26/08 → 25/09/2026 da Desbravando UTV, emitida no dia 08 com o que foi entregue até aqui. Nenhum total é escrito neste arquivo: o template soma e o auditor confere. Valores das peças 2 a 7 são os que a nota de cobrança já usa (programação 120, logo lateral 40, conduta 40, drinks 15, Origens 50, apresentação 120) — o Pedro confirma antes de enviar. A competência usa \"a\" e não a seta →: U+2192 está fora do subset latino das fontes RYZE.",
+ "cliente": "Desbravando UTV",
+ "plano": "Aceleração",
+ "competencia": "26/08 a 25/09/2026",
+ "emissao": "08/09/2026",
+ "vencimento": "26/09/2026",
+ "carater": "Prévia do ciclo em andamento — não é cobrança",
+ "regra": [
+  "A mensalidade do Plano Aceleração é de R$ 165, com vencimento no dia 26, e inclui suporte, backup, monitoramento, pequenos ajustes, 1 atualização de página, relatório mensal e a cota de 5 itens de criação digital.",
+  "Esta prévia lista o que foi entregue entre 26/08 e 08/09. O que entrar até 25/09 soma-se a ela, e o fechamento definitivo sai antes do vencimento, para aprovação.",
+  "Cada peça tem preço fechado, e a coluna de artes diz quantos arquivos finais distintos aquele valor cobre. Peça que constrói um modelo novo custa mais que a que reaproveita o modelo — por isso a primeira peça de uma série vale mais que as seguintes.",
+  "Cada formulário publicado no Controle de Eventos é uma entrega, a R$ 50, conforme alinhado em 03/09. O formulário do jantar ficou no ciclo anterior e não aparece aqui.",
+  "Cada entrega inclui 2 rodadas de ajuste. Neste ciclo nenhuma passou do limite."
+ ],
+ "baseFixa": {
+  "titulo": "Plano mensal",
+  "itens": [
+   {
+    "nome": "Plano Aceleração — mensalidade",
+    "nota": "Renova no dia 26 · inclui a cota de 5 itens de criação digital",
+    "valor": 165
+   },
+   {
+    "nome": "Token de acesso claude-sistemas",
+    "nota": "Recorrente mensal desde 26/07",
+    "valor": 30
+   }
+  ]
+ },
+ "pecas": [
+  {
+   "nome": "Programação da 3ª Expedição Família — 5 dias",
+   "oque": "Uma peça por dia da expedição, enviada pelo WhatsApp às famílias.",
+   "spec": "1080 × 1920 px, pixel exato · P&B estrito, sem foto · fundo de curvas de nível, uma textura por dia",
+   "artes": [
+    "Dia 1 · Chegada — check-in, boas-vindas e a noite",
+    "Dia 2 · Primeiro dia de trilha — previsão, roteiro, asfalto, almoço e jantar",
+    "Dia 3 · Vinícola — seis horários, transfer e Vinícola Thera",
+    "Dia 4 · Segundo dia de trilha — roteiro e evento de encerramento",
+    "Dia 5 · Despedida — café, check-out e mensagem de fecho"
+   ],
+   "valor": 120,
+   "argumento": "A primeira peça construiu o sistema: linha do tempo desenhada, bloco de previsão com três números, roteiro em sequência com o retorno marcado e trechos de asfalto em letra miúda. As quatro seguintes reaproveitam o modelo e trocam conteúdo, com escala ajustada por dia — o dia 4 tem seis horários e roteiro, o dia 5 tem dois horários. O emoji do texto original saiu porque entra colorido e a identidade é P&B: o alfinete virou desenho. As rodadas pedidas — sem foto, em P&B, e usar a logo lateral — couberam nas duas inclusas.",
+   "acompanha": [
+    "Versão de cada dia em PNG pronta para o WhatsApp"
+   ]
+  },
+  {
+   "nome": "Assinatura lateral em vetor (logo-lateral)",
+   "oque": "O nome ao lado da montanha, em arquivo vetorial reutilizável.",
+   "spec": "SVG com o texto em curvas · montanha, filete e #DESBRAVANDOUTV · usável em qualquer escala",
+   "artes": [
+    "logo-lateral.svg — assinatura horizontal"
+   ],
+   "valor": 40,
+   "argumento": "Não é criação de logotipo, o desenho é do cliente. É a construção do arquivo de marca que faltava: a versão horizontal em vetor, com o texto convertido em curvas para não depender de fonte instalada. A partir dela saíram a programação, o código de conduta e a carta de drinks, e ela passa a valer para toda peça em que o nome fica ao lado, não embaixo.",
+   "acompanha": []
+  },
+  {
+   "nome": "Código de conduta — A favor do off-road consciente",
+   "oque": "Remontagem, na identidade P&B, de uma peça antiga do cliente.",
+   "spec": "1080 × 1920 px · trilho contínuo com os itens do código · assinatura lateral",
+   "artes": [
+    "Stories 1080 × 1920 — código de conduta"
+   ],
+   "valor": 40,
+   "argumento": "Peça de texto longo diagramada do zero: os itens do código entram num trilho contínuo que guia a leitura de cima a baixo, com hierarquia entre título, itens e fecho. Construiu o modelo que a carta de drinks reaproveita no mesmo dia.",
+   "acompanha": []
+  },
+  {
+   "nome": "Carta de drinks do evento",
+   "oque": "Lista de drinks da noite do evento, no mesmo modelo do código de conduta.",
+   "spec": "1080 × 1920 px · mesmo trilho contínuo · conteúdo trocado",
+   "artes": [
+    "Stories 1080 × 1920 — carta de drinks"
+   ],
+   "valor": 15,
+   "argumento": "Reaproveita o modelo do código de conduta; o custo é de conteúdo, não de construção. Por isso fica na taxa de arte padrão do contrato.",
+   "acompanha": []
+  },
+  {
+   "nome": "Expedição Origens — proposta em imagem",
+   "oque": "O PDF da Origens virado peça de imagem, para circular no WhatsApp.",
+   "spec": "1080 × 1920 px · modelo novo de oferta: expedição, público, dois pacotes e vagas limitadas",
+   "artes": [
+    "Oferta da Expedição Origens — v2 (expedição masculina, dois pacotes, vagas limitadas)"
+   ],
+   "valor": 50,
+   "argumento": "Modelo novo, diferente da programação e do trilho: uma oferta com blocos de pacote e chamada de vagas. A segunda versão, no mesmo dia, mudou o enquadramento a pedido — expedição masculina, dois pacotes — e coube na primeira rodada de ajuste.",
+   "acompanha": []
+  },
+  {
+   "nome": "Programa de Parcerias · Veículo Oficial — apresentação",
+   "oque": "Apresentação de 10 páginas para levar o programa às montadoras e concessionárias.",
+   "spec": "10 páginas · 4 fotos reais da operação aplicadas · 3 páginas com slot tipográfico para as fotos que faltam",
+   "artes": [
+    "Capa e tese do programa",
+    "A plataforma e o ciclo de valor",
+    "O território do veículo oficial",
+    "O que a marca ganha",
+    "Casos com fotos reais",
+    "Encerramento e contato"
+   ],
+   "valor": 120,
+   "argumento": "Documento comercial completo, com decisão de foto por slot: quatro páginas receberam fotos reais da operação, tratadas em cor, e as três sem foto ganharam composição tipográfica para não circularem com espaço vazio. Quando as fotos chegarem, entram no mesmo arquivo sem refazer a diagramação.",
+   "acompanha": [
+    "PDF em alta para envio e PNGs página a página para o WhatsApp"
+   ]
+  }
+ ],
+ "ajustes": {
+  "titulo": "Rodadas de ajuste além das duas inclusas",
+  "valorUnitario": 5,
+  "itens": [],
+  "nota": "Nenhuma peça deste ciclo passou das duas rodadas inclusas. As voltas da programação que não foram pedido do cliente não contam."
+ },
+ "cotaDigital": {
+  "titulo": "Criação digital — dentro da cota do plano",
+  "usados": 0,
+  "total": 5,
+  "itens": [],
+  "nota": "A cota de 5 itens renovou em 26/08 e ainda não foi usada neste ciclo."
+ },
+ "modulo": {
+  "titulo": "Sistema — formulários publicados no ciclo",
+  "nome": "Dois formulários do Controle de Eventos: almoço na vinícola e avaliação da expedição",
+  "oque": "Links públicos para as famílias responderem no celular; respostas no banco e no painel.",
+  "spec": "almoço na vinícola no ar em 25/08 · avaliação da expedição no ar em 03/09, com o tipo de campo nota de 1 a 5, que não existia e foi construído para ela",
+  "valor": 100,
+  "argumento": "Dois formulários a R$ 50 cada, como alinhado em 03/09. O da vinícola recebeu 28 respostas na semana da expedição; o de avaliação abriu em 03/09 e exigiu desenvolvimento novo: campo de nota em escala, migração do banco e coluna nova no painel. O formulário do jantar, que abriu o módulo, foi cobrado no ciclo anterior."
+ },
+ "projetos": {
+  "titulo": "Projetos à parte",
+  "itens": [
+   {
+    "nome": "Plataformas — fluxo de design + controle de eventos",
+    "parcela": 3,
+    "de": 10,
+    "total": 1100,
+    "valor": 100
+   },
+   {
+    "nome": "Novo design do site",
+    "parcela": 2,
+    "de": 3,
+    "total": 700,
+    "valor": 200,
+    "nota": "300 + 200 + 200, conforme combinado em 24/08 · escopo a formalizar por escrito antes desta parcela"
+   }
+  ]
+ },
+ "descartado": {
+  "titulo": "Executado e descartado a pedido",
+  "itens": [
+   {
+    "nome": "Programação em três formatos — versões feed e impressa",
+    "argumento": "A primeira versão da programação saía em três formatos. Em 26/08 o cliente dispensou dois e ficou só o de WhatsApp. Registrado para constar; não está sendo cobrado."
+   }
+  ]
+ }
+}
