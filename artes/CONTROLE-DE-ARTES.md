@@ -121,6 +121,7 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 | 6 | **Expedição Origens** — proposta em imagem | 1 | 1 | **50** *(proposto 07/09)* | entregue 02/09 · rodada 1/2 no mesmo dia (v2 do PDF) |
 | 7 | **Parcerias · Veículo Oficial** — apresentação de 10 páginas | 10 | 6 | **50** *(decidido pelo Pedro em 07/09)* | entregue 03/09 · 4 fotos reais aplicadas; 3 slots ainda tipográficos |
 | 8 | **Formulário de avaliação da expedição** | — | — | **50** | no ar 03/09 · `/avaliacao-expedicao` |
+| 9 | **Formulário de cadastro** — Expedição Origens | — | — | **50** | no ar 04/09 · `/cadastro-origens` · rodada 1/2 em 08/09 |
 
 **Prévia do ciclo gerada em 07/09** (emissão 08/09): `artes/saida/fechamento-2026-09.pdf` a partir de `dados/fechamento-2026-09.json` — base 195 + peças 315 + formulários 100 + parcelas 300 = **R$ 910** (o cliente ouviu ~980 em 02/09; a apresentação caiu de 120 para 50 por decisão do Pedro em 07/09). Programação a 120 confirmada por ele; logo lateral, conduta, drinks e Origens são proposta minha no critério dele.
 
@@ -372,6 +373,41 @@ existem mantiveram a promessa original — quem respondeu leu aquele texto.
 **Régua:** R$ 50, como os outros dois. Decisão dele em 03/09 — *“já é o terceiro
 formulário, são 3 cobranças”*. ⚠️ Mas o primeiro já foi pago no fechamento de 26/08, então
 o que entra neste ciclo são **dois** (vinícola + avaliação), R$ 100.
+
+### 9 · Formulário de cadastro — Expedição Origens
+
+Pedido em 04/09: “mesmo estilo do anterior, um formulário pros clientes preencherem para mim
+fazer o cadastro de cada um”. No ar em
+`cardapio.desbravando-utv.workers.dev/cadastro-origens`, amarrado ao evento **Origens**
+(23–25/10) — os três anteriores são da Urubici de agosto.
+
+Os seis dados que ele pediu, com o endereço partido em **dois** campos (rua e número · CEP)
+para a planilha do cadastro sair com coluna limpa em vez de texto corrido, e estado civil
+como escolha em vez de digitação.
+
+**Teve desenvolvimento.** Dois tipos de campo novos: `cpf`, **validado pelos dígitos
+verificadores no servidor** e gravado sempre como `000.000.000-00`, e `cep`. A validação não
+é preciosismo — o formulário alimenta cadastro e contrato, e CPF errado só aparece dias
+depois, quando o contrato volta e o cliente está esperando. CPF inválido conta como campo não
+respondido: o formulário recusa e diz que falta o CPF, em vez de guardar documento quebrado
+com aparência de certo. A máscara na tela só formata o que já foi digitado, nunca completa
+nem corrige o documento de ninguém. O CEP **não consulta serviço externo** de propósito: a
+página tem de abrir com sinal ruim, e endereço vindo de fora chega errado em zona rural.
+
+⚠️ **Primeiro formulário que coleta documento.** O token do CSV deixou de expor preferência
+de jantar e passou a expor CPF e RG de todos os clientes. Recomendação registrada no README:
+não colar a fórmula em planilha compartilhada com o grupo, e trocar o token no painel quando
+o cadastro terminar.
+
+**Rodada 1 de 2 (inclusa), em 08/09.** Ele pediu a opção **piloto ou acompanhante** e o
+**nome do piloto** quando for acompanhante. Ele falou “check box”, mas as duas opções se
+excluem — virou escolha única. O nome do piloto ficou **condicional de verdade**: aparece e
+passa a ser obrigatório só quando marca Acompanhante, e ao voltar para Piloto o campo limpa.
+Isso é capacidade nova do módulo (`depende: {campo, valor}`), reaproveitável em qualquer
+formulário. Aplicado por UPDATE e não INSERT, porque o formulário já estava no ar com
+resposta gravada — recriar mudaria o link e o token.
+
+**Régua:** R$ 50, como os outros. Nada a mais pela rodada.
 
 ### Ferramenta criada no caminho (não cobrável)
 
