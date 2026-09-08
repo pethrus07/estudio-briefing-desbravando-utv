@@ -1,5 +1,5 @@
 {
- "_nota": "PRÉVIA do ciclo 26/08 → 25/09/2026 da Desbravando UTV, emitida no dia 08 com o que foi entregue até aqui. Nenhum total é escrito neste arquivo: o template soma e o auditor confere. Valores das peças 2 a 7 são os que a nota de cobrança já usa (programação 120, logo lateral 40, conduta 40, drinks 15, Origens 50, apresentação 120) — o Pedro confirma antes de enviar. A competência usa \"a\" e não a seta →: U+2192 está fora do subset latino das fontes RYZE.",
+ "_nota": "PRÉVIA do ciclo 26/08 → 25/09/2026 da Desbravando UTV, emitida no dia 08 com o que foi entregue até aqui. Nenhum total é escrito neste arquivo: o template soma e o auditor confere. Valores: programação 120, logo lateral 40, conduta 40, drinks 15, Origens 50 (proposta minha no critério dele) e apresentação 50 (decisão do Pedro em 07/09). A competência usa \"a\" e não a seta →: U+2192 está fora do subset latino das fontes RYZE.",
  "cliente": "Desbravando UTV",
  "plano": "Aceleração",
  "competencia": "26/08 a 25/09/2026",
@@ -102,7 +102,7 @@
     "Casos com fotos reais",
     "Encerramento e contato"
    ],
-   "valor": 120,
+   "valor": 50,
    "argumento": "Documento comercial completo, com decisão de foto por slot: quatro páginas receberam fotos reais da operação, tratadas em cor, e as três sem foto ganharam composição tipográfica para não circularem com espaço vazio. Quando as fotos chegarem, entram no mesmo arquivo sem refazer a diagramação.",
    "acompanha": [
     "PDF em alta para envio e PNGs página a página para o WhatsApp"
