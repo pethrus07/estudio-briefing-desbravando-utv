@@ -120,15 +120,15 @@
   "usados": 0,
   "total": 5,
   "itens": [],
-  "nota": "A cota de 5 itens renovou em 26/08 e ainda não foi usada neste ciclo."
+  "nota": "Cota de 5 itens renovada em 26/08; nenhum uso até 08/09."
  },
  "modulo": {
   "titulo": "Sistema — formulários publicados no ciclo",
   "nome": "Dois formulários do Controle de Eventos: almoço na vinícola e avaliação da expedição",
   "oque": "Links públicos para as famílias responderem no celular; respostas no banco e no painel.",
-  "spec": "almoço na vinícola no ar em 25/08 · avaliação da expedição no ar em 03/09, com o tipo de campo nota de 1 a 5, que não existia e foi construído para ela",
+  "spec": "vinícola no ar em 25/08 · avaliação no ar em 03/09, com o campo de nota de 1 a 5 construído para ela",
   "valor": 100,
-  "argumento": "Dois formulários a R$ 50 cada, como alinhado em 03/09. O da vinícola recebeu 28 respostas na semana da expedição; o de avaliação abriu em 03/09 e exigiu desenvolvimento novo: campo de nota em escala, migração do banco e coluna nova no painel. O formulário do jantar, que abriu o módulo, foi cobrado no ciclo anterior."
+  "argumento": "Dois formulários a R$ 50 cada, como alinhado em 03/09: 28 respostas na vinícola; a avaliação exigiu campo de nota, migração e coluna nova no painel."
  },
  "projetos": {
   "titulo": "Projetos à parte",
@@ -146,7 +146,7 @@
     "de": 3,
     "total": 700,
     "valor": 200,
-    "nota": "300 + 200 + 200, conforme combinado em 24/08 · escopo a formalizar por escrito antes desta parcela"
+    "nota": "300 + 200 + 200 · escopo a formalizar por escrito antes desta parcela"
    }
   ]
  },
@@ -155,7 +155,7 @@
   "itens": [
    {
     "nome": "Programação em três formatos — versões feed e impressa",
-    "argumento": "A primeira versão da programação saía em três formatos. Em 26/08 o cliente dispensou dois e ficou só o de WhatsApp. Registrado para constar; não está sendo cobrado."
+    "argumento": "Saía em três formatos; em 26/08 ficou só o de WhatsApp. Sem cobrança."
    }
   ]
  }
