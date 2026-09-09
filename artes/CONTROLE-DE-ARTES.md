@@ -123,6 +123,7 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 | 8 | **Formulário de avaliação da expedição** | — | — | **50** | no ar 03/09 · `/avaliacao-expedicao` |
 | 9 | **Formulário de cadastro** — Expedição Origens | — | — | **50** | no ar 04/09 · `/cadastro-origens` |
 | 10 | **Cadastro · e-mail, valor e forma de pagamento** | — | — | **30** | 09/09 · escopo novo, não rodada |
+| 11 | **Cadastro · telefone, camiseta, emergência e e-mail condicional** | — | — | **30** | 09/09 · segunda leva do dia |
 
 **Prévia do ciclo gerada em 07/09** (emissão 08/09): `artes/saida/fechamento-2026-09.pdf` a partir de `dados/fechamento-2026-09.json` — base 195 + peças 315 + formulários 100 + parcelas 300 = **R$ 910** (o cliente ouviu ~980 em 02/09; a apresentação caiu de 120 para 50 por decisão do Pedro em 07/09). Programação a 120 confirmada por ele; logo lateral, conduta, drinks e Origens são proposta minha no critério dele.
 
@@ -441,6 +442,33 @@ formulário de cadastro respondeu `Error 1101` — fora do ar até o deploy segu
 Terceira vez com a mesma armadilha, primeira em produção. Criei trava de deploy que importa o
 módulo e renderiza antes de publicar, provada quebrando de propósito. **Não cobrável** — e o
 tempo da trava também não.
+
+#### 11 · Telefone, camiseta, emergência e o e-mail condicional — 09/09, segunda leva
+
+Quatro pedidos: **telefone**, **tamanho de camiseta** (P a G4), **nome e telefone de
+emergência**, e o e-mail passando a ser exigido **só de quem paga por boleto** (com a frase
+do contrato por e-mail removida).
+
+**Tipo `telefone` novo no módulo:** 10 ou 11 dígitos, gravado sempre como `(00) 00000-0000`,
+e aceita e descarta o `55` que muita gente cola do WhatsApp. Com dois campos de telefone no
+mesmo formulário, formato homogêneo deixou de ser estética — é o que permite discar direto da
+planilha sem reler.
+
+**O e-mail condicional obrigou a reordenar o formulário.** A dependência só pode apontar para
+pergunta que já veio antes, senão o campo fica invisível para sempre. O bloco de pagamento
+subiu e o e-mail virou o último campo. Lê melhor assim — *escolheu boleto, então me dê o
+e-mail* — mas a restrição é técnica, não estética.
+
+⚠️ **Consequência de negócio a ter em mente:** quem paga por Pix não deixa e-mail nenhum. O
+contato dessa pessoa passa a ser o telefone, que entrou nesta mesma leva; as duas mudanças se
+encaixam por acaso, não por desenho.
+
+Conferido no navegador contra a produção: o e-mail aparece e vira obrigatório ao marcar
+boleto, limpa ao voltar para Pix, a máscara fecha em `(11) 98765-4321`, zero erro de JS. E
+esta foi a primeira alteração publicada **passando pela trava de deploy** criada horas antes.
+
+**Régua: R$ 30**, mesmo enquadramento do item 10 — escopo novo (um tipo de campo a mais,
+quatro campos, reordenação), não rodada de ajuste.
 
 ### Ferramenta criada no caminho (não cobrável)
 
