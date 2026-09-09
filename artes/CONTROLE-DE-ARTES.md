@@ -121,7 +121,8 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 | 6 | **Expedição Origens** — proposta em imagem | 1 | 1 | **50** *(proposto 07/09)* | entregue 02/09 · rodada 1/2 no mesmo dia (v2 do PDF) |
 | 7 | **Parcerias · Veículo Oficial** — apresentação de 10 páginas | 10 | 6 | **50** *(decidido pelo Pedro em 07/09)* | entregue 03/09 · 4 fotos reais aplicadas; 3 slots ainda tipográficos |
 | 8 | **Formulário de avaliação da expedição** | — | — | **50** | no ar 03/09 · `/avaliacao-expedicao` |
-| 9 | **Formulário de cadastro** — Expedição Origens | — | — | **50** | no ar 04/09 · `/cadastro-origens` · rodada 1/2 em 08/09 |
+| 9 | **Formulário de cadastro** — Expedição Origens | — | — | **50** | no ar 04/09 · `/cadastro-origens` |
+| 10 | **Cadastro · e-mail, valor e forma de pagamento** | — | — | **30** | 09/09 · escopo novo, não rodada |
 
 **Prévia do ciclo gerada em 07/09** (emissão 08/09): `artes/saida/fechamento-2026-09.pdf` a partir de `dados/fechamento-2026-09.json` — base 195 + peças 315 + formulários 100 + parcelas 300 = **R$ 910** (o cliente ouviu ~980 em 02/09; a apresentação caiu de 120 para 50 por decisão do Pedro em 07/09). Programação a 120 confirmada por ele; logo lateral, conduta, drinks e Origens são proposta minha no critério dele.
 
@@ -407,7 +408,39 @@ Isso é capacidade nova do módulo (`depende: {campo, valor}`), reaproveitável 
 formulário. Aplicado por UPDATE e não INSERT, porque o formulário já estava no ar com
 resposta gravada — recriar mudaria o link e o token.
 
-**Régua:** R$ 50, como os outros. Nada a mais pela rodada.
+**Régua:** R$ 50, como os outros. Nada a mais pela rodada de 08/09.
+
+#### 10 · E-mail, valor do pacote e forma de pagamento — 09/09
+
+Pedido dele: e-mail, valor do pacote (R$ 2.300) e forma de pagamento (Pix ou 2× no boleto,
+vencimentos 15/09 e 15/10, com a última parcela antes da expedição).
+
+**Não lancei como rodada de ajuste, e a diferença importa.** Rodada é acerto do que já foi
+entregue; isto é **escopo novo** — dois campos que não existiam, mais dois tipos de campo
+construídos no módulo:
+
+- **`email`**, validado no servidor. O contrato sai por e-mail, então e-mail com typo é
+  contrato que nunca chega. A validação é de propósito frouxa: regra apertada recusa e-mail
+  válido e trava a reserva de um cliente real, estrago maior que um endereço torto.
+- **`informe`**, painel de informação dentro do formulário. Ninguém digita o preço que vai
+  pagar, e ele **não vira coluna na planilha** — coluna vazia com título de aviso faz quem lê
+  a planilha desconfiar do resto.
+
+Pelo contrato, aliás, esta seria a **rodada 2 de 2 — ainda inclusa**. Ele decidiu cobrar
+(*"já é o terceiro ajuste"*), e cobrar está certo, mas o lugar honesto na fatura é *escopo
+novo*, não *rodada extra* — a taxa de rodada extra praticada é R$ 5, e isso aqui não é R$ 5
+de trabalho. **Sugestão: R$ 30**, pouco mais da metade de um formulário novo.
+
+⚠️ **Duas coisas ficaram em aberto, ditas e não respondidas:** o valor está fixo em R$ 2.300
+(existe o Pacote 1 Dia de R$ 1.450 — se o formulário servir os dois, o valor não pode ser
+fixo), e **a arte da Origens está circulando com "cartão em até 10× com juros" e "boleto em
+até 2×"**, que não é mais a régua. A arte precisa de correção.
+
+🛑 **Incidente meu, no mesmo dia:** publiquei com acento grave dentro de comentário CSS e o
+formulário de cadastro respondeu `Error 1101` — fora do ar até o deploy seguinte, ~2 min.
+Terceira vez com a mesma armadilha, primeira em produção. Criei trava de deploy que importa o
+módulo e renderiza antes de publicar, provada quebrando de propósito. **Não cobrável** — e o
+tempo da trava também não.
 
 ### Ferramenta criada no caminho (não cobrável)
 
