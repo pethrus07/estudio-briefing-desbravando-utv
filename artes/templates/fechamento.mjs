@@ -28,7 +28,11 @@ export function fechamento(d) {
   const totalAjustes = soma(d.ajustes.itens);
   const totalProjetos = soma(d.projetos.itens);
   const totalModulo = d.modulo.valor;
-  const total = totalBase + totalArtes + totalAjustes + totalModulo + totalProjetos;
+  /* Bloco opcional: escopo novo pedido em cima de um sistema já entregue. Entra separado
+     dos formulários de propósito — campo novo com tipo novo no módulo não é "mais um
+     formulário", e somar os dois numa linha faria a conta não fechar na cara de quem lê. */
+  const totalEscopo = d.escopo?.valor ?? 0;
+  const total = totalBase + totalArtes + totalAjustes + totalModulo + totalEscopo + totalProjetos;
   const acompanhados =
     d.pecas.reduce((s, p) => s + (p.acompanha?.length ?? 0), 0) +
     (d.descartado?.itens?.length ?? 0);
@@ -248,6 +252,24 @@ export function fechamento(d) {
     <p class="arg">${esc(d.modulo.argumento)}</p>
   </div>
 </div>
+${
+  d.escopo
+    ? `
+<div class="bloco">
+  <h2>${esc(d.escopo.titulo)}</h2>
+  <div class="peca">
+    <header>
+      <span class="num">01</span>
+      <div class="cab"><h3>${esc(d.escopo.nome)}</h3><p class="oque">${esc(d.escopo.oque)}</p></div>
+      <div class="preco"><b>${real(totalEscopo)}</b><span>uma vez</span></div>
+    </header>
+    <p class="spec">${esc(d.escopo.spec)}</p>
+    <p class="arg">${esc(d.escopo.argumento)}</p>
+  </div>
+</div>
+`
+    : ""
+}
 
 <div class="bloco">
   <h2>${esc(d.cotaDigital.titulo)}</h2>
