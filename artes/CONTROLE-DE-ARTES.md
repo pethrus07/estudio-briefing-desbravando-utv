@@ -124,6 +124,7 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 | 9 | **Formulário de cadastro** — Expedição Origens | — | — | **50** | no ar 04/09 · `/cadastro-origens` |
 | 10 | **Cadastro · e-mail, valor e forma de pagamento** | — | — | **30** | 09/09 · escopo novo, não rodada |
 | 11 | **Cadastro · telefone, camiseta, emergência e e-mail condicional** | — | — | **30** | 09/09 · segunda leva do dia |
+| 12 | **Formulário das bebidas do cooler** — Origens | — | — | **50** | no ar 16/09 · `/bebidas-origens` |
 
 **Prévia do ciclo gerada em 07/09** (emissão 08/09): `artes/saida/fechamento-2026-09.pdf` a partir de `dados/fechamento-2026-09.json` — base 195 + peças 315 + formulários 100 + parcelas 300 = **R$ 910** (o cliente ouviu ~980 em 02/09; a apresentação caiu de 120 para 50 por decisão do Pedro em 07/09). Programação a 120 confirmada por ele; logo lateral, conduta, drinks e Origens são proposta minha no critério dele.
 
@@ -469,6 +470,33 @@ esta foi a primeira alteração publicada **passando pela trava de deploy** cria
 
 **Régua: R$ 30**, mesmo enquadramento do item 10 — escopo novo (um tipo de campo a mais,
 quatro campos, reordenação), não rodada de ajuste.
+
+### 12 · Formulário das bebidas do cooler — Origens
+
+Pedido em 16/09: formulário para o cliente escolher as bebidas do cooler, com a regra de
+funcionamento dada por ele — *"ao selecionar a bebida, na sequência escolher a quantidade"*.
+No ar em `cardapio.desbravando-utv.workers.dev/bebidas-origens`.
+
+**Como a regra dele virou estrutura:** uma pergunta de múltipla escolha com as seis bebidas e
+**seis perguntas de quantidade**, cada uma condicionada à sua própria bebida estar marcada.
+Quem marca duas vê dois campos de quantidade, e só esses dois são obrigatórios. A planilha
+sai com uma coluna por bebida, que é o formato que serve para montar cooler — somar coluna em
+vez de ler texto corrido.
+
+**A dependência condicional só funcionava com escolha única**, e fazer valer para caixa de
+seleção exigiu duas correções: no cliente, olhar *todos* os marcados (o primeiro não é o
+único); no servidor, `includes` em vez de comparação de texto (resposta de múltipla é lista).
+
+Tipo `aviso` novo para a frase de responsabilidade — pequeno, com filete e cor cheia. Não foi
+para a linha de privacidade do rodapé porque aquela é a mais apagada da página, e *"se beber,
+não pilote"* não é letra miúda.
+
+⚠️ **O teste achou um defeito que já estava no ar nos outros formulários:** resposta de
+múltipla escolha contendo só opção inválida gravava **lista vazia** — que não é `undefined`,
+então passava pela checagem de obrigatório. Ou seja, dava para enviar um formulário
+obrigatório sem resposta nenhuma. Corrigido para os cinco formulários de uma vez.
+
+**Régua:** R$ 50, formulário novo — como os outros quatro.
 
 ### Ferramenta criada no caminho (não cobrável)
 
