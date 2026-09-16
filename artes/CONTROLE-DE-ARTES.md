@@ -115,10 +115,10 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 |---|---|---:|---:|---:|---|
 | 1 | Formulário do almoço na vinícola | — | — | **50** | no ar 25/08 · R$ 50 por formulário, decisão dele em 03/09 |
 | 2 | **Programação da expedição** — 5 dias | 5 | 5 | **120** *(confirmado pelo Pedro em 07/09: 40 + 4 × 20)* | entregue 26/08 |
-| 3 | **`logo-lateral.svg`** — assinatura lateral em vetor | 1 | — | **40** *(proposto 07/09)* | entregue 26/08 |
-| 4 | **Código de conduta** — “A favor do off-road consciente” | 1 | 1 | **40** *(proposto 07/09: constrói o trilho)* | entregue 26/08 |
-| 5 | **Carta de drinks** do evento | 1 | 1 | **15** *(proposto 07/09: reaproveita o trilho, taxa padrão)* | entregue 26/08 |
-| 6 | **Expedição Origens** — proposta em imagem | 1 | 1 | **50** *(proposto 07/09)* | entregue 02/09 · rodada 1/2 no mesmo dia (v2 do PDF) |
+| 3 | **`logo-lateral.svg`** — assinatura lateral em vetor | 1 | — | **40** *(fechado em 16/09)* | entregue 26/08 |
+| 4 | **Código de conduta** — “A favor do off-road consciente” | 1 | 1 | **40** *(fechado em 16/09; constrói o trilho)* | entregue 26/08 |
+| 5 | **Carta de drinks** do evento | 1 | 1 | **20** *(fechado em 16/09 — eu propus 15 na taxa padrão, ele subiu)* | entregue 26/08 |
+| 6 | **Expedição Origens** — proposta em imagem | 1 | 1 | **50** *(fechado em 16/09)* | entregue 02/09 · rodada 1/2 no mesmo dia (v2 do PDF) |
 | 7 | **Parcerias · Veículo Oficial** — apresentação de 10 páginas | 10 | 6 | **50** *(decidido pelo Pedro em 07/09)* | entregue 03/09 · 4 fotos reais aplicadas; 3 slots ainda tipográficos |
 | 8 | **Formulário de avaliação da expedição** | — | — | **50** | no ar 03/09 · `/avaliacao-expedicao` |
 | 9 | **Formulário de cadastro** — Expedição Origens | — | — | **50** | no ar 04/09 · `/cadastro-origens` |
@@ -126,7 +126,20 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 | 11 | **Cadastro · telefone, camiseta, emergência e e-mail condicional** | — | — | **30** | 09/09 · segunda leva do dia |
 | 12 | **Formulário das bebidas do cooler** — Origens | — | — | **50** | no ar 16/09 · `/bebidas-origens` |
 
-**Prévia do ciclo gerada em 07/09** (emissão 08/09): `artes/saida/fechamento-2026-09.pdf` a partir de `dados/fechamento-2026-09.json` — base 195 + peças 315 + formulários 100 + parcelas 300 = **R$ 910** (o cliente ouviu ~980 em 02/09; a apresentação caiu de 120 para 50 por decisão do Pedro em 07/09). Programação a 120 confirmada por ele; logo lateral, conduta, drinks e Origens são proposta minha no critério dele.
+**Prévia do ciclo regerada em 16/09**: `artes/saida/fechamento-2026-09.pdf` a partir de
+`dados/fechamento-2026-09.json` — base 195 + peças 320 + formulários 200 + escopo 60 +
+parcelas 300 = **R$ 1.075**, com a auditoria aprovando (total confere, nenhum valor órfão).
+**Todos os valores estão fechados**: o Pedro confirmou em 16/09 os quatro que faltavam,
+aceitando o proposto em três e subindo a carta de drinks de 15 para 20.
+
+A versão de 07/09 dizia R$ 910 e estava defasada em R$ 165 — foi gerada antes do formulário
+de cadastro, das duas levas de escopo e do formulário das bebidas. ⚠️ **Esta prévia envelhece
+a cada entrega**: regerar antes do vencimento em 26/09, porque o ciclo só fecha em 25/09.
+
+A auditoria pegou um texto velho de verdade na regeração: o argumento da carta de drinks
+dizia que ela *"fica na taxa de arte padrão do contrato"* — e não fica mais, depois de subir
+para 20. Eu cheguei a afrouxar a auditoria achando que era falso positivo; era eu que estava
+errado, e desfiz.
 
 ---
 

@@ -63,6 +63,8 @@ def valores_esperados(d: dict) -> set[int]:
     projetos = [i["valor"] for i in d["projetos"]["itens"]]
     v |= set(base) | set(pecas) | set(ajustes) | set(projetos)
     v.add(d["modulo"]["valor"])
+    if d.get("escopo"):
+        v.add(d["escopo"]["valor"])
     v.add(d["ajustes"]["valorUnitario"])
     for i in d["projetos"]["itens"]:
         if i.get("total"):
@@ -74,6 +76,7 @@ def valores_esperados(d: dict) -> set[int]:
     v.add(sum(projetos))
     v.add(
         sum(base) + sum(pecas) + sum(ajustes) + sum(projetos) + d["modulo"]["valor"]
+        + (d.get("escopo", {}).get("valor", 0))
     )
     v.add(0)  # "R$ 0" das linhas sem cobrança
     # valores citados dentro do texto das regras (ex.: a taxa de R$ 15 do contrato)
@@ -99,7 +102,8 @@ def main() -> None:
     pecas = sum(p["valor"] for p in dados["pecas"])
     ajustes = sum(i["valor"] for i in dados["ajustes"]["itens"])
     projetos = sum(i["valor"] for i in dados["projetos"]["itens"])
-    total = base + pecas + ajustes + projetos + dados["modulo"]["valor"]
+    total = (base + pecas + ajustes + projetos + dados["modulo"]["valor"]
+             + dados.get("escopo", {}).get("valor", 0))
 
     fmt = f"R$ {total:,}".replace(",", ".")
     if fmt not in plano:

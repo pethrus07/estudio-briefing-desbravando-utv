@@ -1,5 +1,5 @@
 {
- "_nota": "PRÉVIA do ciclo 26/08 → 25/09/2026 da Desbravando UTV, emitida no dia 08 com o que foi entregue até aqui. Nenhum total é escrito neste arquivo: o template soma e o auditor confere. Valores: programação 120, logo lateral 40, conduta 40, drinks 15, Origens 50 (proposta minha no critério dele) e apresentação 50 (decisão do Pedro em 07/09). A competência usa \"a\" e não a seta →: U+2192 está fora do subset latino das fontes RYZE.",
+ "_nota": "PRÉVIA do ciclo 26/08 → 25/09/2026 da Desbravando UTV, emitida no dia 08 com o que foi entregue até aqui. Nenhum total é escrito neste arquivo: o template soma e o auditor confere. Valores: programação 120, logo lateral 40, conduta 40, drinks 15, Origens 50 (proposta minha no critério dele) e apresentação 50 (decisão do Pedro em 07/09). A competência usa \"a\" e não a seta →: U+2192 está fora do subset latino das fontes RYZE. ATUALIZADO EM 16/09/2026: drinks de 15 para 20 (decisão dele), formulários de dois para quatro (cadastro da Origens e bebidas do cooler entraram depois), e o bloco de escopo novo do formulário de cadastro, que não existia na geração de 07/09. O documento daquela data dizia R$ 910 e estava defasado em R$ 165.",
  "cliente": "Desbravando UTV",
  "plano": "Aceleração",
  "competencia": "26/08 a 25/09/2026",
@@ -75,8 +75,8 @@
    "artes": [
     "Stories 1080 × 1920 — carta de drinks"
    ],
-   "valor": 15,
-   "argumento": "Reaproveita o modelo do código de conduta; o custo é de conteúdo, não de construção. Por isso fica na taxa de arte padrão do contrato.",
+   "valor": 20,
+   "argumento": "Reaproveita o modelo do código de conduta: o custo foi de conteúdo, não de construção — cinco drinks no lugar de vinte e sete linhas de regra, com a escala do texto subindo 80% para o quadro não ficar meio vazio. Valor fechado pelo Pedro em 16/09 a R$ 20, acima da taxa de arte padrão do contrato: eu havia proposto a taxa padrão e ele subiu.",
    "acompanha": []
   },
   {
@@ -124,11 +124,11 @@
  },
  "modulo": {
   "titulo": "Sistema — formulários publicados no ciclo",
-  "nome": "Dois formulários do Controle de Eventos: almoço na vinícola e avaliação da expedição",
-  "oque": "Links públicos para as famílias responderem no celular; respostas no banco e no painel.",
-  "spec": "vinícola no ar em 25/08 · avaliação no ar em 03/09, com o campo de nota de 1 a 5 construído para ela",
-  "valor": 100,
-  "argumento": "Dois formulários a R$ 50 cada, como alinhado em 03/09: 28 respostas na vinícola; a avaliação exigiu campo de nota, migração e coluna nova no painel."
+  "nome": "Quatro formulários do Controle de Eventos: almoço na vinícola, avaliação da expedição, cadastro da Origens e bebidas do cooler",
+  "oque": "Links públicos para as famílias responderem no celular; respostas no banco, no painel e em planilha que se atualiza sozinha.",
+  "spec": "vinícola 25/08 · avaliação 03/09 (campo de nota 1–5) · cadastro da Origens 04/09 (CPF validado, campo condicional) · bebidas do cooler 16/09 (quantidade por bebida marcada)",
+  "valor": 200,
+  "argumento": "Quatro formulários a R$ 50 cada, na régua que ele fixou em 03/09 (“já é o terceiro formulário, são 3 cobranças”). Cada um exigiu construção no módulo, não só configuração: o de avaliação trouxe o campo de nota, o de cadastro trouxe CPF validado pelos dígitos verificadores e a pergunta condicional, e o das bebidas fez a condicional valer para múltipla escolha."
  },
  "projetos": {
   "titulo": "Projetos à parte",
@@ -158,5 +158,13 @@
     "argumento": "Saía em três formatos; em 26/08 ficou só o de WhatsApp. Sem cobrança."
    }
   ]
+ },
+ "escopo": {
+  "titulo": "Escopo novo no formulário de cadastro",
+  "nome": "Duas levas de campos pedidas em 09/09",
+  "oque": "Campos que não existiam quando o formulário foi publicado, com tipos novos construídos no módulo para eles.",
+  "spec": "leva 1: e-mail validado, valor do pacote e forma de pagamento · leva 2: telefone com máscara, camiseta P–G4, contato de emergência e o e-mail passando a ser exigido só de quem paga por boleto",
+  "valor": 60,
+  "argumento": "R$ 30 por leva. Não entra como rodada de ajuste: rodada é acerto do que foi entregue, e aqui foram seis campos e três tipos novos no módulo (e-mail, informe e telefone), além de reordenar o formulário porque pergunta condicional não pode apontar para frente. A taxa de rodada extra praticada é R$ 5, e isto não é R$ 5 de trabalho."
  }
 }
