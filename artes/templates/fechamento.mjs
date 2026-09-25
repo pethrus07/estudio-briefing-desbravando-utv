@@ -321,7 +321,9 @@ ${
 <div class="fim">
   <h2>Total do ciclo</h2>
   <p>Base mensal ${real(totalBase)} · peças gráficas ${real(totalArtes)} · rodadas extras
-    ${real(totalAjustes)} · módulo do sistema ${real(totalModulo)} · parcelas de projeto
+    ${real(totalAjustes)} · módulo do sistema ${real(totalModulo)}${
+      totalEscopo ? ` · escopo novo ${real(totalEscopo)}` : ""
+    } · parcelas de projeto
     ${real(totalProjetos)}. Os ${acompanhados} itens entregues sem cobrança e os
     ${d.cotaDigital.usados} da cota de criação digital não entram nesta conta.</p>
   <div class="grande"><b>${real(total)}</b><span>vence em ${esc(d.vencimento)}</span></div>

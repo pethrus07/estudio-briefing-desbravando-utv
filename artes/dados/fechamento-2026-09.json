@@ -1,14 +1,14 @@
 {
- "_nota": "PRÉVIA do ciclo 26/08 → 25/09/2026 da Desbravando UTV, emitida no dia 08 com o que foi entregue até aqui. Nenhum total é escrito neste arquivo: o template soma e o auditor confere. Valores: programação 120, logo lateral 40, conduta 40, drinks 15, Origens 50 (proposta minha no critério dele) e apresentação 50 (decisão do Pedro em 07/09). A competência usa \"a\" e não a seta →: U+2192 está fora do subset latino das fontes RYZE. ATUALIZADO EM 16/09/2026: drinks de 15 para 20 (decisão dele), formulários de dois para quatro (cadastro da Origens e bebidas do cooler entraram depois), e o bloco de escopo novo do formulário de cadastro, que não existia na geração de 07/09. O documento daquela data dizia R$ 910 e estava defasado em R$ 165.",
+ "_nota": "FECHAMENTO do ciclo 26/08 → 25/09/2026 da Desbravando UTV, emitido em 25/09, o último dia do ciclo, com tudo o que foi entregue. Nenhum total é escrito neste arquivo: o template soma e o auditor recalcula e ABORTA se divergir. Histórico: a prévia de 08/09 dizia R$ 910 e ficou defasada em R$ 165 (formulário de cadastro, duas levas de escopo e formulário das bebidas entraram depois); em 16/09 o Pedro fechou os quatro valores que faltavam, subindo a carta de drinks de 15 para 20, e confirmou em 25/09 que a parcela do site entra.",
  "cliente": "Desbravando UTV",
  "plano": "Aceleração",
  "competencia": "26/08 a 25/09/2026",
- "emissao": "08/09/2026",
+ "emissao": "25/09/2026",
  "vencimento": "26/09/2026",
- "carater": "Prévia do ciclo em andamento — não é cobrança",
+ "carater": "Fechamento do ciclo — para aprovação antes do vencimento",
  "regra": [
   "A mensalidade do Plano Aceleração é de R$ 165, com vencimento no dia 26, e inclui suporte, backup, monitoramento, pequenos ajustes, 1 atualização de página, relatório mensal e a cota de 5 itens de criação digital.",
-  "Esta prévia lista o que foi entregue entre 26/08 e 08/09. O que entrar até 25/09 soma-se a ela, e o fechamento definitivo sai antes do vencimento, para aprovação.",
+  "Este documento lista tudo o que foi entregue entre 26/08 e 25/09, o ciclo fechado. Os valores de peça foram acordados item a item; nenhuma peça passou das duas rodadas de ajuste inclusas.",
   "Cada peça tem preço fechado, e a coluna de artes diz quantos arquivos finais distintos aquele valor cobre. Peça que constrói um modelo novo custa mais que a que reaproveita o modelo — por isso a primeira peça de uma série vale mais que as seguintes.",
   "Cada formulário publicado no Controle de Eventos é uma entrega, a R$ 50, conforme alinhado em 03/09. O formulário do jantar ficou no ciclo anterior e não aparece aqui.",
   "Cada entrega inclui 2 rodadas de ajuste. Neste ciclo nenhuma passou do limite."
@@ -120,7 +120,7 @@
   "usados": 0,
   "total": 5,
   "itens": [],
-  "nota": "Cota de 5 itens renovada em 26/08; nenhum uso até 08/09."
+  "nota": "Cota de 5 itens renovada em 26/08; nenhum uso no ciclo."
  },
  "modulo": {
   "titulo": "Sistema — formulários publicados no ciclo",

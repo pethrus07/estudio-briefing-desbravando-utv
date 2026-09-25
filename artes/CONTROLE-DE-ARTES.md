@@ -124,9 +124,23 @@ arquivos vetoriais auditados, um por UTV — e não o conserto.
 | 9 | **Formulário de cadastro** — Expedição Origens | — | — | **50** | no ar 04/09 · `/cadastro-origens` |
 | 10 | **Cadastro · e-mail, valor e forma de pagamento** | — | — | **30** | 09/09 · escopo novo, não rodada |
 | 11 | **Cadastro · telefone, camiseta, emergência e e-mail condicional** | — | — | **30** | 09/09 · segunda leva do dia |
-| 12 | **Formulário das bebidas do cooler** — Origens | — | — | **50** | no ar 16/09 · `/bebidas-origens` |
+| 12 | **Formulário das bebidas do cooler** — Urubici · setembro | — | — | **50** | no ar 16/09 · `/bebidas-origens` |
 
-**Prévia do ciclo regerada em 16/09**: `artes/saida/fechamento-2026-09.pdf` a partir de
+**FECHADO em 25/09/2026 — R$ 1.075.** Documento em
+`artes/saida/fechamento-2026-09.pdf`, RYZE branded, 5 páginas, emitido no último dia do ciclo
+para aprovação antes do vencimento em 26/09. Auditoria aprovou: total confere, nenhum valor
+órfão, nenhuma fonte fabricada. Composição: base 195 · peças 320 (6 peças, 15 artes) ·
+formulários 200 · escopo novo 60 · parcelas 300. A parcela do site entra por decisão dele em
+25/09, **ainda sem acordo escrito** — é a única linha do documento nessa condição.
+
+A auditoria pegou um defeito real na geração: o total estava certo, mas **a frase que o
+explica somava 1.015** — o bloco de escopo era novo e não tinha entrado na enumeração. Quem lê
+reconcilia pela frase, então a frase é afirmação numérica. Virou checagem permanente, com
+duas armadilhas aprendidas: prosa extraída de PDF vem quebrada pelo layout (casar sem
+normalizar espaço deixa a diagramação decidir se a checagem roda), e checagem que só roda
+quando casa é checagem que some justo quando o documento muda de forma.
+
+**Prévia anterior, de 16/09**: `artes/saida/fechamento-2026-09.pdf` a partir de
 `dados/fechamento-2026-09.json` — base 195 + peças 320 + formulários 200 + escopo 60 +
 parcelas 300 = **R$ 1.075**, com a auditoria aprovando (total confere, nenhum valor órfão).
 **Todos os valores estão fechados**: o Pedro confirmou em 16/09 os quatro que faltavam,
@@ -484,7 +498,7 @@ esta foi a primeira alteração publicada **passando pela trava de deploy** cria
 **Régua: R$ 30**, mesmo enquadramento do item 10 — escopo novo (um tipo de campo a mais,
 quatro campos, reordenação), não rodada de ajuste.
 
-### 12 · Formulário das bebidas do cooler — Origens
+### 12 · Formulário das bebidas do cooler — Urubici de setembro
 
 Pedido em 16/09: formulário para o cliente escolher as bebidas do cooler, com a regra de
 funcionamento dada por ele — *"ao selecionar a bebida, na sequência escolher a quantidade"*.
