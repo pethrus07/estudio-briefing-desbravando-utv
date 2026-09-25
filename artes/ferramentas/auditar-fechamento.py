@@ -109,6 +109,30 @@ def main() -> None:
     if fmt not in plano:
         falhas.append(f"o total calculado ({fmt}) não aparece no PDF")
 
+    # ---------- 1b · a frase do total fecha? ----------
+    # O total pode estar certo e a frase que o explica não fechar: em 25/09 o documento saiu
+    # com "base 195 · peças 320 · ajustes 0 · módulo 200 · parcelas 300" somando 1.015 contra
+    # um total de 1.075, porque o bloco de escopo era novo e ninguém o pôs na enumeração.
+    # Quem lê reconcilia pela frase, então a frase é afirmação numérica como qualquer outra.
+    #
+    # Duas armadilhas que esta checagem já pagou:
+    #  · prosa extraída de PDF vem quebrada pelo LAYOUT — a frase chega partida no meio,
+    #    com a quebra caindo onde o texto encheu a linha; casar sem normalizar o espaço em
+    #    branco faz a diagramação decidir se a checagem roda;
+    #  · checagem que só roda quando casa é checagem que SOME justo quando o documento muda
+    #    de forma — não achar a frase é falha, não silêncio.
+    prosa = re.sub(r"\s+", " ", plano)
+    m_frase = re.search(r"Base mensal(.{0,400}?) n[ãa]o entram nesta conta", prosa)
+    if not m_frase:
+        falhas.append("não achei a frase de composição do total no PDF — o template mudou de forma?")
+    else:
+        partes = [int(n.replace(".", "")) for n in re.findall(r"R\$\s*([\d.]+)", m_frase.group(1))]
+        if sum(partes) != total:
+            falhas.append(
+                f"a frase do total soma R$ {sum(partes)} mas o total é R$ {total}"
+                " — falta um bloco na enumeração"
+            )
+
     # ---------- 2 · valor órfão ----------
     achados = {int(n.replace(".", "")) for n in re.findall(r"R\$\s*([\d.]+)", plano)}
     orfaos = sorted(achados - esperado)
