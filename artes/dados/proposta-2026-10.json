@@ -1,0 +1,364 @@
+{
+  "cliente": "Desbravando UTV",
+  "interlocutor": "Gustavo",
+  "plano": "Proposta comercial",
+  "emissao": "06/10/2026",
+  "validade": "20/10/2026",
+  "vigencia": "a partir do ciclo 26/10/2026",
+  "carater": "Proposta · substitui o escopo de jun/2026",
+  "capa": {
+    "titulo": "A parceria<br>que <u>amadureceu</u>.",
+    "sub": "Dois ciclos fechados, medidos hora a hora. Esta proposta mostra o que a parceria passou a ser, quanto tempo ela ocupa de verdade, e três formatos de continuidade para você escolher o que faz sentido."
+  },
+  "regra": [
+    "Todo número deste documento sai do registro dos dois ciclos já fechados e cobrados — 26/07 a 25/08 e 26/08 a 25/09. Nada é projeção.",
+    "As horas foram apuradas no registro de versão dos sistemas: data e hora de cada gravação de código, agrupadas em sessões de trabalho. É auditável linha a linha.",
+    "O que não deixa registro não foi contado: reunião, chamada, briefing no WhatsApp, prova de arte, publicação e atendimento. As horas aqui são piso, não teto.",
+    "Os valores já praticados não mudam de tabela: arte continua a R$ 20 por peça dentro do pacote, formulário a R$ 50, rodada extra a R$ 5.",
+    "Parcelas de projeto em andamento (plataformas e novo site) não entram em nenhuma das opções e seguem como estão."
+  ],
+  "maturidade": {
+    "titulo": "O que a parceria virou",
+    "nota": "Volume dos dois ciclos fechados. Em junho isto era um site com manutenção; hoje é uma operação com dado pessoal e dinheiro passando dentro.",
+    "marcos": [
+      {
+        "n": "37",
+        "u": "artes",
+        "o": "em 15 peças distintas — crachá, cordão, camiseta, cardápio, programação de 5 dias, código de conduta, carta de drinks, propostas e apresentações"
+      },
+      {
+        "n": "5",
+        "u": "formulários no ar",
+        "o": "cardápio do jantar, almoço na vinícola, avaliação da expedição, cadastro de cliente e bebidas do cooler"
+      },
+      {
+        "n": "4",
+        "u": "sistemas em produção",
+        "o": "Controle de Eventos, módulo de formulários públicos, Mini Drive e site"
+      },
+      {
+        "n": "11",
+        "u": "migrações de banco",
+        "o": "cada uma é uma mudança de estrutura aplicada em produção, com dado real dentro"
+      }
+    ],
+    "argumento": "O formulário de cadastro da Expedição Origens guarda nome, CPF, RG, endereço, telefone, contato de emergência e forma de pagamento dos seus clientes. Isso não é um site com uma página a mais: é sistema em produção, com responsabilidade de guarda, backup e resposta a incidente. É uma diferença de natureza, não de tamanho."
+  },
+  "horas": {
+    "titulo": "Quanto tempo isto ocupa",
+    "metodo": "Cada gravação de código carrega data e hora. Agrupando as gravações próximas em sessões de trabalho — e contando 40 minutos antes da primeira de cada sessão, porque ninguém grava no minuto zero —, chega-se ao tempo efetivo de cada ciclo. O ciclo de setembro está versionado nas duas frentes e dá o ritmo de produção de arte; esse ritmo é o que reconstrói o tempo das artes de agosto, anteriores ao repositório. É o método mais conservador disponível: ele só enxerga o que virou arquivo.",
+    "ciclos": [
+      {
+        "ciclo": "26/07 a 25/08",
+        "apuradas": 3.1,
+        "sessoes": 3,
+        "dias": 3,
+        "faturado": 780,
+        "nota": "As 22 artes deste ciclo são anteriores ao repositório de artes e não deixaram registro. O tempo delas é reconstruído pelo ritmo medido no ciclo seguinte.",
+        "artes": 22,
+        "reconstruir": true
+      },
+      {
+        "ciclo": "26/08 a 25/09",
+        "apuradas": 13.8,
+        "sessoes": 13,
+        "dias": 9,
+        "faturado": 775,
+        "nota": "Ciclo inteiro versionado, nas duas frentes. Das 13,8 h, 10,2 h são de arte (15 artes) — e é dessa medida que sai o ritmo usado acima.",
+        "artes": 15,
+        "horasArtes": 10.2,
+        "reconstruir": false
+      }
+    ],
+    "foraDaConta": [
+      "reuniões e chamadas de alinhamento",
+      "briefing e troca de mensagem no WhatsApp",
+      "prova de arte, revisão e volta com o cliente",
+      "publicação, deploy e acompanhamento de erro em produção",
+      "atendimento fora de horário durante as expedições"
+    ],
+    "piso": 70,
+    "argumento": "{media} por mês, dois ciclos seguidos — {semana} por semana, toda semana, e sem contar as chamadas soltas, que não entram em nenhuma linha acima. Isso deixou de ser um teste ou um extra ao lado do contrato do site: virou um trabalho de meio período dentro da operação de vocês, e precisa ser correspondido como tal. A proposta a seguir existe para alinhar o valor ao que a parceria já é na prática.",
+    "fecho": "Mesmo no piso, a hora efetiva ficou abaixo do que eu pratico — e o piso é, por construção, o cenário mais favorável a vocês.",
+    "rebaixamento": {
+      "titulo": "Por que este número está puxado para baixo",
+      "itens": [
+        "o método só enxerga o que virou arquivo gravado — pensar, desenhar, decidir e refazer não gravam nada",
+        "as artes de agosto não tinham repositório e entram por reconstrução, pelo ritmo mais conservador disponível",
+        "reunião, chamada, briefing e prova de arte estão fora, e são justamente as horas que mais aparecem numa semana de expedição",
+        "correção de defeito e acompanhamento de erro em produção também não entram, porque muitas vezes não geram arquivo novo",
+        "qualidade não tem linha nenhuma nesta conta: o tempo de fazer bem feito e o de fazer de qualquer jeito contam igual aqui"
+      ],
+      "fecho": "O número real é maior, e com folga. Preferi apresentar o piso auditável a apresentar uma estimativa confortável — mas é importante que fique claro que é piso."
+    }
+  },
+  "planoAtual": {
+    "titulo": "O plano de hoje, e por que ele não cabe mais",
+    "nota": "Escopo de jun/2026, em vigor. A coluna da direita é o que ele deixa de fora — não por falha, mas porque foi escrito para outra realidade.",
+    "incluso": [
+      "suporte, backup e monitoramento",
+      "pequenos ajustes",
+      "1 atualização de página por mês",
+      "relatório mensal, no dia 08",
+      "reunião estratégica, entre os dias 08 e 15, de até 45 minutos",
+      "cota de 5 criações digitais por mês — documento, roteiro, ficha, guia, pesquisa"
+    ],
+    "fora": [
+      "arte gráfica — taxa de R$ 15 por peça padrão",
+      "peça complexa, logotipo e identidade visual — orçadas à parte",
+      "formulário e sistema novo — R$ 50 por entrega",
+      "redesign do site — projeto à parte",
+      "rodada de ajuste além das 2 inclusas — R$ 5"
+    ],
+    "valorHoje": 165,
+    "token": 30,
+    "argumento": "A frase que define o plano é \"1 atualização de página\". Ela foi escrita quando o combinado era um site. Hoje a parceria mantém quatro sistemas em produção, cinco formulários públicos coletando dado pessoal e financeiro, e um banco que já recebeu onze mudanças de estrutura com dado real dentro. Nada disso está no texto do plano, e por isso nada disso está no preço. O reajuste não é de inflação nem de tabela: é o escopo recebendo nome."
+  },
+  "opcoes": [
+    {
+      "chave": "base",
+      "nome": "Só a parceria",
+      "resumo": "Sistemas e operação; arte fora do escopo",
+      "preco": 340,
+      "unidade": "por mês",
+      "inclui": [
+        "a base da parceria — os quatro sistemas, suporte, backup, monitoramento, relatório e reunião",
+        "cota de 5 criações digitais por mês"
+      ],
+      "fora": [
+        "arte gráfica, em qualquer formato — sai do escopo e não há prazo reservado",
+        "formulário novo, orçado caso a caso",
+        "peça complexa, logotipo e identidade visual"
+      ],
+      "paraQuem": "Para quem vai resolver a parte gráfica por outro caminho e quer manter só a operação de pé. Os R$ 50 de diferença para a opção seguinte são a agenda reservada: sem eles, arte entra na fila como pedido novo, sem prazo garantido.",
+      "destaque": false,
+      "cor": "neutra",
+      "curto": "Para quem vai resolver a parte gráfica por outro caminho. Sem agenda reservada: arte entra na fila como pedido novo, sem prazo garantido."
+    },
+    {
+      "chave": "sistemas",
+      "nome": "Parceria e sistemas",
+      "resumo": "A base fixa; arte quando precisar",
+      "preco": 390,
+      "unidade": "por mês",
+      "inclui": [
+        "a base da parceria — os quatro sistemas, suporte, backup, monitoramento, relatório e reunião",
+        "cota de 5 criações digitais por mês",
+        "agenda reservada para arte: prazo de 2 dias úteis e 2 rodadas por entrega",
+        "pacote de arte quando houver expedição — R$ 300 por até 15 artes",
+        "formulário novo a R$ 50, pela régua que vocês mesmos fixaram em 03/09"
+      ],
+      "fora": [
+        "peça complexa, logotipo e identidade visual",
+        "arte e formulário, que passam a ser contratados por demanda"
+      ],
+      "paraQuem": "Para quem prefere decidir expedição a expedição. No mês típico chega ao mesmo valor do pacote completo; em mês parado, fica nos R$ 390. A arte continua comigo, com prazo garantido — o que muda é que ela passa a ser contratada quando aparece.",
+      "destaque": false,
+      "cor": "roxo",
+      "curto": "Para quem prefere decidir expedição a expedição. A arte continua comigo, com prazo garantido — só passa a ser contratada quando aparece."
+    },
+    {
+      "chave": "completa",
+      "nome": "Parceria completa",
+      "resumo": "Tudo dentro, um número só",
+      "preco": 790,
+      "unidade": "por mês",
+      "inclui": [
+        "a base da parceria — os quatro sistemas, suporte, backup, monitoramento, relatório e reunião",
+        "cota de 5 criações digitais por mês",
+        "até 15 artes por expedição, no pacote",
+        "até 2 formulários por ciclo",
+        "prazo de 2 dias úteis para arte avulsa e 2 rodadas de ajuste por entrega"
+      ],
+      "fora": [
+        "peça complexa, logotipo e identidade visual",
+        "arte ou formulário acima do limite do mês"
+      ],
+      "paraQuem": "No mês típico medido, montar isto item a item dá exatamente o mesmo valor — a diferença é que aqui você sabe o número antes de o mês começar, não depois. É o formato que mantém a parte gráfica dentro da parceria, com prazo e agenda reservados, sem orçar peça a peça.",
+      "destaque": true,
+      "cor": "ouro",
+      "curto": "No mês típico medido dá exatamente o mesmo valor que montar item a item — a diferença é que aqui você sabe o número antes de o mês começar."
+    }
+  ],
+  "comparativo": {
+    "titulo": "Comparado com o que vocês pagam hoje",
+    "nota": "Mês de referência: uma expedição e dois formulários — a média real dos dois ciclos fechados. A primeira linha é o que vocês pagaram de fato nesses meses.",
+    "hoje": {
+      "rotulo": "Como está hoje",
+      "fixo": 195,
+      "variavel": 583,
+      "nota": "mensalidade 165 + token 30, mais arte e formulário avulsos — média dos dois ciclos"
+    },
+    "linhas": [
+      {
+        "opcao": "Só a parceria",
+        "fixo": 340,
+        "variavel": 0,
+        "nota": "a parte gráfica sai do escopo e é resolvida por fora"
+      },
+      {
+        "opcao": "Parceria e sistemas",
+        "fixo": 390,
+        "variavel": 400,
+        "nota": "pacote de até 15 artes (R$ 300) + dois formulários (R$ 100)"
+      },
+      {
+        "opcao": "Parceria completa",
+        "fixo": 790,
+        "variavel": 0,
+        "nota": "nada a somar: arte e formulários já estão dentro"
+      }
+    ],
+    "argumento": "Montada item a item, a parceria dá exatamente o mesmo número do pacote completo — e os dois ficam na faixa do que já vem sendo pago. Não é um aumento no mês cheio: é a conta deixando de depender de quanto trabalho apareceu. O que muda de verdade é o mês parado, em que a manutenção dos sistemas continua acontecendo e hoje não é paga."
+  },
+  "aParte": {
+    "titulo": "O que segue à parte, em qualquer opção",
+    "nota": "Nenhuma das opções absorve estes itens. Eles continuam exatamente como estão combinados hoje.",
+    "itens": [
+      {
+        "nome": "Projeto de plataformas",
+        "detalhe": "R$ 1.100 em 10 parcelas — 3 já pagas",
+        "saldo": 700,
+        "obs": "restam 7 parcelas de R$ 100"
+      },
+      {
+        "nome": "Novo design do site",
+        "detalhe": "R$ 700 em 3 parcelas — 2 já pagas",
+        "saldo": 200,
+        "obs": "resta 1 parcela de R$ 200 · falta formalizar o acordo por escrito"
+      },
+      {
+        "nome": "Peça complexa, logotipo e identidade visual",
+        "detalhe": "orçamento por peça, como no escopo atual",
+        "saldo": null,
+        "obs": "exclusão que já existe no contrato de jun/2026",
+        "unidade": "por peça"
+      },
+      {
+        "nome": "Rodada de ajuste além das 2 inclusas",
+        "detalhe": "R$ 5 por rodada",
+        "saldo": null,
+        "obs": "régua inalterada",
+        "unidade": "por rodada"
+      }
+    ]
+  },
+  "encerramento": {
+    "titulo": "O que eu proponho",
+    "texto": "A parceria completa é a que corresponde ao que esta operação virou: um número só, previsível, cobrindo a arte e os sistemas sem conta variável no fim do mês — e ainda assim na faixa do que vocês já vêm pagando. As outras duas existem para o caso de preferirem separar a parte gráfica do resto. Qualquer uma das três entra em vigor no ciclo que abre em 26/10 — a atual segue valendo até lá, sem retroativo.",
+    "numero": 790,
+    "legenda": "Parceria completa · por mês"
+  },
+  "entrouNaRotina": {
+    "titulo": "O que entrou na rotina depois que o plano foi escrito",
+    "nota": "Nenhum destes itens existia em junho, quando o valor de hoje foi fechado. Todos passaram a ser mantidos todo mês, e nenhum tem linha no plano atual.",
+    "itens": [
+      {
+        "quando": "jul/2026",
+        "nome": "Conector dos sistemas",
+        "oque": "o acesso que liga a operação de vocês às ferramentas — recorrente desde 26/07, cobrado à parte como token"
+      },
+      {
+        "quando": "ago/2026",
+        "nome": "Módulo de formulários públicos",
+        "oque": "link público, gravação no banco, validação de campo, planilha que atualiza sozinha e aba própria no painel"
+      },
+      {
+        "quando": "ago/2026",
+        "nome": "Controle de Eventos em produção",
+        "oque": "expedições, inscritos e acompanhamento num painel só, com banco próprio"
+      },
+      {
+        "quando": "set/2026",
+        "nome": "Guarda de dado pessoal e financeiro",
+        "oque": "CPF, RG, endereço, telefone, contato de emergência e forma de pagamento dos seus clientes — com backup, controle de acesso e responsabilidade de LGPD"
+      },
+      {
+        "quando": "set/2026",
+        "nome": "Cinco formulários no ar ao mesmo tempo",
+        "oque": "cardápio do jantar, almoço na vinícola, avaliação, cadastro e bebidas do cooler — cada um com manutenção, correção e acompanhamento durante a expedição"
+      },
+      {
+        "quando": "contínuo",
+        "nome": "Produção gráfica por expedição",
+        "oque": "deixou de ser peça avulsa e virou calendário: programação, cardápio, conduta, drinks, proposta e apresentação a cada evento"
+      },
+      {
+        "quando": "contínuo",
+        "nome": "Plantão durante a expedição",
+        "oque": "formulário que para, link que precisa abrir, ajuste pedido no sábado — não há linha de suporte no plano que cubra sistema em operação"
+      }
+    ],
+    "argumento": "O plano de R$ 165 foi fechado para um site com manutenção, e o site continua lá, atendido. O que não existe no texto dele é tudo o que a lista acima descreve — e é isso que ocupa a maior parte das horas medidas na página anterior."
+  },
+  "matriz": {
+    "titulo": "Os três formatos, lado a lado",
+    "nota": "A diferença entre eles não é qualidade nem prazo de entrega — é quanto da parte gráfica fica dentro do valor fixo.",
+    "linhas": [
+      {
+        "item": "Os quatro sistemas em produção — suporte, backup e monitoramento",
+        "v": {
+          "base": "sim",
+          "sistemas": "sim",
+          "completa": "sim"
+        }
+      },
+      {
+        "item": "Relatório mensal e reunião estratégica",
+        "v": {
+          "base": "sim",
+          "sistemas": "sim",
+          "completa": "sim"
+        }
+      },
+      {
+        "item": "Pequenos ajustes e 1 atualização de página",
+        "v": {
+          "base": "sim",
+          "sistemas": "sim",
+          "completa": "sim"
+        }
+      },
+      {
+        "item": "Cota de 5 criações digitais por mês",
+        "v": {
+          "base": "sim",
+          "sistemas": "sim",
+          "completa": "sim"
+        }
+      },
+      {
+        "item": "Agenda reservada para arte — 2 dias úteis e 2 rodadas por entrega",
+        "v": {
+          "base": "nao",
+          "sistemas": "sim",
+          "completa": "sim"
+        }
+      },
+      {
+        "item": "Artes da expedição, até 15 por evento — demandas do mesmo tipo enviadas de uma vez contam como uma",
+        "v": {
+          "base": "fora do escopo",
+          "sistemas": "R$ 300 o pacote",
+          "completa": "incluso"
+        }
+      },
+      {
+        "item": "Formulário novo no ar",
+        "v": {
+          "base": "orçado caso a caso",
+          "sistemas": "R$ 50 cada",
+          "completa": "2 por ciclo"
+        }
+      },
+      {
+        "item": "Peça complexa, logotipo e identidade visual",
+        "v": {
+          "base": "orçada à parte",
+          "sistemas": "orçada à parte",
+          "completa": "orçada à parte"
+        }
+      }
+    ]
+  }
+}

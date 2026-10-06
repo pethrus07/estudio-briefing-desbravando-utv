@@ -31,6 +31,7 @@ import { carta } from "../templates/carta.mjs";
 import { descritivo } from "../templates/descritivo.mjs";
 
 import { fechamento } from "../templates/fechamento.mjs";
+import { proposta } from "../templates/proposta.mjs";
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const artes = join(aqui, "..");
@@ -372,6 +373,32 @@ function fazerFechamento() {
 }
 
 /**
+ * Proposta comercial (RYZE) — renegociacao do plano com o cliente.
+ * Mesmo aborto do fechamento, por motivo mais forte: documento de negociacao com conta
+ * que nao fecha nao perde um numero, perde a conversa — e nao tem segunda chance.
+ */
+function fazerProposta() {
+  const arquivo = opt("dados", "proposta-2026-10.json");
+  const dados = lerDados(arquivo);
+  const nome = arquivo.replace(/\.json$/, "");
+  console.log(`Proposta RYZE · ${dados.cliente} · ${dados.interlocutor} · valida ate ${dados.validade}`);
+  const pdf = escrever(nome, proposta(dados));
+
+  const r = spawnSync(
+    acha(PYTHONS, "Python"),
+    [join(aqui, "auditar-proposta.py"), pdf, join(artes, "dados", arquivo)],
+    { encoding: "utf8" }
+  );
+  process.stdout.write(r.stdout ?? "");
+  if (r.status !== 0) {
+    process.stderr.write(r.stderr ?? "");
+    rmSync(pdf, { force: true });
+    throw new Error("auditoria reprovou — PDF descartado, nada foi entregue");
+  }
+  paraPng(pdf, 110, nome);
+}
+
+/**
  * Programação do dia — PNG em pixel exato. Passa pelo screenshot, não pelo PDF:
  * converter via PDF arredonda e 1080×1350 já saiu 1080×1351 uma vez.
  */
@@ -444,6 +471,7 @@ const alvos = {
   descritivo: fazerDescritivo,
 
   fechamento: fazerFechamento,
+  proposta: fazerProposta,
   cordao: fazerCordao,
   parcerias: fazerParcerias,
   camiseta: fazerCamiseta,
