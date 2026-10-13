@@ -288,7 +288,19 @@ function fazerBandeira() {
 }
 
 function fazerAdesivo() {
-  const dados = lerDados(opt("dados", "expedicao-urubici-2026.json"));
+  const arquivoDados = opt("dados", "expedicao-urubici-2026.json");
+  const dados = lerDados(arquivoDados);
+  /* O nome de saída era "adesivo-<tema>-<numero>", sem a expedição dentro. Com duas
+     expedições vivas ao mesmo tempo (Urubici em agosto, Origens em outubro) o adesivo 01
+     de uma GRAVA POR CIMA do 01 da outra — aconteceu em 13/10 e só apareceu porque o PNG
+     antigo continuou na pasta e denunciou. Arquivo de gráfica trocado não dá erro: dá
+     adesivo errado colado no UTV. A expedição passa a fazer parte do nome.
+     A família "expedicao-X.json" / "expedicao-X-pecas.json" vira só "X". */
+  const apelido = arquivoDados
+    .replace(/\.json$/, "")
+    .replace(/^expedicao-/, "")
+    .replace(/-pecas$/, "")
+    .replace(/-\d{4}$/, "");
   // "--numeros=01..20" gera a série; "--tema=preto,branco" gera as duas cores
   const bruto = opt("numeros", dados.adesivo?.numero ?? "01") || "";
   const faixa = bruto.match(/^(\d+)\.\.(\d+)$/);
@@ -308,7 +320,7 @@ function fazerAdesivo() {
     );
     for (const tema of temas) {
       const { html, svg, medidas } = adesivoVetor(dados, { numero, tema, curvas });
-      const nome = `adesivo-${tema}-${numero}`;
+      const nome = `adesivo-${apelido}-${tema}-${numero}`;
       writeFileSync(join(saida, `${nome}.svg`), svg, "utf8");
       const pdf = escrever(nome, html);
       if (flag("prova")) paraPng(pdf, 300, nome);

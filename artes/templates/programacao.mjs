@@ -228,7 +228,14 @@ export function programacao(dados, opcoes = {}) {
      Trilho com marcador por item: dá estrutura visível ao que antes eram só
      linhas horizontais soltas. */
   .agenda{ list-style:none; display:grid; gap:3.6em }
-  .ev{ display:grid; grid-template-columns:7.4em 1.9em 1fr; align-items:start }
+  /* A coluna da hora era fixa em 7.4em, medida para "08h30". Hora composta ("13h30/14h",
+     "17h00/18h", que a Origens trouxe em 13/10) tem quase o dobro de caracteres e, com o
+     nowrap abaixo, TRANSBORDAVA por cima do trilho — o fim da hora saía escrito em cima
+     do marcador. O minmax resolve sem mexer no passado: o piso de 7.4em mantém as peças
+     já entregues byte a byte, e a coluna só cresce quando o conteúdo exige.
+     (Sem acento grave nestes comentários: ele fecha o template literal e o CSS vira
+     código. Foi o que aconteceu aqui na primeira tentativa desta correção.) */
+  .ev{ display:grid; grid-template-columns:minmax(7.4em, max-content) 1.9em 1fr; align-items:start }
   .hora{
     font-family:"Anton",sans-serif; font-weight:400; font-size:2.1em; line-height:1;
     letter-spacing:-.01em; font-variant-numeric:tabular-nums; padding-top:.05em;
