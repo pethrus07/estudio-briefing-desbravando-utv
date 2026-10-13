@@ -855,9 +855,21 @@ dias, adicionar briefing as 8:00 nos dois dias"*. Ciclo **26/09→25/10** — r�
 
 | # | peça | artes | R$ | situação |
 |---|---|---:|---:|---|
-| 1 | **Cronograma por dia — 23/10 (sexta)** | 2 | *20* | stories 1080×1920 + feed 1080×1350 |
-| 2 | **Cronograma por dia — 24/10 (sábado)** | 2 | *20* | idem |
-| 3 | **Adesivo do UTV — Origens** | 2 | *25* | 150 mm Ø + 3 mm de sangria, vetor, preto e branco |
+| 1 | **Cronograma por dia — 23/10 (sexta)** | 1 | *20* | feed 1080×1350 (4:5) |
+| 2 | **Cronograma por dia — 24/10 (sábado)** | 1 | *20* | feed 1080×1350 (4:5) |
+| 3 | **Adesivo do UTV — Origens** | 2 | *45* | 150 mm Ø + 3 mm de sangria, vetor, preto e branco |
+
+**Formato único, decidido em 13/10:** só **feed 1080×1350 (4:5)**. O stories 1080×1920 saiu da
+entrega — uma circulação só, sem versão paralela para envelhecer. O render continua gerando os
+dois; a entrega é que escolhe.
+
+**Adesivo refeito no mesmo dia (de *25* para *45*).** A primeira versão era a de Urubici com o
+selo trocado — pilha centrada dentro de um círculo que não fazia trabalho nenhum, e o ano
+partido em 20/26 colado na palavra, que com "ORIGENS" lia como defeito de montagem. A segunda é
+desenho novo: texto em arco no anel (título em cima, local embaixo), losangos às 3h e 9h, anel
+duplo, núcleo com logo, "U T V", número de 38 mm e o ano como elemento próprio entre dois fios.
+O valor sobe porque não foi troca de conteúdo: foi peça redesenhada, e o motor de texto em arco
+não existia.
 
 *Valores em itálico são sugestão minha, sem o sim dele.* Critério: o template das três já
 existia (programação veio da série de agosto, adesivo veio de Urubici), então é troca de

@@ -26,7 +26,7 @@ import { oferta } from "../templates/oferta.mjs";
 import { FORMATOS as FORMATOS_SOCIAL } from "../templates/comum.mjs";
 import { bandeira } from "../templates/bandeira.mjs";
 import { adesivo, cartaoUtv } from "../templates/expedicao.mjs";
-import { adesivoVetor, textosNecessarios } from "../templates/adesivo-vetor.mjs";
+import { adesivoVetor, textosNecessarios, arcosNecessarios } from "../templates/adesivo-vetor.mjs";
 import { carta } from "../templates/carta.mjs";
 import { descritivo } from "../templates/descritivo.mjs";
 
@@ -215,6 +215,21 @@ function curvasDe(texto, fonte = "Archivo-SemiBold.ttf") {
   return cacheCurvas.get(chave);
 }
 
+/** Curvas GLIFO A GLIFO — o texto em arco precisa girar cada letra separadamente. */
+function glifosDe(texto, fonte = "Anton-Regular.ttf") {
+  const chave = `${fonte}|${texto}|glifos`;
+  if (!cacheCurvas.has(chave)) {
+    const r = spawnSync(
+      acha(PYTHONS, "Python"),
+      [join(aqui, "texto-para-svg.py"), fonte, texto, "--glifos"],
+      { encoding: "utf8" }
+    );
+    if (r.status !== 0) throw new Error(`texto-para-svg --glifos falhou em "${texto}": ${r.stderr}`);
+    cacheCurvas.set(chave, JSON.parse(r.stdout).glifos);
+  }
+  return cacheCurvas.get(chave);
+}
+
 function fazerCamiseta() {
   const cargo = (opt("cargo", "PRODUÇÃO") || "").toUpperCase();
   const curvas = curvasDe(cargo, "Anton-Regular.ttf");
@@ -318,8 +333,11 @@ function fazerAdesivo() {
     const curvas = Object.fromEntries(
       Object.entries(pedidos).map(([k, v]) => [k, curvasDe(v.texto, v.fonte)])
     );
+    const arcos = Object.fromEntries(
+      Object.entries(arcosNecessarios(dados)).map(([k, v]) => [k, glifosDe(v.texto, v.fonte)])
+    );
     for (const tema of temas) {
-      const { html, svg, medidas } = adesivoVetor(dados, { numero, tema, curvas });
+      const { html, svg, medidas } = adesivoVetor(dados, { numero, tema, curvas, arcos });
       const nome = `adesivo-${apelido}-${tema}-${numero}`;
       writeFileSync(join(saida, `${nome}.svg`), svg, "utf8");
       const pdf = escrever(nome, html);
