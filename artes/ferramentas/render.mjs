@@ -32,6 +32,7 @@ import { descritivo } from "../templates/descritivo.mjs";
 
 import { fechamento } from "../templates/fechamento.mjs";
 import { proposta } from "../templates/proposta.mjs";
+import { acordo } from "../templates/acordo.mjs";
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const artes = join(aqui, "..");
@@ -373,6 +374,32 @@ function fazerFechamento() {
 }
 
 /**
+ * Acordo de parceria (RYZE) -- o documento que fecha a renegociacao.
+ * Aborta igual aos irmaos, e por um motivo mais forte: acordo erra em ESCOPO, e escopo
+ * errado so aparece dois meses depois, quando ja nao ha documento para apelar.
+ */
+function fazerAcordo() {
+  const arquivo = opt("dados", "acordo-2026-10.json");
+  const dados = lerDados(arquivo);
+  const nome = arquivo.replace(/\.json$/, "");
+  console.log(`Acordo RYZE · ${dados.cliente} · ${dados.interlocutor} · vigencia ${dados.vigencia}`);
+  const pdf = escrever(nome, acordo(dados));
+
+  const r = spawnSync(
+    acha(PYTHONS, "Python"),
+    [join(aqui, "auditar-acordo.py"), pdf, join(artes, "dados", arquivo)],
+    { encoding: "utf8" }
+  );
+  process.stdout.write(r.stdout ?? "");
+  if (r.status !== 0) {
+    process.stderr.write(r.stderr ?? "");
+    rmSync(pdf, { force: true });
+    throw new Error("auditoria reprovou — PDF descartado, nada foi entregue");
+  }
+  paraPng(pdf, 110, nome);
+}
+
+/**
  * Proposta comercial (RYZE) — renegociacao do plano com o cliente.
  * Mesmo aborto do fechamento, por motivo mais forte: documento de negociacao com conta
  * que nao fecha nao perde um numero, perde a conversa — e nao tem segunda chance.
@@ -472,6 +499,7 @@ const alvos = {
 
   fechamento: fazerFechamento,
   proposta: fazerProposta,
+  acordo: fazerAcordo,
   cordao: fazerCordao,
   parcerias: fazerParcerias,
   camiseta: fazerCamiseta,

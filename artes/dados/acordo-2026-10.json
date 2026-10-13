@@ -1,0 +1,273 @@
+{
+  "cliente": "Desbravando UTV",
+  "interlocutor": "Gustavo",
+  "plano": "Acordo de parceria",
+  "emissao": "13/10/2026",
+  "vigencia": "26/10/2026 a 25/04/2027",
+  "carater": "Acordo de 6 meses · substitui o escopo de jun/2026",
+  "valor": 500,
+  "catalogoQtd": 10,
+  "prazoLote": "5 dias úteis",
+  "capa": {
+    "titulo": "Um valor fixo,<br>um <u>caminho só</u>.",
+    "sub": "R$ 500 por mês, por seis meses, com o pacote de comunicação da expedição dentro. O que torna esse valor possível não é desconto: é a demanda passar a entrar por um sistema, já estruturada, em vez de se espalhar por mensagem."
+  },
+  "regra": [
+    "O valor substitui a mensalidade de R$ 165 e o token de acesso de R$ 30 — passa a ser um número só, sem variável no fim do mês.",
+    "O pacote cobre uma expedição por ciclo, com as dez peças do catálogo desta proposta. Peça fora do catálogo continua existindo, orçada à parte como sempre foi.",
+    "Toda demanda entra pelo Briefing de Comunicação, pelo painel ou pelo Claude de vocês. É essa mudança que paga a diferença entre este valor e o da proposta anterior.",
+    "O prazo de entrega conta do briefing fechado, não do pedido — briefing incompleto não inicia a contagem.",
+    "A infraestrutura dos sistemas passa para a conta de vocês na Cloudflare, paga direto, como o Gustavo propôs na reunião de 13/10.",
+    "O acordo é de seis ciclos, de 26/10/2026 a 25/04/2027, com o valor travado no período. O prazo existe porque o sistema que viabiliza esse valor leva semanas para ficar de pé e só se paga ao longo do contrato."
+  ],
+  "comoFunciona": {
+    "titulo": "Como a demanda passa a entrar",
+    "nota": "O conector que liga o Claude de vocês ao sistema já existe e já está em uso. Ele ganha o módulo de comunicação.",
+    "passos": [
+      {
+        "n": "01",
+        "nome": "O sistema preenche o que já sabe",
+        "oque": "Datas, dias, programação, cardápio escolhido, bebidas, participantes — tudo isso já está no Controle de Eventos. O briefing abre pré-preenchido e lista só o que falta."
+      },
+      {
+        "n": "02",
+        "nome": "Vocês completam, pelo Claude ou pelo painel",
+        "oque": "No Claude de vocês: \"vamos preparar a comunicação da próxima expedição\". Ele abre o briefing, pergunta só os buracos e grava. Pelo painel dá no mesmo, na mão."
+      },
+      {
+        "n": "03",
+        "nome": "O briefing é fechado",
+        "oque": "Fechar valida a completude e trava o conteúdo. É neste momento que o prazo começa a correr — e é por isso que ele é curto."
+      },
+      {
+        "n": "04",
+        "nome": "As peças voltam para o painel",
+        "oque": "O lote inteiro é produzido e conferido antes de chegar a vocês, e fica para download no painel. Sem arquivo solto em mensagem, sem versão perdida."
+      }
+    ],
+    "argumento": "Hoje um pedido nasce numa mensagem, vira uma conversa, volta como pergunta e só então vira arte. O briefing elimina as três voltas do meio. É esse tempo — e não a qualidade da peça — que está sendo cortado para o valor caber."
+  },
+  "catalogo": {
+    "titulo": "O catálogo da expedição",
+    "nota": "As dez peças que entram no pacote de cada expedição, pela lista que vocês passaram. Demandas do mesmo tipo enviadas de uma vez contam como uma peça — a regra que combinamos em 06/10 continua valendo.",
+    "pecas": [
+      {
+        "n": "01",
+        "nome": "Adesivo",
+        "oque": "adesivo da expedição, em vetor, pronto para a gráfica"
+      },
+      {
+        "n": "02",
+        "nome": "Contagem regressiva",
+        "oque": "a série de contagem até a saída, no padrão de redes"
+      },
+      {
+        "n": "03",
+        "nome": "Cardápio",
+        "oque": "o cardápio nos formatos de sempre — mesa e redes — a partir do que foi escolhido no formulário"
+      },
+      {
+        "n": "04",
+        "nome": "Formulário",
+        "oque": "o formulário público da expedição no ar, com as respostas caindo no painel e na planilha"
+      },
+      {
+        "n": "05",
+        "nome": "Camiseta",
+        "oque": "as estampas da camiseta da expedição, frente e costas"
+      },
+      {
+        "n": "06",
+        "nome": "Cronograma geral",
+        "oque": "a visão da expedição inteira numa peça"
+      },
+      {
+        "n": "07",
+        "nome": "Cronograma por dia",
+        "oque": "uma peça por dia de expedição, montada da programação que já está no sistema"
+      },
+      {
+        "n": "08",
+        "nome": "Carta de boas-vindas",
+        "oque": "a carta entregue ao participante na chegada"
+      },
+      {
+        "n": "09",
+        "nome": "Off-road consciente",
+        "oque": "o código de conduta na identidade da expedição"
+      },
+      {
+        "n": "10",
+        "nome": "Guia logístico",
+        "oque": "o guia com roteiro, pontos de apoio e orientações práticas"
+      }
+    ]
+  },
+  "dentro": {
+    "titulo": "O que está dentro dos R$ 500",
+    "itens": [
+      "os quatro sistemas em produção — Controle de Eventos, formulários públicos, Mini Drive e site",
+      "suporte, backup, monitoramento e correção de defeito",
+      "o conector que liga o Claude de vocês aos sistemas (o token de R$ 30 deixa de ser cobrado à parte)",
+      "o Briefing de Comunicação, no painel e no Claude de vocês",
+      "o pacote de comunicação de uma expedição por ciclo — as dez peças do catálogo",
+      "duas rodadas de ajuste por peça",
+      "cota de 2 horas por ciclo para ajuste e evolução dos sistemas",
+      "relatório mensal e uma reunião de alinhamento por mês"
+    ]
+  },
+  "fora": {
+    "titulo": "O que não entra no valor fixo",
+    "nota": "Além da tabela acima: itens que seguem como já estão combinados hoje, sem mudança.",
+    "itens": [
+      {
+        "nome": "Infraestrutura dos sistemas",
+        "valor": null,
+        "unidade": "conta de vocês",
+        "detalhe": "passa para a conta de vocês na Cloudflare e é paga direto, sem passar por nós. A migração entra como contrapartida deste acordo, sem custo."
+      },
+      {
+        "nome": "Rodada de ajuste além das duas inclusas",
+        "valor": 5,
+        "unidade": "por rodada",
+        "detalhe": "régua inalterada"
+      },
+      {
+        "nome": "Projeto de plataformas",
+        "valor": 700,
+        "unidade": "em aberto",
+        "detalhe": "R$ 1.100 em 10 parcelas, 3 já pagas — restam 7 de R$ 100, fora deste acordo"
+      },
+      {
+        "nome": "Novo design do site",
+        "valor": 200,
+        "unidade": "em aberto",
+        "detalhe": "R$ 700 em 3 parcelas, 2 já pagas — resta 1 de R$ 200, fora deste acordo"
+      }
+    ]
+  },
+  "regrasDoPreco": {
+    "titulo": "As três regras que fazem o valor funcionar",
+    "nota": "Não são burocracia. Cada uma delas é um pedaço do tempo que foi cortado para o valor cair da proposta anterior para R$ 500.",
+    "itens": [
+      {
+        "nome": "Toda demanda entra pelo sistema",
+        "oque": "Pedido por mensagem solta não entra na fila. Pelo painel ou pelo Claude de vocês leva o mesmo tempo e já nasce completo.",
+        "porque": "é o que elimina as idas e voltas de pergunta, que hoje são a maior parte do tempo gasto por peça"
+      },
+      {
+        "nome": "O prazo conta do briefing fechado",
+        "oque": "Fechado o briefing, o lote do catálogo volta em até 5 dias úteis. Briefing incompleto não inicia a contagem.",
+        "porque": "produzir o lote de uma vez custa uma fração de produzir peça a peça conforme o pedido aparece"
+      },
+      {
+        "nome": "Emergência é sistema parado",
+        "oque": "Sistema fora do ar ou algo que trave uma expedição em curso é atendido na hora, sem custo e sem fila. Pedido de arte urgente não é emergência: entra como peça avulsa, orçada.",
+        "porque": "sem essa linha, a exceção vira a regra em três semanas e o valor deixa de fechar"
+      }
+    ]
+  },
+  "implantacao": {
+    "titulo": "Como entra em vigor",
+    "nota": "O valor passa a valer já no ciclo que abre em 26/10. O sistema entra em duas etapas, e nenhuma delas atrasa a sua operação: até estar tudo de pé, o fluxo atual continua funcionando normalmente.",
+    "etapas": [
+      {
+        "quando": "26/10",
+        "nome": "O valor novo entra",
+        "oque": "R$ 500 fixos substituem a mensalidade e o token. A expedição deste ciclo roda no fluxo atual."
+      },
+      {
+        "quando": "novembro",
+        "nome": "Briefing no ar",
+        "oque": "O módulo de comunicação sobe no painel e no Claude de vocês, com o catálogo das dez peças e o pré-preenchimento do que o sistema já sabe."
+      },
+      {
+        "quando": "novembro",
+        "nome": "Infraestrutura migrada",
+        "oque": "Os sistemas passam para a conta de vocês na Cloudflare, com o custo indo direto para vocês."
+      },
+      {
+        "quando": "dezembro",
+        "nome": "Entrega pelo painel",
+        "oque": "As peças passam a voltar pelo painel, prontas para download, em vez de irem por mensagem."
+      }
+    ]
+  },
+  "encerramento": {
+    "titulo": "O que fica combinado",
+    "texto": "R$ 500 por mês, por seis ciclos, com uma expedição completa dentro e sem conta variável no fim do mês — abaixo da média que os ciclos fechados vinham dando. O que sustenta esse valor é a mudança no caminho da demanda: ela passa a entrar pelo sistema, já pronta para virar peça. Ao fim do período, renovando ou não, os sistemas e os dados ficam com vocês, na conta de vocês, com o procedimento de passagem documentado.",
+    "numero": 500,
+    "legenda": "Por mês · 6 ciclos, de 26/10/2026 a 25/04/2027"
+  },
+  "prazoMeses": 6,
+  "cotaRetrabalho": 2,
+  "horaExcedente": 90,
+  "retrabalho": {
+    "titulo": "Retrabalho e ajuste nos sistemas",
+    "nota": "Sistema em operação muda: campo novo num formulário, uma regra que passa a ser outra, um ajuste de tela. Em vez de orçar cada um desses — o que custa mais em conversa do que em trabalho —, o acordo traz uma cota mensal.",
+    "cota": 2,
+    "linhas": [
+      {
+        "tipo": "Entra na cota",
+        "oque": "ajuste ou evolução pequena em sistema já entregue — campo novo num formulário, mudança de regra ou de texto, ajuste de layout no painel"
+      },
+      {
+        "tipo": "Não entra e não custa",
+        "oque": "defeito nosso: algo que funcionava e parou, ou que nunca funcionou como foi especificado. Isso é garantia, não retrabalho, e não consome a cota"
+      },
+      {
+        "tipo": "Não cabe na cota",
+        "oque": "módulo novo, tela nova ou integração nova. É projeto, orçado à parte e aprovado antes de começar"
+      }
+    ],
+    "argumento": "A cota é de 2 horas por ciclo e não acumula: o que não for usado num mês não passa para o seguinte. Passando das 2 horas, a hora adicional é de R$ 90, sempre com o aviso antes — nunca há surpresa no fechamento."
+  },
+  "avulsos": {
+    "titulo": "Fora do pacote",
+    "nota": "Tudo aqui continua disponível — a tabela existe para o preço estar combinado antes, não para desencorajar. Os valores são mais altos que os do pacote por um motivo prático: a economia do pacote está em produzir as dez peças de uma vez, a partir de um briefing só. Peça isolada quebra o lote, costuma exigir um formato novo e entra fora da fila.",
+    "itens": [
+      {
+        "nome": "Peça do catálogo pedida fora da expedição",
+        "valor": 60,
+        "unidade": "por peça",
+        "detalhe": "formato que já existe, produzido isolado"
+      },
+      {
+        "nome": "Peça nova, fora do catálogo",
+        "valor": 120,
+        "unidade": "por peça",
+        "detalhe": "formato que ainda não existe e precisa ser criado"
+      },
+      {
+        "nome": "Formulário adicional na mesma expedição",
+        "valor": 80,
+        "unidade": "por formulário",
+        "detalhe": "o primeiro de cada expedição já está no pacote"
+      },
+      {
+        "nome": "Expedição adicional no mesmo ciclo",
+        "valor": 250,
+        "unidade": "por pacote",
+        "detalhe": "o catálogo completo das dez peças, para a segunda expedição do mês"
+      },
+      {
+        "nome": "Hora de desenvolvimento além da cota",
+        "valor": 90,
+        "unidade": "por hora",
+        "detalhe": "aprovada antes de começar, nunca lançada sem aviso"
+      },
+      {
+        "nome": "Urgência — entrega em até 48 horas",
+        "valor": null,
+        "unidade": "+50%",
+        "detalhe": "sobre o valor do item, quando o pedido não cabe no prazo normal"
+      },
+      {
+        "nome": "Peça complexa, logotipo e identidade visual",
+        "valor": null,
+        "unidade": "orçada",
+        "detalhe": "exclusão que já existe no escopo de jun/2026 e não muda"
+      }
+    ]
+  }
+}
