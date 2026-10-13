@@ -22,15 +22,52 @@ from fontTools.ttLib import TTFont
 FONTES = Path(__file__).resolve().parent.parent / "fontes"
 
 
+def por_glifo(fonte, texto, escala, cmap, hmtx, glifos):
+    """Cada caractere como path próprio, com seu avanço — para texto em ARCO.
+
+    O path único de main() serve a texto em linha reta: um `d` só, posicionado uma vez.
+    Em arco cada letra precisa do seu transform (translação + rotação), então cada uma
+    tem de vir separada, com o avanço da fonte para o espaçamento sair correto. O avanço
+    é o da métrica da fonte, não a largura da tinta: usar a tinta faria o espaço entre
+    letras variar com o desenho de cada uma, e "ORIGENS" sairia com buracos.
+    """
+    saida = []
+    for ch in texto:
+        nome = cmap.get(ord(ch))
+        if nome is None:
+            continue
+        caneta = SVGPathPen(glifos, ntos=lambda v: f"{v:.1f}")
+        glifos[nome].draw(TransformPen(caneta, Transform(escala, 0, 0, -escala, 0, 0)))
+        limites = BoundsPen(glifos)
+        glifos[nome].draw(limites)
+        b = limites.bounds
+        saida.append(
+            {
+                "c": ch,
+                "d": caneta.getCommands(),
+                "avanco": round(hmtx[nome][0] * escala, 1),
+                "largura": round((b[2] - b[0]) * escala, 1) if b else 0.0,
+                "altura": round((b[3] - b[1]) * escala, 1) if b else 0.0,
+                "topo": round(-b[3] * escala, 1) if b else 0.0,
+            }
+        )
+    return saida
+
+
 def main() -> None:
     fonte = TTFont(FONTES / sys.argv[1])
     texto = sys.argv[2]
+    glifo_a_glifo = "--glifos" in sys.argv[3:]
 
     upem = fonte["head"].unitsPerEm
     escala = 1000 / upem
     cmap = fonte.getBestCmap()
     hmtx = fonte["hmtx"]
     glifos = fonte.getGlyphSet()
+
+    if glifo_a_glifo:
+        print(json.dumps({"glifos": por_glifo(fonte, texto, escala, cmap, hmtx, glifos)}))
+        return
 
     caneta = SVGPathPen(glifos, ntos=lambda v: f"{v:.1f}")
     x = 0.0
