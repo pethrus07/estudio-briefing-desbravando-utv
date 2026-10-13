@@ -1,0 +1,26 @@
+{
+  "_nota": "Cronograma do dia 2 da Expedição Origens (24/10/2026). Mesma fonte e mesma ressalva do dia 1: a peça geral enviada pelo Gustavo em 13/10, não o dados/expedicao-origens.json defasado.",
+  "_briefing": "O 08h00 Briefing é acréscimo pedido pelo Gustavo em 13/10, igual ao dia 1.",
+  "titulo": "Roteiro pela região de Brotas",
+  "subtitulo": "Saída e volta à pousada, com a trilha do dia pela região.",
+  "local": "Região de Brotas · SP",
+  "agenda": [
+    { "hora": "08h00", "titulo": "Briefing" },
+    { "hora": "08h30", "titulo": "Saída" },
+    { "hora": "12h00/13h", "titulo": "Almoço no Trecho Raiz" },
+    { "hora": "17h30/18h", "titulo": "Chegada prevista à pousada" },
+    {
+      "hora": "19h00",
+      "titulo": "Evento de Encerramento",
+      "tags": ["Jantar", "Chopp", "Drinks"],
+      "extra": "Música ao vivo"
+    }
+  ],
+  "fecho": "80 a 120 km para fechar a Origens.",
+  "data": "24/10",
+  "rotuloDia": "Dia 2 · Brotas",
+  "mesNome": "Outubro",
+  "diaSemana": "Sábado",
+  "dia": 2,
+  "escala": 1
+}

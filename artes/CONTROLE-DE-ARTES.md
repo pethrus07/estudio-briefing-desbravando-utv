@@ -844,3 +844,52 @@ Não são artes, mas ficam para todas as peças futuras:
 - Conversor de texto em curvas — arte de estampa que não depende de fonte instalada.
 - Sistema de render: um comando por peça, conteúdo em JSON. A próxima versão de qualquer peça sai em minutos.
 
+
+---
+
+## Expedição Origens · 23–25/10/2026 — primeiras peças (13/10)
+
+Pedido do Gustavo em 13/10 às 14:57, por WhatsApp: *"cronograma por dia"* e *"adesivo com a
+logo e N°"*, com a instrução *"esse é o cronograma geral, aí só tem que dividir entre os dois
+dias, adicionar briefing as 8:00 nos dois dias"*. Ciclo **26/09→25/10** — régua antiga.
+
+| # | peça | artes | R$ | situação |
+|---|---|---:|---:|---|
+| 1 | **Cronograma por dia — 23/10 (sexta)** | 2 | *20* | stories 1080×1920 + feed 1080×1350 |
+| 2 | **Cronograma por dia — 24/10 (sábado)** | 2 | *20* | idem |
+| 3 | **Adesivo do UTV — Origens** | 2 | *25* | 150 mm Ø + 3 mm de sangria, vetor, preto e branco |
+
+*Valores em itálico são sugestão minha, sem o sim dele.* Critério: o template das três já
+existia (programação veio da série de agosto, adesivo veio de Urubici), então é troca de
+conteúdo — a mesma régua dos R$ 20 por dia da série de agosto, e o adesivo no patamar do
+cordão (R$ 25), que também é peça de template pronto.
+
+**O briefing das 08h00 entrou sem descrição**, de propósito: ele não disse o que o briefing
+cobre, e escrever "alinhamento de roteiro e segurança" seria inventar compromisso operacional.
+
+### Dois defeitos corrigidos no caminho
+
+- **Hora composta colidia com a espinha.** A coluna da hora era fixa em `7.4em`, medida para
+  "08h30"; "13h30/14h" e "17h00/18h" transbordavam por cima do marcador. Virou
+  `minmax(7.4em, max-content)` — piso mantém as peças de agosto **byte a byte** (md5
+  `7eb18ab2…` antes e depois) e a coluna só cresce quando precisa.
+- **Adesivo de duas expedições colidia no nome.** `adesivo-<tema>-<numero>` não tinha a
+  expedição dentro: o 01 de Origens gravou por cima do 01 de Urubici. Agora é
+  `adesivo-<expedicao>-<tema>-<numero>`, e o de Urubici foi regerado. Arquivo de gráfica
+  trocado não dá erro — dá adesivo errado colado no UTV.
+
+### ⚠️ Divergência a confirmar com o Pedro
+
+A peça geral de Origens que o Gustavo mandou **não saiu deste pipeline**:
+
+| | `dados/expedicao-origens.json` (02/09) | a peça em circulação |
+|---|---|---|
+| sexta, trecho | Desbravando → **Brotas** | Desbravando → **São Pedro** |
+| sexta, distância | ≈ 110 km | **85 a 100 km** |
+| segurança | É **obrigatório** | É "**ebrigatório**" (erro de digitação) |
+
+Os cronogramas foram montados pela **peça em circulação**, que é a que está na mão do
+participante. O `expedicao-origens.json` segue defasado até ele confirmar o roteiro.
+
+**Em aberto:** o domingo (25/10) não virou peça — o Gustavo disse "os dois dias", e o domingo
+só tem café da manhã e saída às 08h30.

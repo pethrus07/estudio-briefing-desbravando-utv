@@ -1,0 +1,26 @@
+{
+  "_nota": "Cronograma do dia 1 da Expedição Origens (23/10/2026). Fonte: a peça geral de Origens que o Gustavo mandou em 13/10 às 14:57 — NÃO o dados/expedicao-origens.json, que está defasado (diz 'Brotas' e '≈ 110 km' onde a peça em circulação diz 'São Pedro' e '85 a 100 km'). Divergência levada ao Pedro em 13/10.",
+  "_briefing": "O 08h00 Briefing não vem da peça geral: é acréscimo pedido pelo Gustavo em 13/10 ('adicionar briefing as 8:00 nos dois dias'). Sem descrição, porque ele não disse o que o briefing cobre — inventar texto aqui viraria compromisso operacional que ninguém assumiu.",
+  "titulo": "Desbravando → São Pedro",
+  "subtitulo": "O primeiro dia de trilha, até a chegada em São Pedro.",
+  "local": "São Pedro · SP",
+  "agenda": [
+    { "hora": "08h00", "titulo": "Briefing" },
+    { "hora": "08h30", "titulo": "Saída do Desbravando" },
+    { "hora": "13h30/14h", "titulo": "Almoço no trecho", "texto": "Secret Point." },
+    { "hora": "17h00/18h", "titulo": "Chegada prevista em São Pedro" },
+    {
+      "hora": "19h00",
+      "titulo": "Evento de Chegada",
+      "tags": ["Jantar", "Chopp", "Drinks"],
+      "extra": "Música ao vivo"
+    }
+  ],
+  "fecho": "85 a 100 km separando a gente do primeiro destino.",
+  "data": "23/10",
+  "rotuloDia": "Dia 1 · Saída",
+  "mesNome": "Outubro",
+  "diaSemana": "Sexta-feira",
+  "dia": 1,
+  "escala": 1
+}

@@ -1,0 +1,16 @@
+{
+  "_nota": "Peças da Expedição Origens (23 a 25/10/2026) — adesivo do UTV com a logo e o número, pedido pelo Gustavo em 13/10 ('adesivo com a logo e N°', 'uma ideia de adesivo'). Mesmo template do adesivo da 3ª Expedição Família (Urubici), só com o selo trocado.",
+  "_selo": "O selo monta em três linhas: `edicao` / `publico` + ano em dois blocos / `local`. Em Urubici era '3ª Expedição' / 'Família 20 26' / 'in Urubici SC'. Aqui: 'Expedição' / 'Origens 20 26' / 'Serra do Itaqueri · SP' — o nome que a própria peça geral usa ('by Serra do Itaqueri'), e no padrão da marca em vez do 'in … ' que o cliente escreveu na referência de Urubici. Se ele preferir a forma antiga, é trocar esta linha.",
+  "_periodo": "mostrarPeriodo fica false, como ficou em Urubici depois do ajuste de 18/08: o adesivo vive no UTV, e data no adesivo envelhece a peça.",
+  "edicao": "Expedição",
+  "publico": "Origens",
+  "ano": "2026",
+  "local": "Serra do Itaqueri · SP",
+  "periodo": "23/10 a 25/10",
+  "instagram": "@desbravando_utv",
+  "mostrarPeriodo": false,
+  "adesivo": {
+    "diametroMm": 150,
+    "numero": "01"
+  }
+}
