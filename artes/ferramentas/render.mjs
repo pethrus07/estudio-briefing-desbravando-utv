@@ -33,6 +33,7 @@ import { descritivo } from "../templates/descritivo.mjs";
 import { fechamento } from "../templates/fechamento.mjs";
 import { proposta } from "../templates/proposta.mjs";
 import { acordo } from "../templates/acordo.mjs";
+import { guia } from "../templates/guia.mjs";
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const artes = join(aqui, "..");
@@ -403,6 +404,21 @@ function fazerFechamento() {
   paraPng(pdf, 110, nome);
 }
 
+/** Guia de uso (RYZE) — markdown de um arquivo vira A4 para o cliente. */
+function fazerGuia() {
+  const md = opt("md", null);
+  if (!md) throw new Error("passe --md=<caminho do .md>");
+  const dados = {
+    cliente: opt("cliente", "Desbravando UTV"),
+    titulo: opt("titulo", "Guia de uso"),
+    data: opt("data", new Date().toLocaleDateString("pt-BR")),
+    markdown: readFileSync(md, "utf8"),
+  };
+  const nome = opt("nome", "guia");
+  console.log(`Guia RYZE · ${dados.cliente} · ${md}`);
+  paraPng(escrever(nome, guia(dados)), 110, nome);
+}
+
 /**
  * Acordo de parceria (RYZE) -- o documento que fecha a renegociacao.
  * Aborta igual aos irmaos, e por um motivo mais forte: acordo erra em ESCOPO, e escopo
@@ -530,6 +546,7 @@ const alvos = {
   fechamento: fazerFechamento,
   proposta: fazerProposta,
   acordo: fazerAcordo,
+  guia: fazerGuia,
   cordao: fazerCordao,
   parcerias: fazerParcerias,
   camiseta: fazerCamiseta,
