@@ -914,8 +914,8 @@ origens"*, com o conteúdo colado na mensagem, um emoji por prato.
 
 | # | peça | artes | R$ | situação |
 |---|---|---:|---:|---|
-| 4 | **Cardápio — Dia 1 (sexta 23/10)** | 1 | *25* | feed 1080×1350 · almoço e jantar |
-| 5 | **Cardápio — Dia 2 (sábado 24/10)** | 1 | *25* | feed 1080×1350 · almoço na parrilla e jantar |
+| 4 | **Cardápio — Dia 1 (sexta 23/10)** | 2 | *25* | feed 1080×1350 · **1 rodada de ajuste** |
+| 5 | **Cardápio — Dia 2 (sábado 24/10)** | 2 | *25* | feed 1080×1350 · **1 rodada de ajuste** |
 
 **Fiz quatro antes de fazer duas, e o erro foi meu.** O conteúdo chegou em quatro blocos
 separados por fio, então li como quatro peças. Mas o título escrito no próprio texto é
@@ -952,3 +952,41 @@ véu, e some no PNG. Acusava em TODA peça sem foto. Medidor que grita onde não
 medidor que para de ser lido, e aí o defeito de verdade passa junto.
 
 As duas peças passam com 0 colisões e 0 fora da página, medidas em 1080×1350.
+
+### Rodada de ajuste no mesmo dia: "pouco refinado e usando a logo antiga"
+
+Reprovado pelo Pedro em 16/10. As duas críticas eram justas e eram defeitos diferentes.
+
+**A logo.** O template puxava `marca/logo-desbravando.png`, de 600 px — e o problema nem era
+a resolução: naquele arquivo o "UTV" encosta no "DO". Ampliado, lê como erro de montagem. O
+registro menu passou a embutir `logo-montanha-branco.svg`, a montanha sozinha, em vetor. É a
+mesma marca que ele aprovou horas antes como ícone do site, nunca pixela, e num cardápio o
+nome por extenso não faz falta: a sobrelinha já diz de quem é a peça.
+
+**O refino era de REGISTRO TIPOGRÁFICO, não de capricho.** Eu tinha posto cada prato em Anton
+caixa alta. O guia da marca é explícito: Anton é título, Archivo é corpo. Vinte linhas de
+Anton viram um paredão em que nada lidera, e o fio embaixo de cada uma transforma cardápio em
+planilha. No registro menu o prato volta para Archivo, escrito como se escreve, o fio aparece
+só onde separa refeição, e quem manda na página passa a ser o espaço.
+
+**Quatro defeitos que só o print mostrou**, todos achados olhando e nenhum pelo medidor:
+
+1. Fio solto no meio da lista, antes de "Arroz" e de "Batata frita" — a regra `li.grupo + li`
+   continuava valendo mesmo com a categoria oculta. Regra escondida continua valendo.
+2. O rótulo do slot de foto apareceu de fininho no meio da peça: ele vive atrás do véu, e no
+   registro menu sobrou área escura sem texto por cima.
+3. Um terço da peça vazio — o limite de condensação era o do registro antigo. O menu cabe
+   quase o dobro, e eu estava condensando o que já cabia.
+4. O rodapé encostando no último prato, com a lista no limite. O medidor não acusa, porque
+   não chega a haver colisão. Folga que depende do conteúdo não é folga, é sorte.
+
+E a lista passou a FLUTUAR no espaço livre, com a folga dividida em cima e embaixo: o dia 1
+tem 13 linhas e o dia 2 tem 20, e ancoradas no topo as duas pareciam de pesos diferentes lado
+a lado no carrossel.
+
+**⚠️ Acento grave dentro de comentário CSS, pela sexta vez nesta base.** Escrevi um comentário
+citando o seletor entre crases e fechei o template literal que carrega o CSS. O render morreu
+com `SyntaxError`, e como eu tinha mandado a saída para `/dev/null` o PNG antigo ficou no
+lugar e eu olhei duas vezes para uma peça que não tinha sido regerada. **Duas lições: nunca
+acento grave em comentário dentro de template literal, e nunca engolir a saída do render.**
+

@@ -10,12 +10,24 @@
  * referência aprovada.
  */
 
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const aqui = dirname(fileURLToPath(import.meta.url));
+
 const esc = (s) =>
   String(s ?? "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+
+/** A montanha embutida no HTML, não ligada por `src`: vetor que nunca pixela. */
+const montanhaSvg = () =>
+  readFileSync(join(aqui, "..", "marca", "logo-montanha-branco.svg"), "utf8")
+    .replace(/<\?xml[^>]*\?>/g, "")
+    .replace(/width="[^"]*"|height="[^"]*"/g, "");
 
 /**
  * `k` é a escala tipográfica. Nos formatos de tela ela vem da altura; nos de mesa,
@@ -86,8 +98,28 @@ export function evento(dados, opcoes = {}) {
      formato e o PNG sai cortado sem nenhum erro aparecer. `d` encolhe tipografia e respiro
      proporcionalmente, com piso para não virar letra miúda. O número 11 é a lista que cabe
      folgada em 1080×1350 no tamanho cheio — medido, não estimado. */
+  const menuEstilo = dados.estilo === "menu";
   const linhasLista = (dados.itens ?? []).length;
-  const d = linhasLista <= 11 ? 1 : Math.max(0.58, 11 / linhasLista);
+  /* O limite depende do REGISTRO, não é um número do template. O registro menu usa Archivo
+     num corpo bem menor que o Anton caixa alta e não tem fio por linha: cabe quase o dobro.
+     Com o limite de 11 valendo para os dois, o cardápio do dia 2 saiu condensado sem
+     precisar e deixou um terço da peça vazio — condensar o que já cabia. */
+  const limite = menuEstilo ? 18 : 11;
+  const d = linhasLista <= limite ? 1 : Math.max(0.58, limite / linhasLista);
+
+  /* REGISTRO MENU — entrou em 16/10/2026, depois de o Pedro reprovar o cardápio da Origens
+     por "pouco refinado".
+
+     O defeito era de registro tipográfico, não de capricho: eu tinha posto CADA PRATO em
+     Anton caixa alta. O guia da marca é explícito — Anton é TÍTULO, Archivo é corpo. Vinte
+     linhas de Anton viram um paredão de caixa alta em que nada lidera, e o fio embaixo de
+     cada uma transforma cardápio em planilha.
+
+     Aqui o prato volta para Archivo, escrito como se escreve, e o fio só aparece onde
+     separa refeição. Quem manda na página passa a ser o espaço, não o traço — que é o que
+     faz um cardápio parecer cardápio. A escada de opacidade é a do guia: .82 no texto
+     secundário, .55 no rótulo, .13 no divisor. */
+  const menu = menuEstilo;
 
   const linhas = (dados.linhas ?? [])
     .map(
@@ -231,6 +263,65 @@ export function evento(dados, opcoes = {}) {
   }
   .itens li.secao + li, .itens li.secao + li.grupo + li { border-top: 0; }
 
+  ${
+    menu
+      ? `
+  /* ---- registro MENU ---- */
+  .marca-vetor { width: ${Math.round(132 * k)}px; margin: 0 auto; }
+  .marca-vetor svg { width: 100%; height: auto; display: block; fill: #fff; }
+
+  /* A regra "li.grupo + li" lá de cima devolvia um fio no primeiro item depois da
+     categoria, e como a categoria está oculta no menu ele aparecia solto no meio da lista,
+     antes de "Arroz" e de "Batata frita". Regra escondida continua valendo: é preciso
+     desligar, não basta esconder quem a dispara.
+     SEM ACENTO GRAVE NESTE COMENTÁRIO: ele fecha o template literal que carrega o CSS, e
+     foi assim que eu quebrei este arquivo agora há pouco. É a sexta vez nesta base. */
+  .itens li, .itens li:first-child,
+  .itens li.grupo + li, .itens li.secao + li, .itens li.secao + li.grupo + li {
+    border: 0; padding: ${Math.round(12 * k * d)}px 0;
+  }
+  /* O rótulo do slot de foto vive atrás do véu. No registro menu sobra área escura sem
+     texto por cima, e ele passou a aparecer de fininho no meio da peça. */
+  .slot-foto span { display: none; }
+  .item-nome {
+    font-family: "Archivo"; font-weight: 400; text-transform: none;
+    font-size: ${Math.round(40 * k * d)}px; line-height: 1.22;
+    letter-spacing: 0; color: rgba(255,255,255,.92);
+  }
+  /* Rótulo some do registro menu: com o fio e o respiro, "Pratos principais" vira ruído.
+     O que a pessoa precisa saber é a refeição e o que tem nela. O acompanhamento se
+     distingue por ficar depois do fio curto, não por um rótulo em cima. */
+  .itens li.grupo { display: none; }
+  .itens li.secao {
+    border-top: 0; margin-top: ${Math.round(40 * k * d)}px;
+    padding: 0 0 ${Math.round(16 * k * d)}px;
+  }
+  .itens li:first-child.secao { margin-top: ${Math.round(8 * k)}px; padding-top: 0; }
+  .itens li.secao span {
+    font-family: "Anton"; font-size: ${Math.round(40 * k)}px;
+    letter-spacing: ${Math.round(4 * k)}px; color: #fff;
+  }
+  /* O fio é do guia: 1,5px em .13, e um por refeição — não um por prato. */
+  .itens li.secao::after {
+    content: ""; display: block; width: ${Math.round(74 * k)}px;
+    height: 1.5px; background: rgba(255,255,255,.4);
+    margin: ${Math.round(14 * k * d)}px auto 0;
+  }
+  .fio { display: none; }
+  .titulo { letter-spacing: ${Math.round(-1 * k)}px; }
+  .sobrelinha { color: rgba(255,255,255,.55); }
+  /* Piso de respiro entre o último prato e o rodapé. Sem ele, com a lista no limite, a
+     data encosta no prato: o medidor não acusa, porque não chega a haver colisão, e o
+     olho acusa na hora. Folga que depende do conteúdo não é folga, é sorte. */
+  .linhas { margin-top: ${Math.round(46 * k)}px; }
+  /* A lista FLUTUA no espaço que sobra, em vez de empilhar a partir do título. O dia 1 tem
+     13 linhas e o dia 2 tem 20; ancorada no topo, a primeira sobrava um terço de peça vazia
+     embaixo e as duas pareciam de pesos diferentes lado a lado no carrossel. Com a folga
+     dividida em cima e embaixo, as duas lêem como a mesma peça. */
+  .itens { margin-top: auto; margin-bottom: auto; }`
+      : ""
+  }
+
   /* recado do chef: fecha a lista sem competir com os nomes dos sabores */
   .nota {
     margin-top: ${Math.round(30 * k)}px;
@@ -270,7 +361,17 @@ export function evento(dados, opcoes = {}) {
     <div class="canto bl"></div><div class="canto br"></div>
 
     <div class="conteudo">
-      <img class="marca" src="../marca/logo-desbravando.png" alt="Desbravando UTV">
+      ${
+        menu
+          ? /* MONTANHA EM VETOR, não o lockup. O `logo-desbravando.png` tem 600px de largura
+               e, pior que a resolução, traz o "UTV" ENCOSTADO no "DO" — ampliado, lê como
+               defeito de montagem, e foi o que o Pedro chamou de "logo antiga" em 16/10/2026.
+               A montanha sozinha é a mesma marca que ele aprovou hoje como ícone do site:
+               vetor, nunca pixela, e numa peça de cardápio não precisa do nome por extenso,
+               que a sobrelinha já diz. */
+            `<div class="marca-vetor">${montanhaSvg()}</div>`
+          : `<img class="marca" src="../marca/logo-desbravando.png" alt="Desbravando UTV">`
+      }
       <p class="sobrelinha">${esc(dados.sobrelinha)}</p>
 
       <div class="titulo-bloco">
