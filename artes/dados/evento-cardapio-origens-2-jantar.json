@@ -1,0 +1,45 @@
+{
+  "_nota": "Cardápio da Expedição Origens, dia 2 (sábado 24/10), jantar. Conteúdo veio do Gustavo por mensagem em 16/10/2026, com emoji por item; emoji não entra em peça P&B, então saiu. As palavras são as dele.",
+  "_pendencia": "Sem foto de fundo. Não existe foto da comida desta expedição no acervo, e a única de cardápio que temos é a pizza de agosto, que não serve aqui. Sem foto a peça sai em preto, que é identidade e não erro.",
+  "sobrelinha": "EXPEDIÇÃO ORIGENS · SÁBADO 24/10",
+  "titulo": "CARDÁPIO<br>DIA 2",
+  "subtitulo": "Jantar",
+  "itens": [
+    {
+      "grupo": "Pratos principais"
+    },
+    {
+      "nome": "Bife na brasa",
+      "detalhe": null
+    },
+    {
+      "nome": "Hambúrguer",
+      "detalhe": null
+    },
+    {
+      "nome": "Macarrão alho e óleo",
+      "detalhe": null
+    },
+    {
+      "nome": "Arroz branco",
+      "detalhe": null
+    },
+    {
+      "grupo": "Acompanhamentos"
+    },
+    {
+      "nome": "Batata frita",
+      "detalhe": null
+    },
+    {
+      "nome": "Mix de folhas",
+      "detalhe": null
+    }
+  ],
+  "linhas": [
+    {
+      "icone": "hora",
+      "texto": "Sábado · 24 out · evento, 19h00"
+    }
+  ]
+}

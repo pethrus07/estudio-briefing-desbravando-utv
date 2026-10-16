@@ -8,7 +8,7 @@ ou proporção conta separado). **Rodada** = ciclo de ajuste pedido depois de a 
 ter sido entregue. **Documento técnico** = folha de especificação/mapa que acompanha a
 arte, sem ser arte.
 
-Última atualização: **26/08/2026** (fim do dia).
+Última atualização: **16/10/2026** (cardápio da Origens).
 
 ---
 
@@ -905,3 +905,40 @@ participante. O `expedicao-origens.json` segue defasado até ele confirmar o rot
 
 **Em aberto:** o domingo (25/10) não virou peça — o Gustavo disse "os dois dias", e o domingo
 só tem café da manhã e saída às 08h30.
+
+
+### Cardápio da expedição · 4 peças (16/10)
+
+Pedido do Gustavo em 16/10 por WhatsApp: *"consegue fazer um cardápio por favor da expedição
+origens"*, com o conteúdo das quatro refeições colado na mensagem, um emoji por prato.
+
+| # | peça | artes | R$ | situação |
+|---|---|---:|---:|---|
+| 4 | **Cardápio — Dia 1, almoço** | 1 | *20* | feed 1080×1350 |
+| 5 | **Cardápio — Dia 1, jantar** | 1 | *20* | feed 1080×1350 |
+| 6 | **Cardápio — Dia 2, almoço (parrilla)** | 1 | *20* | feed 1080×1350 |
+| 7 | **Cardápio — Dia 2, jantar** | 1 | *20* | feed 1080×1350 |
+
+Quatro peças e não uma: o conteúdo chegou dividido em quatro blocos pelo próprio cliente, e
+vira carrossel de quatro na publicação. Valor em itálico é sugestão minha, sem o sim dele.
+
+**Emoji saiu.** Chegou um por prato. A identidade é P&B estrita e emoji é colorido por
+natureza; numa peça em que a única cor viria da fotografia, ele fura o registro inteiro.
+
+**O template ganhou seção.** `evento.mjs` desenhava lista plana. Um item com `grupo` no lugar
+de `nome` agora vira cabeçalho — sem isso, "Pratos principais" e "Acompanhamentos" somem e a
+peça passa a dizer que batata frita e bife ancho têm o mesmo peso. Cardápio sem `grupo` sai
+igual ao de agosto.
+
+**Sem foto de fundo.** Não existe foto da comida desta expedição no acervo, e a única de
+cardápio é a pizza de agosto. Em preto a peça é identidade; com a pizza seria mentira.
+
+**Uma leitura minha, a confirmar:** no almoço do Dia 2 ele não escreveu os dois rótulos, mandou
+a lista da brasa, uma linha em branco, e depois arroz e mix de folhas. Nas outras três
+refeições ele separou com "Acompanhamentos", então li a linha em branco como a mesma divisão.
+"Da parrilla" é palavra minha, tirada do título que ele deu à refeição.
+
+**Defeito corrigido no caminho, no medidor e não na peça.** `medir-arte.mjs` acusava colisão
+entre o rótulo do slot de foto e um prato. O rótulo é andaime: mora dentro do fundo, atrás do
+véu, e some no PNG. Acusava em TODA peça sem foto. Medidor que grita onde não há defeito é
+medidor que para de ser lido, e aí o defeito de verdade passa junto.
