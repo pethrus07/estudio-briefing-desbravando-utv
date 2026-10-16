@@ -907,38 +907,48 @@ participante. O `expedicao-origens.json` segue defasado até ele confirmar o rot
 só tem café da manhã e saída às 08h30.
 
 
-### Cardápio da expedição · 4 peças (16/10)
+### Cardápio da expedição · 2 peças (16/10)
 
 Pedido do Gustavo em 16/10 por WhatsApp: *"consegue fazer um cardápio por favor da expedição
-origens"*, com o conteúdo das quatro refeições colado na mensagem, um emoji por prato.
+origens"*, com o conteúdo colado na mensagem, um emoji por prato.
 
 | # | peça | artes | R$ | situação |
 |---|---|---:|---:|---|
-| 4 | **Cardápio — Dia 1, almoço** | 1 | *20* | feed 1080×1350 |
-| 5 | **Cardápio — Dia 1, jantar** | 1 | *20* | feed 1080×1350 |
-| 6 | **Cardápio — Dia 2, almoço (parrilla)** | 1 | *20* | feed 1080×1350 |
-| 7 | **Cardápio — Dia 2, jantar** | 1 | *20* | feed 1080×1350 |
+| 4 | **Cardápio — Dia 1 (sexta 23/10)** | 1 | *25* | feed 1080×1350 · almoço e jantar |
+| 5 | **Cardápio — Dia 2 (sábado 24/10)** | 1 | *25* | feed 1080×1350 · almoço na parrilla e jantar |
 
-Quatro peças e não uma: o conteúdo chegou dividido em quatro blocos pelo próprio cliente, e
-vira carrossel de quatro na publicação. Valor em itálico é sugestão minha, sem o sim dele.
+**Fiz quatro antes de fazer duas, e o erro foi meu.** O conteúdo chegou em quatro blocos
+separados por fio, então li como quatro peças. Mas o título escrito no próprio texto é
+"CARDÁPIO — DIA 1" nos dois primeiros blocos e "CARDÁPIO — DIA 2" nos dois últimos: o cliente
+escreveu o agrupamento e eu segui o separador em vez do que estava escrito. **O que o cliente
+dá de nome vale mais que o que ele usa de pontuação.**
 
-**Emoji saiu.** Chegou um por prato. A identidade é P&B estrita e emoji é colorido por
-natureza; numa peça em que a única cor viria da fotografia, ele fura o registro inteiro.
+**Emoji saiu.** A identidade é P&B estrita e emoji é colorido por natureza; numa peça em que a
+única cor viria da fotografia, ele fura o registro inteiro.
 
-**O template ganhou seção.** `evento.mjs` desenhava lista plana. Um item com `grupo` no lugar
-de `nome` agora vira cabeçalho — sem isso, "Pratos principais" e "Acompanhamentos" somem e a
-peça passa a dizer que batata frita e bife ancho têm o mesmo peso. Cardápio sem `grupo` sai
-igual ao de agosto.
+**O template ganhou dois níveis e condensação.** `evento.mjs` desenhava lista plana:
+
+- `{ "secao": "Almoço" }` divide a refeição, com fio forte;
+- `{ "grupo": "Acompanhamentos" }` é a categoria, em rótulo pequeno;
+- a lista encolhe sozinha acima de 11 linhas, porque o dia 2 tem 20 e, no tamanho cheio,
+  o texto desceria para fora do formato e o PNG sairia cortado sem erro nenhum aparecer.
+
+Cardápio sem `secao` nem `grupo` sai igual ao de agosto.
+
+**A refeição passou a ser medida em relação ao prato (1,22×), não em tamanho fixo.** Com a
+lista condensada o prato encolhe, e o tamanho fixo empatava: no dia 2, "ALMOÇO · PARRILLA"
+saiu do tamanho de "CHORIPÁN" e a refeição parou de liderar a leitura.
 
 **Sem foto de fundo.** Não existe foto da comida desta expedição no acervo, e a única de
 cardápio é a pizza de agosto. Em preto a peça é identidade; com a pizza seria mentira.
 
-**Uma leitura minha, a confirmar:** no almoço do Dia 2 ele não escreveu os dois rótulos, mandou
-a lista da brasa, uma linha em branco, e depois arroz e mix de folhas. Nas outras três
-refeições ele separou com "Acompanhamentos", então li a linha em branco como a mesma divisão.
-"Da parrilla" é palavra minha, tirada do título que ele deu à refeição.
+**Uma leitura minha, a confirmar:** no almoço do Dia 2 ele não escreveu "Acompanhamentos",
+mandou a lista da brasa, uma linha em branco, e depois arroz e mix de folhas. Nas outras
+refeições ele separou assim, então li a linha em branco como a mesma divisão.
 
 **Defeito corrigido no caminho, no medidor e não na peça.** `medir-arte.mjs` acusava colisão
 entre o rótulo do slot de foto e um prato. O rótulo é andaime: mora dentro do fundo, atrás do
 véu, e some no PNG. Acusava em TODA peça sem foto. Medidor que grita onde não há defeito é
 medidor que para de ser lido, e aí o defeito de verdade passa junto.
+
+As duas peças passam com 0 colisões e 0 fora da página, medidas em 1080×1350.

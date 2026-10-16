@@ -1,0 +1,76 @@
+{
+  "_nota": "Cardápio da Expedição Origens, dia 1 (sexta 23/10). UMA peça por dia, com almoço e jantar dentro, como o Gustavo escreveu. Conteúdo dele, mandado por mensagem em 16/10/2026 com um emoji por prato; emoji não entra em peça P&B, então saiu. As palavras são as dele.",
+  "_pendencia": "Sem foto de fundo. Não existe foto da comida desta expedição no acervo, e a única de cardápio é a pizza de agosto, que não serve aqui. Em preto a peça é identidade.",
+  "sobrelinha": "EXPEDIÇÃO ORIGENS · SEXTA 23/10",
+  "titulo": "CARDÁPIO<br>DIA 1",
+  "itens": [
+    {
+      "secao": "Almoço"
+    },
+    {
+      "grupo": "Pratos principais"
+    },
+    {
+      "nome": "Arroz carreteiro",
+      "detalhe": null
+    },
+    {
+      "nome": "Arroz branco",
+      "detalhe": null
+    },
+    {
+      "nome": "Bife grelhado",
+      "detalhe": null
+    },
+    {
+      "grupo": "Acompanhamentos"
+    },
+    {
+      "nome": "Couve na manteiga",
+      "detalhe": null
+    },
+    {
+      "nome": "Vinagrete tradicional",
+      "detalhe": null
+    },
+    {
+      "secao": "Jantar"
+    },
+    {
+      "grupo": "Pratos principais"
+    },
+    {
+      "nome": "Bife grelhado",
+      "detalhe": null
+    },
+    {
+      "nome": "Peixe grelhado",
+      "detalhe": null
+    },
+    {
+      "nome": "Arroz branco",
+      "detalhe": null
+    },
+    {
+      "nome": "Rondelli de quatro queijos",
+      "detalhe": null
+    },
+    {
+      "grupo": "Acompanhamentos"
+    },
+    {
+      "nome": "Mix de folhas",
+      "detalhe": null
+    },
+    {
+      "nome": "Batata frita",
+      "detalhe": null
+    }
+  ],
+  "linhas": [
+    {
+      "icone": "hora",
+      "texto": "Sexta · 23 out"
+    }
+  ]
+}

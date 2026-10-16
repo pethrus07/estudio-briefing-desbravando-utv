@@ -1,0 +1,89 @@
+{
+  "_nota": "Cardápio da Expedição Origens, dia 2 (sábado 24/10). UMA peça por dia, com almoço e jantar dentro, como o Gustavo escreveu. Conteúdo dele, mandado por mensagem em 16/10/2026 com um emoji por prato; emoji não entra em peça P&B, então saiu. As palavras são as dele. No almoço do dia 2 ele não escreveu 'Acompanhamentos': mandou a lista da brasa, uma linha em branco, e depois arroz e mix de folhas. Nas outras refeições ele separou assim, então li a linha em branco como a mesma divisão.",
+  "_pendencia": "Sem foto de fundo. Não existe foto da comida desta expedição no acervo, e a única de cardápio é a pizza de agosto, que não serve aqui. Em preto a peça é identidade.",
+  "sobrelinha": "EXPEDIÇÃO ORIGENS · SÁBADO 24/10",
+  "titulo": "CARDÁPIO<br>DIA 2",
+  "itens": [
+    {
+      "secao": "Almoço · Parrilla"
+    },
+    {
+      "nome": "Bife ancho / bife de chorizo",
+      "detalhe": null
+    },
+    {
+      "nome": "Bife ancho com gorgonzola",
+      "detalhe": null
+    },
+    {
+      "nome": "Linguiça fina de pernil com queijo",
+      "detalhe": null
+    },
+    {
+      "nome": "Filé de coxa na mostarda",
+      "detalhe": null
+    },
+    {
+      "nome": "Choripán",
+      "detalhe": null
+    },
+    {
+      "nome": "Medalhão de mandioca",
+      "detalhe": null
+    },
+    {
+      "nome": "Abacaxi grelhado",
+      "detalhe": null
+    },
+    {
+      "grupo": "Acompanhamentos"
+    },
+    {
+      "nome": "Arroz",
+      "detalhe": null
+    },
+    {
+      "nome": "Mix de folhas",
+      "detalhe": null
+    },
+    {
+      "secao": "Jantar"
+    },
+    {
+      "grupo": "Pratos principais"
+    },
+    {
+      "nome": "Bife na brasa",
+      "detalhe": null
+    },
+    {
+      "nome": "Hambúrguer",
+      "detalhe": null
+    },
+    {
+      "nome": "Macarrão alho e óleo",
+      "detalhe": null
+    },
+    {
+      "nome": "Arroz branco",
+      "detalhe": null
+    },
+    {
+      "grupo": "Acompanhamentos"
+    },
+    {
+      "nome": "Batata frita",
+      "detalhe": null
+    },
+    {
+      "nome": "Mix de folhas",
+      "detalhe": null
+    }
+  ],
+  "linhas": [
+    {
+      "icone": "hora",
+      "texto": "Sábado · 24 out"
+    }
+  ]
+}
