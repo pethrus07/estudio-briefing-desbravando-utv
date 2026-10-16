@@ -55,23 +55,39 @@ export function evento(dados, opcoes = {}) {
 
   if (!dados.fundo?.arquivo) pendencias.push(`foto de fundo · ${dados.fundo?.descricao ?? "sem descrição"}`);
 
-  /* Um item com `grupo` no lugar de `nome` é CABEÇALHO de seção, não prato. Entrou em
-     16/10/2026 porque o cardápio da Origens chegou dividido em "Pratos principais" e
-     "Acompanhamentos", e sem a divisão o acompanhamento aparece do mesmo tamanho do prato —
-     a peça passa a dizer que batata frita e bife ancho têm o mesmo peso.
-     Compatível com o que já existe: cardápio sem `grupo` nenhum sai igual ao de agosto. */
+  /* Três tipos de linha na lista, e não um só. Entrou em 16/10/2026 com o cardápio da
+     Origens, que é UMA peça por dia com as duas refeições dentro:
+
+       { "secao": "Almoço" }            refeição — divisor forte
+       { "grupo": "Acompanhamentos" }   categoria — rótulo pequeno
+       { "nome": "Bife grelhado" }      prato
+
+     Sem os dois níveis, batata frita e bife ancho saem do mesmo tamanho, e almoço e jantar
+     viram uma lista só de quinze pratos sem ninguém saber onde um acaba.
+     Compatível: cardápio sem `secao` nem `grupo` sai igual ao de agosto. */
   const itens = (dados.itens ?? [])
     .map((i) =>
-      i.grupo
+      i.secao
         ? `
+      <li class="secao"><span>${esc(i.secao)}</span></li>`
+        : i.grupo
+          ? `
       <li class="grupo"><span>${esc(i.grupo)}</span></li>`
-        : `
+          : `
       <li>
         <span class="item-nome">${esc(i.nome)}</span>
         ${i.detalhe ? `<span class="item-detalhe">${esc(i.detalhe)}</span>` : ""}
       </li>`
     )
     .join("");
+
+  /* CONDENSAÇÃO. O corpo da peça é fixo: o que cresce é a lista. Com 7 linhas sobra espaço;
+     com 21, que é o dia de parrilla com as duas refeições, o texto desce para fora do
+     formato e o PNG sai cortado sem nenhum erro aparecer. `d` encolhe tipografia e respiro
+     proporcionalmente, com piso para não virar letra miúda. O número 11 é a lista que cabe
+     folgada em 1080×1350 no tamanho cheio — medido, não estimado. */
+  const linhasLista = (dados.itens ?? []).length;
+  const d = linhasLista <= 11 ? 1 : Math.max(0.58, 11 / linhasLista);
 
   const linhas = (dados.linhas ?? [])
     .map(
@@ -167,25 +183,25 @@ export function evento(dados, opcoes = {}) {
   }
 
   /* lista principal (os sabores) */
-  .itens { list-style: none; margin-top: ${Math.round(40 * k)}px; width: 100%; }
+  .itens { list-style: none; margin-top: ${Math.round(40 * k * d)}px; width: 100%; }
   .itens li {
-    padding: ${Math.round(19 * k)}px 0;
+    padding: ${Math.round(19 * k * d)}px 0;
     border-bottom: 1px solid rgba(255,255,255,.14);
   }
   .itens li:first-child { border-top: 1px solid rgba(255,255,255,.14); }
   .item-nome {
     display: block; font-family: "Anton"; font-weight: 400;
-    font-size: ${Math.round(58 * k)}px; line-height: 1.06;
+    font-size: ${Math.round(58 * k * d)}px; line-height: 1.06;
     text-transform: uppercase; color: var(--branco); letter-spacing: .5px;
   }
   .item-detalhe {
-    display: block; margin-top: ${Math.round(7 * k)}px;
-    font-size: ${Math.round(25 * k)}px; color: rgba(255,255,255,.74);
+    display: block; margin-top: ${Math.round(7 * k * d)}px;
+    font-size: ${Math.round(25 * k * d)}px; color: rgba(255,255,255,.74);
   }
-  /* Cabeçalho de seção: mesma régua da sobrelinha, para ler como rótulo e não como prato.
+  /* Categoria: mesma régua da sobrelinha, para ler como rótulo e não como prato.
      Sem o fio de baixo, senão vira linha de lista; o fio do item seguinte já separa. */
   .itens li.grupo {
-    padding: ${Math.round(26 * k)}px 0 ${Math.round(9 * k)}px;
+    padding: ${Math.round(26 * k * d)}px 0 ${Math.round(9 * k * d)}px;
     border-bottom: 0;
   }
   .itens li.grupo span {
@@ -193,6 +209,27 @@ export function evento(dados, opcoes = {}) {
     text-transform: uppercase; color: rgba(255,255,255,.55);
   }
   .itens li.grupo + li { border-top: 1px solid rgba(255,255,255,.14); }
+
+  /* Refeição: divisor forte. Precisa vencer a categoria sem competir com o prato, por isso
+     é branco cheio e com fio em cima — é ele que diz onde o almoço acaba e o jantar começa. */
+  .itens li.secao {
+    padding: ${Math.round(34 * k * d)}px 0 ${Math.round(12 * k * d)}px;
+    border-bottom: 0; border-top: 2px solid rgba(255,255,255,.5);
+    margin-top: ${Math.round(10 * k * d)}px;
+  }
+  /* Primeira linha da lista: o fio do título já separa, e o da seção em cima dele faz
+     listra dupla. */
+  .itens li:first-child.secao { margin-top: 0; border-top: 0; padding-top: ${Math.round(14 * k * d)}px; }
+  .itens li.secao span {
+    font-family: "Anton"; font-weight: 400;
+    /* Medida RELATIVA ao prato, não fixa. Com a lista condensada o prato encolhe e um
+       tamanho fixo de refeição passa a empatar com ele — foi o que aconteceu no dia 2:
+       "ALMOÇO · PARRILLA" saiu do tamanho de "CHORIPÁN" e a refeição parou de liderar a
+       leitura. Em 1,22× ela vence o prato em qualquer densidade. */
+    font-size: ${Math.round(58 * k * d * 1.22)}px; letter-spacing: ${Math.round(2 * k)}px;
+    text-transform: uppercase; color: var(--branco);
+  }
+  .itens li.secao + li, .itens li.secao + li.grupo + li { border-top: 0; }
 
   /* recado do chef: fecha a lista sem competir com os nomes dos sabores */
   .nota {
