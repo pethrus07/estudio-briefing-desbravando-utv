@@ -55,9 +55,17 @@ export function evento(dados, opcoes = {}) {
 
   if (!dados.fundo?.arquivo) pendencias.push(`foto de fundo · ${dados.fundo?.descricao ?? "sem descrição"}`);
 
+  /* Um item com `grupo` no lugar de `nome` é CABEÇALHO de seção, não prato. Entrou em
+     16/10/2026 porque o cardápio da Origens chegou dividido em "Pratos principais" e
+     "Acompanhamentos", e sem a divisão o acompanhamento aparece do mesmo tamanho do prato —
+     a peça passa a dizer que batata frita e bife ancho têm o mesmo peso.
+     Compatível com o que já existe: cardápio sem `grupo` nenhum sai igual ao de agosto. */
   const itens = (dados.itens ?? [])
-    .map(
-      (i) => `
+    .map((i) =>
+      i.grupo
+        ? `
+      <li class="grupo"><span>${esc(i.grupo)}</span></li>`
+        : `
       <li>
         <span class="item-nome">${esc(i.nome)}</span>
         ${i.detalhe ? `<span class="item-detalhe">${esc(i.detalhe)}</span>` : ""}
@@ -174,6 +182,17 @@ export function evento(dados, opcoes = {}) {
     display: block; margin-top: ${Math.round(7 * k)}px;
     font-size: ${Math.round(25 * k)}px; color: rgba(255,255,255,.74);
   }
+  /* Cabeçalho de seção: mesma régua da sobrelinha, para ler como rótulo e não como prato.
+     Sem o fio de baixo, senão vira linha de lista; o fio do item seguinte já separa. */
+  .itens li.grupo {
+    padding: ${Math.round(26 * k)}px 0 ${Math.round(9 * k)}px;
+    border-bottom: 0;
+  }
+  .itens li.grupo span {
+    font-size: ${Math.round(23 * k)}px; letter-spacing: ${Math.round(3 * k)}px;
+    text-transform: uppercase; color: rgba(255,255,255,.55);
+  }
+  .itens li.grupo + li { border-top: 1px solid rgba(255,255,255,.14); }
 
   /* recado do chef: fecha a lista sem competir com os nomes dos sabores */
   .nota {

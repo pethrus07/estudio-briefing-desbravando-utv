@@ -93,6 +93,12 @@ const bruto = await aval(`JSON.stringify((function(){
     if (!t.nodeValue.trim()) continue;
     var cs = getComputedStyle(t.parentElement);
     if (cs.visibility === "hidden" || cs.display === "none") continue;
+    /* O rótulo do slot de foto é ANDAIME, não arte: fica dentro do fundo, atrás do véu e de
+       todo o conteúdo, e some no PNG. Geometricamente ele cruza o miolo da peça, então o
+       medidor acusava colisão em TODA peça sem foto — em 16/10/2026 persegui uma dessas no
+       cardápio da Origens. Medidor que grita onde não há defeito é medidor que para de ser
+       lido, e aí o defeito de verdade passa junto. */
+    if (t.parentElement.closest(".slot-foto")) continue;
     var b = inkDe(t);
     if (b) caixas = caixas.concat(b.filter(function(c){ return c.w > 0 && c.h > 0; }));
   }
