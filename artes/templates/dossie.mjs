@@ -64,6 +64,13 @@ export function dossie(dados) {
 
   const pag = (classe, dentro) => `<section class="pagina ${classe}">${dentro}</section>`;
 
+  /* O Can-Am entra só na capa e no encerramento, canto inferior direito, e SEMPRE com a
+     label acima — a régua é explícita nos dois pontos. Sem a label vira logo solto. */
+  const patrocinio = `<div class="patrocinio">
+       <p class="sobrelinha mini">PATROCÍNIO OFICIAL</p>
+       <img src="../marca/can-am-branco.png" alt="Can-Am">
+     </div>`;
+
   /* ---- 1 · capa ---------------------------------------------------- */
   const capa = pag(
     "capa",
@@ -75,7 +82,8 @@ export function dossie(dados) {
        <h1 class="titulo hero">${esc(dados.titulo)}</h1>
        <p class="linha-regiao">${esc(dados.subtitulo)}${dados.regiao ? " · " + esc(dados.regiao) : ""}</p>
        <p class="sobrelinha destaque">${sobre([dados.duracao, dados.destaques].filter(Boolean).join(" · "))}</p>
-     </div>`
+     </div>
+     ${patrocinio}`
   );
 
   /* ---- 2 · quem somos ---------------------------------------------- */
@@ -198,7 +206,8 @@ export function dossie(dados) {
        <p class="sobrelinha destaque">${sobre(`EXPEDIÇÃO ${dados.titulo} · ${dados.subtitulo}`)}</p>
        <p class="corpo menor">Reservas &amp; Info · Fale com a equipe Desbravando</p>
        ${marca}
-     </div>`
+     </div>
+     ${patrocinio}`
   );
 
   const corpo = [capa, quemSomos, aExpedicao, ...dias, foraDoVolante, padrao, hosp, pacote, fecho].join("\n");
@@ -211,17 +220,17 @@ export function dossie(dados) {
 <link rel="stylesheet" href="../identidade.css">
 <style>
   @page { size: ${P / 96}in ${A / 96}in; margin: 0; }
-  html, body { margin: 0; padding: 0; background: #0d0d0d; }
+  html, body { margin: 0; padding: 0; background: #000; }
 
   .pagina {
     position: relative; width: ${P}px; height: ${A}px;
-    background: var(--preto); color: #fff; padding: 96px 120px;
+    background: #000; color: #fff; padding: 96px 120px;
     overflow: hidden; page-break-after: always;
     display: flex; gap: 72px; align-items: center;
   }
   .pagina:last-child { page-break-after: auto; }
 
-  .marca-vetor { width: 128px; margin-bottom: 30px; }
+  .marca-vetor { width: 120px; margin: 0 0 30px; }
   .marca-vetor svg { width: 100%; height: auto; display: block; fill: #fff; }
   .fecho .marca-vetor { margin: 40px auto 0; }
   .sobrelinha.marca-nome { letter-spacing: 8px; color: rgba(255,255,255,.72); }
@@ -236,7 +245,7 @@ export function dossie(dados) {
   .titulo.hotel-nome { font-size: 34px; margin: 8px 0 6px; }
 
   .sobrelinha {
-    font-family: "Archivo"; font-size: 19px; letter-spacing: 6px;
+    font-family: "Archivo"; font-weight: 600; font-size: 20px; letter-spacing: 6px;
     color: rgba(255,255,255,.55); margin: 0 0 22px; text-transform: uppercase;
   }
   .sobrelinha.mini { font-size: 16px; letter-spacing: 4px; margin-bottom: 10px; }
@@ -245,12 +254,16 @@ export function dossie(dados) {
   .corpo { font-family: "Archivo"; font-size: 26px; line-height: 1.52; color: rgba(255,255,255,.82); margin: 24px 0 0; max-width: 46ch; }
   .corpo.menor { font-size: 21px; margin-top: 12px; }
   .km { font-family: "Archivo"; font-size: 18px; letter-spacing: 3px; color: rgba(255,255,255,.55); margin: 16px 0 0; text-transform: uppercase; }
-  .linha-regiao { font-family: "Archivo"; font-size: 28px; color: rgba(255,255,255,.82); margin: 22px 0 0; }
+  .linha-regiao { font-family: "Archivo"; font-weight: 700; font-size: 34px; color: #fff; margin: 22px 0 0; }
 
   .col { flex: 1 1 52%; min-width: 0; }
   .foto, .slot { flex: 1 1 48%; align-self: stretch; margin: -96px -120px -96px 0; }
   .foto.meia, .slot.meia { max-width: 46%; }
   .foto img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.05) contrast(1.04); }
+  /* BORDA ESFUMAÇADA, não corte seco. A régua pede que o lado da foto voltado ao texto se
+     funda no preto por máscara em gradiente — é o que separa "duas metades coladas" de uma
+     peça inteira. Os 18% são a faixa de fusão; abaixo disso a emenda ainda aparece. */
+  .foto.meia { -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 18%); mask-image: linear-gradient(90deg, transparent 0%, #000 18%); }
   .slot { background: #171717; display: flex; align-items: center; justify-content: center; }
   .slot span { font-family: "Archivo"; font-size: 20px; letter-spacing: 3px; color: rgba(255,255,255,.38); text-transform: uppercase; }
   .foto.sangra, .slot.sangra { position: absolute; inset: 0; margin: 0; max-width: none; }
@@ -263,7 +276,7 @@ export function dossie(dados) {
 
   .itens { list-style: none; padding: 0; margin: 30px 0 0; }
   .itens li { font-family: "Archivo"; font-size: 23px; line-height: 1.5; color: rgba(255,255,255,.88); margin-bottom: 14px; display: flex; gap: 14px; }
-  .itens li .mk { color: rgba(255,255,255,.55); flex: none; }
+  .itens li .mk { color: #fff; flex: none; }
   .itens.fora li { color: rgba(255,255,255,.62); }
   .itens.duas { columns: 2; column-gap: 72px; }
   .itens.duas li { break-inside: avoid; }
@@ -277,9 +290,12 @@ export function dossie(dados) {
   .numeros b { display: block; font-family: "Anton"; font-size: 34px; font-weight: 400; margin-top: 8px; }
 
   .hoteis { display: flex; gap: 48px; width: 100%; margin-top: 18px; }
-  .hotel { flex: 1 1 0; border-top: 1.5px solid rgba(255,255,255,.4); padding-top: 18px; }
+  .hotel { flex: 1 1 0; border-top: 1.5px solid rgba(255,255,255,.13); padding-top: 18px; }
   .papel { font-family: "Archivo"; font-size: 17px; line-height: 1.4; color: rgba(255,255,255,.62); margin: 6px 0 0; }
   .titulo.hotel-nome { font-size: 30px; }
+  .patrocinio { position: absolute; right: 120px; bottom: 84px; text-align: right; }
+  .patrocinio .sobrelinha { margin: 0 0 10px; font-size: 15px; letter-spacing: 4px; }
+  .patrocinio img { width: 150px; height: auto; display: block; margin-left: auto; }
   .nota-rodape { font-family: "Archivo"; font-size: 19px; color: rgba(255,255,255,.55); margin: 40px 0 0; }
 </style>
 </head>
