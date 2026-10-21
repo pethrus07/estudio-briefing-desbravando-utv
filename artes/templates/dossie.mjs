@@ -88,14 +88,17 @@ export function dossie(dados) {
   );
 
   /* ---- 2 · quem somos ---------------------------------------------- */
+  /* Full-bleed com o texto na base: a segunda página não pode repetir a geometria da
+     terceira, e esta é a que apresenta a empresa — é a hora de deixar a foto falar. */
   const quemSomos = pag(
-    "texto-foto",
-    `<div class="col">
+    "cheio",
+    `${foto(f.equipe, "sangra")}
+     <div class="veu baixo"></div>
+     <div class="dentro base">
        <p class="sobrelinha">QUEM SOMOS</p>
-       <h2 class="titulo secao">CONHEÇA O<br>DESBRAVANDO UTV.</h2>
-       <p class="corpo">${esc(dados.quemSomos ?? "")}</p>
-     </div>
-     ${foto(f.equipe, "meia")}`
+       <h2 class="titulo secao">CONHEÇA O DESBRAVANDO UTV.</h2>
+       <p class="corpo largo">${esc(dados.quemSomos ?? "")}</p>
+     </div>`
   );
   if (!dados.quemSomos) pendencias.push("quemSomos — o texto da empresa (o mesmo do dossiê da Costa Doce serve)");
 
@@ -116,49 +119,87 @@ export function dossie(dados) {
      ${foto(f.expedicao, "meia")}`
   );
 
-  /* ---- 4..N · um slide por dia -------------------------------------- */
+  /* ---- 4..N · um slide por dia, em QUATRO GEOMETRIAS -----------------
+
+     Reprovado em 21/10: "ficaram muito iguais os slides". Era verdade — nove das quinze
+     páginas eram texto à esquerda e foto na metade direita. A régua do cliente já dizia, desde
+     agosto, que cada módulo tem geometria própria, e eu tinha feito uma só.
+
+     Agora o dia escolhe entre:
+       cheio   foto sangrando, texto por cima na base        (chegada, marco do roteiro)
+       faixa   foto em faixa horizontal, texto embaixo       (trecho longo)
+       lado    foto na metade, texto na outra                (o padrão antigo, agora minoria)
+       tipo    só tipografia, número gigante ao fundo        (dia sem foto)
+
+     O ritmo é o que faz o documento parecer feito, não montado: duas páginas iguais seguidas
+     já lêem como repetição. A ordem vem do JSON, em `layout` por dia. */
   const dias = (dados.roteiro ?? []).map((d, i) => {
-    const cabeca = i === 0
-      ? `<p class="sobrelinha">A JORNADA</p><h2 class="titulo secao-menor">O ROTEIRO · ${esc(dados.roteiro.length)} DIAS.</h2>`
-      : `<p class="sobrelinha">${sobre(`DIA ${String(d.dia).padStart(2, "0")}${d.data ? " · " + d.data : ""}${d.local ? " · " + d.local : ""}`)}</p>`;
     const slot = (f.dias ?? {})[String(d.dia)];
     const limpo = esc(String(d.titulo).replace(/^\s*dia\s*0?\d+\s*[-–—·:]\s*/i, ""));
-    /* SEM FOTO = SLIDE TIPOGRÁFICO, não caixa vazia. É regra da régua ("sem_foto: diagramar só
-       com tipografia e elementos P&B"), e aqui ela resolve um problema real: das cinco fotos
-       que o cliente mandou, só duas têm lugar definido, e as do hotel são de quarto — ao lado
-       de "Trecho de Barreirinhas à Tutóia" leriam errado. Sem foto o dia ganha a página
-       inteira: número gigante, texto em duas colunas e o trecho virando dado, não legenda. */
-    if (!slot || !slot.arquivo)
-      return pag(
-        "dia sem-foto",
-        `<span class="marca-dagua">${String(d.dia).padStart(2, "0")}</span>
+    const n = String(d.dia).padStart(2, "0");
+    const etiqueta = sobre(`DIA ${n}${d.data ? " · " + d.data : ""}${d.local ? " · " + d.local : ""}`);
+    const km = d.km ? `<p class="km">${sobre("trecho")} · ${esc(d.km)}</p>` : "";
+    const abertura = i === 0
+      ? `<p class="sobrelinha">A JORNADA · O ROTEIRO EM ${esc(dados.roteiro.length)} DIAS</p>`
+      : `<p class="sobrelinha">${etiqueta}</p>`;
+    const layout = (!slot || !slot.arquivo) ? "tipo" : (d.layout || "lado");
+
+    if (layout === "cheio")
+      return pag("dia cheio",
+        `${foto(slot, "sangra")}
+         <div class="veu baixo"></div>
+         <div class="dentro base">
+           ${abertura}
+           <h3 class="titulo secao">${limpo}</h3>
+           <p class="corpo largo">${esc(d.texto)}</p>
+           ${km}
+         </div>`);
+
+    if (layout === "faixa")
+      return pag("dia faixa",
+        `<div class="empilha">
+           ${foto(slot, "tira")}
+           <div class="sob-faixa">
+             ${abertura}
+             <div class="dia-bloco">
+               <span class="numero">${n}</span>
+               <div>
+                 <h3 class="titulo dia-titulo">${limpo}</h3>
+                 <p class="corpo">${esc(d.texto)}</p>
+               </div>
+             </div>
+             ${km}
+           </div>
+         </div>`);
+
+    if (layout === "tipo")
+      return pag("dia sem-foto",
+        `<span class="marca-dagua">${n}</span>
          <div class="col larga">
-           ${cabeca}
+           ${abertura}
            <div class="dia-bloco">
-             <span class="numero grande">${String(d.dia).padStart(2, "0")}</span>
+             <span class="numero grande">${n}</span>
              <div>
                <h3 class="titulo dia-titulo grande">${limpo}</h3>
                <p class="corpo solta">${esc(d.texto)}</p>
              </div>
            </div>
            ${d.km ? `<div class="numeros"><div><small>${sobre("trecho do dia")}</small><b>${esc(d.km)}</b></div></div>` : ""}
-         </div>`
-      );
-    return pag(
-      "dia",
+         </div>`);
+
+    return pag("dia",
       `<div class="col">
-         ${cabeca}
+         ${abertura}
          <div class="dia-bloco">
-           <span class="numero">${String(d.dia).padStart(2, "0")}</span>
+           <span class="numero">${n}</span>
            <div>
              <h3 class="titulo dia-titulo">${limpo}</h3>
              <p class="corpo">${esc(d.texto)}</p>
-             ${d.km ? `<p class="km">${sobre("trecho")} · ${esc(d.km)}</p>` : ""}
+             ${km}
            </div>
          </div>
        </div>
-       ${foto(slot, "meia")}`
-    );
+       ${foto(slot, "meia")}`);
   });
 
   /* ---- fora do volante ---------------------------------------------- */
@@ -300,7 +341,7 @@ export function dossie(dados) {
   .slot span { font-family: "Archivo"; font-size: 20px; letter-spacing: 3px; color: rgba(255,255,255,.38); text-transform: uppercase; }
   .foto.sangra, .slot.sangra { position: absolute; inset: 0; margin: 0; max-width: none; }
   .veu { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.62) 52%, rgba(0,0,0,.35) 100%); }
-  .capa .dentro, .fecho .dentro { position: relative; width: 100%; }
+  .capa .dentro, .fecho .dentro, .dentro.base { position: relative; z-index: 2; width: 100%; }
   .fecho .dentro.centro { text-align: center; }
 
   .dia-bloco { display: flex; gap: 34px; align-items: flex-start; margin-top: 30px; }
@@ -345,6 +386,22 @@ export function dossie(dados) {
      hospedagem o que vende é o nome e a cidade; a foto confirma, não grita. */
   .foto-hotel { height: 150px; border-radius: 14px; overflow: hidden; margin-bottom: 18px; }
   .foto-hotel img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* ---- geometrias novas ---- */
+  .veu.baixo { background: linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.55) 48%, rgba(0,0,0,.93) 100%); }
+  .dentro.base { align-self: flex-end; width: 100%; }
+  .corpo.largo { max-width: 72ch; }
+  .cheio, .dia.cheio { align-items: flex-end; }
+
+  /* faixa: a foto é uma tira no topo e o texto mora embaixo. Quebra a leitura horizontal
+     das páginas de meia a meia sem precisar de outro recurso gráfico. */
+  .dia.faixa { padding: 0; align-items: stretch; }
+  /* Altura em PIXEL, não em porcentagem: a faixa saía com a foto ocupando a página inteira
+     e o texto fora dela. Altura relativa dentro de item flex depende de a cadeia toda ter
+     altura definida, e uma peça que precisa disso para funcionar é uma peça que quebra. */
+  .empilha { position: relative; z-index: 2; display: flex; flex-direction: column; width: 100%; height: ${A}px; }
+  .foto.tira, .slot.tira { flex: 0 0 auto; height: ${Math.round(A * 0.5)}px; width: 100%; margin: 0; max-width: none; align-self: auto; }
+  .foto.tira { -webkit-mask-image: none; mask-image: none; }
+  .sob-faixa { flex: 1 1 auto; padding: 56px 120px 72px; display: flex; flex-direction: column; justify-content: center; }
   .patrocinio { position: absolute; right: 120px; bottom: 84px; text-align: right; }
   .patrocinio .sobrelinha { margin: 0 0 10px; font-size: 15px; letter-spacing: 4px; }
   .patrocinio img { width: 150px; height: auto; display: block; margin-left: auto; }
