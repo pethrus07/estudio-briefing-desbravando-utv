@@ -36,6 +36,7 @@ const esc = (s) =>
 
 const P = 1920;
 const A = 1080;
+const ESCALA = 2 / 3;
 
 /** Espaçado letra a letra, como as sobrelinhas do modelo. */
 const sobre = (t) => esc(String(t ?? "").toUpperCase());
@@ -62,7 +63,7 @@ export function dossie(dados) {
      foi reprovado em 16/10 no cardápio pelo mesmo motivo. */
   const marca = `<div class="marca-vetor">${montanhaSvg()}</div>`;
 
-  const pag = (classe, dentro) => `<section class="pagina ${classe}">${dentro}</section>`;
+  const pag = (classe, dentro) => `<div class="folha"><section class="pagina ${classe}">${dentro}</section></div>`;
 
   /* O Can-Am entra só na capa e no encerramento, canto inferior direito, e SEMPRE com a
      label acima — a régua é explícita nos dois pontos. Sem a label vira logo solto. */
@@ -243,7 +244,14 @@ export function dossie(dados) {
 <title>Expedição ${esc(dados.titulo)} — Desbravando UTV</title>
 <link rel="stylesheet" href="../identidade.css">
 <style>
-  @page { size: ${P / 96}in ${A / 96}in; margin: 0; }
+  /* PÁGINA no tamanho do modelo (960×540pt = 10×5.625in) com o layout desenhado em 1920px e
+     reduzido por transform. O Chrome embute imagem na resolução DA PÁGINA: em 20 polegadas de
+     largura, 16 fotos viravam 20 MB. ATENÇÃO: conferir que a fonte continua Type0 — transform
+     pode fazer o Chrome rasterizar texto, e aí o PDF perde seleção e não serve para gráfica. */
+  @page { size: ${(P * ESCALA) / 96}in ${(A * ESCALA) / 96}in; margin: 0; }
+  .folha { width: ${P * ESCALA}px; height: ${A * ESCALA}px; overflow: hidden; page-break-after: always; }
+  .folha:last-child { page-break-after: auto; }
+  .folha > .pagina { transform: scale(${ESCALA}); transform-origin: top left; page-break-after: auto; }
   html, body { margin: 0; padding: 0; background: #000; }
 
   .pagina {
