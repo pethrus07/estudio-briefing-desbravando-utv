@@ -4,7 +4,7 @@
     "transfer (origem, embarque e chegada) — não existe campo no CMS",
     "quemSomos foi reescrito do dossiê da Costa Doce — conferir com o cliente",
     "a lista de 'o padrão Desbravando' veio do dossiê da Costa Doce — é da empresa, conferir",
-    "dias 2, 5 e 7 em diagramação tipográfica: só vieram 5 fotos de expedição e as de pousada não servem no slide do dia — ficam na página de hospedagem"
+    "os dias 2, 5 e 7 usam foto de TERCEIRO (Wikimedia Commons, crédito impresso no fecho) — trocar por foto da própria expedição assim que existir"
   ],
   "slug": "lencois-maranhenses",
   "titulo": "Lençóis Maranhenses",
@@ -39,7 +39,7 @@
       "titulo": "Dia 02 - Barreirinhas → Tutóia",
       "texto": "Trecho pelas regiões Caburé, Paulino Neves, Pequenos Lençóis e Tutóia. Dunas e praias com almoço em na região do Barro Vermelho",
       "km": "~80Km",
-      "layout": "tipo"
+      "layout": "faixa"
     },
     {
       "dia": 3,
@@ -48,7 +48,7 @@
       "titulo": "Dia 03 - Tutóia → Parnaíba",
       "texto": "Travessia de barco pelo Delta, uma tarde com uma linda vista á apreciar. Almoço com gastronomia regional, e encerramento com com a revoada dos guarás, prócimo ao pôr do sol.",
       "km": "",
-      "layout": "faixa"
+      "layout": "lado"
     },
     {
       "dia": 4,
@@ -57,7 +57,7 @@
       "titulo": "Dia 04 - Parnaíba → Camocim",
       "texto": "Dunas, praias, trechos de terra, um trajeto com boa parte da vista para a praia, com travessia de balsa ao longo do percurso.",
       "km": "~100Km",
-      "layout": "lado"
+      "layout": "cheio"
     },
     {
       "dia": 5,
@@ -66,7 +66,7 @@
       "titulo": "Dia 05 - Exploração pela região de Camocim",
       "texto": "Exploração pela região de Camocim, com dunas e praias. Aproveitando um pouco da região mais exclusiva.",
       "km": "~80Km",
-      "layout": "tipo"
+      "layout": "faixa"
     },
     {
       "dia": 6,
@@ -75,7 +75,7 @@
       "titulo": "Dia 06 - Camocim → Preá",
       "texto": "Trecho de Camocim á Tatajuba, para á região de Jericoacoara, finalizando no Preá. Com almoço em Tatajuba e finalizando no Preá, com nosso tradicional evento de encerramento.",
       "km": "~65Km",
-      "layout": "cheio"
+      "layout": "lado"
     },
     {
       "dia": 7,
@@ -84,7 +84,7 @@
       "titulo": "Retorno do grupo",
       "texto": "Café da manhã e check-out, sem pressa.Você volta para casa com memórias que duram para sempre.",
       "km": "",
-      "layout": "tipo"
+      "layout": "cheio"
     }
   ],
   "hospedagens": [
@@ -196,11 +196,26 @@
       "4": {
         "arquivo": "fotos/lencois/comboio-fila-utv.jpg",
         "descricao": "fila de UTVs na praia",
-        "foco": "center 46%"
+        "foco": "center 38%"
       },
       "6": {
         "arquivo": "fotos/lencois/prea-pedra-furada.jpg",
         "descricao": "Pedra Furada · Preá",
+        "foco": "center 50%"
+      },
+      "2": {
+        "arquivo": "fotos/lencois/dia02-pequenos-lencois.jpg",
+        "descricao": "Pequenos Lençóis",
+        "foco": "center 55%"
+      },
+      "5": {
+        "arquivo": "fotos/lencois/dia05-tatajuba.jpg",
+        "descricao": "Tatajuba",
+        "foco": "center 55%"
+      },
+      "7": {
+        "arquivo": "fotos/lencois/dia07-tatajuba-por-do-sol.jpg",
+        "descricao": "pôr do sol em Tatajuba",
         "foco": "center 55%"
       }
     }
@@ -215,5 +230,6 @@
     "Carro de apoio e mecânicos",
     "Eventos fora do volante (boas-vindas e encerramento)",
     "Fotos e vídeos profissionais"
-  ]
+  ],
+  "creditos": "Fotos dos dias 2, 5 e 7: Helier Gomes (CC BY-SA 4.0), Artur Warchavchik (CC BY-SA 3.0) e Mario Penner (CC BY 3.0), via Wikimedia Commons. Demais imagens: acervo Desbravando UTV."
 }

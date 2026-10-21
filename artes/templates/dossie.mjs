@@ -271,6 +271,7 @@ export function dossie(dados) {
        <h2 class="titulo secao">ISSO NÃO É TRILHA,<br>É EXPEDIÇÃO PADRÃO DESBRAVANDO.</h2>
        <p class="sobrelinha destaque">${sobre(`EXPEDIÇÃO ${dados.titulo} · ${dados.subtitulo}`)}</p>
        <p class="corpo menor">Reservas &amp; Info · Fale com a equipe Desbravando</p>
+       ${dados.creditos ? `<p class="creditos">${esc(dados.creditos)}</p>` : ""}
        ${marca}
      </div>
      ${patrocinio}`
@@ -402,6 +403,7 @@ export function dossie(dados) {
   .foto.tira, .slot.tira { flex: 0 0 auto; height: ${Math.round(A * 0.5)}px; width: 100%; margin: 0; max-width: none; align-self: auto; }
   .foto.tira { -webkit-mask-image: none; mask-image: none; }
   .sob-faixa { flex: 1 1 auto; padding: 56px 120px 72px; display: flex; flex-direction: column; justify-content: center; }
+  .creditos { font-family: "Archivo"; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.38); margin: 26px auto 0; max-width: 90ch; }
   .patrocinio { position: absolute; right: 120px; bottom: 84px; text-align: right; }
   .patrocinio .sobrelinha { margin: 0 0 10px; font-size: 15px; letter-spacing: 4px; }
   .patrocinio img { width: 150px; height: auto; display: block; margin-left: auto; }
