@@ -4,8 +4,7 @@
     "transfer (origem, embarque e chegada) — não existe campo no CMS",
     "quemSomos foi reescrito do dossiê da Costa Doce — conferir com o cliente",
     "a lista de 'o padrão Desbravando' veio do dossiê da Costa Doce — é da empresa, conferir",
-    "foto de Vila Parnaíba — a única imagem que veio é retrato e não cabe no bloco",
-    "fotos de trilha para os dias 2, 3, 4, 5 e 7 — sem elas o dia sai em diagramação tipográfica, que é o previsto na régua"
+    "dias 3 e 7 sem foto: o dia 3 é a travessia de barco pelo Delta e o 7 é o retorno — não veio imagem de nenhum dos dois, e a Vila Parnaíba (dia 3) só mandou um panfleto"
   ],
   "slug": "lencois-maranhenses",
   "titulo": "Lençóis Maranhenses",
@@ -167,8 +166,8 @@
       "foco": "center 60%"
     },
     "encerramento": {
-      "arquivo": "fotos/lencois/comboio-por-do-sol.jpg",
-      "descricao": "comboio ao pôr do sol",
+      "arquivo": "fotos/lencois/evento-casa-siara-anoitecer.jpg",
+      "descricao": "casa ao anoitecer",
       "foco": "center 50%"
     },
     "fecho": {
@@ -182,9 +181,24 @@
         "descricao": "chegada a Barreirinhas",
         "foco": "center 55%"
       },
+      "2": {
+        "arquivo": "fotos/lencois/dia02-jagata-fachada.jpg",
+        "descricao": "Pousada Jagatá · Tutóia",
+        "foco": "center 55%"
+      },
+      "4": {
+        "arquivo": "fotos/lencois/dia04-villazen-varanda-duna.jpg",
+        "descricao": "Villa Zen · varanda e duna",
+        "foco": "center 55%"
+      },
+      "5": {
+        "arquivo": "fotos/lencois/dia05-villazen-piscina.jpg",
+        "descricao": "Villa Zen · Camocim",
+        "foco": "center 50%"
+      },
       "6": {
         "arquivo": "fotos/lencois/prea-pedra-furada.jpg",
-        "descricao": "Preá",
+        "descricao": "Pedra Furada · Preá",
         "foco": "center 55%"
       }
     }
