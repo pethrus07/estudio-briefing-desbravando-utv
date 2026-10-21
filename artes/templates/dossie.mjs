@@ -120,6 +120,29 @@ export function dossie(dados) {
     const cabeca = i === 0
       ? `<p class="sobrelinha">A JORNADA</p><h2 class="titulo secao-menor">O ROTEIRO · ${esc(dados.roteiro.length)} DIAS.</h2>`
       : `<p class="sobrelinha">${sobre(`DIA ${String(d.dia).padStart(2, "0")}${d.data ? " · " + d.data : ""}${d.local ? " · " + d.local : ""}`)}</p>`;
+    const slot = (f.dias ?? {})[String(d.dia)];
+    const limpo = esc(String(d.titulo).replace(/^\s*dia\s*0?\d+\s*[-–—·:]\s*/i, ""));
+    /* SEM FOTO = SLIDE TIPOGRÁFICO, não caixa vazia. É regra da régua ("sem_foto: diagramar só
+       com tipografia e elementos P&B"), e aqui ela resolve um problema real: das cinco fotos
+       que o cliente mandou, só duas têm lugar definido, e as do hotel são de quarto — ao lado
+       de "Trecho de Barreirinhas à Tutóia" leriam errado. Sem foto o dia ganha a página
+       inteira: número gigante, texto em duas colunas e o trecho virando dado, não legenda. */
+    if (!slot || !slot.arquivo)
+      return pag(
+        "dia sem-foto",
+        `<span class="marca-dagua">${String(d.dia).padStart(2, "0")}</span>
+         <div class="col larga">
+           ${cabeca}
+           <div class="dia-bloco">
+             <span class="numero grande">${String(d.dia).padStart(2, "0")}</span>
+             <div>
+               <h3 class="titulo dia-titulo grande">${limpo}</h3>
+               <p class="corpo solta">${esc(d.texto)}</p>
+             </div>
+           </div>
+           ${d.km ? `<div class="numeros"><div><small>${sobre("trecho do dia")}</small><b>${esc(d.km)}</b></div></div>` : ""}
+         </div>`
+      );
     return pag(
       "dia",
       `<div class="col">
@@ -127,13 +150,13 @@ export function dossie(dados) {
          <div class="dia-bloco">
            <span class="numero">${String(d.dia).padStart(2, "0")}</span>
            <div>
-             <h3 class="titulo dia-titulo">${esc(String(d.titulo).replace(/^\s*dia\s*0?\d+\s*[-–—·:]\s*/i, ""))}</h3>
+             <h3 class="titulo dia-titulo">${limpo}</h3>
              <p class="corpo">${esc(d.texto)}</p>
              ${d.km ? `<p class="km">${sobre("trecho")} · ${esc(d.km)}</p>` : ""}
            </div>
          </div>
        </div>
-       ${foto((f.dias ?? {})[String(d.dia)], "meia")}`
+       ${foto(slot, "meia")}`
     );
   });
 
@@ -167,6 +190,7 @@ export function dossie(dados) {
        ${(dados.hospedagens ?? [])
          .map(
            (h) => `<div class="hotel">
+         ${h.foto ? `<div class="foto-hotel"><img src="${esc(h.foto)}" alt=""></div>` : ""}
          <p class="sobrelinha mini">${sobre(h.onde)}</p>
          ${h.papel ? `<p class="papel">${esc(h.papel)}</p>` : ""}
          <h3 class="titulo hotel-nome">${esc(h.nome)}</h3>
@@ -293,6 +317,26 @@ export function dossie(dados) {
   .hotel { flex: 1 1 0; border-top: 1.5px solid rgba(255,255,255,.13); padding-top: 18px; }
   .papel { font-family: "Archivo"; font-size: 17px; line-height: 1.4; color: rgba(255,255,255,.62); margin: 6px 0 0; }
   .titulo.hotel-nome { font-size: 30px; }
+  .col.larga { flex: 1 1 100%; max-width: 1400px; }
+  .numero.grande { font-size: 148px; }
+  .titulo.dia-titulo.grande { font-size: 72px; }
+  /* UMA coluna, não duas. Em duas, um texto de três linhas quebra no meio da frase e a
+     segunda coluna fica com um resto solto — foi o que aconteceu no dia 02. Coluna larga com
+     corpo maior é o que a página sem foto pede. */
+  .corpo.solta { max-width: 34ch; font-size: 32px; line-height: 1.48; }
+  .sem-foto { align-items: center; }
+  /* O número do dia, gigante e quase apagado, ocupando a metade que seria da foto. Sem ele a
+     direita fica preta e a página lê como inacabada, não como escolha. É P&B e é o próprio
+     dado da página: não inventa ornamento nem cor. */
+  .marca-dagua {
+    position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+    font-family: "Anton"; font-size: 620px; line-height: .78;
+    color: rgba(255,255,255,.055); letter-spacing: -20px; pointer-events: none;
+  }
+  /* Foto contida: canto 14px, como a régua manda. Aqui ela é pequena de propósito — na
+     hospedagem o que vende é o nome e a cidade; a foto confirma, não grita. */
+  .foto-hotel { height: 150px; border-radius: 14px; overflow: hidden; margin-bottom: 18px; }
+  .foto-hotel img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .patrocinio { position: absolute; right: 120px; bottom: 84px; text-align: right; }
   .patrocinio .sobrelinha { margin: 0 0 10px; font-size: 15px; letter-spacing: 4px; }
   .patrocinio img { width: 150px; height: auto; display: block; margin-left: auto; }

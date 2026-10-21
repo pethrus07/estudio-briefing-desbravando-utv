@@ -2,9 +2,10 @@
   "_nota": "Gerado de design/dossie-dados.mjs a partir do CMS do site em 2026-10-21. Não editar à mão: corrige no CMS e roda de novo, senão o PDF e a página do site divergem.",
   "_pendencias": [
     "transfer (origem, embarque e chegada) — não existe campo no CMS",
-    "fotos dos dias 2, 3, 4, 5 e 7 — só tenho imagem para o 1 (Barreirinhas) e o 6 (Preá)",
     "quemSomos foi reescrito do dossiê da Costa Doce — conferir com o cliente",
-    "a lista de 'o padrão Desbravando' veio do dossiê da Costa Doce — é da empresa, conferir"
+    "a lista de 'o padrão Desbravando' veio do dossiê da Costa Doce — é da empresa, conferir",
+    "foto de Vila Parnaíba — a única imagem que veio é retrato e não cabe no bloco",
+    "fotos de trilha para os dias 2, 3, 4, 5 e 7 — sem elas o dia sai em diagramação tipográfica, que é o previsto na régua"
   ],
   "slug": "lencois-maranhenses",
   "titulo": "Lençóis Maranhenses",
@@ -87,7 +88,8 @@
       "noites": "1 noite",
       "papel": "Ponto de início da aventura pelo Nordeste",
       "texto": "",
-      "fotos": []
+      "fotos": [],
+      "foto": "fotos/lencois/hotel-porto-preguicas.jpg"
     },
     {
       "nome": "Pousada Jagatá",
@@ -95,7 +97,8 @@
       "noites": "1 noite",
       "papel": "Descanso entre dunas e praias paradisíacas",
       "texto": "",
-      "fotos": []
+      "fotos": [],
+      "foto": "fotos/lencois/hotel-jagata.jpg"
     },
     {
       "nome": "Vila Parnaíba",
@@ -103,7 +106,8 @@
       "noites": "1 noite",
       "papel": "Conforto para explorar os encantos do Delta",
       "texto": "",
-      "fotos": []
+      "fotos": [],
+      "foto": ""
     },
     {
       "nome": "Villa Zen",
@@ -111,7 +115,8 @@
       "noites": "2 noites",
       "papel": "Tranquilidade em meio ás belezas do litoral cearense",
       "texto": "",
-      "fotos": []
+      "fotos": [],
+      "foto": "fotos/lencois/hotel-villa-zen.jpg"
     },
     {
       "nome": "Casa Siará",
@@ -119,7 +124,8 @@
       "noites": "1 noite",
       "papel": "O cenário perfeito para celebrar nossa jornada",
       "texto": "",
-      "fotos": []
+      "fotos": [],
+      "foto": "fotos/lencois/hotel-casa-siara.jpg"
     }
   ],
   "hospedagemNota": "Hospedagens escolhidas cuidadosamente, priorizando localização, estrutura e conforto",
