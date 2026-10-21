@@ -51,8 +51,22 @@ function foto(slot, classe = "") {
   return `<div class="foto ${classe}"><img src="${esc(slot.arquivo)}" alt="" style="object-position:${esc(slot.foco ?? "center 50%")}"></div>`;
 }
 
-const lista = (itens, marcador = "↗") =>
-  itens.map((i) => `<li><span class="mk">${marcador}</span>${esc(i)}</li>`).join("");
+/* MARCADOR EM VETOR, não em caractere. O guia manda usar ↗ na lista do núcleo e ✓ no que
+   está incluso, mas nem o Anton nem o Archivo têm esses glifos: o Chrome cai calado no
+   SegoeUISymbol do Windows e embute fonte de sistema no PDF. A esteira de QA reprovou por
+   isso em 21/10/2026, e com razão — fonte que veio da máquina desenha diferente em outra, e
+   num PDF que vai para o cliente isso é defeito que só aparece longe de quem fez.
+   Em path não depende de fonte nenhuma. */
+const MARCAS = {
+  seta: '<path d="M4 12 12 4M6 4h6v6"/>',
+  check: '<path d="M3 8.5 6.5 12 13 4"/>',
+  menos: '<path d="M3.5 8h9"/>',
+};
+const marcaSvg = (tipo) => `<svg class="mk" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+      stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${MARCAS[tipo] ?? MARCAS.seta}</svg>`;
+
+const lista = (itens, tipo = "seta") =>
+  itens.map((i) => `<li>${marcaSvg(tipo)}${esc(i)}</li>`).join("");
 
 export function dossie(dados) {
   const pendencias = [...(dados._pendencias ?? [])];
@@ -84,6 +98,7 @@ export function dossie(dados) {
        <p class="linha-regiao">${esc(dados.subtitulo)}${dados.regiao ? " · " + esc(dados.regiao) : ""}</p>
        <p class="sobrelinha destaque">${sobre([dados.duracao, dados.destaques].filter(Boolean).join(" · "))}</p>
      </div>
+     ${dados.creditos ? `<p class="creditos">${esc(dados.creditos)}</p>` : ""}
      ${patrocinio}`
   );
 
@@ -216,7 +231,7 @@ export function dossie(dados) {
 
   /* ---- o padrão Desbravando ------------------------------------------ */
   const padrao = pag(
-    "lista",
+    "painel",
     `<p class="sobrelinha">O PADRÃO DESBRAVANDO</p>
      <h2 class="titulo secao">A GENTE CUIDA DOS DETALHES.</h2>
      <ul class="itens duas">${lista(dados.padrao ?? [])}</ul>
@@ -253,11 +268,11 @@ export function dossie(dados) {
      <div class="duas-colunas">
        <div>
          <p class="sobrelinha mini">INCLUSO</p>
-         <ul class="itens">${lista(dados.incluso ?? [], "✓")}</ul>
+         <ul class="itens">${lista(dados.incluso ?? [], "check")}</ul>
        </div>
        <div>
          <p class="sobrelinha mini">NÃO INCLUSO</p>
-         <ul class="itens fora">${lista(dados.naoIncluso ?? [], "–")}</ul>
+         <ul class="itens fora">${lista(dados.naoIncluso ?? [], "menos")}</ul>
        </div>
      </div>`
   );
@@ -271,9 +286,9 @@ export function dossie(dados) {
        <h2 class="titulo secao">ISSO NÃO É TRILHA,<br>É EXPEDIÇÃO PADRÃO DESBRAVANDO.</h2>
        <p class="sobrelinha destaque">${sobre(`EXPEDIÇÃO ${dados.titulo} · ${dados.subtitulo}`)}</p>
        <p class="corpo menor">Reservas &amp; Info · Fale com a equipe Desbravando</p>
-       ${dados.creditos ? `<p class="creditos">${esc(dados.creditos)}</p>` : ""}
        ${marca}
      </div>
+     ${dados.creditos ? `<p class="creditos">${esc(dados.creditos)}</p>` : ""}
      ${patrocinio}`
   );
 
@@ -346,15 +361,19 @@ export function dossie(dados) {
   .fecho .dentro.centro { text-align: center; }
 
   .dia-bloco { display: flex; gap: 34px; align-items: flex-start; margin-top: 30px; }
-  .numero { font-family: "Anton"; font-size: 92px; line-height: 1; color: rgba(255,255,255,.26); }
+  /* .38 e não .26: a .26 dava 2,1:1 sobre preto e a norma pede 3:1 para texto grande. O
+     número do dia é texto, não ornamento — quem lê de longe ou com pouca luz precisa dele.
+     Em .38 dá 3,1:1 e continua claramente secundário ao título. Medido pela esteira. */
+  .numero { font-family: "Anton"; font-size: 92px; line-height: 1; color: rgba(255,255,255,.38); }
 
   .itens { list-style: none; padding: 0; margin: 30px 0 0; }
   .itens li { font-family: "Archivo"; font-size: 23px; line-height: 1.5; color: rgba(255,255,255,.88); margin-bottom: 14px; display: flex; gap: 14px; }
-  .itens li .mk { color: #fff; flex: none; }
+  .itens li .mk { color: #fff; flex: none; width: 22px; height: 22px; margin-top: 4px; }
+  .itens.fora li .mk { color: rgba(255,255,255,.55); }
   .itens.fora li { color: rgba(255,255,255,.62); }
   .itens.duas { columns: 2; column-gap: 72px; }
   .itens.duas li { break-inside: avoid; }
-  .lista, .pacote, .hospedagem { flex-direction: column; align-items: flex-start; justify-content: center; }
+  .painel, .pacote, .hospedagem { flex-direction: column; align-items: flex-start; justify-content: center; }
   .duas-colunas { display: flex; gap: 96px; width: 100%; margin-top: 10px; }
   .duas-colunas > div { flex: 1 1 50%; }
   .assinatura { font-family: "Anton"; font-size: 46px; line-height: 1.14; text-transform: uppercase; margin: 44px 0 0; color: #fff; }
@@ -403,7 +422,14 @@ export function dossie(dados) {
   .foto.tira, .slot.tira { flex: 0 0 auto; height: ${Math.round(A * 0.5)}px; width: 100%; margin: 0; max-width: none; align-self: auto; }
   .foto.tira { -webkit-mask-image: none; mask-image: none; }
   .sob-faixa { flex: 1 1 auto; padding: 56px 120px 72px; display: flex; flex-direction: column; justify-content: center; }
-  .creditos { font-family: "Archivo"; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.38); margin: 26px auto 0; max-width: 90ch; }
+  /* .55 (a opacidade de rótulo do guia) e não .38: em 13px a norma pede 4,5:1, e .38 dava
+     3,39:1. Crédito de licença que não se lê não cumpre a licença — é o único texto desta
+     peça que existe por obrigação legal, não por design. */
+  .creditos {
+    position: absolute; left: 120px; bottom: 84px; z-index: 3; text-align: left;
+    font-family: "Archivo"; font-size: 13px; line-height: 1.5;
+    color: rgba(255,255,255,.55); margin: 0; max-width: 58ch;
+  }
   .patrocinio { position: absolute; right: 120px; bottom: 84px; text-align: right; }
   .patrocinio .sobrelinha { margin: 0 0 10px; font-size: 15px; letter-spacing: 4px; }
   .patrocinio img { width: 150px; height: auto; display: block; margin-left: auto; }
