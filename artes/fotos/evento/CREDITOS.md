@@ -17,3 +17,18 @@ refaz num comando.
 - **Licença:** domínio público (sem obrigação de atribuição; creditado por escolha).
 - **Fonte:** https://commons.wikimedia.org/wiki/File:Renato_Soares_Morro_da_Igreja_Parque_Nacional_de_S%C3%A3o_Joaquim.jpg
 - **Tratamento:** recorte 3:2 a partir de 6048×4032, reamostrado para 2160×1440; P&B aplicado no CSS da peça.
+
+## Dossiê da Expedição Lençóis Maranhenses (21/10/2026)
+
+Três dias do roteiro não tinham foto própria e entraram com imagem do Wikimedia Commons.
+**Todas exigem crédito ao publicar**, e as CC BY-SA exigem também manter a mesma licença.
+
+| arquivo em `fotos/lencois/` | original | autor | licença |
+|---|---|---|---|
+| `dia02-pequenos-lencois.jpg` | Pequenos Lençóis.jpg | Helier Gomes | **CC BY-SA 4.0** |
+| `dia05-tatajuba.jpg` | Tatajuba - Ceará.jpg | Artur Warchavchik | **CC BY-SA 3.0** |
+| `dia07-tatajuba-por-do-sol.jpg` | Por do sol em Tatajuba - panoramio.jpg | Mario Penner | **CC BY 3.0** |
+
+O crédito sai impresso na última página do dossiê. ⚠️ **São fotos de terceiro num documento
+comercial:** o ideal é substituir pelas da própria expedição assim que existirem — basta trocar
+o caminho em `dados/dossie-lencois-maranhenses.json` e rodar de novo.
