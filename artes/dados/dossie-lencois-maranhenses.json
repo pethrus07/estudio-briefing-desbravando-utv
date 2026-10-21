@@ -1,0 +1,197 @@
+{
+  "_nota": "Gerado de design/dossie-dados.mjs a partir do CMS do site em 2026-10-21. Não editar à mão: corrige no CMS e roda de novo, senão o PDF e a página do site divergem.",
+  "_pendencias": [
+    "transfer (origem, embarque e chegada) — não existe campo no CMS",
+    "fotos dos dias 2, 3, 4, 5 e 7 — só tenho imagem para o 1 (Barreirinhas) e o 6 (Preá)",
+    "quemSomos foi reescrito do dossiê da Costa Doce — conferir com o cliente",
+    "a lista de 'o padrão Desbravando' veio do dossiê da Costa Doce — é da empresa, conferir"
+  ],
+  "slug": "lencois-maranhenses",
+  "titulo": "Lençóis Maranhenses",
+  "subtitulo": "Litoral do Nordeste",
+  "regiao": "Barreirinhas · Tutóia · Parnaíba · Camocim · Preá",
+  "duracao": "7 dias",
+  "destaques": "Dunas, Praias e Travessia de barco",
+  "percurso": "~570 - 600 Km",
+  "formato": "Família",
+  "situacao": "Pré-reserva aberta",
+  "aeroporto": "Aeroporto de São Luís  e Aeroporto Regional de Jericoacoara",
+  "pontoEncontro": "São Luís",
+  "chamada": "De Barreirinha ao Preá, onde a aventura encontra o paraíso",
+  "tituloSobre": "O lado mais bruto e surpreendente do Nordeste",
+  "sobreDestino": "Uma jornada inesquesível pelo litoral do Nordeste, unindo aventura, diversão e momentos especiais ao lado de pessoas especiais. Um trajeto em família de São Lupis aos lençois Maranhenses, passando pelo Delta do Parnaíba e pelo litoral do Ceará, até chegar ás paisagens paradisíacas de Preá e Jericoacoara. Uma experiência a bordo dos UTVs que combina dunas, praias selvagens, gastronomia regional e cenários exuerantes, criando memórias únicas para compartilhar em família.",
+  "dataInicio": "2027-05-24",
+  "dataFim": "2027-05-30",
+  "roteiro": [
+    {
+      "dia": 1,
+      "data": "24/05",
+      "local": "Barreirinhas",
+      "titulo": "Dia 01 - Chegada à Barreirinhas",
+      "texto": "Chegada pelo Aeroporto de São Luís, com transfer até Barreirinhas. Ás 19:00 daremos inicio á expedição com um evento de boas-vindas especial, com jantar completo, chopp, drinks e música ao vivo.",
+      "km": "~250Km"
+    },
+    {
+      "dia": 2,
+      "data": "25/05",
+      "local": "Barreirinhas → Tutóia",
+      "titulo": "Dia 02 - Barreirinhas → Tutóia",
+      "texto": "Trecho pelas regiões Caburé, Paulino Neves, Pequenos Lençóis e Tutóia. Dunas e praias com almoço em na região do Barro Vermelho",
+      "km": "~80Km"
+    },
+    {
+      "dia": 3,
+      "data": "26/05",
+      "local": "Tutóia → Parnaíba",
+      "titulo": "Dia 03 - Tutóia → Parnaíba",
+      "texto": "Travessia de barco pelo Delta, uma tarde com uma linda vista á apreciar. Almoço com gastronomia regional, e encerramento com com a revoada dos guarás, prócimo ao pôr do sol.",
+      "km": ""
+    },
+    {
+      "dia": 4,
+      "data": "27/05",
+      "local": "Parnaíba → Camocim",
+      "titulo": "Dia 04 - Parnaíba → Camocim",
+      "texto": "Dunas, praias, trechos de terra, um trajeto com boa parte da vista para a praia, com travessia de balsa ao longo do percurso.",
+      "km": "~100Km"
+    },
+    {
+      "dia": 5,
+      "data": "28/05",
+      "local": "Camocim",
+      "titulo": "Dia 05 - Exploração pela região de Camocim",
+      "texto": "Exploração pela região de Camocim, com dunas e praias. Aproveitando um pouco da região mais exclusiva.",
+      "km": "~80Km"
+    },
+    {
+      "dia": 6,
+      "data": "29/05",
+      "local": "Camocim → Preá",
+      "titulo": "Dia 06 - Camocim → Preá",
+      "texto": "Trecho de Camocim á Tatajuba, para á região de Jericoacoara, finalizando no Preá. Com almoço em Tatajuba e finalizando no Preá, com nosso tradicional evento de encerramento.",
+      "km": "~65Km"
+    },
+    {
+      "dia": 7,
+      "data": "30/05",
+      "local": "",
+      "titulo": "Retorno do grupo",
+      "texto": "Café da manhã e check-out, sem pressa.Você volta para casa com memórias que duram para sempre.",
+      "km": ""
+    }
+  ],
+  "hospedagens": [
+    {
+      "nome": "Porto Preguiças Resort",
+      "onde": "Barreirinhas - MA",
+      "noites": "1 noite",
+      "papel": "Ponto de início da aventura pelo Nordeste",
+      "texto": "",
+      "fotos": []
+    },
+    {
+      "nome": "Pousada Jagatá",
+      "onde": "Tutóia - MA",
+      "noites": "1 noite",
+      "papel": "Descanso entre dunas e praias paradisíacas",
+      "texto": "",
+      "fotos": []
+    },
+    {
+      "nome": "Vila Parnaíba",
+      "onde": "Parnaíba - PI",
+      "noites": "1 noite",
+      "papel": "Conforto para explorar os encantos do Delta",
+      "texto": "",
+      "fotos": []
+    },
+    {
+      "nome": "Villa Zen",
+      "onde": "Camocim - CE",
+      "noites": "2 noites",
+      "papel": "Tranquilidade em meio ás belezas do litoral cearense",
+      "texto": "",
+      "fotos": []
+    },
+    {
+      "nome": "Casa Siará",
+      "onde": "Preá - CE",
+      "noites": "1 noite",
+      "papel": "O cenário perfeito para celebrar nossa jornada",
+      "texto": "",
+      "fotos": []
+    }
+  ],
+  "hospedagemNota": "Hospedagens escolhidas cuidadosamente, priorizando localização, estrutura e conforto",
+  "incluso": [
+    "4 dias de trilha guiada por equipe experiente",
+    "6 pernoites com café (1 Barreirinhas, 1 Tutóia, 1 Parnaíba, 2 Camocim, 1 Preá)",
+    "6 jantas (1 Barreirinhas, 1 Tutóia, 1 Parnaíba, 2 Camocim, 1 Preá)",
+    "5 almoços (1 Barreirinhas, 1 Tutóia, 1 Parnaíba, 2 Camoci, 1 Preá)",
+    "Eventos fora do volante - boas vindas e encerramento (coquetel, chopp, drinks, música ao vivo)",
+    "Carro de apoio 4x4 + reboque",
+    "4 quadriciclos + mecânicos no comboio",
+    "Staff (guias - apoio - mecânico)",
+    "Equipe de fotos e vídeos profissionais"
+  ],
+  "naoIncluso": [
+    "Combustível dos trajetos",
+    "Peças efetivamente utilizadas e mão de obra",
+    "Passagem aérea",
+    "Cegonha (transporte do UTV) ida e volta,",
+    "O que não foi mencionado anteriormente"
+  ],
+  "formasPagamento": "10x no cartão (com juros), Pix (á vista) ou Boleto",
+  "politicaCriancas": "Crianças até 6 anos é isento, de 7 á 13 anos paga 50% do valor do pacote",
+  "cancelamento": "Após o envio dos dados dos participantes da expedição e a assinatura do contrato, o cancelamento estará sujeito á multas e condições previstas contratualmente, conforme a legislação aplicável.",
+  "fotos": {
+    "capa": {
+      "arquivo": "fotos/lencois/prea-pedra-furada.jpg",
+      "descricao": "Pedra Furada · Preá",
+      "foco": "center 55%"
+    },
+    "equipe": {
+      "arquivo": "fotos/lencois/comboio-fila-utv.jpg",
+      "descricao": "comboio na praia",
+      "foco": "center 50%"
+    },
+    "expedicao": {
+      "arquivo": "fotos/lencois/comboio-praia-larga.jpg",
+      "descricao": "comboio na praia larga",
+      "foco": "center 60%"
+    },
+    "encerramento": {
+      "arquivo": "fotos/lencois/comboio-por-do-sol.jpg",
+      "descricao": "comboio ao pôr do sol",
+      "foco": "center 50%"
+    },
+    "fecho": {
+      "arquivo": "fotos/lencois/comboio-por-do-sol.jpg",
+      "descricao": "comboio ao pôr do sol",
+      "foco": "center 45%"
+    },
+    "dias": {
+      "1": {
+        "arquivo": "fotos/lencois/barreirinhas-comboio-praia.jpg",
+        "descricao": "chegada a Barreirinhas",
+        "foco": "center 55%"
+      },
+      "6": {
+        "arquivo": "fotos/lencois/prea-pedra-furada.jpg",
+        "descricao": "Preá",
+        "foco": "center 55%"
+      }
+    }
+  },
+  "transfer": null,
+  "quemSomos": "O Desbravando UTV conduz expedições por todo o Brasil, levando famílias e grupos aos cantos mais bonitos e selvagens do país. Você pilota o seu próprio UTV; do resto cuidamos nós: rota, transporte da máquina, hospedagem, apoio mecânico e os eventos fora do volante.",
+  "padrao": [
+    "Planejamento e reconhecimento de rota",
+    "Transporte do seu UTV (cegonha) com seguro",
+    "Hospedagem escolhida a dedo entre as opções e padrões da região",
+    "Equipe completa com você o tempo todo",
+    "Carro de apoio e mecânicos",
+    "Eventos fora do volante (boas-vindas e encerramento)",
+    "Fotos e vídeos profissionais"
+  ]
+}

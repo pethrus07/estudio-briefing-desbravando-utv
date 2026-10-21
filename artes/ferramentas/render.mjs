@@ -17,6 +17,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { cracha, meta as metaCracha } from "../templates/cracha.mjs";
 import { cordao, meta as metaCordao } from "../templates/cordao.mjs";
 import { parcerias, meta as metaParcerias } from "../templates/parcerias.mjs";
+import { dossie } from "../templates/dossie.mjs";
 import { arteEstampa, mapaAplicacao } from "../templates/camiseta.mjs";
 import { evento, meta as metaEvento } from "../templates/evento.mjs";
 
@@ -357,6 +358,29 @@ function fazerCartaoUtv() {
   paraPng(escrever("cartao-utv", html), 300, "cartao-utv");
 }
 
+/* O dossiê da expedição: 16:9, uma página por dia, conteúdo vindo do CMS do site
+   (desbravando-site/design/dossie-dados.mjs grava o JSON aqui em dados/). */
+function fazerDossie() {
+  const arquivo = opt("dados", "dossie-lencois-maranhenses.json");
+  const dados = lerDados(arquivo);
+  const f = dados.fotos ?? {};
+  for (const chave of ["capa", "equipe", "expedicao", "encerramento", "fecho"]) {
+    if (f[chave]) f[chave] = { ...f[chave], arquivo: resolverFoto(f[chave].arquivo) };
+  }
+  for (const [dia, slot] of Object.entries(f.dias ?? {})) {
+    if (slot) f.dias[dia] = { ...slot, arquivo: resolverFoto(slot.arquivo) };
+  }
+  const { html, pendencias } = dossie(dados);
+  const nPaginas = (html.match(/<section class="pagina/g) ?? []).length;
+  console.log(`Dossiê · ${dados.titulo} · ${nPaginas} páginas · 1920×1080`);
+  if (pendencias.length) {
+    console.log(`  ${pendencias.length} pendência(s) antes de enviar:`);
+    for (const x of pendencias) console.log(`    · ${x}`);
+  }
+  const nome = `dossie-${arquivo.replace(/^dossie-|\.json$/g, "")}`;
+  paraPng(escrever(nome, html), 110, nome);
+}
+
 function fazerDescritivo() {
   const arquivo = opt("dados", "faturamento-2026-08.json");
   const dados = lerDados(arquivo);
@@ -542,6 +566,7 @@ const alvos = {
   "cartao-utv": fazerCartaoUtv,
   carta: fazerCarta,
   descritivo: fazerDescritivo,
+  dossie: fazerDossie,
 
   fechamento: fazerFechamento,
   proposta: fazerProposta,
