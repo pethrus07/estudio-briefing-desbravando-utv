@@ -1,0 +1,139 @@
+{
+  "_nota": "FECHAMENTO do ciclo 26/09 → 25/10/2026 da Desbravando UTV, emitido em 26/10. É o ÚLTIMO ciclo da régua antiga: o acordo de R$ 500/mês vale a partir do ciclo que abre hoje, 26/10, e daí em diante não existe mais preço por peça. Nenhum total é escrito aqui: o template soma e o auditor recalcula e ABORTA se divergir. O dossiê da Lençóis entra como DOCUMENTO a R$ 50, no precedente que o Pedro fixou em 07/09 para a apresentação de Parcerias (10 páginas, R$ 50). As voltas do cardápio e do dossiê que foram correção minha, e não pedido do cliente, não entram como rodada de ajuste.",
+  "cliente": "Desbravando UTV",
+  "plano": "Aceleração",
+  "competencia": "26/09 a 25/10/2026",
+  "emissao": "26/10/2026",
+  "vencimento": "26/10/2026",
+  "carater": "Fechamento do ciclo — último no formato de mensalidade + peça a peça",
+  "regra": [
+    "A mensalidade do Plano Aceleração é de R$ 165, com vencimento no dia 26, e inclui suporte, backup, monitoramento, pequenos ajustes, 1 atualização de página, relatório mensal e a cota de 5 itens de criação digital.",
+    "Este documento lista tudo o que foi entregue entre 26/09 e 25/10, o ciclo fechado. Os valores de peça foram acordados item a item; cada entrega inclui 2 rodadas de ajuste.",
+    "Cada peça tem preço fechado, e a coluna de artes diz quantos arquivos finais distintos aquele valor cobre. Peça que constrói um modelo novo custa mais que a que reaproveita o modelo.",
+    "A partir do ciclo que abre em 26/10 entra o acordo de R$ 500/mês por 6 ciclos, que passa a cobrir o catálogo de 10 peças por expedição. Este é o último fechamento no formato antigo."
+  ],
+  "baseFixa": {
+    "titulo": "Plano mensal",
+    "itens": [
+      {
+        "nome": "Plano Aceleração — mensalidade",
+        "nota": "Renova no dia 26 · inclui a cota de 5 itens de criação digital",
+        "valor": 165
+      },
+      {
+        "nome": "Token de acesso claude-sistemas",
+        "nota": "Recorrente mensal desde 26/07",
+        "valor": 30
+      }
+    ]
+  },
+  "pecas": [
+    {
+      "nome": "Expedição Origens — cronograma do dia 23/10",
+      "oque": "A sexta-feira da expedição numa peça, para o grupo saber a hora de cada coisa.",
+      "spec": "1080 × 1350 px (feed), pixel exato · P&B estrito · espinha de horários com a hora à esquerda",
+      "artes": ["Sexta 23/10 — saída, almoço no trecho, chegada e evento"],
+      "valor": 20
+    },
+    {
+      "nome": "Expedição Origens — cronograma do dia 24/10",
+      "oque": "O sábado, no mesmo modelo do dia anterior.",
+      "spec": "1080 × 1350 px (feed) · mesmo modelo, conteúdo do segundo dia",
+      "artes": ["Sábado 24/10 — saída, almoço no Trecho Raiz, chegada e evento"],
+      "valor": 20
+    },
+    {
+      "nome": "Expedição Origens — adesivo do UTV",
+      "oque": "O adesivo da expedição, em vetor, pronto para a gráfica, nas duas cores.",
+      "spec": "150 mm de diâmetro + 3 mm de sangria · 100% vetor, sem imagem · texto em arco no anel, número de 38 mm",
+      "artes": ["Versão para fundo claro", "Versão para fundo escuro"],
+      "valor": 45,
+      "argumento": "Desenho novo, não adaptação: anel com texto em arco, losangos, anel duplo e o ano como elemento próprio. O motor de texto em arco foi construído para esta peça."
+    },
+    {
+      "nome": "Expedição Origens — cardápio do dia 1",
+      "oque": "O almoço e o jantar da sexta, numa peça só.",
+      "spec": "1080 × 1350 px (feed) · refeição como divisor, categoria como rótulo, pratos em Archivo",
+      "artes": ["Dia 1 — almoço e jantar"],
+      "valor": 25
+    },
+    {
+      "nome": "Expedição Origens — cardápio do dia 2",
+      "oque": "O almoço na parrilla e o jantar do sábado.",
+      "spec": "1080 × 1350 px (feed) · mesmo modelo, com a lista de brasa do almoço",
+      "artes": ["Dia 2 — almoço na parrilla e jantar"],
+      "valor": 25
+    },
+    {
+      "nome": "Expedição Lençóis Maranhenses — dossiê de 15 páginas",
+      "oque": "O documento que apresenta a expedição de maio/2027 para quem vai viajar: capa, a expedição, um slide por dia do roteiro, hospedagem, o que está incluso e o fecho.",
+      "spec": "PDF 16:9, 960 × 540 pt, 15 páginas · P&B estrito com foto colorida · conteúdo lido direto do site, para o PDF e a página nunca divergirem",
+      "artes": ["Dossiê completo, 15 páginas"],
+      "valor": 50,
+      "argumento": "Cobrado como documento, na mesma régua da apresentação de Parcerias. Inclui a montagem do modelo, que não existia, e a busca das três imagens de licença livre que faltavam, com o crédito impresso na última página."
+    }
+  ],
+  "ajustes": {
+    "titulo": "Rodadas de ajuste além das duas inclusas",
+    "valorUnitario": 5,
+    "itens": [],
+    "nota": "Nenhuma peça deste ciclo passou das duas rodadas inclusas. As voltas do cardápio e do dossiê que foram correção nossa, e não pedido de mudança, não contam."
+  },
+  "cotaDigital": {
+    "titulo": "Criação digital — dentro da cota do plano",
+    "usados": 1,
+    "total": 5,
+    "itens": [
+      {
+        "nome": "Guia do Briefing de Comunicação",
+        "oque": "O passo a passo de como preencher o briefing das peças dentro do Controle de Eventos e baixar o pacote pronto."
+      }
+    ],
+    "nota": "Cota de 5 itens renovada em 26/09. Restam 4 usos, sem custo."
+  },
+  "modulo": {
+    "titulo": "Sistema — incluso no plano, sem cobrança",
+    "nome": "Controle de Eventos: aba Comunicação, permissão por pessoa e correções",
+    "oque": "A aba Comunicação passou a funcionar, o briefing das peças virou conteúdo do site sem redigitação, e o cadastro de usuário ganhou a opção de escolher as áreas de cada pessoa, uma a uma.",
+    "spec": "aba Comunicação alcançável e funcionando · briefing fechado vira a página da expedição no site · permissão individual por área, sem precisar criar perfil · quatro verificações automáticas novas antes de cada publicação",
+    "valor": 0,
+    "argumento": "Manutenção e evolução do sistema estão dentro da mensalidade. Entra aqui para ficar registrado o que foi feito no ciclo, sem valor cobrado."
+  },
+  "projetos": {
+    "titulo": "Projetos à parte",
+    "itens": [
+      {
+        "nome": "Plataformas — fluxo de design + controle de eventos",
+        "parcela": 4,
+        "de": 10,
+        "total": 1100,
+        "valor": 100
+      },
+      {
+        "nome": "Novo design do site",
+        "parcela": 3,
+        "de": 3,
+        "total": 700,
+        "valor": 200,
+        "nota": "300 + 200 + 200 · última parcela"
+      }
+    ]
+  },
+  "descartado": {
+    "titulo": "Executado e não cobrado",
+    "itens": [
+      {
+        "nome": "Cardápio da Origens — primeira versão em quatro peças",
+        "argumento": "Saiu em quatro peças, uma por refeição, e foi refeito em duas, uma por dia, como estava escrito no pedido. Sem cobrança."
+      },
+      {
+        "nome": "Dossiê da Lençóis — duas rodadas de refino",
+        "argumento": "Refeito até chegar no padrão: variação de diagramação página a página e troca das imagens. Correção nossa, sem cobrança."
+      },
+      {
+        "nome": "Ícone do site",
+        "argumento": "O ícone da aba ainda era o logotipo antigo. Refeito a partir da marca atual, em vetor. Sem cobrança."
+      }
+    ]
+  }
+}
