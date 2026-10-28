@@ -218,16 +218,29 @@ export function dossie(dados) {
   });
 
   /* ---- fora do volante ---------------------------------------------- */
-  const foraDoVolante = pag(
-    "texto-foto",
-    `<div class="col">
-       <p class="sobrelinha">FORA DO VOLANTE</p>
-       <h2 class="titulo secao">BOAS-VINDAS &amp;<br>ENCERRAMENTO.</h2>
-       <p class="corpo">Toda expedição começa e termina com um evento à altura — o seu momento fora do
-         volante. Antes da primeira trilha e no fim da última, o grupo se encontra fora do UTV.</p>
-     </div>
-     ${foto(f.encerramento, "meia")}`
-  );
+  /* Sem foto, a página do evento não mostra caixa vazia: vira centrada, só com tipografia,
+     que é o que a régua manda em `sem_foto`. A Ana pediu para tirar a foto em 28/10. */
+  const temFotoEvento = f.encerramento && f.encerramento.arquivo;
+  const foraDoVolante = temFotoEvento
+    ? pag(
+        "texto-foto",
+        `<div class="col">
+           <p class="sobrelinha">FORA DO VOLANTE</p>
+           <h2 class="titulo secao">BOAS-VINDAS &amp;<br>ENCERRAMENTO.</h2>
+           <p class="corpo">Toda expedição começa e termina com um evento à altura — o seu momento fora do
+             volante. Antes da primeira trilha e no fim da última, o grupo se encontra fora do UTV.</p>
+         </div>
+         ${foto(f.encerramento, "meia")}`
+      )
+    : pag(
+        "painel centrado",
+        `<div class="col larga">
+           <p class="sobrelinha">FORA DO VOLANTE</p>
+           <h2 class="titulo secao">BOAS-VINDAS &amp; ENCERRAMENTO.</h2>
+           <p class="corpo solta">Toda expedição começa e termina com um evento à altura, o seu momento fora
+             do volante. Antes da primeira trilha e no fim da última, o grupo se encontra fora do UTV.</p>
+         </div>`
+      );
 
   /* ---- o padrão Desbravando ------------------------------------------ */
   const padrao = pag(
@@ -373,6 +386,11 @@ export function dossie(dados) {
   .itens.fora li { color: rgba(255,255,255,.62); }
   .itens.duas { columns: 2; column-gap: 72px; }
   .itens.duas li { break-inside: avoid; }
+  /* No painel centrado a coluna NÃO pode esticar: com flex 1 1 100% ela toma a altura toda
+     e o texto volta a encostar no topo, que é o oposto de centrar. */
+  .centrado { justify-content: center; }
+  .pagina.centrado .col { flex: 0 1 auto; }
+  .centrado .corpo.solta { max-width: 46ch; }
   .painel, .pacote, .hospedagem { flex-direction: column; align-items: flex-start; justify-content: center; }
   .duas-colunas { display: flex; gap: 96px; width: 100%; margin-top: 10px; }
   .duas-colunas > div { flex: 1 1 50%; }

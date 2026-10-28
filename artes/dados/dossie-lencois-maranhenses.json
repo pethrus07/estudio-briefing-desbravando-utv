@@ -1,10 +1,8 @@
 {
-  "_nota": "Gerado de design/dossie-dados.mjs a partir do CMS do site em 2026-10-21. Não editar à mão: corrige no CMS e roda de novo, senão o PDF e a página do site divergem.",
+  "_nota": "Gerado de design/dossie-dados.mjs a partir do CMS do site em 2026-10-28. Não editar à mão: corrige no CMS e roda de novo, senão o PDF e a página do site divergem.",
   "_pendencias": [
     "transfer (origem, embarque e chegada) — não existe campo no CMS",
-    "quemSomos foi reescrito do dossiê da Costa Doce — conferir com o cliente",
-    "a lista de 'o padrão Desbravando' veio do dossiê da Costa Doce — é da empresa, conferir",
-    "os dias 2, 5 e 7 usam foto de TERCEIRO (Wikimedia Commons, crédito impresso no fecho) — trocar por foto da própria expedição assim que existir"
+    "fotos — entram por nome de arquivo no bloco \"fotos\""
   ],
   "slug": "lencois-maranhenses",
   "titulo": "Lençóis Maranhenses",
@@ -19,7 +17,7 @@
   "pontoEncontro": "São Luís",
   "chamada": "De Barreirinha ao Preá, onde a aventura encontra o paraíso",
   "tituloSobre": "O lado mais bruto e surpreendente do Nordeste",
-  "sobreDestino": "Uma jornada inesquesível pelo litoral do Nordeste, unindo aventura, diversão e momentos especiais ao lado de pessoas especiais. Um trajeto em família de São Lupis aos lençois Maranhenses, passando pelo Delta do Parnaíba e pelo litoral do Ceará, até chegar ás paisagens paradisíacas de Preá e Jericoacoara. Uma experiência a bordo dos UTVs que combina dunas, praias selvagens, gastronomia regional e cenários exuerantes, criando memórias únicas para compartilhar em família.",
+  "sobreDestino": "Uma jornada inesquesível pelo litoral do Nordeste, unindo aventura, diversão e momentos especiais em família. Um trajeto que percorre o litoral do Maranhão, passando pelos Pequenos Lançóis e pelo Delta do Parnaíba, até chegar às praias e dunas do Ceará, com destino final na região do Preá e Jericoacoara. Uma experiência a bordo dos UTVs que combina dunas, praias selvagens, gastronomia regional e cenários exuberantes, criando memórias únicas para compartilhar em família.",
   "dataInicio": "2027-05-24",
   "dataFim": "2027-05-30",
   "roteiro": [
@@ -66,7 +64,7 @@
       "titulo": "Dia 05 - Exploração pela região de Camocim",
       "texto": "Exploração pela região de Camocim, com dunas e praias. Aproveitando um pouco da região mais exclusiva.",
       "km": "~80Km",
-      "layout": "faixa"
+      "layout": "lado"
     },
     {
       "dia": 6,
@@ -75,7 +73,7 @@
       "titulo": "Dia 06 - Camocim → Preá",
       "texto": "Trecho de Camocim á Tatajuba, para á região de Jericoacoara, finalizando no Preá. Com almoço em Tatajuba e finalizando no Preá, com nosso tradicional evento de encerramento.",
       "km": "~65Km",
-      "layout": "lado"
+      "layout": "faixa"
     },
     {
       "dia": 7,
@@ -94,8 +92,7 @@
       "noites": "1 noite",
       "papel": "Ponto de início da aventura pelo Nordeste",
       "texto": "",
-      "fotos": [],
-      "foto": "fotos/lencois/hotel-porto-preguicas.jpg"
+      "fotos": []
     },
     {
       "nome": "Pousada Jagatá",
@@ -103,8 +100,7 @@
       "noites": "1 noite",
       "papel": "Descanso entre dunas e praias paradisíacas",
       "texto": "",
-      "fotos": [],
-      "foto": "fotos/lencois/hotel-jagata.jpg"
+      "fotos": []
     },
     {
       "nome": "Vila Parnaíba",
@@ -112,8 +108,7 @@
       "noites": "1 noite",
       "papel": "Conforto para explorar os encantos do Delta",
       "texto": "",
-      "fotos": [],
-      "foto": "fotos/lencois/hotel-vila-parnaiba.jpg"
+      "fotos": []
     },
     {
       "nome": "Villa Zen",
@@ -121,8 +116,7 @@
       "noites": "2 noites",
       "papel": "Tranquilidade em meio ás belezas do litoral cearense",
       "texto": "",
-      "fotos": [],
-      "foto": "fotos/lencois/hotel-villa-zen.jpg"
+      "fotos": []
     },
     {
       "nome": "Casa Siará",
@@ -130,8 +124,7 @@
       "noites": "1 noite",
       "papel": "O cenário perfeito para celebrar nossa jornada",
       "texto": "",
-      "fotos": [],
-      "foto": "fotos/lencois/hotel-casa-siara.jpg"
+      "fotos": []
     }
   ],
   "hospedagemNota": "Hospedagens escolhidas cuidadosamente, priorizando localização, estrutura e conforto",
@@ -142,7 +135,6 @@
     "5 almoços (1 Barreirinhas, 1 Tutóia, 1 Parnaíba, 2 Camoci, 1 Preá)",
     "Eventos fora do volante - boas vindas e encerramento (coquetel, chopp, drinks, música ao vivo)",
     "Carro de apoio 4x4 + reboque",
-    "4 quadriciclos + mecânicos no comboio",
     "Staff (guias - apoio - mecânico)",
     "Equipe de fotos e vídeos profissionais"
   ],
@@ -172,11 +164,7 @@
       "descricao": "comboio na praia larga",
       "foco": "center 60%"
     },
-    "encerramento": {
-      "arquivo": "fotos/lencois/evento-casa-siara-anoitecer.jpg",
-      "descricao": "casa ao anoitecer",
-      "foco": "center 50%"
-    },
+    "encerramento": null,
     "fecho": {
       "arquivo": "fotos/lencois/comboio-por-do-sol.jpg",
       "descricao": "comboio ao pôr do sol",
@@ -188,30 +176,30 @@
         "descricao": "comboio chegando a Barreirinhas",
         "foco": "center 58%"
       },
+      "2": {
+        "arquivo": "fotos/lencois/dia02-pequenos-lencois.jpg",
+        "descricao": "Pequenos Lençóis",
+        "foco": "center 55%"
+      },
       "3": {
-        "arquivo": "fotos/lencois/comboio-praia-larga.jpg",
-        "descricao": "comboio na praia larga",
-        "foco": "center 62%"
+        "arquivo": "fotos/lencois/dia03-travessia-barco.jpg",
+        "descricao": "travessia de barco pelo Delta",
+        "foco": "center 45%"
       },
       "4": {
         "arquivo": "fotos/lencois/comboio-fila-utv.jpg",
         "descricao": "fila de UTVs na praia",
         "foco": "center 38%"
       },
+      "5": {
+        "arquivo": "fotos/lencois/dia05-comboio-serra.jpg",
+        "descricao": "comboio na região de Camocim",
+        "foco": "center 50%"
+      },
       "6": {
         "arquivo": "fotos/lencois/prea-pedra-furada.jpg",
         "descricao": "Pedra Furada · Preá",
         "foco": "center 50%"
-      },
-      "2": {
-        "arquivo": "fotos/lencois/dia02-pequenos-lencois.jpg",
-        "descricao": "Pequenos Lençóis",
-        "foco": "center 55%"
-      },
-      "5": {
-        "arquivo": "fotos/lencois/dia05-tatajuba.jpg",
-        "descricao": "Tatajuba",
-        "foco": "center 55%"
       },
       "7": {
         "arquivo": "fotos/lencois/dia07-tatajuba-por-do-sol.jpg",
@@ -231,5 +219,5 @@
     "Eventos fora do volante (boas-vindas e encerramento)",
     "Fotos e vídeos profissionais"
   ],
-  "creditos": "Fotos dos dias 2, 5 e 7: Helier Gomes (CC BY-SA 4.0), Artur Warchavchik (CC BY-SA 3.0) e Mario Penner (CC BY 3.0), via Wikimedia Commons. Demais imagens: acervo Desbravando UTV."
+  "creditos": "Fotos dos dias 2 e 7: Helier Gomes (CC BY-SA 4.0) e Mario Penner (CC BY 3.0), via Wikimedia Commons. Demais imagens: acervo Desbravando UTV."
 }
