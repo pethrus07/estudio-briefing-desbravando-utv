@@ -34,6 +34,22 @@ const esc = (s) =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 
+/**
+ * O texto de um dia em um ou mais parágrafos, pela linha em branco que vem do CMS.
+ *
+ * O cliente escreve em dois quando o dia tem duas partes — em 29/10/2026 a travessia de barco
+ * da Lençóis chegou assim: um parágrafo para o deslocamento dos veículos, outro para o passeio
+ * no Delta. Um `<p>` só com tudo dentro tira a pausa que ela pôs de propósito, e oito linhas
+ * corridas é exatamente o que ninguém lê num slide.
+ */
+const paras = (t, classe) =>
+  String(t ?? "")
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => `<p class="${classe}">${esc(p)}</p>`)
+    .join("");
+
 const P = 1920;
 const A = 1080;
 const ESCALA = 2 / 3;
@@ -166,7 +182,7 @@ export function dossie(dados) {
          <div class="dentro base">
            ${abertura}
            <h3 class="titulo secao">${limpo}</h3>
-           <p class="corpo largo">${esc(d.texto)}</p>
+           ${paras(d.texto, "corpo largo")}
            ${km}
          </div>`);
 
@@ -180,7 +196,7 @@ export function dossie(dados) {
                <span class="numero">${n}</span>
                <div>
                  <h3 class="titulo dia-titulo">${limpo}</h3>
-                 <p class="corpo">${esc(d.texto)}</p>
+                 ${paras(d.texto, "corpo")}
                </div>
              </div>
              ${km}
@@ -196,7 +212,7 @@ export function dossie(dados) {
              <span class="numero grande">${n}</span>
              <div>
                <h3 class="titulo dia-titulo grande">${limpo}</h3>
-               <p class="corpo solta">${esc(d.texto)}</p>
+               ${paras(d.texto, "corpo solta")}
              </div>
            </div>
            ${d.km ? `<div class="numeros"><div><small>${sobre("trecho do dia")}</small><b>${esc(d.km)}</b></div></div>` : ""}
@@ -209,7 +225,7 @@ export function dossie(dados) {
            <span class="numero">${n}</span>
            <div>
              <h3 class="titulo dia-titulo">${limpo}</h3>
-             <p class="corpo">${esc(d.texto)}</p>
+             ${paras(d.texto, "corpo")}
              ${km}
            </div>
          </div>
@@ -355,6 +371,9 @@ export function dossie(dados) {
 
   .corpo { font-family: "Archivo"; font-size: 26px; line-height: 1.52; color: rgba(255,255,255,.82); margin: 24px 0 0; max-width: 46ch; }
   .corpo.menor { font-size: 21px; margin-top: 12px; }
+  /* Parágrafo seguinte respira MENOS que a distância do título, senão o bloco se parte em
+     dois textos soltos em vez de ler como um só com uma pausa no meio. */
+  .corpo + .corpo { margin-top: 16px; }
   .km { font-family: "Archivo"; font-size: 18px; letter-spacing: 3px; color: rgba(255,255,255,.55); margin: 16px 0 0; text-transform: uppercase; }
   .linha-regiao { font-family: "Archivo"; font-weight: 700; font-size: 34px; color: #fff; margin: 22px 0 0; }
 

@@ -990,3 +990,36 @@ com `SyntaxError`, e como eu tinha mandado a saída para `/dev/null` o PNG antig
 lugar e eu olhei duas vezes para uma peça que não tinha sido regerada. **Duas lições: nunca
 acento grave em comentário dentro de template literal, e nunca engolir a saída do render.**
 
+
+## 29/10/2026 · Dossiê Lençóis: o texto do dia 3 (travessia de barco)
+
+Pedido da Ana às 09:24: "consegue ajustar o texto do dia da balsa (tutoia a Parnaíba)", com o
+texto novo colado na mensagem. É o **dia 3**, `lencois-maranhenses-dia-3`.
+
+O texto novo é mais longo e corrige três erros do anterior, que era dela também: "á apreciar",
+"com com" e "prócimo". Entrou como veio, sem retoque meu.
+
+**Gravado no CMS, não no JSON.** O dossiê e a página do site dizem a mesma coisa para a mesma
+pessoa; digitar no JSON faria o PDF e o site divergirem no primeiro ajuste. Entrou por
+`desbravando-site/design/ajustar-dia.mjs`, que nasceu aqui: o cliente reescreve o texto de um
+dia toda semana, e até hoje o caminho era colar à mão no Editor da Wix. O texto vai por
+ARQUIVO, nunca por argumento, porque acento, aspas e quebra de parágrafo são comidos de três
+maneiras diferentes pelo shell no Windows.
+
+**O parágrafo dela quase se perdeu no caminho.** Ela escreveu em dois: um para o deslocamento
+dos veículos, outro para o passeio no Delta. `dossie-dados.mjs` colapsava todo espaço em
+branco num espaço só, e no primeiro render os dois saíram grudados num bloco de oito linhas
+corridas. O fim de parágrafo agora vira linha em branco (`</p><p>` → `\n\n`), e o template
+ganhou `paras()`, que devolve um `<p>` por parágrafo nas quatro geometrias de dia. Com um
+parágrafo só, a saída é idêntica à de antes: nenhum outro dia muda.
+
+`.corpo + .corpo` respira 16px, menos que os 24px que separam o texto do título. Igual, o
+bloco se partia em dois textos soltos em vez de ler como um com uma pausa no meio.
+
+Esteira: PDF 13 checagens e HTML 15, as duas PASSOU, sem texto cortado. Único aviso é 72 ppi
+efetivo, que é o esperado para destino tela.
+
+**⚠️ Conflito de conteúdo levantado e NÃO corrigido:** o texto novo diz que no dia 3 os
+veículos seguem de cegonha até Parnaíba, e a lista de NÃO INCLUSO diz "Cegonha (transporte do
+UTV) ida e volta,". Na mesma peça, quem lê entende que vai pagar à parte um transporte que o
+roteiro já prevê. É pergunta para o cliente, não conserto meu.

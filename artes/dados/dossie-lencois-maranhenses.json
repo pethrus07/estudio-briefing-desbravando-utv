@@ -1,5 +1,5 @@
 {
-  "_nota": "Gerado de design/dossie-dados.mjs a partir do CMS do site em 2026-10-28. Não editar à mão: corrige no CMS e roda de novo, senão o PDF e a página do site divergem.",
+  "_nota": "Gerado de design/dossie-dados.mjs a partir do CMS do site em 2026-10-29. Não editar à mão: corrige no CMS e roda de novo, senão o PDF e a página do site divergem.",
   "_pendencias": [
     "transfer (origem, embarque e chegada) — não existe campo no CMS",
     "fotos — entram por nome de arquivo no bloco \"fotos\""
@@ -44,7 +44,7 @@
       "data": "26/05",
       "local": "Tutóia → Parnaíba",
       "titulo": "Dia 03 - Tutóia → Parnaíba",
-      "texto": "Travessia de barco pelo Delta, uma tarde com uma linda vista á apreciar. Almoço com gastronomia regional, e encerramento com com a revoada dos guarás, prócimo ao pôr do sol.",
+      "texto": "Em Tutóia, os veículos seguem de cegonha até Parnaíba, enquanto o grupo realiza a travessia de barco, evitando um longo deslocamento terrestre por regiões remotas e garantindo mais segurança e conforto.\n\nO dia será dedicado à exploração do Delta do Parnaíba, com navegação, paradas para banho, bebidas e almoço em uma comunidade das ilhas, com gastronomia regional. O encerramento acontece ao pôr do sol, com a espetacular revoada dos guarás.",
       "km": "",
       "layout": "lado"
     },
