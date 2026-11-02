@@ -10,3 +10,11 @@ node_modules/
 # Dados do cliente: ficam FORA do repositório (ver artes/README.md, "Onde ficam os dados")
 artes/dados/
 artes/CONTROLE-DE-ARTES.md
+
+# Fotos de expedição do cliente: ficam na pasta de dados (DESBRAVANDO_DADOS/fotos)
+artes/fotos/lencois/
+artes/fotos/veiculo-oficial/
+
+# Python compilado
+__pycache__/
+*.pyc

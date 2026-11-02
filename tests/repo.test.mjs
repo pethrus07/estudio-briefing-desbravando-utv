@@ -29,7 +29,14 @@ test("as chaves do Mini Drive estão vazias no repositório", () => {
 
 test("nenhum dado do cliente está versionado", () => {
   const arquivos = execFileSync("git", ["ls-files"], { cwd: raiz, encoding: "utf8" }).split("\n");
-  const proibidos = arquivos.filter((a) => a.startsWith("artes/dados/") || a.endsWith("CONTROLE-DE-ARTES.md"));
+  const proibidos = arquivos.filter(
+    (a) =>
+      a.startsWith("artes/dados/") ||
+      a.endsWith("CONTROLE-DE-ARTES.md") ||
+      a.startsWith("artes/fotos/lencois/") ||
+      a.startsWith("artes/fotos/veiculo-oficial/") ||
+      a.endsWith(".pyc")
+  );
   assert.deepEqual(proibidos, []);
 });
 

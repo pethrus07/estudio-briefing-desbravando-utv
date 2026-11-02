@@ -19,7 +19,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { cracha } from "../templates/cracha.mjs";
 import { cordao } from "../templates/cordao.mjs";
 import { especificacao } from "../templates/especificacao.mjs";
-import { arquivoDeDados } from "./caminhos.mjs";
+import { acharFoto, arquivoDeDados } from "./caminhos.mjs";
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const artes = join(aqui, "..");
@@ -75,8 +75,8 @@ function png(pdfPath, dpi, prefixo, pasta) {
 const dados = JSON.parse(readFileSync(arquivoDeDados("equipe.json"), "utf8"));
 const resolverFoto = (c) => {
   if (!c) return null;
-  const abs = resolve(artes, c);
-  return existsSync(abs) ? pathToFileURL(abs).href : null;
+  const abs = acharFoto(artes, c);
+  return abs ? pathToFileURL(abs).href : null;
 };
 dados.pessoas = dados.pessoas.map((p) => ({ ...p, foto: resolverFoto(p.foto) }));
 

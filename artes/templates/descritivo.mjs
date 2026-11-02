@@ -23,6 +23,13 @@ export function descritivo(d) {
   const totalArtes = artes.reduce((s, i) => s + i.valor, 0);
   const menos = artes.filter((i) => i.classe === "menos simples").length;
   const simples = artes.filter((i) => i.classe === "simples").length;
+  // Preço por classe vem dos dados do faturamento (pasta de dados), nunca do código.
+  const precoDe = (classe) => artes.find((i) => i.classe === classe)?.valor ?? 0;
+  const somaDe = (classe) => artes.filter((i) => i.classe === classe).reduce((s, i) => s + i.valor, 0);
+  const precoMenos = precoDe("menos simples");
+  const precoSimples = precoDe("simples");
+  const totalMenos = somaDe("menos simples");
+  const totalSimples = somaDe("simples");
   const totalAjustes = (d.ajustes?.itens ?? []).reduce((s, i) => s + i.valor, 0);
   const acompanhados = d.pecas.reduce((s, p) => s + (p.acompanha?.length ?? 0), 0);
 

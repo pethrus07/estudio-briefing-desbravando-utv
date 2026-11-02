@@ -35,7 +35,7 @@ import { fechamento } from "../templates/fechamento.mjs";
 import { proposta } from "../templates/proposta.mjs";
 import { acordo } from "../templates/acordo.mjs";
 import { guia } from "../templates/guia.mjs";
-import { arquivoDeDados } from "./caminhos.mjs";
+import { acharFoto, arquivoDeDados } from "./caminhos.mjs";
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const artes = join(aqui, "..");
@@ -76,8 +76,8 @@ const lerDados = (arquivo) => JSON.parse(readFileSync(arquivoDeDados(arquivo), "
 function resolverFoto(caminho) {
   if (!caminho) return null;
   if (/^https?:\/\//.test(caminho)) return caminho;
-  const abs = resolve(artes, caminho);
-  if (!existsSync(abs)) {
+  const abs = acharFoto(artes, caminho);
+  if (!abs) {
     console.log(`  ! foto não encontrada, seguindo sem ela: ${caminho}`);
     return null;
   }

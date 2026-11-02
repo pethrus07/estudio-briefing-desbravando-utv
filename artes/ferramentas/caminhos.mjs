@@ -24,6 +24,20 @@ export const RAIZ_DADOS = process.env.DESBRAVANDO_DADOS
 export const DIR_DADOS = join(RAIZ_DADOS, "dados");
 export const CONTROLE_DE_ARTES = join(RAIZ_DADOS, "CONTROLE-DE-ARTES.md");
 
+/**
+ * Foto citada num JSON (ex.: "fotos/lencois/hotel-jagata.jpg") → caminho absoluto, ou null.
+ * Procura primeiro em artes/ (fotos públicas: commons, evento, provisórias) e depois na
+ * pasta de dados, onde moram as fotos de expedição do cliente (fotos/lencois,
+ * fotos/veiculo-oficial), que desde 01/11/2026 não entram no git.
+ */
+export function acharFoto(artes, caminho) {
+  for (const base of [artes, RAIZ_DADOS]) {
+    const abs = resolve(base, caminho);
+    if (existsSync(abs)) return abs;
+  }
+  return null;
+}
+
 /** Caminho de um arquivo de dados, com erro claro se a pasta não estiver lá. */
 export function arquivoDeDados(nome) {
   if (!existsSync(DIR_DADOS)) {

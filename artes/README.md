@@ -19,6 +19,8 @@ do cliente.
 | os JSON (antes `artes/dados/`) | `C:\Users\olive\Arquivo-projetos\desbravando-dados\dados\` |
 | a tabela de artes, versões e ajustes (antes `artes/CONTROLE-DE-ARTES.md`) | `C:\Users\olive\Arquivo-projetos\desbravando-dados\CONTROLE-DE-ARTES.md` |
 | valores internos que os auditores barram no PDF | `C:\Users\olive\Arquivo-projetos\desbravando-dados\dados\valores-internos.json` |
+| fotos de expedição (antes `artes/fotos/lencois` e `artes/fotos/veiculo-oficial`) | `C:\Users\olive\Arquivo-projetos\desbravando-dados\fotos\` |
+| preço de cada arte no descritivo | sai do `faturamento-*.json` (o template não tem número) |
 
 Para usar outra pasta, defina `DESBRAVANDO_DADOS` com o caminho que contém `dados/` e o
 CONTROLE. Quem resolve o caminho é `ferramentas/caminhos.mjs`; sem a pasta, o render para com
@@ -141,7 +143,8 @@ render lista o que falta antes de enviar:
 ```
 
 Fotos: aponte `"foto"` / `"arquivo"` para o caminho do arquivo (absoluto, ou relativo à
-pasta `artes/`). Retrato de crachá: recorte vertical, rosto no terço superior — ele entra
+pasta `artes/`; se não estiver em `artes/`, o render procura o mesmo caminho na pasta de
+dados, onde ficam `fotos/lencois` e `fotos/veiculo-oficial`). Retrato de crachá: recorte vertical, rosto no terço superior — ele entra
 em preto e branco.
 
 ## Para a gráfica
