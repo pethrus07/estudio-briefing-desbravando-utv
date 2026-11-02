@@ -14,11 +14,10 @@ Two tools for Desbravando UTV, an off-road UTV expedition operator, in one repos
 ## Status
 
 Active. The Studio runs in production on Cloudflare Pages (`estudio-briefing.pages.dev`).
-The art factory runs locally. Private repository since 2026-11-01.
+The art factory runs locally.
 
-Known gap: `main` is behind production. The live Studio is the branch `feat/modo-reuniao`
-(meeting mode wizard), byte for byte except for the two Mini Drive keys, checked on
-2026-11-01.
+`main` matches production: the meeting mode wizard (`feat/modo-reuniao`) was merged on
+2026-11-01. The only difference is the two Mini Drive keys, which stay empty here.
 
 ## The problem it solves
 
@@ -74,19 +73,13 @@ Diagrams in [docs/arquitetura/](docs/arquitetura/). Studio internals in
   does not deploy.
 - Two products share this repository. Splitting them is proposed, not done.
 
-## Before going public
+## History cleanup (2026-11)
 
-History still holds client data. It must be removed from every commit first:
-
-- `artes/dados/` (agreement, monthly statements, invoicing, proposal, team, partners with phones);
-- `artes/CONTROLE-DE-ARTES.md` (billing table with amounts);
-- the internal value lists that lived in `artes/ferramentas/auditar-acordo.py`,
-  `auditar-fechamento.py` and `auditar-proposta.py` until 2026-11-01.
-
-Still in the tree and waiting for a decision: per-piece prices in
-`artes/templates/descritivo.mjs` and the expedition photos in `artes/fotos/lencois/` and
-`artes/fotos/veiculo-oficial/`.
+The history was rewritten on 2026-11-01, before the repository was opened. Client data
+(`artes/dados/`, `artes/CONTROLE-DE-ARTES.md`), the internal value lists of the auditors,
+the expedition photos and the per-piece prices left every commit. They live in a data
+folder outside the repository, read through `DESBRAVANDO_DADOS`.
 
 ## License
 
-All rights reserved.
+All rights reserved. Published as portfolio; not licensed for reuse. See [LICENSE](LICENSE).

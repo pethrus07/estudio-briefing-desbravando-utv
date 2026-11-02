@@ -14,11 +14,10 @@ Duas ferramentas da Desbravando UTV, operadora de expedições off-road de UTV, 
 ## Status
 
 Ativo. O Estúdio está em produção no Cloudflare Pages (`estudio-briefing.pages.dev`). A
-fábrica de artes roda na máquina. Repositório privado desde 01/11/2026.
+fábrica de artes roda na máquina.
 
-Lacuna conhecida: o `main` está atrás da produção. O Estúdio no ar é o branch
-`feat/modo-reuniao` (assistente do modo reunião), byte a byte, tirando as duas chaves do Mini
-Drive. Conferido em 01/11/2026.
+O `main` é igual à produção: o assistente do modo reunião (`feat/modo-reuniao`) entrou por
+merge em 01/11/2026. A única diferença são as duas chaves do Mini Drive, vazias aqui.
 
 ## O problema que resolve
 
@@ -74,18 +73,13 @@ Diagramas em [docs/arquitetura/](docs/arquitetura/). Funcionamento interno do Es
   não publica.
 - Dois produtos dividem este repositório. Separar em dois está proposto, não feito.
 
-## Antes de tornar público
+## Limpeza do histórico (2026-11)
 
-O histórico ainda tem dado do cliente. Precisa sair de todos os commits antes:
-
-- `artes/dados/` (acordo, fechamentos, faturamento, proposta, equipe, parcerias com telefone);
-- `artes/CONTROLE-DE-ARTES.md` (tabela de cobrança com valores);
-- as listas de valores internos que ficavam em `artes/ferramentas/auditar-acordo.py`,
-  `auditar-fechamento.py` e `auditar-proposta.py` até 01/11/2026.
-
-Continuam na árvore e precisam de decisão: os preços por arte em `artes/templates/descritivo.mjs`
-e as fotos de expedição em `artes/fotos/lencois/` e `artes/fotos/veiculo-oficial/`.
+O histórico foi reescrito em 01/11/2026, antes de o repositório ser aberto. Os dados do
+cliente (`artes/dados/`, `artes/CONTROLE-DE-ARTES.md`), as listas de valores internos dos
+auditores, as fotos de expedição e os preços por arte saíram de todos os commits. Eles
+ficam numa pasta de dados fora do repositório, lida pela variável `DESBRAVANDO_DADOS`.
 
 ## Licença
 
-Todos os direitos reservados.
+Todos os direitos reservados. Publicado como portfólio; não licenciado para reuso. Veja o arquivo [LICENSE](LICENSE).
