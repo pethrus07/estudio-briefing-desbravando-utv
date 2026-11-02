@@ -1,75 +1,92 @@
-# Estúdio de Briefing · Desbravando UTV
+# Briefing Studio · Desbravando UTV
 
-![status](https://img.shields.io/badge/status-em%20produção-6FCF97)
-![tipo](https://img.shields.io/badge/app-HTML%20único%20offline-E34F26)
-![backend](https://img.shields.io/badge/backend-nenhum-lightgrey)
-![deps](https://img.shields.io/badge/dependências-JSZip-blue)
+[Português](README.pt-BR.md) · English
 
-**Projeto real, em produção — não é demo nem exercício de portfólio.** É usado no dia a dia da **Desbravando UTV**, uma operação de expedições de UTV com atuação nacional que movimenta milhões de reais.
+Two tools for Desbravando UTV, an off-road UTV expedition operator, in one repository:
 
-**Desbravando UTV:** [site oficial](https://desbravandoutv.com) · Instagram [@desbravando_utv](https://www.instagram.com/desbravando_utv/)
+1. **Briefing Studio** (`index.html`): a single offline HTML file. A guided form turns an
+   expedition brief into a structured `.zip` (photos, `expedicao.json`, brand kit,
+   instructions) built in the browser.
+2. **Art factory** (`artes/`): Node and Python scripts that render print and social pieces
+   (badges, stickers, flags, menus, expedition dossier, schedules) from HTML/CSS templates
+   to PDF and PNG, with automatic checks on each PDF.
 
-> Ferramenta de briefing usada no atendimento ao cliente: um **único arquivo HTML, client-side e offline**, que transforma um formulário guiado num **pacote estruturado** (`.zip`) pronto pra virar um deck de 14 slides. Sem servidor, sem login, sem build — abre e usa.
+## Status
 
----
+Active. The Studio runs in production on Cloudflare Pages (`estudio-briefing.pages.dev`).
+The art factory runs locally. Private repository since 2026-11-01.
 
-## 1. Visão Geral e a Dor
+Known gap: `main` is behind production. The live Studio is the branch `feat/modo-reuniao`
+(meeting mode wizard), byte for byte except for the two Mini Drive keys, checked on
+2026-11-01.
 
-Fechar uma expedição exige combinar um monte de coisa com o cliente: destino, datas, o que entra no pacote, fotos de referência, tom da arte. Isso costumava ir solto por WhatsApp e e-mail, e quem ia montar a arte final recebia um amontoado sem padrão — faltando foto, faltando medida, faltando contexto.
+## The problem it solves
 
-**O que está sendo resolvido?**
-Padronizar a coleta do briefing num formulário sob medida e cuspir, no fim, um **pacote organizado e previsível** — as imagens separadas, os textos estruturados em JSON, o kit de marca junto e as instruções de montagem — em vez de um monte de anexo solto.
+Briefs for each expedition used to arrive scattered over chat and e-mail, and every piece of
+art needed several rounds of questions. The Studio collects the brief once, in a fixed
+structure. The art factory turns structured data into finished files with the real brand
+fonts and logos, and refuses a PDF whose numbers do not match the data.
 
-**Por que um HTML único offline?**
-Porque roda em qualquer máquina, sem instalar nada e sem internet, e o pacote é montado no próprio navegador. Zero infra pra manter, zero custo, e nada do cliente sai da máquina de quem preenche até a hora de exportar.
+## Stack
 
----
+- Studio: HTML, CSS and JavaScript in one file, JSZip, no build, no backend
+- Art factory: Node.js ES modules, headless Chrome (PDF), PyMuPDF (PNG and PDF checks)
 
-## 2. Arquitetura e Decisões Técnicas
+## Run locally
 
+- Studio: open `index.html` in a browser. No server needed.
+- Art factory: `npm run artes -- <piece>` (for example `npm run artes -- bandeira`).
+  It reads client data from a folder outside the repository; see
+  [artes/README.md](artes/README.md), section "Onde ficam os dados".
+
+## Tests
+
+```bash
+npm test
 ```
-Schema (14 seções)  ──►  Formulário renderizado  ──►  JSZip (no navegador)  ──►  pacote.zip
-  definido em JS         textos + fotos arrastadas       monta tudo client-side     IMAGENS/ · expedicao.json
-                                                                                    MARCA/ · instruções
-```
 
-| Camada | Escolha | Por que escolhi isso? | Alternativa considerada | Nota de impacto |
-|---|---|---|---|---|
-| **Formato** | Arquivo HTML único, self-contained | Roda offline em qualquer lugar, sem instalar; marca (logos/fontes) embutida como data URI | App com build (Vite) | Portabilidade total, zero setup |
-| **Render** | Formulário dirigido por schema | As 14 seções são dados, não markup — o motor lê o conteúdo de forma genérica, o que facilita generalizar depois | Formulário hard-coded | Flexível e fácil de evoluir |
-| **Empacotamento** | JSZip no cliente | Monta o `.zip` no navegador; nada sobe pra servidor nenhum na coleta | Backend que zipa | Sem infra, sem custo, privado |
-| **Saída** | `expedicao.json` + `IMAGENS/` + `MARCA/` + instruções | Handoff estruturado e legível por máquina, pronto pra IA montar o PDF de 14 slides | PDF direto no cliente | Separa conteúdo de diagramação |
-| **Acesso** | Sem login (uso interno 1:1) | Ferramenta de atendimento, não produto multiusuário | Auth/contas | Atrito zero |
+Checks that the Studio's JavaScript compiles, that the Mini Drive keys are empty in the
+repository, that no client data is tracked, and that the data path resolver works. Each
+commercial PDF of the art factory is also audited by its own script when rendered.
 
-O pacote gerado conecta com o [Mini Drive](https://github.com/pethrus07/minidrive-desbravando-utv): quando configurado, o `.zip` sobe pro acervo e o download local continua como rede de segurança (*fail-open*).
+## Folder structure
 
----
+| Path | What it is |
+|---|---|
+| `index.html` | The Briefing Studio |
+| `docs/app/` | Studio technical map, expansion plan, July review notes |
+| `artes/` | Art factory: `templates/`, `ferramentas/`, brand, photos with credits |
+| `artes/saida/` | Rendered files (ignored by git) |
+| `tests/` | Automated checks |
+| `docs/arquitetura/` | Diagrams |
 
-## 3. Destaque de Engenharia / "The Hard Part"
+## Architecture
 
-**Gerar um entregável estruturado inteiro no navegador, sem backend.** O fim do fluxo não é "enviar um formulário" — é montar, client-side, um `.zip` que separa responsabilidades:
+Diagrams in [docs/arquitetura/](docs/arquitetura/). Studio internals in
+[docs/app/MAPA_TECNICO.md](docs/app/MAPA_TECNICO.md) (Portuguese).
 
-- `IMAGENS/` — as fotos arrastadas, já organizadas;
-- `expedicao.json` — todo o conteúdo do briefing em formato estruturado (o que a etapa de diagramação realmente consome);
-- `MARCA/` — logos, fontes e o guia de identidade visual embutidos, pra arte final sair fiel à marca;
-- instruções de montagem dos 14 slides.
+## Decisions and known limits
 
-O truque é o **motor ser genérico**: o formulário é renderizado a partir de um schema de seções, então o que muda entre um briefing e outro é dado, não código. Separar *conteúdo* (JSON) de *diagramação* (o PDF montado depois) é o que deixa o mesmo motor atender novos tipos de arte sem reescrever a ferramenta.
+- Client data (agreement, monthly statements, proposal, team names, partner phones) and the
+  billing table live outside the repository since 2026-11-01. The pipeline finds them through
+  `DESBRAVANDO_DADOS`.
+- The production Studio is a direct upload to Cloudflare Pages, not linked to GitHub. A merge
+  does not deploy.
+- Two products share this repository. Splitting them is proposed, not done.
 
----
+## Before going public
 
-## 4. Como usar
+History still holds client data. It must be removed from every commit first:
 
-Abra o `index.html` no navegador — não precisa de servidor nem internet. Preencha as seções, arraste as fotos e clique em exportar; o `.zip` é baixado na hora.
+- `artes/dados/` (agreement, monthly statements, invoicing, proposal, team, partners with phones);
+- `artes/CONTROLE-DE-ARTES.md` (billing table with amounts);
+- the internal value lists that lived in `artes/ferramentas/auditar-acordo.py`,
+  `auditar-fechamento.py` and `auditar-proposta.py` until 2026-11-01.
 
-> App em produção, personalizado para uma operação real. As chaves de integração com o acervo (`DRIVE_ENDPOINT`/`DRIVE_KEY`) ficam **vazias** neste repositório — são preenchidas só no arquivo em uso, nunca versionadas.
+Still in the tree and waiting for a decision: per-piece prices in
+`artes/templates/descritivo.mjs` and the expedition photos in `artes/fotos/lencois/` and
+`artes/fotos/veiculo-oficial/`.
 
----
+## License
 
-## 5. Roadmap
-
-O plano de evolução — sair de "um deck de expedição" para uma ferramenta que
-atende vários tipos de arte, online e com slides reordenáveis, mantendo o custo
-próximo de zero — está documentado em **[PLANO_EXPANSAO.md](PLANO_EXPANSAO.md)**:
-diagnóstico do que existe hoje, decisões fechadas, arquitetura escolhida
-(Cloudflare Pages + R2) e custo de operação.
+All rights reserved.
