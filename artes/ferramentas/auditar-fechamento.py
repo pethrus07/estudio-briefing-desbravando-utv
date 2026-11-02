@@ -28,15 +28,18 @@ from pathlib import Path
 
 import fitz
 
-PROIBIDAS = [
-    "reajuste",
-    "menos simples",
-    "R$ X",
-    "R$ X",
-    "R$ X",
-    "20 simples",
-    "preparação vetorial para gráfica",
-]
+
+def _valores_internos(chave, arquivo_de_dados):
+    """Lista de valores internos que não podem aparecer no PDF. Mora na pasta de dados do
+    cliente (valores-internos.json, ao lado do JSON auditado), não no código: é número
+    comercial. Sem o arquivo, a checagem fica vazia e o auditor avisa."""
+    p = Path(arquivo_de_dados).parent / "valores-internos.json"
+    if not p.exists():
+        print(f"  aviso: {p} não existe; checagem de valores internos desligada")
+        return {}
+    return json.load(io.open(p, encoding="utf-8")).get(chave, {})
+
+# As expressões e valores internos do fechamento moram em valores-internos.json, na pasta de dados (ver _valores_internos).
 
 
 def _glifos_da_fonte(doc, nome: str) -> str:
@@ -143,7 +146,7 @@ def main() -> None:
         )
 
     # ---------- 3 · frase proibida ----------
-    for p in PROIBIDAS:
+    for p in _valores_internos("fechamento", sys.argv[2]):
         if p.lower() in plano.lower():
             falhas.append(f'frase do modelo antigo sobreviveu: "{p}"')
 

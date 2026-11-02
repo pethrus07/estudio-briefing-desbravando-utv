@@ -32,15 +32,18 @@ from pathlib import Path
 
 import fitz
 
-# Números que pertencem a rodadas anteriores ou à cozinha interna. Nenhum pode chegar ao
-# documento que fecha o acordo.
-PROIBIDOS = {
-    "R$ X": "o valor da proposta anterior, já superada",
-    "R$ X": "o valor citado de cabeça na reunião de 13/10",
-    "R$ X": "a primeira contraproposta do cliente",
-    "R$ X": "custo interno de infraestrutura, não conferido",
-    "US$ X": "custo interno de infraestrutura, não conferido",
-}
+
+def _valores_internos(chave, arquivo_de_dados):
+    """Lista de valores internos que não podem aparecer no PDF. Mora na pasta de dados do
+    cliente (valores-internos.json, ao lado do JSON auditado), não no código: é número
+    comercial. Sem o arquivo, a checagem fica vazia e o auditor avisa."""
+    p = Path(arquivo_de_dados).parent / "valores-internos.json"
+    if not p.exists():
+        print(f"  aviso: {p} não existe; checagem de valores internos desligada")
+        return {}
+    return json.load(io.open(p, encoding="utf-8")).get(chave, {})
+
+# Os valores internos do acordo moram em valores-internos.json, na pasta de dados (ver _valores_internos).
 
 
 def normaliza(s: str) -> str:
@@ -163,7 +166,7 @@ def main() -> None:
         )
 
     # ---------- 4 · número proibido ----------
-    for n, oque in PROIBIDOS.items():
+    for n, oque in _valores_internos("acordo", sys.argv[2]).items():
         if n in plano:
             falhas.append(f"número que não podia chegar ao acordo: {n} — {oque}")
 

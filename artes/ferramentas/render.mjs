@@ -35,6 +35,7 @@ import { fechamento } from "../templates/fechamento.mjs";
 import { proposta } from "../templates/proposta.mjs";
 import { acordo } from "../templates/acordo.mjs";
 import { guia } from "../templates/guia.mjs";
+import { arquivoDeDados } from "./caminhos.mjs";
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const artes = join(aqui, "..");
@@ -65,7 +66,7 @@ const opt = (nome, padrao = null) => {
 };
 const flag = (nome) => args.includes(`--${nome}`);
 
-const lerDados = (arquivo) => JSON.parse(readFileSync(join(artes, "dados", arquivo), "utf8"));
+const lerDados = (arquivo) => JSON.parse(readFileSync(arquivoDeDados(arquivo), "utf8"));
 
 /**
  * Caminho de foto do JSON → URL absoluta. Aceita caminho absoluto ou relativo à
@@ -419,7 +420,7 @@ function fazerFechamento() {
 
   const r = spawnSync(
     acha(PYTHONS, "Python"),
-    [join(aqui, "auditar-fechamento.py"), pdf, join(artes, "dados", arquivo)],
+    [join(aqui, "auditar-fechamento.py"), pdf, arquivoDeDados(arquivo)],
     { encoding: "utf8" }
   );
   process.stdout.write(r.stdout ?? "");
@@ -460,7 +461,7 @@ function fazerAcordo() {
 
   const r = spawnSync(
     acha(PYTHONS, "Python"),
-    [join(aqui, "auditar-acordo.py"), pdf, join(artes, "dados", arquivo)],
+    [join(aqui, "auditar-acordo.py"), pdf, arquivoDeDados(arquivo)],
     { encoding: "utf8" }
   );
   process.stdout.write(r.stdout ?? "");
@@ -486,7 +487,7 @@ function fazerProposta() {
 
   const r = spawnSync(
     acha(PYTHONS, "Python"),
-    [join(aqui, "auditar-proposta.py"), pdf, join(artes, "dados", arquivo)],
+    [join(aqui, "auditar-proposta.py"), pdf, arquivoDeDados(arquivo)],
     { encoding: "utf8" }
   );
   process.stdout.write(r.stdout ?? "");

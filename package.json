@@ -1,0 +1,11 @@
+{
+  "name": "estudio-briefing-desbravando-utv",
+  "private": true,
+  "type": "module",
+  "description": "Estúdio de Briefing (app HTML único) e a fábrica de artes da Desbravando UTV.",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "artes": "node artes/ferramentas/render.mjs",
+    "artes:tudo": "node artes/ferramentas/render.mjs tudo"
+  }
+}

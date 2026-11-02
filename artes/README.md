@@ -8,6 +8,24 @@ Fonte da verdade da identidade: `SPEC_MD` em `../index.html`. Registro usado aqu
 (P&B estrito)** — preto, branco e cinza; a única cor viria da fotografia, e nas peças de
 marca até a foto entra dessaturada.
 
+## Onde ficam os dados (desde 01/11/2026)
+
+Os JSON que alimentam as peças e a tabela de cobrança **não ficam mais neste repositório**:
+acordo, fechamentos, faturamento, proposta, equipe e parcerias são dado comercial e pessoal
+do cliente.
+
+| O quê | Onde |
+|---|---|
+| os JSON (antes `artes/dados/`) | `C:\Users\olive\Arquivo-projetos\desbravando-dados\dados\` |
+| a tabela de artes, versões e ajustes (antes `artes/CONTROLE-DE-ARTES.md`) | `C:\Users\olive\Arquivo-projetos\desbravando-dados\CONTROLE-DE-ARTES.md` |
+| valores internos que os auditores barram no PDF | `C:\Users\olive\Arquivo-projetos\desbravando-dados\dados\valores-internos.json` |
+
+Para usar outra pasta, defina `DESBRAVANDO_DADOS` com o caminho que contém `dados/` e o
+CONTROLE. Quem resolve o caminho é `ferramentas/caminhos.mjs`; sem a pasta, o render para com
+uma mensagem clara. Onde esta página diz `dados/...`, leia "a pasta de dados".
+
+A pasta de dados tem um git só local, sem remoto, para guardar o histórico.
+
 ## O que tem aqui
 
 | Peça | Template | Formato final | Arquivo de conteúdo |

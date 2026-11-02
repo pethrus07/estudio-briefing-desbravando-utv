@@ -19,6 +19,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { cracha } from "../templates/cracha.mjs";
 import { cordao } from "../templates/cordao.mjs";
 import { especificacao } from "../templates/especificacao.mjs";
+import { arquivoDeDados } from "./caminhos.mjs";
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const artes = join(aqui, "..");
@@ -71,7 +72,7 @@ function png(pdfPath, dpi, prefixo, pasta) {
 
 /* ---------------------------------------------------------------- execução */
 
-const dados = JSON.parse(readFileSync(join(artes, "dados", "equipe.json"), "utf8"));
+const dados = JSON.parse(readFileSync(arquivoDeDados("equipe.json"), "utf8"));
 const resolverFoto = (c) => {
   if (!c) return null;
   const abs = resolve(artes, c);
@@ -130,11 +131,11 @@ writeFileSync(
     semFoto.length
       ? `ATENÇÃO — faltam os retratos de: ${semFoto.map((p) => p.nome).join(", ")}.\n` +
         "Os crachás dessas pessoas saíram com o espaço da foto vazio. Coloque os arquivos\n" +
-        "em artes/fotos/, aponte no artes/dados/equipe.json e rode de novo:\n" +
+        "em artes/fotos/, aponte no equipe.json da pasta de dados (DESBRAVANDO_DADOS) e rode de novo:\n" +
         "  node artes/ferramentas/pacote-grafica.mjs"
       : "Todos os retratos estão aplicados.",
     "",
-    "Os nomes e cargos vêm de artes/dados/equipe.json — confira antes de enviar.",
+    "Os nomes e cargos vêm do equipe.json da pasta de dados (DESBRAVANDO_DADOS) — confira antes de enviar.",
     "",
     `Gerado a partir de: ${resolve(artes)}`,
   ].join("\n"),

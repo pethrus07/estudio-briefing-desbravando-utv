@@ -15,6 +15,7 @@
 import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { arquivoDeDados } from "./caminhos.mjs";
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const artes = join(aqui, "..");
@@ -146,7 +147,7 @@ function porCaminho(obj, caminho) {
   return [alvo, partes.at(-1)];
 }
 
-const dadosPath = join(artes, "dados", "parcerias-apoio-mecanico.json");
+const dadosPath = arquivoDeDados("parcerias-apoio-mecanico.json");
 const dados = JSON.parse(readFileSync(dadosPath, "utf8"));
 mkdirSync(fotos, { recursive: true });
 

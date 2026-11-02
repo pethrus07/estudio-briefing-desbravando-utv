@@ -6,3 +6,7 @@ Thumbs.db
 node_modules/
 .env
 .env.*
+
+# Dados do cliente: ficam FORA do repositório (ver artes/README.md, "Onde ficam os dados")
+artes/dados/
+artes/CONTROLE-DE-ARTES.md

@@ -21,6 +21,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { adesivoVetor, textosNecessarios, meta } from "../templates/adesivo-vetor.mjs";
+import { arquivoDeDados } from "./caminhos.mjs";
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const artes = join(aqui, "..");
@@ -81,7 +82,7 @@ function paraPdf(html, nome, pdfPath) {
 
 /* ------------------------------------------------------------------ gera */
 
-const dados = JSON.parse(readFileSync(join(artes, "dados", "expedicao-urubici-2026.json"), "utf8"));
+const dados = JSON.parse(readFileSync(arquivoDeDados("expedicao-urubici-2026.json"), "utf8"));
 
 if (existsSync(destino)) rmSync(destino, { recursive: true, force: true });
 const pastas = { preto: join(destino, "1-PRETO"), branco: join(destino, "2-BRANCO") };
