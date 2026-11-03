@@ -1,6 +1,6 @@
 # Estúdio de Briefing · Desbravando UTV
 
-Português · [English](README.md)
+[English](README.md) · Português
 
 Duas ferramentas da Desbravando UTV, operadora de expedições off-road de UTV, num repositório:
 
@@ -19,7 +19,7 @@ fábrica de artes roda na máquina.
 O `main` é igual à produção: o assistente do modo reunião (`feat/modo-reuniao`) entrou por
 merge em 01/11/2026. A única diferença são as duas chaves do Mini Drive, vazias aqui.
 
-## O problema que resolve
+## O problema
 
 O briefing de cada expedição chegava solto por mensagem e e-mail, e cada arte pedia várias
 rodadas de pergunta. O Estúdio coleta o briefing uma vez, numa estrutura fixa. A fábrica de
@@ -48,7 +48,7 @@ Confere que o JavaScript do Estúdio compila, que as chaves do Mini Drive estão
 repositório, que nenhum dado do cliente está versionado e que a resolução da pasta de dados
 funciona. Cada PDF comercial da fábrica também é auditado pelo próprio script quando é gerado.
 
-## Estrutura de pastas
+## Pastas
 
 | Caminho | O que é |
 |---|---|
@@ -73,7 +73,7 @@ Diagramas em [docs/arquitetura/](docs/arquitetura/). Funcionamento interno do Es
   não publica.
 - Dois produtos dividem este repositório. Separar em dois está proposto, não feito.
 
-## Limpeza do histórico (2026-11)
+### Limpeza do histórico (2026-11)
 
 O histórico foi reescrito em 01/11/2026, antes de o repositório ser aberto. Os dados do
 cliente (`artes/dados/`, `artes/CONTROLE-DE-ARTES.md`), as listas de valores internos dos

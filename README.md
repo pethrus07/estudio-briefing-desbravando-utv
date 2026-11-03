@@ -1,6 +1,6 @@
-# Briefing Studio · Desbravando UTV
+# Estúdio de Briefing · Desbravando UTV
 
-[Português](README.pt-BR.md) · English
+English · [Português](README.pt-BR.md)
 
 Two tools for Desbravando UTV, an off-road UTV expedition operator, in one repository:
 
@@ -19,7 +19,7 @@ The art factory runs locally.
 `main` matches production: the meeting mode wizard (`feat/modo-reuniao`) was merged on
 2026-11-01. The only difference is the two Mini Drive keys, which stay empty here.
 
-## The problem it solves
+## The problem
 
 Briefs for each expedition used to arrive scattered over chat and e-mail, and every piece of
 art needed several rounds of questions. The Studio collects the brief once, in a fixed
@@ -48,7 +48,7 @@ Checks that the Studio's JavaScript compiles, that the Mini Drive keys are empty
 repository, that no client data is tracked, and that the data path resolver works. Each
 commercial PDF of the art factory is also audited by its own script when rendered.
 
-## Folder structure
+## Folders
 
 | Path | What it is |
 |---|---|
@@ -73,7 +73,7 @@ Diagrams in [docs/arquitetura/](docs/arquitetura/). Studio internals in
   does not deploy.
 - Two products share this repository. Splitting them is proposed, not done.
 
-## History cleanup (2026-11)
+### History cleanup (2026-11)
 
 The history was rewritten on 2026-11-01, before the repository was opened. Client data
 (`artes/dados/`, `artes/CONTROLE-DE-ARTES.md`), the internal value lists of the auditors,
