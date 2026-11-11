@@ -148,7 +148,7 @@ export function programacao(dados, opcoes = {}) {
   .bl-titulo{ margin-bottom:9.5em }
   .agenda{ margin-bottom:9.5em }
 
-  /* marca: só a montanha (logo nova, 11/11/2026; a lateral de 26/08 saiu) */
+  /* marca: o símbolo da logo oficial (montanha nova, 11/11/2026; ferramentas/atualizar-logo.py) */
   .marca{ width:${11.5 / fmt.k}em; color:#fff }
   .marca svg{ width:100%; height:auto; display:block; fill:currentColor }
 

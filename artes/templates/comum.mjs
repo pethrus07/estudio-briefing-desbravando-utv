@@ -159,7 +159,7 @@ export function htmlFundo(arquivo = "topografia-conduta.svg") {
   <div class="veu"></div>`;
 }
 
-/** Marca: só a montanha (logo nova, 11/11/2026). O lockup com o nome e a assinatura lateral saíram. */
+/** Marca no cromo social: o símbolo da logo oficial (montanha nova, 11/11/2026), gerado por ferramentas/atualizar-logo.py. */
 export function htmlMarca() {
   return `<div class="marca">${svgDoRepo("logo-montanha.svg")}</div>`;
 }
