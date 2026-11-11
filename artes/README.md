@@ -37,6 +37,7 @@ A pasta de dados tem um git só local, sem remoto, para guardar o histórico.
 | Documento para as marcas | `templates/parcerias.mjs` | 1920 × 1080, 9 páginas | `dados/parcerias-*.json` |
 | Camiseta da equipe | `templates/camiseta.mjs` | estampa 80 mm (costas) e 30 mm (frente) | `--cargo=` |
 | Peça de evento (social) | `templates/evento.mjs` | 1080 × 1920 e 1080 × 1350 | `dados/evento-*.json` |
+| Contagem regressiva | `templates/contagem.mjs` (gera com `ferramentas/contagem.mjs <dados.json>`) | 1080 × 1920, um PNG por número | `dados/contagem-*.json` |
 
 ## Como gerar
 
