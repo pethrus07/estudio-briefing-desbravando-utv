@@ -5,7 +5,8 @@
  *   node artes/ferramentas/contagem.mjs contagem-costa-doce.json --destino=C:\pasta
  *
  * O JSON mora na pasta de dados do cliente (ver caminhos.mjs): ele aponta para fotos de
- * expedição, que não entram neste repositório. Sai um PNG por número, em pixel exato
+ * expedição, que não entram neste repositório. Logo e patrocínio são caminhos relativos a
+ * artes/ (marca/...), resolvidos pelo mesmo `acharFoto`. Sai um PNG por número, em pixel exato
  * (screenshot direto, sem passar por PDF), e o HTML ao lado para conferir.
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
@@ -45,7 +46,6 @@ const resolverFoto = (c) => {
   if (!abs) throw new Error(`foto não encontrada: ${c}`);
   return pathToFileURL(abs).href;
 };
-dados.patrocinioLogo = pathToFileURL(join(artes, dados.patrocinioLogo)).href;
 
 // O HTML precisa ficar em artes/saida/ para o identidade.css e as fontes resolverem;
 // o PNG vai para o destino pedido.

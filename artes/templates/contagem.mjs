@@ -3,27 +3,38 @@
  *
  * Foto de expedição sangrando a tela inteira e colorida (regra da marca: foto de expedição
  * entra com a cor dela; só peça de marca/patrocínio dessatura). O número é o herói, em
- * Anton; o resto é Archivo pequeno. Logo no topo, patrocínio oficial no fecho.
+ * Anton; o resto é Archivo. A linguagem segue o PDF de apresentação da expedição que o
+ * cliente usa (sobrelinha espaçada, Anton gigante, pílulas de borda fina), para a contagem
+ * ler como parte da mesma campanha.
+ *
+ * LOGO: a oficial de 2026, montanha · filete · #DESBRAVANDOUTV (`marca/logo-oficial-2026.png`,
+ * do arquivo que o Pedro mandou em 11/11/2026). Não é o `logo-lateral.svg` de 26/08: a
+ * montanha nova é mais achatada e a fonte do texto é outra.
+ *
+ * SÉRIE: a régua "20 · 15 · 7 · 3 · 1" acende o número do dia e apaga os outros. É o que
+ * faz as cinco artes lerem como uma sequência no feed de stories.
  *
  * ZONAS DO INSTAGRAM: os ~250 px de cima (barra de progresso, perfil) e os ~340 px de
  * baixo (campo de resposta) ficam cobertos no app. Nada de texto ali: a logo começa em
  * 250 e o bloco termina antes de 1580. O fundo continua sangrando por baixo.
  *
  * Regra herdada do comum: nenhum texto com line-height abaixo de 1. O Anton tem a caixa
- * mais curta que o glifo; o aperto óptico entre "FALTAM" e o número se faz com margin.
+ * mais curta que o glifo; o aperto óptico entre linhas se faz com margin.
  */
-import { esc, svgDoRepo } from "./comum.mjs";
+import { esc } from "./comum.mjs";
 
 const L = 1080;
 const A = 1920;
 const TOPO_SEGURO = 250;
 const BASE_SEGURA = 340;
+const MARGEM = 84;
 
 export function contagem(dados, n, opcoes = {}) {
   const item = dados.numeros.find((x) => x.n === n);
   if (!item) throw new Error(`número ${n} não está nos dados`);
   const um = n === 1;
-  const foto = opcoes.resolverFoto ? opcoes.resolverFoto(item.foto) : item.foto;
+  const url = (c) => (opcoes.resolverFoto ? opcoes.resolverFoto(c) : c);
+  const serie = dados.numeros.map((x) => x.n);
 
   return `<!doctype html>
 <html lang="pt-BR">
@@ -41,60 +52,80 @@ export function contagem(dados, n, opcoes = {}) {
     position:absolute; inset:0; width:100%; height:100%;
     object-fit:cover; object-position:${item.posicao ?? "50% 50%"};
   }
-  /* véu: escurece o topo só o bastante para a logo, deixa o meio respirar com a cor da
-     foto e fecha em preto quase sólido onde mora o número. */
+  /* véu: degradê contínuo (uma janela clara entre duas faixas escuras vira listra) + uma
+     sombra elíptica só atrás da logo, para a foto continuar aberta no resto do topo. Fecha
+     em preto quase sólido onde mora o número. Calibrado por medição de
+     contraste nas cinco fotos (texto mais fraco acima de 4,5:1). */
   .veu{
     position:absolute; inset:0;
-    background:linear-gradient(180deg,
-      rgba(0,0,0,.66) 0%, rgba(0,0,0,.30) 18%, rgba(0,0,0,.04) 27%,
-      rgba(0,0,0,.56) 37%, rgba(0,0,0,.82) 46%, rgba(0,0,0,.90) 60%, rgba(0,0,0,.94) 100%);
+    background:
+      radial-gradient(ellipse 1040px 330px at 400px 345px, rgba(0,0,0,.76), rgba(0,0,0,.30) 55%, rgba(0,0,0,0) 80%),
+      linear-gradient(180deg,
+        rgba(0,0,0,.50) 0%, rgba(0,0,0,.22) 15%, rgba(0,0,0,.20) 25%,
+        rgba(0,0,0,.48) 33%, rgba(0,0,0,.78) 42%, rgba(0,0,0,.90) 54%, rgba(0,0,0,.95) 100%);
+  }
+  /* grão fino: tira o ar de foto ampliada e amarra as cinco fotos num mesmo acabamento */
+  .grao{
+    position:absolute; inset:0; opacity:.07; mix-blend-mode:overlay; pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23f)'/></svg>");
   }
 
-  .marca{ position:absolute; top:${TOPO_SEGURO}px; left:84px; width:190px; color:#fff }
-  .marca svg{ width:100%; height:auto; display:block }
+  .marca{ position:absolute; top:${TOPO_SEGURO + 6}px; left:${MARGEM}px; width:640px }
+  .marca img{ width:100%; height:auto; display:block; filter:drop-shadow(0 2px 18px rgba(0,0,0,.6)) }
 
-  .bloco{
-    position:absolute; left:84px; right:84px; bottom:${BASE_SEGURA + 30}px;
-  }
+  .bloco{ position:absolute; left:${MARGEM}px; right:${MARGEM}px; bottom:${BASE_SEGURA + 24}px }
+
   .sobre{
-    font-weight:700; font-size:26px; line-height:1.3; letter-spacing:.3em;
-    text-transform:uppercase; color:rgba(255,255,255,.9);
+    font-weight:700; font-size:24px; line-height:1.3; letter-spacing:.34em;
+    text-transform:uppercase; color:#fff; text-shadow:0 1px 16px rgba(0,0,0,.6);
   }
   .falta{
-    font-family:"Anton",sans-serif; font-size:92px; line-height:1; text-transform:uppercase;
-    letter-spacing:.02em; margin-top:26px;
+    font-family:"Anton",sans-serif; font-size:96px; line-height:1; text-transform:uppercase;
+    letter-spacing:.015em; margin-top:22px;
   }
-  .linha-num{ display:flex; align-items:baseline; gap:34px; margin-top:-10px }
+  .linha-num{ display:flex; align-items:baseline; gap:30px; margin-top:-14px }
   .num{
-    font-family:"Anton",sans-serif; font-size:${dados.corpoNumero ?? 440}px; line-height:1;
-    letter-spacing:-.02em; font-variant-numeric:tabular-nums;
+    font-family:"Anton",sans-serif; font-size:470px; line-height:1;
+    letter-spacing:-.025em; font-variant-numeric:tabular-nums;
   }
   .dias{
-    font-family:"Anton",sans-serif; font-size:118px; line-height:1; text-transform:uppercase;
-    letter-spacing:.06em;
+    font-family:"Anton",sans-serif; font-size:124px; line-height:1; text-transform:uppercase;
+    letter-spacing:.05em;
   }
-  .fio{ height:2px; background:rgba(255,255,255,.28); margin:6px 0 30px }
-  .rodape{ display:flex; align-items:flex-end; justify-content:space-between; gap:40px }
-  .data{ font-family:"Anton",sans-serif; font-size:50px; line-height:1.05; letter-spacing:.02em }
-  .rota{ font-size:28px; line-height:1.35; color:rgba(255,255,255,.82); margin-top:10px }
+
+  /* régua da série: trilho fino com os cinco marcos; o do dia aceso */
+  .serie{ position:relative; display:flex; justify-content:space-between; margin:8px 0 40px }
+  .serie::before{
+    content:""; position:absolute; left:0; right:0; top:50%; height:2px;
+    background:rgba(255,255,255,.22); transform:translateY(-50%);
+  }
+  .marco{
+    position:relative; font-family:"Anton",sans-serif; font-size:30px; line-height:1;
+    padding:10px 18px; border-radius:999px; background:#000; color:rgba(255,255,255,.42);
+    border:1.5px solid rgba(255,255,255,.22); min-width:72px; text-align:center;
+  }
+  .marco.ativo{ background:#fff; color:#000; border-color:#fff }
+
+  .rodape{ display:flex; align-items:center; justify-content:space-between; gap:24px }
+  .pilulas{ display:flex; gap:14px; flex-wrap:wrap }
+  .pilula{
+    font-weight:600; font-size:24px; line-height:1.2; padding:14px 26px; border-radius:999px;
+    border:1.5px solid rgba(255,255,255,.38); color:#fff; white-space:nowrap;
+  }
   .patro{ text-align:right; flex:none }
   .patro .label{
-    font-weight:600; font-size:18px; line-height:1.3; letter-spacing:.3em;
+    font-weight:600; font-size:16px; line-height:1.3; letter-spacing:.3em;
     text-transform:uppercase; color:rgba(255,255,255,.62);
   }
-  .patro img{ width:230px; height:auto; display:block; margin:12px 0 0 auto }
-  .credito{
-    position:absolute; right:30px; top:${TOPO_SEGURO + 10}px; font-size:16px;
-    color:rgba(255,255,255,.7);
-  }
+  .patro img{ width:200px; height:auto; display:block; margin:12px 0 0 auto }
 </style>
 </head>
 <body>
   <div class="peca">
-    <img class="foto" src="${esc(foto)}" alt="">
+    <img class="foto" src="${esc(url(item.foto))}" alt="">
     <div class="veu"></div>
-    <div class="marca">${svgDoRepo("logo-montanha.svg")}</div>
-    ${item.credito ? `<p class="credito">© ${esc(item.credito)}</p>` : ""}
+    <div class="grao"></div>
+    <div class="marca"><img src="${esc(url(dados.logo))}" alt="Desbravando UTV"></div>
 
     <div class="bloco">
       <p class="sobre">Expedição ${esc(dados.expedicao)}</p>
@@ -103,15 +134,16 @@ export function contagem(dados, n, opcoes = {}) {
         <span class="num">${n}</span>
         <span class="dias">${um ? "dia" : "dias"}</span>
       </div>
-      <div class="fio"></div>
+      <div class="serie">
+        ${serie.map((x) => `<span class="marco${x === n ? " ativo" : ""}">${x}</span>`).join("")}
+      </div>
       <div class="rodape">
-        <div>
-          <p class="data">${esc(dados.periodo)}</p>
-          <p class="rota">${esc(dados.rota)}</p>
+        <div class="pilulas">
+          ${(dados.pilulas ?? []).map((p) => `<span class="pilula">${esc(p)}</span>`).join("")}
         </div>
         <div class="patro">
           <p class="label">Patrocínio oficial</p>
-          <img src="${esc(dados.patrocinioLogo)}" alt="Can-Am">
+          <img src="${esc(url(dados.patrocinioLogo))}" alt="Can-Am">
         </div>
       </div>
     </div>
