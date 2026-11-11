@@ -287,7 +287,7 @@ export function mapaAplicacao({ cargo = "PRODUÇÃO", curvas, curvasDe } = {}) {
 </head>
 <body>
   <div class="folha">
-    <img class="marca" src="../marca/logo-desbravando.png" alt="Desbravando UTV">
+    <img class="marca" src="../marca/logo-montanha-branco.svg" alt="Desbravando UTV">
     <p class="sobrelinha">Uniforme da equipe</p>
     <h1>Camiseta preta<br>${cargo}</h1>
     <p class="intro">Mapa de aplicação e medidas. As artes de estampa vão em arquivo separado,

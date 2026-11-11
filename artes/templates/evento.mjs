@@ -370,7 +370,7 @@ export function evento(dados, opcoes = {}) {
                vetor, nunca pixela, e numa peça de cardápio não precisa do nome por extenso,
                que a sobrelinha já diz. */
             `<div class="marca-vetor">${montanhaSvg()}</div>`
-          : `<img class="marca" src="../marca/logo-desbravando.png" alt="Desbravando UTV">`
+          : `<img class="marca" src="../marca/logo-montanha-branco.svg" alt="Desbravando UTV">`
       }
       <p class="sobrelinha">${esc(dados.sobrelinha)}</p>
 

@@ -51,7 +51,7 @@ function frente(pessoa, layout) {
       <div class="topo-editorial">
         ${foto}
         <div class="veu"></div>
-        <img class="logotipo" src="../marca/logo-desbravando.png" alt="Desbravando UTV">
+        <img class="logotipo" src="../marca/logo-montanha-branco.svg" alt="Desbravando UTV">
       </div>
       <div class="baixo-editorial">
         <h1 class="titulo nome-1">${esc(primeiro)}</h1>
@@ -65,7 +65,7 @@ function frente(pessoa, layout) {
   return `
   <section class="pagina frente centro">
     <div class="sangria-guia"></div>
-    <img class="logotipo" src="../marca/logo-desbravando.png" alt="Desbravando UTV">
+    <img class="logotipo" src="../marca/logo-montanha-branco.svg" alt="Desbravando UTV">
     ${foto}
     <hr class="divisor">
     <h1 class="titulo nome-1" style="font-size:${corpoPrimeiroNome(primeiro)}mm">${esc(primeiro)}</h1>

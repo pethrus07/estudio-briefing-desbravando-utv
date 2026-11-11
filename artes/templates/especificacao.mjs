@@ -99,7 +99,7 @@ export function especificacao({ layout = "centro", pessoas = 0, arquivos = [] } 
 </head>
 <body>
   <div class="folha">
-    <img class="marca" src="../marca/logo-desbravando.png" alt="Desbravando UTV">
+    <img class="marca" src="../marca/logo-montanha-branco.svg" alt="Desbravando UTV">
     <p class="sobrelinha">Especificação técnica</p>
     <h1>Crachá e cordão<br>Equipe Desbravando</h1>
     <p class="intro">Arquivos fechados em PDF, com fontes embutidas e sangria aplicada.

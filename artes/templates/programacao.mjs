@@ -148,8 +148,8 @@ export function programacao(dados, opcoes = {}) {
   .bl-titulo{ margin-bottom:9.5em }
   .agenda{ margin-bottom:9.5em }
 
-  /* logo lateral: montanha · filete · #DESBRAVANDOUTV, o arquivo de marca de 26/08 */
-  .marca{ width:${17.5 / fmt.k}em; color:#fff }
+  /* marca: só a montanha (logo nova, 11/11/2026; a lateral de 26/08 saiu) */
+  .marca{ width:${11.5 / fmt.k}em; color:#fff }
   .marca svg{ width:100%; height:auto; display:block; fill:currentColor }
 
   /* ---------- data ---------- */
@@ -278,7 +278,7 @@ export function programacao(dados, opcoes = {}) {
   <div class="veu"></div>
 
   <div class="coluna">
-    <div class="marca">${svgDoRepo("logo-lateral.svg")}</div>
+    <div class="marca">${svgDoRepo("logo-montanha.svg")}</div>
 
     <div class="miolo">
     <div class="bl-data">

@@ -57,7 +57,7 @@ function anoDividido(ano) {
 function selo(d, u) {
   const [a1, a2] = anoDividido(d.ano);
   return `
-    <img class="marca" src="../marca/logo-desbravando-grande.png" alt="Desbravando UTV">
+    <img class="marca" src="../marca/logo-montanha-branco.svg" alt="Desbravando UTV">
     <div class="edicao bloco-edicao">
       <span class="linha-1">${esc(d.edicao)}</span>
       <span class="linha-2">${esc(d.publico)}<i class="ano"><b>${esc(a1)}</b>${a2 ? `<b>${esc(a2)}</b>` : ""}</i></span>

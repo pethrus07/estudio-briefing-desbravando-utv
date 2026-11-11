@@ -1,5 +1,15 @@
 # Assets de marca — Desbravando UTV
 
+## ⚠️ Logo nova: SÓ A MONTANHA (11/11/2026)
+
+O Pedro definiu em 11/11/2026: **a logo do Desbravando é somente a montanha.** Em toda peça
+nova usar `logo-montanha.svg` (currentColor), `logo-montanha-branco.svg` ou
+`logo-montanha-preto.svg`. **Não usar mais** o lockup com o nome embaixo
+(`logo-desbravando.svg/.png`, `logo-desbravando-grande.png`) nem a assinatura lateral
+(`logo-lateral.svg`). Os arquivos ficam no repositório só para histórico e para o adesivo do
+UTV já produzido (série 01–20), que é o lockup vetorizado e depende de decisão do Pedro para
+mudar. Todos os templates já foram trocados (commit desta data). O que vem abaixo é histórico.
+
 ## logo-lateral.svg — assinatura lateral (26/08/2026)
 
 Arquivo de marca novo, enviado pelo Pedro em 26/08/2026: **o nome fica AO LADO da

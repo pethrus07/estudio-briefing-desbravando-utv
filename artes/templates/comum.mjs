@@ -77,7 +77,7 @@ export function cssCromo(fmt) {
   .miolo{ display:grid; align-content:center; padding:1.4em 0 }
   .bl-titulo{ margin-bottom:5em }
 
-  .marca{ width:${17.5 / fmt.k}em; color:#fff }
+  .marca{ width:${11.5 / fmt.k}em; color:#fff }
   .marca svg{ width:100%; height:auto; display:block; fill:currentColor }
 
   /* ---------- título ---------- */
@@ -159,7 +159,7 @@ export function htmlFundo(arquivo = "topografia-conduta.svg") {
   <div class="veu"></div>`;
 }
 
-/** Assinatura lateral: montanha · filete · #DESBRAVANDOUTV. */
+/** Marca: só a montanha (logo nova, 11/11/2026). O lockup com o nome e a assinatura lateral saíram. */
 export function htmlMarca() {
-  return `<div class="marca">${svgDoRepo("logo-lateral.svg")}</div>`;
+  return `<div class="marca">${svgDoRepo("logo-montanha.svg")}</div>`;
 }

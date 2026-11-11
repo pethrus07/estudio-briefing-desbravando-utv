@@ -113,7 +113,7 @@ const emColunas = (n) =>
 /** Grade de duas colunas só existe se a coluna da direita existir. */
 const grade = (classe, slot) => (tem(slot) ? classe : "grade-solo");
 
-const marca = `<img class="marca-topo" src="../marca/logo-desbravando.png" alt="Desbravando UTV">`;
+const marca = `<img class="marca-topo" src="../marca/logo-montanha-branco.svg" alt="Desbravando UTV">`;
 const rodape = (n) => `<div class="rodape"><span>Programa de Parcerias Desbravando</span><span>${n}</span></div>`;
 
 /* ------------------------------------------------------------------ páginas */

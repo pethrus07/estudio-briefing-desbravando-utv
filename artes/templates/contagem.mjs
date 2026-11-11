@@ -50,7 +50,7 @@ export function contagem(dados, n, opcoes = {}) {
       rgba(0,0,0,.56) 37%, rgba(0,0,0,.82) 46%, rgba(0,0,0,.90) 60%, rgba(0,0,0,.94) 100%);
   }
 
-  .marca{ position:absolute; top:${TOPO_SEGURO}px; left:84px; width:300px; color:#fff }
+  .marca{ position:absolute; top:${TOPO_SEGURO}px; left:84px; width:190px; color:#fff }
   .marca svg{ width:100%; height:auto; display:block }
 
   .bloco{
@@ -93,7 +93,7 @@ export function contagem(dados, n, opcoes = {}) {
   <div class="peca">
     <img class="foto" src="${esc(foto)}" alt="">
     <div class="veu"></div>
-    <div class="marca">${svgDoRepo("logo-desbravando.svg")}</div>
+    <div class="marca">${svgDoRepo("logo-montanha.svg")}</div>
     ${item.credito ? `<p class="credito">© ${esc(item.credito)}</p>` : ""}
 
     <div class="bloco">
