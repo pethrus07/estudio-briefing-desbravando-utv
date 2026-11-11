@@ -39,6 +39,18 @@ A pasta de dados tem um git só local, sem remoto, para guardar o histórico.
 | Peça de evento (social) | `templates/evento.mjs` | 1080 × 1920 e 1080 × 1350 | `dados/evento-*.json` |
 | Contagem regressiva | `templates/contagem.mjs` (gera com `ferramentas/contagem.mjs <dados.json>`) | 1080 × 1920, um PNG por número | `dados/contagem-*.json` |
 
+## Trocar a logo
+
+```bash
+python artes/ferramentas/atualizar-logo.py caminho/da/logo.png --simular   # mostra o plano
+python artes/ferramentas/atualizar-logo.py caminho/da/logo.png             # aplica
+```
+
+Gera `marca/logo-oficial.png/.svg`, `logo-lateral.svg` e `logo-montanha*.svg/.png` (nomes fixos que
+os templates usam), confere o vetor contra o PNG, troca a logo embutida no Estúdio, atualiza a
+pasta de artes do site e os favicons e re-renderiza as contagens. Publicar e fazer commit fica
+fora dele.
+
 ## Como gerar
 
 ```bash

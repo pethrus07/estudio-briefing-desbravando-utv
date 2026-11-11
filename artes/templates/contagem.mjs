@@ -7,8 +7,8 @@
  * cliente usa (sobrelinha espaçada, Anton gigante, pílulas de borda fina), para a contagem
  * ler como parte da mesma campanha.
  *
- * LOGO: a oficial de 2026, montanha · filete · #DESBRAVANDOUTV (`marca/logo-oficial-2026.png`,
- * do arquivo que o Pedro mandou em 11/11/2026). Não é o `logo-lateral.svg` de 26/08: a
+ * LOGO: a oficial, montanha · filete · #DESBRAVANDOUTV (`marca/logo-oficial.svg`, gerado por
+ * `ferramentas/atualizar-logo.py` a partir do arquivo que o Pedro mandou em 11/11/2026). Não é o `logo-lateral.svg` de 26/08: a
  * montanha nova é mais achatada e a fonte do texto é outra.
  *
  * SÉRIE: a régua "20 · 15 · 7 · 3 · 1" acende o número do dia e apaga os outros. É o que
@@ -21,7 +21,7 @@
  * Regra herdada do comum: nenhum texto com line-height abaixo de 1. O Anton tem a caixa
  * mais curta que o glifo; o aperto óptico entre linhas se faz com margin.
  */
-import { esc } from "./comum.mjs";
+import { esc, svgDoRepo } from "./comum.mjs";
 
 const L = 1080;
 const A = 1920;
@@ -71,7 +71,8 @@ export function contagem(dados, n, opcoes = {}) {
   }
 
   .marca{ position:absolute; top:${TOPO_SEGURO + 6}px; left:${MARGEM}px; width:640px }
-  .marca img{ width:100%; height:auto; display:block; filter:drop-shadow(0 2px 18px rgba(0,0,0,.6)) }
+  .marca{ color:#fff }
+  .marca svg{ width:100%; height:auto; display:block; filter:drop-shadow(0 2px 18px rgba(0,0,0,.6)) }
 
   .bloco{ position:absolute; left:${MARGEM}px; right:${MARGEM}px; bottom:${BASE_SEGURA + 24}px }
 
@@ -125,7 +126,7 @@ export function contagem(dados, n, opcoes = {}) {
     <img class="foto" src="${esc(url(item.foto))}" alt="">
     <div class="veu"></div>
     <div class="grao"></div>
-    <div class="marca"><img src="${esc(url(dados.logo))}" alt="Desbravando UTV"></div>
+    <div class="marca" role="img" aria-label="Desbravando UTV">${svgDoRepo("logo-oficial.svg")}</div>
 
     <div class="bloco">
       <p class="sobre">Expedição ${esc(dados.expedicao)}</p>
