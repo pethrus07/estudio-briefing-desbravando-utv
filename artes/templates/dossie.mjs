@@ -27,6 +27,12 @@ const montanhaSvg = () =>
     .replace(/<\?xml[^>]*\?>/g, "")
     .replace(/width="[^"]*"|height="[^"]*"/g, "");
 
+/** A logo oficial completa (montanha · filete · #DESBRAVANDOUTV), em vetor, herdando a cor. */
+const logoOficialSvg = () =>
+  readFileSync(join(aqui, "..", "marca", "logo-oficial.svg"), "utf8")
+    .replace(/<\?xml[^>]*\?>/g, "")
+    .replace(/width="[^"]*"|height="[^"]*"/g, "");
+
 const esc = (s) =>
   String(s ?? "")
     .replace(/&/g, "&amp;")
@@ -92,6 +98,9 @@ export function dossie(dados) {
      não imagem. O lockup em PNG traz o "UTV" encostado no "DO" e lê como erro de montagem;
      foi reprovado em 16/10 no cardápio pelo mesmo motivo. */
   const marca = `<div class="marca-vetor">${montanhaSvg()}</div>`;
+  /* Logo oficial de 2026 onde há espaço (capa e fecho); a montanha sozinha fica para onde
+     não cabe. Regra de 11/11/2026, ver marca/MARCA.md. */
+  const logo = `<div class="logo-oficial">${logoOficialSvg()}</div>`;
 
   const pag = (classe, dentro) => `<div class="folha"><section class="pagina ${classe}">${dentro}</section></div>`;
 
@@ -108,7 +117,7 @@ export function dossie(dados) {
     `${foto(f.capa, "sangra")}
      <div class="veu"></div>
      <div class="dentro">
-       ${marca}
+       ${logo}
        <p class="sobrelinha marca-nome">DESBRAVANDO UTV · EXPEDIÇÃO</p>
        <h1 class="titulo hero">${esc(dados.titulo)}</h1>
        <p class="linha-regiao">${esc(dados.subtitulo)}${dados.regiao ? " · " + esc(dados.regiao) : ""}</p>
@@ -121,7 +130,24 @@ export function dossie(dados) {
   /* ---- 2 · quem somos ---------------------------------------------- */
   /* Full-bleed com o texto na base: a segunda página não pode repetir a geometria da
      terceira, e esta é a que apresenta a empresa — é a hora de deixar a foto falar. */
-  const quemSomos = pag(
+  const pilulas = (txt) => {
+    const ps = (Array.isArray(txt) ? txt : String(txt ?? "").split("|")).map((x) => String(x).trim()).filter(Boolean);
+    return ps.length ? `<div class="pilulas">${ps.map((x) => `<span class="pilula">${esc(x)}</span>`).join("")}</div>` : "";
+  };
+  /* Foto vertical não aguenta sangrar 16:9 (ampliaria 2× e cortaria a maior parte): com
+     `layout: "meia"` no slot a página vira texto + foto. */
+  const quemSomos = f.equipe?.layout === "meia"
+    ? pag(
+        "texto-foto",
+        `<div class="col">
+           <p class="sobrelinha">QUEM SOMOS</p>
+           <h2 class="titulo secao">CONHEÇA O DESBRAVANDO UTV.</h2>
+           ${paras(dados.quemSomos, "corpo")}
+           ${pilulas(dados.quemSomosPilulas)}
+         </div>
+         ${foto(f.equipe, "meia")}`
+      )
+    : pag(
     "cheio",
     `${foto(f.equipe, "sangra")}
      <div class="veu baixo"></div>
@@ -139,9 +165,9 @@ export function dossie(dados) {
     `<div class="col">
        <p class="sobrelinha">A EXPEDIÇÃO</p>
        <h2 class="titulo secao">${esc(dados.tituloSobre)}</h2>
-       <p class="corpo">${esc(dados.sobreDestino)}</p>
-       <div class="numeros">
-         ${[["duração", dados.duracao], ["percurso", dados.percurso], ["formato", dados.formato], ["base", dados.regiao ? dados.regiao.split("·")[0].trim() : ""]]
+       ${paras(dados.sobreDestino, "corpo")}
+       <div class="numeros${dados.ficha ? " ficha" : ""}">
+         ${(dados.ficha ? dados.ficha.map((x) => [x.rotulo, x.valor]) : [["duração", dados.duracao], ["percurso", dados.percurso], ["formato", dados.formato], ["base", dados.regiao ? dados.regiao.split("·")[0].trim() : ""]])
            .filter(([, v]) => v)
            .map(([r, v]) => `<div><small>${sobre(r)}</small><b>${esc(v)}</b></div>`)
            .join("")}
@@ -164,7 +190,30 @@ export function dossie(dados) {
 
      O ritmo é o que faz o documento parecer feito, não montado: duas páginas iguais seguidas
      já lêem como repetição. A ordem vem do JSON, em `layout` por dia. */
-  const dias = (dados.roteiro ?? []).map((d, i) => {
+  /* ROTEIRO EM UMA PÁGINA: expedição curta e sem foto por dia (Origens, 13/11/2026). Três
+     páginas só de tipografia seguidas leriam como repetição; uma página com os dias lado a
+     lado e a agenda de cada um é o que o participante consulta. `agenda` = linhas "HH:MM texto". */
+  const roteiroResumo = dados.roteiroResumo
+    ? [pag(
+        "painel roteiro",
+        `<p class="sobrelinha">A JORNADA</p>
+         <h2 class="titulo secao-menor">O ROTEIRO · ${esc(dados.roteiro.length)} DIAS.</h2>
+         <div class="dias-lado">
+           ${dados.roteiro.map((d) => `<div class="dia-col">
+             <span class="numero">${String(d.dia).padStart(2, "0")}</span>
+             <h3 class="titulo dia-col-titulo">${esc(d.titulo)}</h3>
+             ${d.texto ? `<p class="corpo menor">${esc(d.texto)}</p>` : ""}
+             ${d.km ? `<p class="km">${sobre("trecho")} · ${esc(d.km)}</p>` : ""}
+             <ul class="agenda">${(d.agenda ?? []).map((l) => {
+               const m = String(l).match(/^\s*(\d[\d:/h]*(?:\s*[-–]\s*[\d:/h]+)?)\s+(.*)$/);
+               return m ? `<li><b>${esc(m[1])}</b><span>${esc(m[2])}</span></li>` : `<li><b></b><span>${esc(l)}</span></li>`;
+             }).join("")}</ul>
+           </div>`).join("")}
+         </div>
+         ${dados.roteiroNota ? `<p class="nota-rodape">${esc(dados.roteiroNota)}</p>` : ""}`
+      )]
+    : null;
+  const dias = roteiroResumo ?? (dados.roteiro ?? []).map((d, i) => {
     const slot = (f.dias ?? {})[String(d.dia)];
     const limpo = esc(String(d.titulo).replace(/^\s*dia\s*0?\d+\s*[-–—·:]\s*/i, ""));
     const n = String(d.dia).padStart(2, "0");
@@ -237,7 +286,23 @@ export function dossie(dados) {
   /* Sem foto, a página do evento não mostra caixa vazia: vira centrada, só com tipografia,
      que é o que a régua manda em `sem_foto`. A cliente pediu para tirar a foto em 28/10. */
   const temFotoEvento = f.encerramento && f.encerramento.arquivo;
-  const foraDoVolante = temFotoEvento
+  const fv = dados.foraDoVolante;
+  const foraDoVolante = fv
+    ? pag(
+        "painel",
+        `<p class="sobrelinha">FORA DO VOLANTE</p>
+         <h2 class="titulo secao">${esc(fv.titulo ?? "Boas-vindas & encerramento.")}</h2>
+         ${fv.texto ? `<p class="corpo largo">${esc(fv.texto)}</p>` : ""}
+         <div class="cartoes">
+           ${(fv.cartoes ?? []).map((c) => `<div class="cartao">
+             <p class="sobrelinha mini">${sobre(c.etiqueta)}</p>
+             <h3 class="titulo cartao-titulo">${esc(c.titulo)}</h3>
+             <p class="corpo menor">${esc(c.texto)}</p>
+           </div>`).join("")}
+         </div>
+         ${pilulas(fv.pilulas)}`
+      )
+    : temFotoEvento
     ? pag(
         "texto-foto",
         `<div class="col">
@@ -268,7 +333,23 @@ export function dossie(dados) {
   );
 
   /* ---- hospedagem ----------------------------------------------------- */
-  const hosp = pag(
+  const hs = dados.hospedagens ?? [];
+  const hospUnica = hs.length === 1 && hs[0].foto;
+  const hosp = hospUnica
+    ? pag(
+        "texto-foto",
+        `<div class="col">
+           <p class="sobrelinha">HOSPEDAGEM</p>
+           <h2 class="titulo secao-menor">ONDE VOCÊ FICA.</h2>
+           <p class="sobrelinha mini hosp-onde">${sobre(hs[0].onde)}</p>
+           <h3 class="titulo hotel-nome grande">${esc(hs[0].nome)}</h3>
+           ${hs[0].noites ? `<p class="km">${esc(hs[0].noites)}</p>` : ""}
+           ${hs[0].texto ? `<p class="corpo">${esc(hs[0].texto)}</p>` : ""}
+           ${dados.hospedagemNota ? `<p class="nota-rodape">${esc(dados.hospedagemNota)}</p>` : ""}
+         </div>
+         <div class="foto meia"><img src="${esc(hs[0].foto)}" alt="" style="object-position:${esc(hs[0].foco ?? "center 50%")}"></div>`
+      )
+    : pag(
     "hospedagem",
     `<p class="sobrelinha">HOSPEDAGEM</p>
      <h2 class="titulo secao-menor">ONDE VOCÊ FICA.</h2>
@@ -288,6 +369,19 @@ export function dossie(dados) {
      </div>
      ${dados.hospedagemNota ? `<p class="nota-rodape">${esc(dados.hospedagemNota)}</p>` : ""}`
   );
+
+  /* ---- você só pilota (estrutura) -------------------------------------- */
+  const es = dados.estrutura;
+  const estrutura = es
+    ? pag(
+        "painel",
+        `<p class="sobrelinha">A ESTRUTURA</p>
+         <h2 class="titulo secao">${esc(es.titulo ?? "Você só pilota. Do resto, a gente cuida.")}</h2>
+         ${es.texto ? `<p class="corpo largo">${esc(es.texto)}</p>` : ""}
+         <ul class="itens duas">${lista(es.itens ?? [])}</ul>
+         ${es.obs ? `<p class="nota-rodape forte">${esc(es.obs)}</p>` : ""}`
+      )
+    : "";
 
   /* ---- o pacote -------------------------------------------------------- */
   const pacote = pag(
@@ -314,14 +408,14 @@ export function dossie(dados) {
      <div class="dentro centro">
        <h2 class="titulo secao">ISSO NÃO É TRILHA,<br>É EXPEDIÇÃO PADRÃO DESBRAVANDO.</h2>
        <p class="sobrelinha destaque">${sobre(`EXPEDIÇÃO ${dados.titulo} · ${dados.subtitulo}`)}</p>
-       <p class="corpo menor">Reservas &amp; Info · Fale com a equipe Desbravando</p>
-       ${marca}
+       <p class="corpo menor">${esc(dados.contato ?? "Reservas & Info · Fale com a equipe Desbravando")}</p>
+       ${logo}
      </div>
      ${dados.creditos ? `<p class="creditos">${esc(dados.creditos)}</p>` : ""}
      ${patrocinio}`
   );
 
-  const corpo = [capa, quemSomos, aExpedicao, ...dias, foraDoVolante, padrao, hosp, pacote, fecho].join("\n");
+  const corpo = [capa, quemSomos, aExpedicao, ...dias, foraDoVolante, padrao, hosp, estrutura, pacote, fecho].filter(Boolean).join("\n");
 
   const html = `<!doctype html>
 <html lang="pt-BR">
@@ -471,6 +565,35 @@ export function dossie(dados) {
   .patrocinio .sobrelinha { margin: 0 0 10px; font-size: 15px; letter-spacing: 4px; }
   .patrocinio img { width: 150px; height: auto; display: block; margin-left: auto; }
   .nota-rodape { font-family: "Archivo"; font-size: 19px; color: rgba(255,255,255,.55); margin: 40px 0 0; }
+  .nota-rodape.forte { color: rgba(255,255,255,.82); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: 18px; }
+
+  /* logo oficial: por largura, porque o #DESBRAVANDOUTV é pequeno dentro dela (texto = 9% da
+     altura no PNG do Pedro) e precisa de corpo para ler na tela */
+  .logo-oficial { width: 460px; color: #fff; margin: 0 0 40px; }
+  .logo-oficial svg { width: 100%; height: auto; display: block; fill: currentColor; }
+  .fecho .logo-oficial { margin: 56px auto 0; }
+
+  .pilulas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+  .pilula { font-family: "Archivo"; font-weight: 600; font-size: 19px; padding: 11px 22px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.38); color: #fff; }
+
+  .numeros.ficha { flex-wrap: wrap; gap: 30px 56px; }
+
+  .roteiro { justify-content: center; }
+  .dias-lado { display: flex; gap: 56px; width: 100%; margin-top: 30px; }
+  .dia-col { flex: 1 1 0; border-top: 1.5px solid rgba(255,255,255,.13); padding-top: 22px; min-width: 0; }
+  .dia-col .numero { font-size: 104px; display: block; }
+  .dia-col .corpo.menor { font-size: 24px; }
+  .titulo.dia-col-titulo { font-size: 54px; margin: 12px 0 0; }
+  .agenda { list-style: none; padding: 0; margin: 22px 0 0; }
+  .agenda li { display: flex; gap: 18px; font-family: "Archivo"; font-size: 25px; line-height: 1.42; color: rgba(255,255,255,.82); padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .agenda li b { flex: 0 0 150px; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
+
+  .cartoes { display: flex; gap: 28px; width: 100%; margin-top: 40px; }
+  .cartao { flex: 1 1 0; border: 1.5px solid rgba(255,255,255,.13); border-radius: 14px; padding: 30px 34px; background: rgba(255,255,255,.03); }
+  .titulo.cartao-titulo { font-size: 38px; margin: 4px 0 0; }
+
+  .hosp-onde { margin-top: 34px; }
+  .titulo.hotel-nome.grande { font-size: 56px; margin: 6px 0 0; }
 </style>
 </head>
 <body>
