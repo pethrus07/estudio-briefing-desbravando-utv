@@ -373,7 +373,10 @@ function fazerDossie() {
   }
   // A foto do hotel mora dentro de cada hospedagem, não no bloco `fotos` — sem passar por
   // resolverFoto ela vira caminho relativo a saida/ e o bloco sai preto, sem erro nenhum.
-  for (const h of dados.hospedagens ?? []) if (h.foto) h.foto = resolverFoto(h.foto);
+  for (const h of dados.hospedagens ?? []) {
+    if (h.foto) h.foto = resolverFoto(h.foto);
+    if (h.foto2) h.foto2 = resolverFoto(h.foto2);
+  }
   const { html, pendencias } = dossie(dados);
   const nPaginas = (html.match(/<section class="pagina/g) ?? []).length;
   console.log(`Dossiê · ${dados.titulo} · ${nPaginas} páginas · 1920×1080`);

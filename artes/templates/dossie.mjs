@@ -112,7 +112,27 @@ export function dossie(dados) {
      </div>`;
 
   /* ---- 1 · capa ---------------------------------------------------- */
-  const capa = pag(
+  /* Capa com foto VERTICAL (Serra da Bocaina, 13/11/2026): sangrar 16:9 ampliaria 2× e
+     cortaria o assunto. Com `fotos.capa.layout = "meia"` o texto fica à esquerda e a foto
+     inteira à direita. */
+  const pilulasCapa = (dados.capaPilulas ?? []).length
+    ? `<div class="pilulas">${dados.capaPilulas.map((x) => `<span class="pilula">${esc(x)}</span>`).join("")}</div>`
+    : "";
+  const capa = f.capa?.layout === "meia"
+    ? pag(
+        "capa texto-foto",
+        `<div class="col capa-col">
+           ${logo}
+           <p class="sobrelinha marca-nome">DESBRAVANDO UTV · EXPEDIÇÃO</p>
+           <h1 class="titulo hero">${esc(dados.titulo)}</h1>
+           <p class="linha-regiao">${esc(dados.subtitulo)}${dados.regiao ? " · " + esc(dados.regiao) : ""}</p>
+           <p class="sobrelinha destaque">${sobre([dados.duracao, dados.destaques].filter(Boolean).join(" · "))}</p>
+           ${pilulasCapa}
+         </div>
+         ${foto(f.capa, "meia")}
+         ${patrocinio}`
+      )
+    : pag(
     "capa",
     `${foto(f.capa, "sangra")}
      <div class="veu"></div>
@@ -122,6 +142,7 @@ export function dossie(dados) {
        <h1 class="titulo hero">${esc(dados.titulo)}</h1>
        <p class="linha-regiao">${esc(dados.subtitulo)}${dados.regiao ? " · " + esc(dados.regiao) : ""}</p>
        <p class="sobrelinha destaque">${sobre([dados.duracao, dados.destaques].filter(Boolean).join(" · "))}</p>
+       ${pilulasCapa}
      </div>
      ${dados.creditos ? `<p class="creditos">${esc(dados.creditos)}</p>` : ""}
      ${patrocinio}`
@@ -195,18 +216,19 @@ export function dossie(dados) {
      lado e a agenda de cada um é o que o participante consulta. `agenda` = linhas "HH:MM texto". */
   const roteiroResumo = dados.roteiroResumo
     ? [pag(
-        "painel roteiro",
+        `painel roteiro${dados.roteiro.length >= 5 ? " muitos-dias" : ""}`,
         `<p class="sobrelinha">A JORNADA</p>
          <h2 class="titulo secao-menor">O ROTEIRO · ${esc(dados.roteiro.length)} DIAS.</h2>
          <div class="dias-lado">
            ${dados.roteiro.map((d) => `<div class="dia-col">
              <span class="numero">${String(d.dia).padStart(2, "0")}</span>
              <h3 class="titulo dia-col-titulo">${esc(d.titulo)}</h3>
+             ${d.data ? `<p class="km dia-data">${esc(d.data)}</p>` : ""}
              ${d.texto ? `<p class="corpo menor">${esc(d.texto)}</p>` : ""}
              ${d.km ? `<p class="km">${sobre("trecho")} · ${esc(d.km)}</p>` : ""}
              <ul class="agenda">${(d.agenda ?? []).map((l) => {
                const m = String(l).match(/^\s*(\d[\d:/h]*(?:\s*[-–]\s*[\d:/h]+)?)\s+(.*)$/);
-               return m ? `<li><b>${esc(m[1])}</b><span>${esc(m[2])}</span></li>` : `<li><b></b><span>${esc(l)}</span></li>`;
+               return m ? `<li><b>${esc(m[1])}</b><span>${esc(m[2])}</span></li>` : `<li class="solta"><span>${esc(l)}</span></li>`;
              }).join("")}</ul>
            </div>`).join("")}
          </div>
@@ -347,7 +369,7 @@ export function dossie(dados) {
            ${hs[0].texto ? `<p class="corpo">${esc(hs[0].texto)}</p>` : ""}
            ${dados.hospedagemNota ? `<p class="nota-rodape">${esc(dados.hospedagemNota)}</p>` : ""}
          </div>
-         <div class="foto meia"><img src="${esc(hs[0].foto)}" alt="" style="object-position:${esc(hs[0].foco ?? "center 50%")}"></div>`
+         <div class="foto meia${hs[0].foto2 ? " duas" : ""}"><img src="${esc(hs[0].foto)}" alt="" style="object-position:${esc(hs[0].foco ?? "center 50%")}">${hs[0].foto2 ? `<img src="${esc(hs[0].foto2)}" alt="" style="object-position:${esc(hs[0].foco2 ?? "center 50%")}">` : ""}</div>`
       )
     : pag(
     "hospedagem",
@@ -403,8 +425,7 @@ export function dossie(dados) {
   /* ---- fecho ----------------------------------------------------------- */
   const fecho = pag(
     "fecho",
-    `${foto(f.fecho, "sangra")}
-     <div class="veu"></div>
+    `${f.fecho?.arquivo ? `${foto(f.fecho, "sangra")}<div class="veu"></div>` : ""}
      <div class="dentro centro">
        <h2 class="titulo secao">ISSO NÃO É TRILHA,<br>É EXPEDIÇÃO PADRÃO DESBRAVANDO.</h2>
        <p class="sobrelinha destaque">${sobre(`EXPEDIÇÃO ${dados.titulo} · ${dados.subtitulo}`)}</p>
@@ -485,6 +506,7 @@ export function dossie(dados) {
   .veu { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.62) 52%, rgba(0,0,0,.35) 100%); }
   .capa .dentro, .fecho .dentro, .dentro.base { position: relative; z-index: 2; width: 100%; }
   .fecho .dentro.centro { text-align: center; }
+  .fecho .dentro.centro .corpo { margin-left: auto; margin-right: auto; }
 
   .dia-bloco { display: flex; gap: 34px; align-items: flex-start; margin-top: 30px; }
   /* .38 e não .26: a .26 dava 2,1:1 sobre preto e a norma pede 3:1 para texto grande. O
@@ -593,6 +615,26 @@ export function dossie(dados) {
   .titulo.cartao-titulo { font-size: 38px; margin: 4px 0 0; }
 
   .hosp-onde { margin-top: 34px; }
+  .capa-col { position: relative; z-index: 2; }
+  .capa.texto-foto .titulo.hero { font-size: 128px; }
+  /* na capa de meia página o selo vai para a coluna do texto: sobre a foto ele cai em cima do
+     assunto (na Bocaina, sobre os UTVs) */
+  .capa.texto-foto .patrocinio { z-index: 3; left: 120px; right: auto; text-align: left; }
+  .capa.texto-foto .patrocinio img { margin-left: 0; }
+  .dia-data { margin-top: 6px; }
+  .agenda li.solta span { flex: 1 1 auto; }
+  .muitos-dias .dias-lado { gap: 30px; }
+  .muitos-dias .dia-col .numero { font-size: 76px; }
+  .muitos-dias .titulo.dia-col-titulo { font-size: 38px; }
+  .muitos-dias .dia-col .corpo.menor { font-size: 20px; }
+  .muitos-dias .agenda li { font-size: 20px; gap: 10px; padding: 9px 0; }
+  .muitos-dias .agenda li b { flex: 0 0 66px; }
+  /* duas fotos empilhadas: posição absoluta, porque altura em % (grid ou flex) não resolve
+     dentro de um item esticado pelo flex da página e a segunda foto sumia */
+  .foto.meia.duas { position: relative; }
+  .foto.meia.duas img { position: absolute; left: 0; width: 100%; height: calc(50% - 3px); }
+  .foto.meia.duas img:first-child { top: 0; }
+  .foto.meia.duas img:last-child { bottom: 0; }
   .titulo.hotel-nome.grande { font-size: 56px; margin: 6px 0 0; }
 </style>
 </head>
