@@ -2,6 +2,9 @@
 
     python artes/ferramentas/briefing-para-dossie.py <briefing.zip | pasta> <slug> [--corrigir "errado=>certo" ...]
 
+Mudança pedida depois do briefing vai em `ajustes.json` ao lado dele (na pasta do briefing ou
+na pasta-mãe de `conteudo/`): cada chave substitui a do JSON gerado, e "_motivo" documenta.
+
 Depois:
     node artes/ferramentas/render.mjs dossie --dados=dossie-<slug>.json
     python artes/ferramentas/comprimir-pdf.py artes/saida/dossie-<slug>.pdf
@@ -225,6 +228,19 @@ def main():
     for k in ("foraDoVolante", "estrutura", "contato"):
         if dados[k] is None:
             del dados[k]
+
+    # pedidos do Pedro ou do cliente DEPOIS do briefing: ficam escritos ao lado dele, para a
+    # próxima conversão não desfazer (ex.: Bocaina, 17/11 — "Visconde de Mauá é o título e base")
+    ajustes_arq = pasta / "ajustes.json"
+    if not ajustes_arq.exists() and pasta.name == "conteudo":
+        ajustes_arq = pasta.parent / "ajustes.json"
+    if ajustes_arq.exists():
+        ajustes = json.loads(ajustes_arq.read_text(encoding="utf-8"))
+        for k, v in ajustes.items():
+            if k.startswith("_"):
+                continue
+            print(f"  ajuste: {k} = {json.dumps(v, ensure_ascii=False)[:90]}")
+            dados[k] = v
 
     saida = DADOS / "dados" / f"dossie-{a.slug}.json"
     saida.write_text(json.dumps(dados, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
