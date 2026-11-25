@@ -17,7 +17,159 @@
 import { esc, real, cssRyze } from "./ryze-doc.mjs";
 const soma = (lista, campo = "valor") => lista.reduce((s, i) => s + (i[campo] ?? 0), 0);
 
+/**
+ * FECHAMENTO NO FORMATO DO ACORDO (a partir do ciclo 26/10/2026).
+ *
+ * O formato antigo fala de preço fechado por peça, rodada avulsa e cota de itens: nada disso
+ * existe no acordo mensal fixo. Mandar aquele texto com valor zero em
+ * cada bloco faria o cliente ler regras que não valem mais. Aqui:
+ *   - o acordo é a base;
+ *   - as peças do pacote aparecem SEM valor (estão no valor do acordo);
+ *   - o retrabalho mostra o uso da cota de 2 h, sem valor;
+ *   - só o avulso aprovado antes tem preço;
+ *   - parcelas de contrato anterior seguem à parte.
+ * Os campos de dados são os mesmos que o auditor-fechamento.py lê (baseFixa, pecas, ajustes,
+ * modulo, projetos), para a auditoria continuar valendo sem outro auditor. A frase do total
+ * começa em "Base mensal" e termina em "não entram nesta conta" porque é ela que o auditor
+ * reconcilia com o total.
+ */
+function fechamentoAcordo(d) {
+  const totalBase = soma(d.baseFixa.itens);
+  const totalAvulsos = soma(d.pecas);
+  const totalAjustes = soma(d.ajustes.itens);
+  const totalProjetos = soma(d.projetos.itens);
+  const totalModulo = d.modulo.valor;
+  const total = totalBase + totalAvulsos + totalAjustes + totalModulo + totalProjetos;
+  const nPacote = (d.pacote?.itens ?? []).length;
+  const nSem = (d.descartado?.itens ?? []).length;
+
+  const linha = (nome, nota, valor) => `
+      <tr>
+        <td class="n">${esc(nome)}${nota ? `<i>${esc(nota)}</i>` : ""}</td>
+        <td class="v">${typeof valor === "number" ? real(valor) : `<span style="color:var(--ink70)">${esc(valor)}</span>`}</td>
+      </tr>`;
+
+  return `<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Fechamento do ciclo — ${esc(d.cliente)} · ${esc(d.competencia)}</title>
+<link rel="stylesheet" href="../marca/ryze/fontes-ryze.css">
+<style>
+${cssRyze()}
+</style>
+</head>
+<body>
+
+<div class="capa">
+  <div class="topo">
+    <div class="marca">
+      <img src="../marca/ryze/ryze-symbol-gold-transparent.svg" alt="">
+      <div><b>RYZE</b><span>${esc(d.plano)}</span></div>
+    </div>
+    <div class="meta">
+      Cliente <em>${esc(d.cliente)}</em><br>
+      Competência <em>${esc(d.competencia)}</em><br>
+      Emissão <em>${esc(d.emissao)}</em><br>
+      Vencimento <em>${esc(d.vencimento)}</em>
+    </div>
+  </div>
+  <span class="selo">${esc(d.carater)}</span>
+  <h1>Fechamento<br>do <u>ciclo</u>.</h1>
+  <p class="sub">${esc(d.subtitulo ?? "O que entrou no ciclo: o que está dentro do acordo, o que foi aprovado à parte e o que foi feito sem cobrança.")}</p>
+</div>
+
+<div class="faixa">
+  <div class="cel"><span class="k">Peças do pacote</span><div class="v">${nPacote}<small> no acordo</small></div></div>
+  <div class="cel"><span class="k">Sem cobrança</span><div class="v">${nSem}<small> entregas</small></div></div>
+  <div class="cel"><span class="k">Total do ciclo</span><div class="v">${real(total)}</div></div>
+</div>
+
+<div class="regras">
+  <span class="rot">Como este fechamento é contado</span>
+  <ol>${d.regra.map((r) => `<li>${esc(r)}</li>`).join("\n    ")}</ol>
+</div>
+
+<div class="bloco">
+  <h2>${esc(d.baseFixa.titulo)}</h2>
+  <table>
+    ${d.baseFixa.itens.map((i) => linha(i.nome, i.nota, i.valor)).join("")}
+  </table>
+</div>
+
+<div class="bloco">
+  <h2>${esc(d.pacote.titulo)}</h2>
+  <p class="cap">${esc(d.pacote.nota)}</p>
+  <table>
+    ${d.pacote.itens.map((i) => linha(i.nome, i.oque, "no acordo")).join("")}
+  </table>
+</div>
+
+<div class="bloco">
+  <h2>${esc(d.ajustes.titulo)}</h2>
+  <p class="cap">${esc(d.ajustes.nota)}</p>
+  <table>
+    ${(d.ajustes.usados ?? []).map((i) => linha(i.nome, i.oque, "na cota")).join("")}
+    ${d.ajustes.itens.map((i) => linha(i.nome, i.oque, i.valor)).join("")}
+  </table>
+</div>
+
+<div class="bloco">
+  <h2>Avulsos aprovados</h2>
+  <p class="cap">Fora do pacote, com o valor aprovado antes de fazer.</p>
+  <table>
+    ${d.pecas.map((p) => linha(p.nome, p.oque, p.valor)).join("")}
+    <tr class="tot"><td class="n">Avulsos do ciclo</td><td class="v">${real(totalAvulsos)}</td></tr>
+  </table>
+</div>
+
+<div class="bloco">
+  <h2>${esc(d.modulo.titulo)}</h2>
+  <table>
+    ${linha(d.modulo.nome, d.modulo.oque, "no acordo")}
+  </table>
+</div>
+
+<div class="bloco">
+  <h2>${esc(d.projetos.titulo)}</h2>
+  <table>
+    ${d.projetos.itens
+      .map((i) => linha(i.nome, `Parcela ${i.parcela} de ${i.de}${i.total ? ` · projeto de ${real(i.total)}` : ""}${i.nota ? ` · ${i.nota}` : ""}`, i.valor))
+      .join("")}
+  </table>
+</div>
+
+${
+  nSem
+    ? `<div class="bloco">
+  <h2>${esc(d.descartado.titulo)}</h2>
+  <table>
+    ${d.descartado.itens.map((i) => linha(i.nome, i.argumento, "sem cobrança")).join("")}
+  </table>
+</div>`
+    : ""
+}
+
+<div class="fim">
+  <h2>Total do ciclo</h2>
+  <p>Base mensal do acordo ${real(totalBase)} · avulsos aprovados ${real(totalAvulsos)}${
+    totalAjustes ? ` · horas além da cota ${real(totalAjustes)}` : ""
+  } · parcela das plataformas ${real(totalProjetos)}. As peças do pacote, o retrabalho dentro da
+    cota e as entregas sem cobrança não entram nesta conta.</p>
+  <div class="grande"><b>${real(total)}</b><span>vence em ${esc(d.vencimento)}</span></div>
+</div>
+
+<footer>
+  <span>RYZE · ryzecode08@gmail.com</span>
+  <span>${esc(d.carater)}</span>
+</footer>
+
+</body>
+</html>`;
+}
+
 export function fechamento(d) {
+  if (d.formato === "acordo") return fechamentoAcordo(d);
   /* ---------- tudo que é número sai daqui, nunca do JSON ---------- */
   const totalBase = soma(d.baseFixa.itens);
   const totalArtes = soma(d.pecas);
